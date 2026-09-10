@@ -15,6 +15,28 @@ export function onGet(url: string, respond: Responder): RequestHandler {
   return http.get(url, ({ request }) => respond(request));
 }
 
+/** Handles POST requests for `url`. */
+export function onPost(url: string, respond: Responder): RequestHandler {
+  return http.post(url, ({ request }) => respond(request));
+}
+
+/** A JSON body with the given status. */
+export function jsonBody(
+  value: unknown,
+  init: { status?: number; headers?: Record<string, string> } = {},
+): Response {
+  // Fixtures are read as `unknown`; msw types the body more narrowly.
+  return HttpResponse.json(value as never, init);
+}
+
+/** A plain-text body, for responses that are not JSON at all. */
+export function textBody(
+  text: string,
+  init: { status?: number; headers?: Record<string, string> } = {},
+): Response {
+  return HttpResponse.text(text, init);
+}
+
 function toArrayBuffer(bytes: Buffer): ArrayBuffer {
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
 }

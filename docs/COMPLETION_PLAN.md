@@ -311,7 +311,11 @@ tolerances.
 - [x] 5.7 Distributor parametric mappers: `digikeyParameterToKey(name)` and
       `mouserAttributeToKey(name)` covering every buck-regulator attribute
       name seen in the M7/M8 fixtures, returning `null` for unmapped names.
-      Every mapping row has a test.
+      Every mapping row has a test. **Reconfirmed against the 13 recorded
+      Digi-Key fixtures on 2026-09-10**: all 16 distinct parametric names are
+      either mapped or deliberately unmapped. Real data added three handled
+      forms: `Up to 1MHz` (a stated bound), `Both` and `-` (inconclusive).
+      Reopens again when M8 records Mouser fixtures.
 - [x] 5.8 Tests: table-driven cases for every alias and separator, property
       tests for round trips and for "parse never throws anything but
       `ParseError`", exhaustive mapper coverage.
@@ -362,7 +366,7 @@ locate the sections the agent needs. All through poppler, all cached.
 Goal: search, product details, pricing, and datasheet URLs from Digi-Key
 Product Information v4, cached and logged. [R-01] [R-02]
 
-- [ ] 7.1 OAuth2 client-credentials token client [R-60]: POSTs
+- [x] 7.1 OAuth2 client-credentials token client [R-60]: POSTs
       `client_id`, `client_secret`, and `grant_type=client_credentials` as
       form data to `https://api.digikey.com/v1/oauth2/token` (sandbox:
       `https://sandbox-api.digikey.com/v1/oauth2/token`, selected by
@@ -370,33 +374,33 @@ Product Information v4, cached and logged. [R-01] [R-02]
       `DATA_DIR/tokens/`, refreshes ahead of expiry, retries once on 401.
       **The token lives only 600 seconds**, so refresh-ahead is not optional:
       a long extraction run will cross an expiry.
-- [ ] 7.2 Request layer: headers `X-DIGIKEY-Client-Id`,
+- [x] 7.2 Request layer: headers `X-DIGIKEY-Client-Id`,
       `X-DIGIKEY-Locale-Site`, `X-DIGIKEY-Locale-Language`,
       `X-DIGIKEY-Locale-Currency`; token-bucket rate limiter; backoff on 429
       and 5xx; typed `DigiKeyError` with the API's error body.
-- [ ] 7.3 Record the exact endpoint paths and request shapes for
+- [x] 7.3 Record the exact endpoint paths and request shapes for
       `KeywordSearch`, `ProductDetails`, `ProductPricing`,
       `PricingOptionsByQuantity`, `Media`, `Substitutions`, and
       `AlternatePackaging` from the developer portal into
       `src/adapters/digikey/README.md` with the date checked. [R-02]
-- [ ] 7.4 Response schemas (Zod, strict on the fields we use, passthrough
+- [x] 7.4 Response schemas (Zod, strict on the fields we use, passthrough
       elsewhere) for each endpoint above.
-- [ ] 7.5 Operations: `searchKeyword(mpn)`, `productDetails(productNumber)`,
+- [x] 7.5 Operations: `searchKeyword(mpn)`, `productDetails(productNumber)`,
       `pricing(productNumber)`, `media(productNumber)` (datasheet URL),
       `substitutions(productNumber)`. Each goes through `cached()` and the
       ledger, and maps to M1 `Offer[]`, distributor parametrics (via M5
       mappers), and datasheet URL.
-- [ ] 7.6 `scripts/record-fixture.ts digikey <mpn>`: performs live calls,
+- [x] 7.6 `scripts/record-fixture.ts digikey <mpn>`: performs live calls,
       strips tokens and account details, writes sanitised JSON under
       `test/fixtures/digikey/`. Requires credentials (Q1).
-- [ ] 7.7 Fixtures recorded for at least ten of the golden-set candidates
+- [x] 7.7 Fixtures recorded for at least ten of the golden-set candidates
       (see M13) including one with multiple packaging variants and one with
       no Digi-Key listing.
-- [ ] 7.8 Tests with `msw`: token lifecycle, every operation against
+- [x] 7.8 Tests with `msw`: token lifecycle, every operation against
       fixtures, rate limiting, 429/5xx backoff, malformed responses rejected
       by schema, cache hit prevents network, ledger record per call.
       [R-30]
-- [ ] 7.9 Live contract test in `test/live/digikey.test.ts` (opt-in) that
+- [x] 7.9 Live contract test in `test/live/digikey.test.ts` (opt-in) that
       re-validates fixtures against the real API and fails on schema drift.
 
 ---

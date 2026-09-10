@@ -1,0 +1,172 @@
+{
+  "ProductPricings": [
+    {
+      "ManufacturerProductNumber": "MP1584EN-LF-Z",
+      "Manufacturer": {
+        "Name": "Monolithic Power Systems Inc.",
+        "Id": 1589
+      },
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "1589-1533-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 4.12,
+              "TotalPrice": 4.12
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 3.075,
+              "TotalPrice": 30.75
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 2.8136,
+              "TotalPrice": 70.34
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 2.5257,
+              "TotalPrice": 252.57
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 2.38848,
+              "TotalPrice": 597.12
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 2.33906,
+              "TotalPrice": 1169.53
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 9235,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true,
+          "DigiReelingFee": 9.5
+        },
+        {
+          "DigiKeyProductNumber": "1589-1533-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 2.16573,
+              "TotalPrice": 5414.325
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 2.1224,
+              "TotalPrice": 10612
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 7500,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        },
+        {
+          "DigiKeyProductNumber": "1589-1533-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 4.12,
+              "TotalPrice": 4.12
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 3.075,
+              "TotalPrice": 30.75
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 2.8136,
+              "TotalPrice": 70.34
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 2.5257,
+              "TotalPrice": 252.57
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 2.38848,
+              "TotalPrice": 597.12
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 2.33906,
+              "TotalPrice": 1169.53
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 9235,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        }
+      ],
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOICE",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width) Exposed Pad"
+      },
+      "ProductUrl": "",
+      "IsDiscontinued": false,
+      "NormallyStocking": true,
+      "IsObsolete": false,
+      "ManufacturerLeadWeeks": "16",
+      "ManufacturerPublicQuantity": 0,
+      "StandardPackage": 2500,
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070",
+      "MoistureSensitivityLevel": "2A  (4 Weeks)",
+      "IsBoNotAllowed": false,
+      "IsNcnr": false,
+      "Categories": [
+        {
+          "CategoryId": 32,
+          "Level": 0,
+          "Name": "Integrated Circuits (ICs)"
+        },
+        {
+          "CategoryId": 2025,
+          "Level": 1,
+          "Name": "Power Management (PMIC)"
+        },
+        {
+          "CategoryId": 739,
+          "Level": 2,
+          "Name": "Voltage Regulators - DC DC Switching Regulators"
+        }
+      ],
+      "ContainsLithium": false,
+      "ContainsMercury": false,
+      "IsEndOfLife": false,
+      "OtherNames": ["MP1584EN-LF-Z-ND", "1589-1533-6", "1589-1533-1", "1589-1533-2"]
+    }
+  ],
+  "ProductsCount": 1,
+  "SettingsUsed": {
+    "SearchLocale": {
+      "Site": "AU",
+      "Language": "en",
+      "Currency": "AUD"
+    },
+    "Filters": {}
+  }
+}

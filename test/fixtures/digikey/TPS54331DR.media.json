@@ -1,0 +1,66 @@
+{
+  "MediaLinks": [
+    {
+      "MediaType": "Datasheets",
+      "Title": "TPS54331",
+      "Url": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331"
+    },
+    {
+      "MediaType": "Product Photos",
+      "Title": "8 SOIC",
+      "Url": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/6/003/251/211/MFG_296%7E4040047-3%7ED%7E8_web%28640x640%29.jpg",
+      "SmallPhoto": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/003/251/211/MFG_296%7E4040047-3%7ED%7E8_sml%28200x200%29.jpg",
+      "Thumbnail": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/251/211/MFG_296%7E4040047-3%7ED%7E8_tmb%2864x64%29.jpg"
+    },
+    {
+      "MediaType": "Product Training Modules",
+      "Title": "Understanding SWIFT Step Down Dc/Dc Converters",
+      "Url": "https://www.digikey.com/ptm/t/texas-instruments/power-understanding-swift-step-down-dcdc-converters"
+    },
+    {
+      "MediaType": "Design Resources",
+      "Title": "TPS54331 Design with WEBENCH® Power Designer",
+      "Url": "https://webench.ti.com/webench5/power/launch_wb.cgi?part=TPS54331&fromdisty=digikey"
+    },
+    {
+      "MediaType": "Featured Product",
+      "Title": "Power Management",
+      "Url": "https://www.digikey.com/product-highlight/t/texas-instruments/power-management"
+    },
+    {
+      "MediaType": "Featured Product",
+      "Title": "Analog Solutions for Xilinx FPGAs and CPLDs – Texas Instruments | DigiKey",
+      "Url": "https://www.digikey.com/product-highlight/t/texas-instruments/analog-xilinx"
+    },
+    {
+      "MediaType": "Featured Product",
+      "Title": "Create your power design now with TI’s WEBENCH® Designer",
+      "Url": "https://www.digikey.com/product-highlight/t/texas-instruments/webench-design-center"
+    },
+    {
+      "MediaType": "PCN Design/Specification",
+      "Title": "TPS54331Dx 26/Jul/2022",
+      "Url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5342/PCN20220715001.0.pdf"
+    },
+    {
+      "MediaType": "PCN Design/Specification",
+      "Title": "Design 25/Feb/2022",
+      "Url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/4884/PCN20211123004.0.pdf"
+    },
+    {
+      "MediaType": "PCN Assembly/Origin",
+      "Title": "Wire Base Metal 21/May/2019",
+      "Url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/696/PCN20101118003C.pdf"
+    },
+    {
+      "MediaType": "EDA Models",
+      "Title": "TPS54331DR by SnapEDA",
+      "Url": "https://www.snapeda.com/parts/TPS54331DR/Texas%20Instruments/view-part/?ref=digikey"
+    },
+    {
+      "MediaType": "EDA Models",
+      "Title": "TPS54331DR by Ultra Librarian",
+      "Url": "https://app.ultralibrarian.com/details/16A6F71C-103F-11E9-AB3A-0A3560A4CCCC/Texas-Instruments/TPS54331DR?ref=digikey"
+    }
+  ]
+}

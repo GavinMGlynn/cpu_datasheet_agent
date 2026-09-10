@@ -1,0 +1,22 @@
+{
+  "AlternatePackagings": {
+    "AlternatePackaging": [
+      {
+        "ManufacturerProductNumber": "MP1584EN-LF-P",
+        "Manufacturer": {
+          "Name": "Monolithic Power Systems Inc.",
+          "Id": 1589
+        },
+        "DigiKeyProductNumber": "1589-MP1584EN-LF-PTR-ND",
+        "Description": "IC REG BUCK ADJ 3A 8SOIC",
+        "UnitPrice": "2.69069",
+        "ProductUrl": "https://www.digikey.com.au/en/products/detail/monolithic-power-systems-inc/MP1584EN-LF-P/18088877"
+      }
+    ]
+  },
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

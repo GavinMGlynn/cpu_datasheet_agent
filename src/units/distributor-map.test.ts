@@ -7,6 +7,8 @@ import {
   digikeyParameterToKey,
   mouserAttributeToKey,
   parseDistributorValue,
+  splitQualifier,
+  tryParseDistributorValue,
   type DistributorMapping,
 } from './distributor-map.js';
 import { ParseError } from './parse.js';
@@ -134,6 +136,16 @@ describe('parseDistributorValue', () => {
     expect(() => parseDistributorValue(dk('Synchronous Rectifier'), 'Maybe')).toThrow(ParseError);
   });
 
+  it('yields no topology fact when Digi-Key says the part does both', () => {
+    expect(parseDistributorValue(dk('Synchronous Rectifier'), 'Both')).toEqual([]);
+    expect(parseDistributorValue(dk('Synchronous Rectifier'), 'both')).toEqual([]);
+  });
+
+  it('yields no output-type fact when a listing offers both', () => {
+    expect(parseDistributorValue(dk('Output Type'), 'Fixed, Adjustable')).toEqual([]);
+    expect(parseDistributorValue(dk('Output Type'), 'Adjustable, Fixed')).toEqual([]);
+  });
+
   it('parses the output type', () => {
     expect(parseDistributorValue(dk('Output Type'), 'Fixed')).toEqual([
       { kind: 'enum', key: 'voutFixed', value: 'fixed' },
@@ -141,7 +153,7 @@ describe('parseDistributorValue', () => {
     expect(parseDistributorValue(dk('Output Type'), 'ADJUSTABLE')).toEqual([
       { kind: 'enum', key: 'voutFixed', value: 'adjustable' },
     ]);
-    expect(() => parseDistributorValue(dk('Output Type'), 'Fixed, Adjustable')).toThrow(ParseError);
+    expect(() => parseDistributorValue(dk('Output Type'), 'Switchable')).toThrow(ParseError);
   });
 
   it('parses control features into booleans, absent ones false', () => {
@@ -196,5 +208,88 @@ describe('parseDistributorValue', () => {
 describe('parseDistributorValue with a keyless mapping', () => {
   it('rejects it', () => {
     expect(() => parseDistributorValue({ keys: [], kind: 'text' }, 'x')).toThrow(ParseError);
+  });
+});
+
+describe('stated bounds', () => {
+  const must = (mapping: DistributorMapping | null): DistributorMapping => {
+    if (mapping === null) {
+      throw new Error('expected a mapping');
+    }
+    return mapping;
+  };
+
+  it.each([
+    ['Up to 1MHz', 'max'],
+    ['up to 1MHz', 'max'],
+    ['max 1MHz', 'max'],
+    ['maximum of 1MHz', 'max'],
+    ['<= 1MHz', 'max'],
+    ['≤1MHz', 'max'],
+    ['from 1MHz', 'min'],
+    ['min 1MHz', 'min'],
+    ['down to 1MHz', 'min'],
+    ['>= 1MHz', 'min'],
+    ['≥1MHz', 'min'],
+  ])('reads %j as a stated %s', (text, kind) => {
+    expect(
+      parseDistributorValue(must(digikeyParameterToKey('Frequency - Switching')), text),
+    ).toEqual([{ kind, key: 'switchingFrequency', value: { value: 1_000_000, unit: 'Hz' } }]);
+  });
+
+  it('still reads a plain value as a quantity and a pair as a range', () => {
+    const mapping = must(digikeyParameterToKey('Frequency - Switching'));
+
+    expect(parseDistributorValue(mapping, '570kHz')).toEqual([
+      { kind: 'quantity', key: 'switchingFrequency', value: { value: 570_000, unit: 'Hz' } },
+    ]);
+    expect(parseDistributorValue(mapping, '100kHz to 1MHz')).toEqual([
+      {
+        kind: 'range',
+        key: 'switchingFrequency',
+        value: { unit: 'Hz', min: 100_000, max: 1_000_000 },
+      },
+    ]);
+  });
+
+  it('applies to plain quantity mappings too', () => {
+    expect(
+      parseDistributorValue(must(digikeyParameterToKey('Current - Output')), 'up to 3A'),
+    ).toEqual([{ kind: 'max', key: 'ioutMax', value: { value: 3, unit: 'A' } }]);
+  });
+
+  it('splits the qualifier from the value', () => {
+    expect(splitQualifier('Up to 1MHz')).toEqual({ kind: 'max', text: '1MHz' });
+    expect(splitQualifier('570kHz')).toEqual({ kind: 'quantity', text: '570kHz' });
+    expect(splitQualifier('minimum 2V')).toEqual({ kind: 'min', text: '2V' });
+  });
+});
+
+describe('tryParseDistributorValue', () => {
+  const found = digikeyParameterToKey('Voltage - Input (Min)');
+  if (found === null) {
+    throw new Error('expected a mapping for Voltage - Input (Min)');
+  }
+  const mapping: DistributorMapping = found;
+
+  it('returns the facts when the value parses', () => {
+    expect(tryParseDistributorValue(mapping, '4.5V')).toEqual({
+      ok: true,
+      value: [{ kind: 'quantity', key: 'vinMin', value: { value: 4.5, unit: 'V' } }],
+    });
+  });
+
+  it('returns the parse error rather than throwing', () => {
+    const result = tryParseDistributorValue(mapping, 'about five volts');
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error).toBeInstanceOf(ParseError);
+      expect(result.error.code).toBe('UNIT_PARSE_FAILED');
+    }
+  });
+
+  it('rethrows anything that is not a parse error', () => {
+    expect(() => tryParseDistributorValue(mapping, 5 as unknown as string)).toThrow(TypeError);
   });
 });

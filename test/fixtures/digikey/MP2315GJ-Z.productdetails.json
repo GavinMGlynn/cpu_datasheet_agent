@@ -1,0 +1,339 @@
+{
+  "Product": {
+    "ManufacturerProductNumber": "MP2315GJ-Z",
+    "Manufacturer": {
+      "Id": 1589,
+      "Name": "Monolithic Power Systems Inc."
+    },
+    "Description": {
+      "ProductDescription": "IC REG BUCK ADJ 3A TSOT23-8",
+      "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A SOT-23-8 Thin, TSOT-23-8"
+    },
+    "DatasheetUrl": "https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2315/document_id/513",
+    "ProductUrl": "https://www.digikey.com.au/en/products/detail/monolithic-power-systems-inc/MP2315GJ-Z/9554690",
+    "QuantityAvailable": 393,
+    "Parameters": [
+      {
+        "ParameterId": 110,
+        "ParameterText": "Function",
+        "ValueText": "Step-Down",
+        "ParameterType": "String",
+        "ValueId": "408308"
+      },
+      {
+        "ParameterId": 255,
+        "ParameterText": "Output Configuration",
+        "ValueText": "Positive",
+        "ParameterType": "String",
+        "ValueId": "389019"
+      },
+      {
+        "ParameterId": 1098,
+        "ParameterText": "Topology",
+        "ValueText": "Buck",
+        "ParameterType": "String",
+        "ValueId": "323617"
+      },
+      {
+        "ParameterId": 41,
+        "ParameterText": "Output Type",
+        "ValueText": "Adjustable",
+        "ParameterType": "String",
+        "ValueId": "310372"
+      },
+      {
+        "ParameterId": 87,
+        "ParameterText": "Number of Outputs",
+        "ValueText": "1",
+        "ParameterType": "String",
+        "ValueId": "39665"
+      },
+      {
+        "ParameterId": 1471,
+        "ParameterText": "Voltage - Input (Min)",
+        "ValueText": "4.5V",
+        "ParameterType": "String",
+        "ValueId": "208524"
+      },
+      {
+        "ParameterId": 573,
+        "ParameterText": "Voltage - Input (Max)",
+        "ValueText": "24V",
+        "ParameterType": "String",
+        "ValueId": "155183"
+      },
+      {
+        "ParameterId": 1779,
+        "ParameterText": "Voltage - Output (Min/Fixed)",
+        "ValueText": "0.8V",
+        "ParameterType": "String",
+        "ValueId": "36543"
+      },
+      {
+        "ParameterId": 1429,
+        "ParameterText": "Voltage - Output (Max)",
+        "ValueText": "22.8V",
+        "ParameterType": "String",
+        "ValueId": "147434"
+      },
+      {
+        "ParameterId": 129,
+        "ParameterText": "Current - Output",
+        "ValueText": "3A",
+        "ParameterType": "String",
+        "ValueId": "201594"
+      },
+      {
+        "ParameterId": 384,
+        "ParameterText": "Frequency - Switching",
+        "ValueText": "500kHz",
+        "ParameterType": "String",
+        "ValueId": "236697"
+      },
+      {
+        "ParameterId": 1320,
+        "ParameterText": "Synchronous Rectifier",
+        "ValueText": "Yes",
+        "ParameterType": "String",
+        "ValueId": "423329"
+      },
+      {
+        "ParameterId": 252,
+        "ParameterText": "Operating Temperature",
+        "ValueText": "-40°C ~ 125°C (TJ)",
+        "ParameterType": "String",
+        "ValueId": "212481"
+      },
+      {
+        "ParameterId": 69,
+        "ParameterText": "Mounting Type",
+        "ValueText": "Surface Mount",
+        "ParameterType": "String",
+        "ValueId": "409393"
+      },
+      {
+        "ParameterId": 16,
+        "ParameterText": "Package / Case",
+        "ValueText": "SOT-23-8 Thin, TSOT-23-8",
+        "ParameterType": "String",
+        "ValueId": "405440"
+      },
+      {
+        "ParameterId": 1291,
+        "ParameterText": "Supplier Device Package",
+        "ValueText": "TSOT-23-8",
+        "ParameterType": "String",
+        "ValueId": "416362"
+      }
+    ],
+    "ProductVariations": [
+      {
+        "DigiKeyProductNumber": "1589-1884-2-ND",
+        "PackageType": {
+          "Id": 1,
+          "Name": "Tape & Reel (TR)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 3000,
+            "UnitPrice": 1.77164,
+            "TotalPrice": 5314.92
+          },
+          {
+            "BreakQuantity": 6000,
+            "UnitPrice": 1.73655,
+            "TotalPrice": 10419.3
+          }
+        ],
+        "MinimumOrderQuantity": 3000,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 3000,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 1589,
+          "Name": "Monolithic Power Systems Inc."
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "1589-1884-1-ND",
+        "PackageType": {
+          "Id": 2,
+          "Name": "Cut Tape (CT)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 3.45,
+            "TotalPrice": 3.45
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 2.558,
+            "TotalPrice": 25.58
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 2.3344,
+            "TotalPrice": 58.36
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 2.0891,
+            "TotalPrice": 208.91
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 1.972,
+            "TotalPrice": 493
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 1.9158,
+            "TotalPrice": 957.9
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 393,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 1589,
+          "Name": "Monolithic Power Systems Inc."
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "1589-1884-6-ND",
+        "PackageType": {
+          "Id": 243,
+          "Name": "Digi-Reel®"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 3.45,
+            "TotalPrice": 3.45
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 2.558,
+            "TotalPrice": 25.58
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 2.3344,
+            "TotalPrice": 58.36
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 2.0891,
+            "TotalPrice": 208.91
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 1.972,
+            "TotalPrice": 493
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 1.9158,
+            "TotalPrice": 957.9
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 393,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 9.5,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 1589,
+          "Name": "Monolithic Power Systems Inc."
+        },
+        "MaxQuantityForDistribution": 999999999
+      }
+    ],
+    "BaseProductNumber": {
+      "Id": 326143,
+      "Name": "MP2315"
+    },
+    "Category": {
+      "Name": "Integrated Circuits (ICs)",
+      "CategoryId": 32,
+      "ParentId": 0,
+      "ProductCount": 0,
+      "NewProductCount": 0,
+      "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+      "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+      "ChildCategories": [
+        {
+          "CategoryId": 2025,
+          "ParentId": 32,
+          "Name": "Power Management (PMIC)",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+          "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+          "ChildCategories": [
+            {
+              "CategoryId": 739,
+              "ParentId": 2025,
+              "Name": "Voltage Regulators - DC DC Switching Regulators",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+              "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+              "ChildCategories": []
+            }
+          ]
+        }
+      ]
+    },
+    "ProductStatus": {
+      "Status": "Not For New Designs",
+      "Id": 7
+    },
+    "Discontinued": false,
+    "EndOfLife": false,
+    "UnitPrice": 3.45,
+    "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4243/1589%7ETSOT23-8%7E%7E8.jpg",
+    "BackOrderNotAllowed": false,
+    "NormallyStocking": true,
+    "Ncnr": false,
+    "PrimaryVideoUrl": "",
+    "ManufacturerLeadWeeks": "24",
+    "ManufacturerPublicQuantity": 0,
+    "Series": {
+      "Id": 818,
+      "Name": "-"
+    },
+    "Classifications": {
+      "ReachStatus": "REACH Unaffected",
+      "RohsStatus": "ROHS3 Compliant",
+      "MoistureSensitivityLevel": "1  (Unlimited)",
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070"
+    },
+    "OtherNames": [
+      "1589-1884",
+      "1589-1884-ND",
+      "1589-1884-1",
+      "1589-1884-2",
+      "MP2315GJ-Z-ND",
+      "1589-1884-6"
+    ]
+  },
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

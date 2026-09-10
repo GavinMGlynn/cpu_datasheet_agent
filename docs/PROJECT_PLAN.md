@@ -82,6 +82,8 @@ that supersedes the old one, and the old row's status changes to
 | D21 | 2026-09-10 | CI runs on the user's self-hosted GitHub Actions runner (`[self-hosted, Linux, X64]`, name `localhost`) instead of `ubuntu-latest`. CI verifies poppler is installed rather than installing it, and runs are cancelled when superseded. | User request. The runner is the same WSL host the project targets, so CI exercises the real environment (Rocky Linux, poppler 24.02.0) and needs no package installs. One runner means queued duplicate runs must be cancelled. | active |
 | D22 | 2026-09-10 | All Mock Service Worker usage goes through `test/helpers/msw.ts`, the only file with an ESLint exception for the unsafe-call and unsafe-return rules. | msw's request-handler types do not resolve under type-aware linting even though `tsc` accepts them. Confining the boundary to one module keeps every other file strictly checked instead of disabling the rules for all tests. | active |
 | D23 | 2026-09-10 | No unreachable defensive fallbacks. Where `noUncheckedIndexedAccess` forces a check on a value the caller has already proved present, use a guarded helper (`group` for regex captures, `elementAt` for arrays) that throws a coded error and is tested directly. | A `?? ''` that can never run is untestable and hides a real off-by-one. The helper turns it into a reachable, named failure. | active |
+| D24 | 2026-09-10 | A distributor value that states a bound (`Up to 1MHz`) becomes a `max` or `min` fact, not a quantity and not a range. A value that is inconclusive (`Both` for Synchronous Rectifier, `Fixed, Adjustable` for Output Type, `-`) yields no fact at all. | Recording `Up to 1MHz` as a range would require inventing a lower end, and as a quantity would assert a fixed frequency the part does not have. `Both` corroborates nothing and the datasheet decides, so a fact would be a guess and an error would be noise. | active |
+| D25 | 2026-09-10 | Digi-Key response schemas are loose objects with every read field declared. | Digi-Key adds fields over time, so an unknown field is not a reason to reject a response; a declared field that changes type is. Validated against live responses rather than documentation, which is how the nested `AlternatePackagings` wrapper and the optional `BaseProductNumber.Name` were found. | active |
 
 ## 4. Status
 
@@ -97,7 +99,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M4  | Persistence (SQLite) | complete | 2026-09-10 |
 | M5  | Units, parsing, and normalisation | complete | 2026-09-10 |
 | M6  | PDF toolkit | complete | 2026-09-10 |
-| M7  | Digi-Key adapter | not started | |
+| M7  | Digi-Key adapter | complete | 2026-09-10 |
 | M8  | Mouser adapter | not started | |
 | M9  | Nexar adapter with hard budget | not started | |
 | M10 | MPN resolution | not started | |
@@ -209,6 +211,52 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 9: Module 7 complete, architecture document added
+
+**Done**
+
+- `docs/ARCHITECTURE.md` describes the system: the two layers and why they are
+  split, the per-part pipeline, what each module owns, and the seams. A
+  rendered version with the diagrams drawn is published as an artifact and its
+  source is committed as `docs/architecture.html`.
+- Digi-Key credentials (production and sandbox) verified against their own
+  token endpoints. The config now holds both pairs and selects by
+  `DIGIKEY_SANDBOX`, since each host rejects the other's pair. Both are
+  redacted from logs and the ledger.
+- `src/adapters/digikey/`: token client with refresh-ahead, paced request
+  layer with retry and quota tracking, loose response schemas validated
+  against live responses, mapping to offers and parametric facts, and cached,
+  ledgered operations with a `lookup` that answers in one request what would
+  otherwise take three.
+- 27 fixtures recorded from the live API across 13 parts and 6 manufacturers,
+  plus a keyword search and a part Digi-Key does not list, all sanitised of
+  account fields. Live contract test passes. 1303 tests, 100% coverage, zero
+  warnings.
+
+**Learned**
+
+- The Digi-Key access token lives 600 seconds, so refresh-ahead is mandatory
+  rather than an optimisation.
+- Product details already carries pricing, parametrics and the datasheet URL,
+  so `lookup` spends one request instead of three.
+- Real data drove two design decisions (D24): `Up to 1MHz` is a stated bound,
+  and `Both` is inconclusive. Both were found by parsing 13 real parts, not by
+  reading documentation.
+- Two schema shapes were wrong until checked against live responses:
+  `AlternatePackagings` wraps its array in an object with leaner items, and
+  `BaseProductNumber.Name` is absent on some keyword results (D25).
+- **A test-quality bug worth remembering**: msw converts an exception thrown
+  inside a handler into a 500 response, so two tests that claimed to exercise
+  transport failure were exercising the 5xx retry path and passing for the
+  wrong reason. Use the helper's `networkError()` for a real dropped
+  connection. The coverage gate is what surfaced it.
+
+**Next**
+
+- M8 (Mouser adapter). Its endpoint paths still need confirming (task 8.1);
+  the pages timed out when first checked. A Mouser API key is needed before
+  fixtures can be recorded.
 
 ### 2026-09-10 — Session 8: Module 6 complete, CI moved to the self-hosted runner
 

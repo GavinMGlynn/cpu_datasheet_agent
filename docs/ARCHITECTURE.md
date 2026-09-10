@@ -258,7 +258,7 @@ locates the sections that matter, including ordering information, because one
 datasheet usually covers a family and the ordering table is what says which
 part numbers.
 
-### Distributor adapters (`src/adapters/`) — Digi-Key in progress
+### Distributor adapters (`src/adapters/`) — Digi-Key built
 
 Each adapter owns its authentication, request layer, response schemas, and the
 mapping to core types. All of them share three properties: every call goes
@@ -270,7 +270,9 @@ variant, and a datasheet URL. Authentication is the 2-legged client
 credentials flow, and the access token lives only 600 seconds, so the token
 client refreshes ahead of expiry rather than reacting to a 401. Requests are
 serialised with a minimum gap so a burst cannot trip the rate limit, and the
-daily quota reported in the response headers is tracked.
+daily quota reported in the response headers is tracked. `lookup(mpn)` spends
+one request where the obvious three calls would spend three, because product
+details already carries pricing, parametrics, and the datasheet URL.
 
 Response objects are deliberately *loose*: Digi-Key adds fields over time and
 an unknown field is not a reason to fail. Every field the adapter reads is

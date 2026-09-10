@@ -1,0 +1,162 @@
+{
+  "ProductPricings": [
+    {
+      "ManufacturerProductNumber": "AP63203WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "AP63203WU-7DICT-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 1.3,
+              "TotalPrice": 1.3
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 0.927,
+              "TotalPrice": 9.27
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 0.834,
+              "TotalPrice": 20.85
+            },
+            {
+              "BreakQuantity": 50,
+              "UnitPrice": 0.7776,
+              "TotalPrice": 38.88
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 0.7311,
+              "TotalPrice": 73.11
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 0,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        },
+        {
+          "DigiKeyProductNumber": "AP63203WU-7DIDKR-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 1.3,
+              "TotalPrice": 1.3
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 0.927,
+              "TotalPrice": 9.27
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 0.834,
+              "TotalPrice": 20.85
+            },
+            {
+              "BreakQuantity": 50,
+              "UnitPrice": 0.7776,
+              "TotalPrice": 38.88
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 0.7311,
+              "TotalPrice": 73.11
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 0,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true,
+          "DigiReelingFee": 9.5
+        },
+        {
+          "DigiKeyProductNumber": "AP63203WU-7DITR-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 3000,
+              "UnitPrice": 0.59809,
+              "TotalPrice": 1794.27
+            },
+            {
+              "BreakQuantity": 9000,
+              "UnitPrice": 0.576,
+              "TotalPrice": 5184
+            }
+          ],
+          "MinimumOrderQuantity": 3000,
+          "QuantityAvailableforPackageType": 0,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        }
+      ],
+      "Description": {
+        "ProductDescription": "IC REG BUCK 3.3V 2A TSOT23-6",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Fixed 3.3V 1 Output 2A SOT-23-6 Thin, TSOT-23-6"
+      },
+      "ProductUrl": "",
+      "IsDiscontinued": false,
+      "NormallyStocking": true,
+      "IsObsolete": false,
+      "ManufacturerLeadWeeks": "32",
+      "ManufacturerPublicQuantity": 0,
+      "StandardPackage": 3000,
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0090",
+      "MoistureSensitivityLevel": "1  (Unlimited)",
+      "IsBoNotAllowed": false,
+      "IsNcnr": false,
+      "Categories": [
+        {
+          "CategoryId": 32,
+          "Level": 0,
+          "Name": "Integrated Circuits (ICs)"
+        },
+        {
+          "CategoryId": 2025,
+          "Level": 1,
+          "Name": "Power Management (PMIC)"
+        },
+        {
+          "CategoryId": 739,
+          "Level": 2,
+          "Name": "Voltage Regulators - DC DC Switching Regulators"
+        }
+      ],
+      "ContainsLithium": false,
+      "ContainsMercury": false,
+      "IsEndOfLife": false,
+      "OtherNames": ["AP63203WU-7DICT", "AP63203WU-7DITR", "AP63203WU-7DIDKR"]
+    }
+  ],
+  "ProductsCount": 1,
+  "SettingsUsed": {
+    "SearchLocale": {
+      "Site": "AU",
+      "Language": "en",
+      "Currency": "AUD"
+    },
+    "Filters": {}
+  }
+}

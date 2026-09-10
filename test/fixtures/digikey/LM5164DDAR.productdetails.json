@@ -1,0 +1,326 @@
+{
+  "Product": {
+    "ManufacturerProductNumber": "LM5164DDAR",
+    "Manufacturer": {
+      "Id": 296,
+      "Name": "Texas Instruments"
+    },
+    "Description": {
+      "ProductDescription": "IC REG BUCK ADJ 1A 8SOPWR",
+      "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 1.2V 1 Output 1A 8-PowerSOIC (0.154\", 3.90mm Width)"
+    },
+    "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2FLM5164",
+    "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/LM5164DDAR/10434708",
+    "Parameters": [
+      {
+        "ParameterId": 110,
+        "ParameterText": "Function",
+        "ValueText": "Step-Down",
+        "ParameterType": "String",
+        "ValueId": "408308"
+      },
+      {
+        "ParameterId": 255,
+        "ParameterText": "Output Configuration",
+        "ValueText": "Positive",
+        "ParameterType": "String",
+        "ValueId": "389019"
+      },
+      {
+        "ParameterId": 1098,
+        "ParameterText": "Topology",
+        "ValueText": "Buck",
+        "ParameterType": "String",
+        "ValueId": "323617"
+      },
+      {
+        "ParameterId": 41,
+        "ParameterText": "Output Type",
+        "ValueText": "Adjustable",
+        "ParameterType": "String",
+        "ValueId": "310372"
+      },
+      {
+        "ParameterId": 87,
+        "ParameterText": "Number of Outputs",
+        "ValueText": "1",
+        "ParameterType": "String",
+        "ValueId": "39665"
+      },
+      {
+        "ParameterId": 1471,
+        "ParameterText": "Voltage - Input (Min)",
+        "ValueText": "6V",
+        "ParameterType": "String",
+        "ValueId": "267452"
+      },
+      {
+        "ParameterId": 573,
+        "ParameterText": "Voltage - Input (Max)",
+        "ValueText": "100V",
+        "ParameterType": "String",
+        "ValueId": "69629"
+      },
+      {
+        "ParameterId": 1779,
+        "ParameterText": "Voltage - Output (Min/Fixed)",
+        "ValueText": "1.2V",
+        "ParameterType": "String",
+        "ValueId": "48701"
+      },
+      {
+        "ParameterId": 1429,
+        "ParameterText": "Voltage - Output (Max)",
+        "ValueText": "100V",
+        "ParameterType": "String",
+        "ValueId": "69629"
+      },
+      {
+        "ParameterId": 129,
+        "ParameterText": "Current - Output",
+        "ValueText": "1A",
+        "ParameterType": "String",
+        "ValueId": "119750"
+      },
+      {
+        "ParameterId": 384,
+        "ParameterText": "Frequency - Switching",
+        "ValueText": "Up to 1MHz",
+        "ParameterType": "String",
+        "ValueId": "417928"
+      },
+      {
+        "ParameterId": 1320,
+        "ParameterText": "Synchronous Rectifier",
+        "ValueText": "Yes",
+        "ParameterType": "String",
+        "ValueId": "423329"
+      },
+      {
+        "ParameterId": 252,
+        "ParameterText": "Operating Temperature",
+        "ValueText": "-40°C ~ 150°C (TJ)",
+        "ParameterType": "String",
+        "ValueId": "212510"
+      },
+      {
+        "ParameterId": 69,
+        "ParameterText": "Mounting Type",
+        "ValueText": "Surface Mount",
+        "ParameterType": "String",
+        "ValueId": "409393"
+      },
+      {
+        "ParameterId": 16,
+        "ParameterText": "Package / Case",
+        "ValueText": "8-PowerSOIC (0.154\", 3.90mm Width)",
+        "ParameterType": "String",
+        "ValueId": "294803"
+      },
+      {
+        "ParameterId": 1291,
+        "ParameterText": "Supplier Device Package",
+        "ValueText": "8-SO PowerPad",
+        "ParameterType": "String",
+        "ValueId": "294919"
+      }
+    ],
+    "ProductVariations": [
+      {
+        "DigiKeyProductNumber": "296-LM5164DDARTR-ND",
+        "PackageType": {
+          "Id": 1,
+          "Name": "Tape & Reel (TR)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 2500,
+            "UnitPrice": 3.31976,
+            "TotalPrice": 8299.4
+          }
+        ],
+        "MinimumOrderQuantity": 2500,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 2500,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": false,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "296-LM5164DDARCT-ND",
+        "PackageType": {
+          "Id": 2,
+          "Name": "Cut Tape (CT)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 6.1,
+            "TotalPrice": 6.1
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 4.61,
+            "TotalPrice": 46.1
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 4.238,
+            "TotalPrice": 105.95
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 3.83,
+            "TotalPrice": 383
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 3.63544,
+            "TotalPrice": 908.86
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 3.61996,
+            "TotalPrice": 1809.98
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": false,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "296-LM5164DDARDKR-ND",
+        "PackageType": {
+          "Id": 243,
+          "Name": "Digi-Reel®"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 6.1,
+            "TotalPrice": 6.1
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 4.61,
+            "TotalPrice": 46.1
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 4.238,
+            "TotalPrice": 105.95
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 3.83,
+            "TotalPrice": 383
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 3.63544,
+            "TotalPrice": 908.86
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 3.61996,
+            "TotalPrice": 1809.98
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 9.5,
+        "MyPricing": [],
+        "TariffActive": false,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      }
+    ],
+    "BaseProductNumber": {
+      "Id": 26110,
+      "Name": "LM5164"
+    },
+    "Category": {
+      "Name": "Integrated Circuits (ICs)",
+      "CategoryId": 32,
+      "ParentId": 0,
+      "ProductCount": 0,
+      "NewProductCount": 0,
+      "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+      "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+      "ChildCategories": [
+        {
+          "CategoryId": 2025,
+          "ParentId": 32,
+          "Name": "Power Management (PMIC)",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+          "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+          "ChildCategories": [
+            {
+              "CategoryId": 739,
+              "ParentId": 2025,
+              "Name": "Voltage Regulators - DC DC Switching Regulators",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+              "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+              "ChildCategories": []
+            }
+          ]
+        }
+      ]
+    },
+    "ProductStatus": {
+      "Status": "Active",
+      "Id": 0
+    },
+    "Discontinued": false,
+    "EndOfLife": false,
+    "UnitPrice": 6.1,
+    "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/6222/296%7E4202561%7EDDA%7E8.jpg",
+    "BackOrderNotAllowed": false,
+    "NormallyStocking": true,
+    "Ncnr": false,
+    "PrimaryVideoUrl": "",
+    "ManufacturerLeadWeeks": "16",
+    "ManufacturerPublicQuantity": 0,
+    "Series": {
+      "Id": 818,
+      "Name": "-"
+    },
+    "Classifications": {
+      "ReachStatus": "REACH Unaffected",
+      "RohsStatus": "ROHS3 Compliant",
+      "MoistureSensitivityLevel": "2  (1 Year)",
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070"
+    },
+    "OtherNames": ["296-LM5164DDARDKR", "296-LM5164DDARCT", "296-LM5164DDARTR"]
+  },
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

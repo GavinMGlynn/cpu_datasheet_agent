@@ -1,0 +1,23 @@
+{
+  "AlternatePackagings": {
+    "AlternatePackaging": [
+      {
+        "ManufacturerProductNumber": "TPS54331D",
+        "Manufacturer": {
+          "Name": "Texas Instruments",
+          "Id": 296
+        },
+        "DigiKeyProductNumber": "296-23626-5-ND",
+        "Description": "IC REG BUCK ADJ 3A 8SOIC",
+        "UnitPrice": "3.16",
+        "QuantityAvailable": 1620,
+        "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331D/1913497"
+      }
+    ]
+  },
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

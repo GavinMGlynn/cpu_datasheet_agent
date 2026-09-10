@@ -7,6 +7,7 @@ import {
   parseRange,
   parseTemperatureRange,
   splitRange,
+  type ParseResult,
 } from './parse.js';
 
 export type MappingKind =
@@ -26,9 +27,20 @@ export interface DistributorMapping {
   readonly unit?: Unit;
 }
 
-/** One value learned from a distributor attribute. Provenance is added by the adapter. */
+/**
+ * One value learned from a distributor attribute. Provenance is added by the
+ * adapter.
+ *
+ * `max` and `min` carry a stated bound rather than a value: Digi-Key writes
+ * `Up to 1MHz` for an adjustable frequency, which says the parameter is at
+ * most 1 MHz and says nothing about its lower end. Recording that as a range
+ * would require inventing the other end, and recording it as a quantity would
+ * assert a fixed value the part does not have.
+ */
 export type DistributorFact =
   | { readonly kind: 'quantity'; readonly key: ParameterKey; readonly value: Quantity }
+  | { readonly kind: 'max'; readonly key: ParameterKey; readonly value: Quantity }
+  | { readonly kind: 'min'; readonly key: ParameterKey; readonly value: Quantity }
   | { readonly kind: 'range'; readonly key: ParameterKey; readonly value: QuantityRange }
   | { readonly kind: 'enum'; readonly key: ParameterKey; readonly value: string }
   | { readonly kind: 'boolean'; readonly key: ParameterKey; readonly value: boolean }
@@ -114,6 +126,26 @@ export function mouserAttributeToKey(name: string): DistributorMapping | null {
 
 const NOT_APPLICABLE: ReadonlySet<string> = new Set(['', '-', 'n/a', 'na', 'not applicable']);
 
+/** Phrases that state a bound rather than a value. */
+const UPPER_BOUND = /^(?:up\s+to|max(?:imum)?(?:\s+of)?|≤|<=|<)\s*/i;
+const LOWER_BOUND = /^(?:down\s+to|from|min(?:imum)?(?:\s+of)?|≥|>=|>)\s*/i;
+
+interface Qualified {
+  readonly kind: 'quantity' | 'max' | 'min';
+  readonly text: string;
+}
+
+/** Splits a leading bound phrase from the value it qualifies. */
+export function splitQualifier(text: string): Qualified {
+  if (UPPER_BOUND.test(text)) {
+    return { kind: 'max', text: text.replace(UPPER_BOUND, '') };
+  }
+  if (LOWER_BOUND.test(text)) {
+    return { kind: 'min', text: text.replace(LOWER_BOUND, '') };
+  }
+  return { kind: 'quantity', text };
+}
+
 const FEATURE_KEYS: readonly (readonly [RegExp, ParameterKey])[] = [
   [/\benable\b/, 'enablePin'],
   [/\bpower[- ]?good\b/, 'powerGoodPin'],
@@ -154,13 +186,24 @@ export function parseDistributorValue(
     });
   }
   switch (mapping.kind) {
-    case 'quantity':
-      return [quantity(key, parseQuantity(text, unit(mapping, text)))];
+    case 'quantity': {
+      const qualified = splitQualifier(text);
+      return [
+        { kind: qualified.kind, key, value: parseQuantity(qualified.text, unit(mapping, text)) },
+      ];
+    }
     case 'quantity_or_range': {
       const target = unit(mapping, text);
-      return splitRange(text).length === 2
-        ? [{ kind: 'range', key, value: parseRange(text, target) }]
-        : [quantity(key, parseQuantity(text, target))];
+      // The qualifier is checked first: `to` is also a range separator, so
+      // "Up to 1MHz" would otherwise split into a range with "Up" as its min.
+      const qualified = splitQualifier(text);
+      if (qualified.kind !== 'quantity') {
+        return [{ kind: qualified.kind, key, value: parseQuantity(qualified.text, target) }];
+      }
+      if (splitRange(text).length === 2) {
+        return [{ kind: 'range', key, value: parseRange(text, target) }];
+      }
+      return [{ kind: 'quantity', key, value: parseQuantity(text, target) }];
     }
     case 'output_voltage': {
       const target = unit(mapping, text);
@@ -194,14 +237,28 @@ export function parseDistributorValue(
       if (word === 'no') {
         return [{ kind: 'enum', key: 'topology', value: 'non_synchronous' }];
       }
-      throw new ParseError('UNIT_PARSE_FAILED', `cannot parse "${text}": expected Yes or No`, {
-        details: { text, reason: 'expected Yes or No' },
-      });
+      if (word === 'both') {
+        // Digi-Key writes "Both" for a part that can run either way. It
+        // corroborates nothing, and the datasheet decides topology, so it
+        // yields no fact rather than a guess or a spurious parse failure.
+        return [];
+      }
+      throw new ParseError(
+        'UNIT_PARSE_FAILED',
+        `cannot parse "${text}": expected Yes, No, or Both`,
+        {
+          details: { text, reason: 'expected Yes, No, or Both' },
+        },
+      );
     }
     case 'output_type': {
       const word = text.toLowerCase();
       if (word === 'fixed' || word === 'adjustable') {
         return [{ kind: 'enum', key: 'voutFixed', value: word }];
+      }
+      if (/^fixed\s*,\s*adjustable$|^adjustable\s*,\s*fixed$/.test(word)) {
+        // A listing offering both. Inconclusive for the same reason as "Both".
+        return [];
       }
       throw new ParseError(
         'UNIT_PARSE_FAILED',
@@ -221,5 +278,24 @@ export function parseDistributorValue(
     }
     case 'text':
       return [{ kind: 'text', key, value: text }];
+  }
+}
+
+/**
+ * {@link parseDistributorValue} as a result rather than an exception, so a
+ * caller collecting failures across many attributes needs no try/catch.
+ * Anything that is not a {@link ParseError} is a bug and still propagates.
+ */
+export function tryParseDistributorValue(
+  mapping: DistributorMapping,
+  rawText: string,
+): ParseResult<readonly DistributorFact[]> {
+  try {
+    return { ok: true, value: parseDistributorValue(mapping, rawText) };
+  } catch (error) {
+    if (error instanceof ParseError) {
+      return { ok: false, error };
+    }
+    throw error;
   }
 }

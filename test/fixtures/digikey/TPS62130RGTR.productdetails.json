@@ -1,0 +1,351 @@
+{
+  "Product": {
+    "ManufacturerProductNumber": "TPS62130RGTR",
+    "Manufacturer": {
+      "Id": 296,
+      "Name": "Texas Instruments"
+    },
+    "Description": {
+      "ProductDescription": "IC REG BUCK ADJ 3A 16VQFN",
+      "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.9V 1 Output 3A 16-VFQFN Exposed Pad"
+    },
+    "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Ftps62130",
+    "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS62130RGTR/2833429",
+    "Parameters": [
+      {
+        "ParameterId": 110,
+        "ParameterText": "Function",
+        "ValueText": "Step-Down",
+        "ParameterType": "String",
+        "ValueId": "408308"
+      },
+      {
+        "ParameterId": 255,
+        "ParameterText": "Output Configuration",
+        "ValueText": "Positive",
+        "ParameterType": "String",
+        "ValueId": "389019"
+      },
+      {
+        "ParameterId": 1098,
+        "ParameterText": "Topology",
+        "ValueText": "Buck",
+        "ParameterType": "String",
+        "ValueId": "323617"
+      },
+      {
+        "ParameterId": 41,
+        "ParameterText": "Output Type",
+        "ValueText": "Adjustable",
+        "ParameterType": "String",
+        "ValueId": "310372"
+      },
+      {
+        "ParameterId": 87,
+        "ParameterText": "Number of Outputs",
+        "ValueText": "1",
+        "ParameterType": "String",
+        "ValueId": "39665"
+      },
+      {
+        "ParameterId": 1471,
+        "ParameterText": "Voltage - Input (Min)",
+        "ValueText": "3V",
+        "ParameterType": "String",
+        "ValueId": "202627"
+      },
+      {
+        "ParameterId": 573,
+        "ParameterText": "Voltage - Input (Max)",
+        "ValueText": "17V",
+        "ParameterType": "String",
+        "ValueId": "112605"
+      },
+      {
+        "ParameterId": 1779,
+        "ParameterText": "Voltage - Output (Min/Fixed)",
+        "ValueText": "0.9V",
+        "ParameterType": "String",
+        "ValueId": "38672"
+      },
+      {
+        "ParameterId": 1429,
+        "ParameterText": "Voltage - Output (Max)",
+        "ValueText": "6V",
+        "ParameterType": "String",
+        "ValueId": "267452"
+      },
+      {
+        "ParameterId": 129,
+        "ParameterText": "Current - Output",
+        "ValueText": "3A",
+        "ParameterType": "String",
+        "ValueId": "201594"
+      },
+      {
+        "ParameterId": 384,
+        "ParameterText": "Frequency - Switching",
+        "ValueText": "2.5MHz",
+        "ParameterType": "String",
+        "ValueId": "131807"
+      },
+      {
+        "ParameterId": 1320,
+        "ParameterText": "Synchronous Rectifier",
+        "ValueText": "Yes",
+        "ParameterType": "String",
+        "ValueId": "423329"
+      },
+      {
+        "ParameterId": 252,
+        "ParameterText": "Operating Temperature",
+        "ValueText": "-40°C ~ 85°C (TA)",
+        "ParameterType": "String",
+        "ValueId": "212621"
+      },
+      {
+        "ParameterId": 69,
+        "ParameterText": "Mounting Type",
+        "ValueText": "Surface Mount",
+        "ParameterType": "String",
+        "ValueId": "409393"
+      },
+      {
+        "ParameterId": 16,
+        "ParameterText": "Package / Case",
+        "ValueText": "16-VFQFN Exposed Pad",
+        "ParameterType": "String",
+        "ValueId": "108825"
+      },
+      {
+        "ParameterId": 1291,
+        "ParameterText": "Supplier Device Package",
+        "ValueText": "16-VQFN (3x3)",
+        "ParameterType": "String",
+        "ValueId": "108841"
+      }
+    ],
+    "ProductVariations": [
+      {
+        "DigiKeyProductNumber": "296-37682-2-ND",
+        "PackageType": {
+          "Id": 1,
+          "Name": "Tape & Reel (TR)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 3000,
+            "UnitPrice": 1.46303,
+            "TotalPrice": 4389.09
+          },
+          {
+            "BreakQuantity": 6000,
+            "UnitPrice": 1.43302,
+            "TotalPrice": 8598.12
+          },
+          {
+            "BreakQuantity": 9000,
+            "UnitPrice": 1.41798,
+            "TotalPrice": 12761.82
+          }
+        ],
+        "MinimumOrderQuantity": 3000,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 3000,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "296-37682-1-ND",
+        "PackageType": {
+          "Id": 2,
+          "Name": "Cut Tape (CT)"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 2.9,
+            "TotalPrice": 2.9
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 2.136,
+            "TotalPrice": 21.36
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 1.9448,
+            "TotalPrice": 48.62
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 1.7345,
+            "TotalPrice": 173.45
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 1.6344,
+            "TotalPrice": 408.6
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 1.57498,
+            "TotalPrice": 787.49
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 0,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      },
+      {
+        "DigiKeyProductNumber": "296-37682-6-ND",
+        "PackageType": {
+          "Id": 243,
+          "Name": "Digi-Reel®"
+        },
+        "StandardPricing": [
+          {
+            "BreakQuantity": 1,
+            "UnitPrice": 2.9,
+            "TotalPrice": 2.9
+          },
+          {
+            "BreakQuantity": 10,
+            "UnitPrice": 2.136,
+            "TotalPrice": 21.36
+          },
+          {
+            "BreakQuantity": 25,
+            "UnitPrice": 1.9448,
+            "TotalPrice": 48.62
+          },
+          {
+            "BreakQuantity": 100,
+            "UnitPrice": 1.7345,
+            "TotalPrice": 173.45
+          },
+          {
+            "BreakQuantity": 250,
+            "UnitPrice": 1.6344,
+            "TotalPrice": 408.6
+          },
+          {
+            "BreakQuantity": 500,
+            "UnitPrice": 1.57498,
+            "TotalPrice": 787.49
+          }
+        ],
+        "MinimumOrderQuantity": 1,
+        "QuantityAvailableforPackageType": 0,
+        "StandardPackage": 1,
+        "MarketPlace": false,
+        "DigiReelFee": 9.5,
+        "MyPricing": [],
+        "TariffActive": true,
+        "Supplier": {
+          "Id": 296,
+          "Name": "Texas Instruments"
+        },
+        "MaxQuantityForDistribution": 999999999
+      }
+    ],
+    "BaseProductNumber": {
+      "Id": 87735,
+      "Name": "TPS62130"
+    },
+    "Category": {
+      "Name": "Integrated Circuits (ICs)",
+      "CategoryId": 32,
+      "ParentId": 0,
+      "ProductCount": 0,
+      "NewProductCount": 0,
+      "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+      "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+      "ChildCategories": [
+        {
+          "CategoryId": 2025,
+          "ParentId": 32,
+          "Name": "Power Management (PMIC)",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+          "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+          "ChildCategories": [
+            {
+              "CategoryId": 739,
+              "ParentId": 2025,
+              "Name": "Voltage Regulators - DC DC Switching Regulators",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+              "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+              "ChildCategories": []
+            }
+          ]
+        }
+      ]
+    },
+    "ProductStatus": {
+      "Status": "Active",
+      "Id": 0
+    },
+    "Discontinued": false,
+    "EndOfLife": false,
+    "UnitPrice": 2.9,
+    "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4117/296%7E4222419%7ERGT%7E16.JPG",
+    "BackOrderNotAllowed": false,
+    "NormallyStocking": true,
+    "Ncnr": false,
+    "PrimaryVideoUrl": "",
+    "ManufacturerLeadWeeks": "16",
+    "ManufacturerPublicQuantity": 0,
+    "Series": {
+      "Id": 29037,
+      "Name": "DCS-Control™"
+    },
+    "Classifications": {
+      "ReachStatus": "REACH Unaffected",
+      "RohsStatus": "ROHS3 Compliant",
+      "MoistureSensitivityLevel": "2  (1 Year)",
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070"
+    },
+    "OtherNames": [
+      "-TPS62130RGTRF0-NDR",
+      "296-37682-6",
+      "296-50553-6",
+      "TEXTISTPS62130RGTR",
+      "296-37682-1",
+      "296-37682-2",
+      "2156-TPS62130RGTR",
+      "296-50553-2-ND",
+      "-TPS62130RGTRF0",
+      "296-50553-1-ND",
+      "296-50553-6-ND",
+      "TPS62130RGTR-ND",
+      "296-50553-1",
+      "296-50553-2"
+    ]
+  },
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

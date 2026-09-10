@@ -1,0 +1,2727 @@
+{
+  "Products": [
+    {
+      "ManufacturerProductNumber": "TPS54331DR",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DR/2047963",
+      "QuantityAvailable": 7468,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-26991-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.17679,
+              "TotalPrice": 2941.975
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.15048,
+              "TotalPrice": 5752.4
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.13731,
+              "TotalPrice": 8529.825
+            },
+            {
+              "BreakQuantity": 12500,
+              "UnitPrice": 1.12271,
+              "TotalPrice": 14033.875
+            }
+          ],
+          "MinimumOrderQuantity": 2500,
+          "QuantityAvailableforPackageType": 5000,
+          "StandardPackage": 2500,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-26991-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.36,
+              "TotalPrice": 2.36
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.73,
+              "TotalPrice": 17.3
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.57,
+              "TotalPrice": 39.25
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.3954,
+              "TotalPrice": 139.54
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.31204,
+              "TotalPrice": 328.01
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.2618,
+              "TotalPrice": 630.9
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.25196,
+              "TotalPrice": 1251.96
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 7468,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          }
+        },
+        {
+          "DigiKeyProductNumber": "296-26991-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.36,
+              "TotalPrice": 2.36
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.73,
+              "TotalPrice": 17.3
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.57,
+              "TotalPrice": 39.25
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.3954,
+              "TotalPrice": 139.54
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.31204,
+              "TotalPrice": 328.01
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.2618,
+              "TotalPrice": 630.9
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.25196,
+              "TotalPrice": 1251.96
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 7468,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 9.5,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 2.36,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": [
+        "296-26991-2",
+        "2156-TPS54331DR",
+        "TPS54331DR-ND",
+        "TEXTISTPS54331DR",
+        "296-26991-1",
+        "-TPS54331DRG4",
+        "296-26991-6",
+        "-TPS54331DRG4-NDR"
+      ]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DDAR",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOPWR",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-PowerSOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DDAR/3053257",
+      "QuantityAvailable": 2014,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-PowerSOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294803"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SO PowerPad",
+          "ParameterType": "String",
+          "ValueId": "294919"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-39419-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.57318,
+              "TotalPrice": 3932.95
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.53946,
+              "TotalPrice": 7697.3
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.52257,
+              "TotalPrice": 11419.275
+            }
+          ],
+          "MinimumOrderQuantity": 2500,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 2500,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-39419-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 3.1,
+              "TotalPrice": 3.1
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 2.282,
+              "TotalPrice": 22.82
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 2.0776,
+              "TotalPrice": 51.94
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.8533,
+              "TotalPrice": 185.33
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.74656,
+              "TotalPrice": 436.64
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.68364,
+              "TotalPrice": 841.82
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.58834,
+              "TotalPrice": 1588.34
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 2014,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-39419-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 3.1,
+              "TotalPrice": 3.1
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 2.282,
+              "TotalPrice": 22.82
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 2.0776,
+              "TotalPrice": 51.94
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.8533,
+              "TotalPrice": 185.33
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.74656,
+              "TotalPrice": 436.64
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.68364,
+              "TotalPrice": 841.82
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.58834,
+              "TotalPrice": 1588.34
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 2014,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 9.5,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 3.1,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/6222/296%7E4202561%7EDDA%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "2  (1 Year)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": ["296-39419-2", "296-39419-1", "TPS54331DDAR-ND", "296-39419-6"]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331GDR",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331GDR/2696979",
+      "QuantityAvailable": 3327,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-50099-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.29095,
+              "TotalPrice": 3227.375
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.26256,
+              "TotalPrice": 6312.8
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.24836,
+              "TotalPrice": 9362.7
+            }
+          ],
+          "MinimumOrderQuantity": 2500,
+          "QuantityAvailableforPackageType": 2500,
+          "StandardPackage": 2500,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-50099-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.58,
+              "TotalPrice": 2.58
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.887,
+              "TotalPrice": 18.87
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.7152,
+              "TotalPrice": 42.88
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.5268,
+              "TotalPrice": 152.68
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.43684,
+              "TotalPrice": 359.21
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.38264,
+              "TotalPrice": 691.32
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.37671,
+              "TotalPrice": 1376.71
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 3327,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          }
+        },
+        {
+          "DigiKeyProductNumber": "296-50099-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.58,
+              "TotalPrice": 2.58
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.887,
+              "TotalPrice": 18.87
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.7152,
+              "TotalPrice": 42.88
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.5268,
+              "TotalPrice": 152.68
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.43684,
+              "TotalPrice": 359.21
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.38264,
+              "TotalPrice": 691.32
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.37671,
+              "TotalPrice": 1376.71
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 3327,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 9.5,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 2.58,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": ["296-50099-1", "296-50099-2", "TPS54331GDR-ND", "296-50099-6"]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331D",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331D/1913497",
+      "QuantityAvailable": 1620,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-23626-5-ND",
+          "PackageType": {
+            "Id": 6,
+            "Name": "Tube"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 3.16,
+              "TotalPrice": 3.16
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 2.34,
+              "TotalPrice": 23.4
+            },
+            {
+              "BreakQuantity": 75,
+              "UnitPrice": 1.94653,
+              "TotalPrice": 145.98975
+            },
+            {
+              "BreakQuantity": 150,
+              "UnitPrice": 1.85493,
+              "TotalPrice": 278.2395
+            },
+            {
+              "BreakQuantity": 300,
+              "UnitPrice": 1.77953,
+              "TotalPrice": 533.859
+            },
+            {
+              "BreakQuantity": 525,
+              "UnitPrice": 1.72851,
+              "TotalPrice": 907.46775
+            },
+            {
+              "BreakQuantity": 1050,
+              "UnitPrice": 1.67546,
+              "TotalPrice": 1759.233
+            },
+            {
+              "BreakQuantity": 2550,
+              "UnitPrice": 1.62102,
+              "TotalPrice": 4133.601
+            },
+            {
+              "BreakQuantity": 5025,
+              "UnitPrice": 1.58766,
+              "TotalPrice": 7977.9915
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 1620,
+          "StandardPackage": 75,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 3.16,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": [
+        "-TPS54331D-NDR",
+        "-296-23626-5",
+        "-296-23626-5-ND",
+        "296-23626-5-NDR",
+        "-296-23626-5-NDR",
+        "296-23626-5",
+        "2156-TPS54331D",
+        "TEXTISTPS54331D",
+        "-TPS54331DG4",
+        "-TPS54331DG4-NDR"
+      ]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DDA",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOPWR",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-PowerSOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DDA/2825941",
+      "QuantityAvailable": 568,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-PowerSOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294803"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SO PowerPad",
+          "ParameterType": "String",
+          "ValueId": "294919"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-30200-5-ND",
+          "PackageType": {
+            "Id": 6,
+            "Name": "Tube"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 3.68,
+              "TotalPrice": 3.68
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 2.733,
+              "TotalPrice": 27.33
+            },
+            {
+              "BreakQuantity": 75,
+              "UnitPrice": 2.28267,
+              "TotalPrice": 171.20025
+            },
+            {
+              "BreakQuantity": 150,
+              "UnitPrice": 2.1778,
+              "TotalPrice": 326.67
+            },
+            {
+              "BreakQuantity": 300,
+              "UnitPrice": 2.09153,
+              "TotalPrice": 627.459
+            },
+            {
+              "BreakQuantity": 525,
+              "UnitPrice": 2.03316,
+              "TotalPrice": 1067.409
+            },
+            {
+              "BreakQuantity": 1050,
+              "UnitPrice": 1.9725,
+              "TotalPrice": 2071.125
+            },
+            {
+              "BreakQuantity": 2550,
+              "UnitPrice": 1.91024,
+              "TotalPrice": 4871.112
+            },
+            {
+              "BreakQuantity": 5025,
+              "UnitPrice": 1.87209,
+              "TotalPrice": 9407.25225
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 568,
+          "StandardPackage": 75,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 3.68,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/6222/296%7E4202561%7EDDA%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "2  (1 Year)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": [
+        "-296-30200-5-ND",
+        "-296-30200-5",
+        "TPS54331DDA-ND",
+        "-TPS54331DDA-NDR",
+        "296-30200-5"
+      ]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331QDRQ1",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331-q1",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331QDRQ1/2512406",
+      "QuantityAvailable": 1850,
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 125°C (TA)",
+          "ParameterType": "String",
+          "ValueId": "212479"
+        },
+        {
+          "ParameterId": 1977,
+          "ParameterText": "Grade",
+          "ValueText": "Automotive",
+          "ParameterType": "String",
+          "ValueId": "316912"
+        },
+        {
+          "ParameterId": 2700,
+          "ParameterText": "Qualification",
+          "ValueText": "AEC-Q100",
+          "ParameterType": "String",
+          "ValueId": "312102"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-28114-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 3.38174,
+              "TotalPrice": 8454.35
+            }
+          ],
+          "MinimumOrderQuantity": 2500,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 2500,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-28114-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 6.2,
+              "TotalPrice": 6.2
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 4.691,
+              "TotalPrice": 46.91
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 4.314,
+              "TotalPrice": 107.85
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 3.8998,
+              "TotalPrice": 389.98
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 3.7022,
+              "TotalPrice": 925.55
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 3.68904,
+              "TotalPrice": 1844.52
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 1850,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        },
+        {
+          "DigiKeyProductNumber": "296-28114-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 6.2,
+              "TotalPrice": 6.2
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 4.691,
+              "TotalPrice": 46.91
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 4.314,
+              "TotalPrice": 107.85
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 3.8998,
+              "TotalPrice": 389.98
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 3.7022,
+              "TotalPrice": 925.55
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 3.68904,
+              "TotalPrice": 1844.52
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 1850,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 9.5,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 6.2,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "26",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": [
+        "296-28114-6",
+        "-296-28114-1-ND",
+        "TEXTISTPS54331QDRQ1",
+        "296-28114-2",
+        "296-28114-1",
+        "-TPS54331QDRQ1-NDR",
+        "2156-TPS54331QDRQ1"
+      ]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331EVM-232",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "EVAL BOARD FOR TPS54331",
+        "DetailedDescription": "TPS54331 SWIFT™ 1 Non-Isolated Output DC/DC, Step Down Evaluation Board"
+      },
+      "DatasheetUrl": "https://www.ti.com/lit/ug/slvu247a/slvu247a.pdf",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331EVM-232/2047965",
+      "Parameters": [
+        {
+          "ParameterId": 1000,
+          "ParameterText": "Main Purpose",
+          "ValueText": "DC/DC, Step Down",
+          "ParameterType": "String",
+          "ValueId": "337613"
+        },
+        {
+          "ParameterId": 1001,
+          "ParameterText": "Outputs and Type",
+          "ValueText": "1 Non-Isolated Output",
+          "ParameterType": "String",
+          "ValueId": "830511"
+        },
+        {
+          "ParameterId": 2186,
+          "ParameterText": "Power - Output",
+          "ValueText": "-",
+          "ParameterType": "String",
+          "ValueId": "1"
+        },
+        {
+          "ParameterId": 48,
+          "ParameterText": "Voltage - Output",
+          "ValueText": "3.3V",
+          "ParameterType": "String",
+          "ValueId": "174115"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 127,
+          "ParameterText": "Voltage - Input",
+          "ValueText": "7V ~ 28V",
+          "ParameterType": "String",
+          "ValueId": "281328"
+        },
+        {
+          "ParameterId": 507,
+          "ParameterText": "Regulator Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 224,
+          "ParameterText": "Contents",
+          "ValueText": "Board(s)",
+          "ParameterType": "String",
+          "ValueId": "321631"
+        },
+        {
+          "ParameterId": 984,
+          "ParameterText": "Utilized IC / Part",
+          "ValueText": "TPS54331",
+          "ParameterType": "String",
+          "ValueId": "414721"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-31196-ND",
+          "PackageType": {
+            "Id": 61,
+            "Name": "Box"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 98.11,
+              "TotalPrice": 98.11
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 10
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Development Boards, Kits, Programmers",
+        "CategoryId": 33,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+        "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2041,
+            "ParentId": 33,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+            "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+            "ChildCategories": [
+              {
+                "CategoryId": 792,
+                "ParentId": 2041,
+                "Name": "DC/DC & AC/DC (Off-Line) SMPS Evaluation Boards",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/345/MFG_NBM2317D60E1560T0R_tmb.jpg",
+                "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of devices used for switch-mode power conversion, including both DC-DC and AC-DC types. Devices described as \"regulators\" (those containing an internal power switching device) and \"controllers\" (those designed to control an external power switch) are both included.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Active",
+        "Id": 0
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 98.11,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/668/TPS54331EVM-232.JPG",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": true,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "12",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 19151,
+        "Name": "SWIFT™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "Not Applicable",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8504.40.9580"
+      },
+      "OtherNames": ["296-31196", "TPS54331EVM232", "TPS54331EVM-232-ND"]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DRG4",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DRG4/2047964",
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-52802-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.20192,
+              "TotalPrice": 3004.8
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.17529,
+              "TotalPrice": 5876.45
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.16196,
+              "TotalPrice": 8714.7
+            },
+            {
+              "BreakQuantity": 12500,
+              "UnitPrice": 1.14719,
+              "TotalPrice": 14339.875
+            }
+          ],
+          "MinimumOrderQuantity": 2500,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 2500,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Discontinued at DigiKey",
+        "Id": 2
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 1.20192,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": false,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": ["296-52802-1", "296-52802-2", "296-52802-6", "TPS54331DRG4-ND"]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DG4",
+      "Manufacturer": {
+        "Id": 296,
+        "Name": "Texas Instruments"
+      },
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "DatasheetUrl": "https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DG4/2047962",
+      "Parameters": [
+        {
+          "ParameterId": 110,
+          "ParameterText": "Function",
+          "ValueText": "Step-Down",
+          "ParameterType": "String",
+          "ValueId": "408308"
+        },
+        {
+          "ParameterId": 255,
+          "ParameterText": "Output Configuration",
+          "ValueText": "Positive",
+          "ParameterType": "String",
+          "ValueId": "389019"
+        },
+        {
+          "ParameterId": 1098,
+          "ParameterText": "Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 41,
+          "ParameterText": "Output Type",
+          "ValueText": "Adjustable",
+          "ParameterType": "String",
+          "ValueId": "310372"
+        },
+        {
+          "ParameterId": 87,
+          "ParameterText": "Number of Outputs",
+          "ValueText": "1",
+          "ParameterType": "String",
+          "ValueId": "39665"
+        },
+        {
+          "ParameterId": 1471,
+          "ParameterText": "Voltage - Input (Min)",
+          "ValueText": "3.5V",
+          "ParameterType": "String",
+          "ValueId": "176389"
+        },
+        {
+          "ParameterId": 573,
+          "ParameterText": "Voltage - Input (Max)",
+          "ValueText": "28V",
+          "ParameterType": "String",
+          "ValueId": "165862"
+        },
+        {
+          "ParameterId": 1779,
+          "ParameterText": "Voltage - Output (Min/Fixed)",
+          "ValueText": "0.8V",
+          "ParameterType": "String",
+          "ValueId": "36543"
+        },
+        {
+          "ParameterId": 1429,
+          "ParameterText": "Voltage - Output (Max)",
+          "ValueText": "25V",
+          "ParameterType": "String",
+          "ValueId": "159247"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "3A",
+          "ParameterType": "String",
+          "ValueId": "201594"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "570kHz",
+          "ParameterType": "String",
+          "ValueId": "245511"
+        },
+        {
+          "ParameterId": 1320,
+          "ParameterText": "Synchronous Rectifier",
+          "ValueText": "No",
+          "ParameterType": "String",
+          "ValueId": "380240"
+        },
+        {
+          "ParameterId": 252,
+          "ParameterText": "Operating Temperature",
+          "ValueText": "-40°C ~ 150°C (TJ)",
+          "ParameterType": "String",
+          "ValueId": "212510"
+        },
+        {
+          "ParameterId": 69,
+          "ParameterText": "Mounting Type",
+          "ValueText": "Surface Mount",
+          "ParameterType": "String",
+          "ValueId": "409393"
+        },
+        {
+          "ParameterId": 16,
+          "ParameterText": "Package / Case",
+          "ValueText": "8-SOIC (0.154\", 3.90mm Width)",
+          "ParameterType": "String",
+          "ValueId": "294928"
+        },
+        {
+          "ParameterId": 1291,
+          "ParameterText": "Supplier Device Package",
+          "ValueText": "8-SOIC",
+          "ParameterType": "String",
+          "ValueId": "294926"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "TPS54331DG4-ND",
+          "PackageType": {
+            "Id": 6,
+            "Name": "Tube"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 375,
+              "UnitPrice": 1.55747,
+              "TotalPrice": 584.05125
+            }
+          ],
+          "MinimumOrderQuantity": 375,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 75,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": false,
+          "Supplier": {
+            "Id": 296,
+            "Name": "Texas Instruments"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {
+        "Id": 63712,
+        "Name": "TPS54331"
+      },
+      "Category": {
+        "Name": "Integrated Circuits (ICs)",
+        "CategoryId": 32,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/153/598/8-SOIC%2CM8_tmb.jpg",
+        "SeoDescription": "Integrated circuits combine a large number of transistors and other elementary electronic components in miniaturized form into a single physical device, that is designed for a specific purpose or function and characterized by its performance of that function rather than by the behavior of its component pieces. Examples include microcontrollers, battery monitors and charge controllers, analog to digital converters, operational amplifiers, logic gates, voltage regulators, gate drivers, motro controllers, and others.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2025,
+            "ParentId": 32,
+            "Name": "Power Management (PMIC)",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/314/540/846%3B-TO220CP-3%3B-%3B-3_tmb.jpg",
+            "SeoDescription": "PMIC, or Power Management Integrated Circuits, refers to a wide range of application-specific ICs or chips. Included in this category is PMICs for AC/DC Converters, Battery Chargers, Battery Management, Current Regulation, Display Drivers, Energy Metering, Full/Half-Bridge Drivers, Gate Drivers, Hot Swap Controllers, Laser Drivers, LED Drivers, Lighting/Ballast Controllers, Motor Drivers, OR Controllers, Power Factor Correction, Power Distribution Switches, PoE Controllers, Power Supply Controllers, RMS to DC Converters, Supervisors, Thermal Management, V/F and F/V Controllers, various Voltage Regulators, and More.",
+            "ChildCategories": [
+              {
+                "CategoryId": 739,
+                "ParentId": 2025,
+                "Name": "Voltage Regulators - DC DC Switching Regulators",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/003/932/150%3B-C04-1196%3B-PHA%3B-32_tmb%2864x64%29.jpg",
+                "SeoDescription": "Products in the DC-DC switching regulator PMIC (Power Management Integrated Circuit) family are component-level devices used in applications requiring stabilization of a DC input voltage and/or transformation thereof to an output voltage of different magnitude. They are distinguished from similar products called \"controller\" PMICs by virtue of integrating the main switching element through which the power delivered by the device passes.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Discontinued at DigiKey",
+        "Id": 2
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 1.55747,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/8900/MFG_296%7E4040047-3%7ED%7E8.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": false,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 20340,
+        "Name": "Eco-Mode™"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unaffected",
+        "RohsStatus": "ROHS3 Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8542.39.0070"
+      },
+      "OtherNames": []
+    },
+    {
+      "ManufacturerProductNumber": "106990019",
+      "Manufacturer": {
+        "Id": 1597,
+        "Name": "Seeed Technology Co., Ltd"
+      },
+      "Description": {
+        "ProductDescription": "EVAL BOARD FOR TPS54331",
+        "DetailedDescription": "TPS54331 - 1 Non-Isolated Output DC/DC, Positive and Negative Evaluation Board"
+      },
+      "DatasheetUrl": "http://www.seeedstudio.com/document/pdf/PNMini2A%20datasheet.pdf",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/seeed-technology-co-ltd/106990019/5487516",
+      "Parameters": [
+        {
+          "ParameterId": 1000,
+          "ParameterText": "Main Purpose",
+          "ValueText": "DC/DC, Positive and Negative",
+          "ParameterType": "String",
+          "ValueId": "337612"
+        },
+        {
+          "ParameterId": 1001,
+          "ParameterText": "Outputs and Type",
+          "ValueText": "1 Non-Isolated Output",
+          "ParameterType": "String",
+          "ValueId": "830511"
+        },
+        {
+          "ParameterId": 2186,
+          "ParameterText": "Power - Output",
+          "ValueText": "-",
+          "ParameterType": "String",
+          "ValueId": "1"
+        },
+        {
+          "ParameterId": 48,
+          "ParameterText": "Voltage - Output",
+          "ValueText": "-",
+          "ParameterType": "String",
+          "ValueId": "1"
+        },
+        {
+          "ParameterId": 129,
+          "ParameterText": "Current - Output",
+          "ValueText": "2A",
+          "ParameterType": "String",
+          "ValueId": "167594"
+        },
+        {
+          "ParameterId": 127,
+          "ParameterText": "Voltage - Input",
+          "ValueText": "3.5V ~ 28V",
+          "ParameterType": "String",
+          "ValueId": "176558"
+        },
+        {
+          "ParameterId": 507,
+          "ParameterText": "Regulator Topology",
+          "ValueText": "Buck",
+          "ParameterType": "String",
+          "ValueId": "323617"
+        },
+        {
+          "ParameterId": 384,
+          "ParameterText": "Frequency - Switching",
+          "ValueText": "-",
+          "ParameterType": "String",
+          "ValueId": "1"
+        },
+        {
+          "ParameterId": 224,
+          "ParameterText": "Contents",
+          "ValueText": "Board(s)",
+          "ParameterType": "String",
+          "ValueId": "321631"
+        },
+        {
+          "ParameterId": 984,
+          "ParameterText": "Utilized IC / Part",
+          "ValueText": "TPS54331",
+          "ParameterType": "String",
+          "ValueId": "414721"
+        }
+      ],
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "106990019-ND",
+          "PackageType": {
+            "Id": 3,
+            "Name": "Bulk"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 3,
+              "UnitPrice": 21.84,
+              "TotalPrice": 65.52
+            }
+          ],
+          "MinimumOrderQuantity": 3,
+          "QuantityAvailableforPackageType": 0,
+          "StandardPackage": 1,
+          "MarketPlace": false,
+          "DigiReelFee": 0,
+          "MyPricing": [],
+          "TariffActive": true,
+          "Supplier": {
+            "Id": 1597,
+            "Name": "Seeed Technology Co., Ltd"
+          },
+          "MaxQuantityForDistribution": 999999999
+        }
+      ],
+      "BaseProductNumber": {},
+      "Category": {
+        "Name": "Development Boards, Kits, Programmers",
+        "CategoryId": 33,
+        "ParentId": 0,
+        "ProductCount": 0,
+        "NewProductCount": 0,
+        "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+        "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+        "ChildCategories": [
+          {
+            "CategoryId": 2041,
+            "ParentId": 33,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0,
+            "NewProductCount": 0,
+            "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+            "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+            "ChildCategories": [
+              {
+                "CategoryId": 792,
+                "ParentId": 2041,
+                "Name": "DC/DC & AC/DC (Off-Line) SMPS Evaluation Boards",
+                "ProductCount": 0,
+                "NewProductCount": 0,
+                "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/345/MFG_NBM2317D60E1560T0R_tmb.jpg",
+                "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of devices used for switch-mode power conversion, including both DC-DC and AC-DC types. Devices described as \"regulators\" (those containing an internal power switching device) and \"controllers\" (those designed to control an external power switch) are both included.",
+                "ChildCategories": []
+              }
+            ]
+          }
+        ]
+      },
+      "ProductStatus": {
+        "Status": "Obsolete",
+        "Id": 1
+      },
+      "Discontinued": false,
+      "EndOfLife": false,
+      "UnitPrice": 21.84,
+      "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/1039/MFG_106990019.jpg",
+      "BackOrderNotAllowed": false,
+      "NormallyStocking": false,
+      "Ncnr": false,
+      "PrimaryVideoUrl": "",
+      "ManufacturerLeadWeeks": "3",
+      "ManufacturerPublicQuantity": 0,
+      "Series": {
+        "Id": 818,
+        "Name": "-"
+      },
+      "Classifications": {
+        "ReachStatus": "REACH Unknown",
+        "RohsStatus": "RoHS Compliant",
+        "MoistureSensitivityLevel": "1  (Unlimited)",
+        "ExportControlClassNumber": "EAR99",
+        "HtsusCode": "8504.40.9550"
+      },
+      "OtherNames": []
+    }
+  ],
+  "ProductsCount": 10,
+  "ExactMatches": [],
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  },
+  "FilterOptions": {
+    "Manufacturers": [
+      {
+        "Id": 1597,
+        "Value": "Seeed Technology Co., Ltd",
+        "ProductCount": 1
+      },
+      {
+        "Id": 296,
+        "Value": "Texas Instruments",
+        "ProductCount": 9
+      }
+    ]
+  },
+  "AppliedParametricFiltersDto": []
+}

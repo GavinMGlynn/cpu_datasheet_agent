@@ -1,0 +1,281 @@
+{
+  "ProductPricings": [
+    {
+      "ManufacturerProductNumber": "TPS54331DR",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-26991-6-ND",
+          "PackageType": {
+            "Id": 243,
+            "Name": "Digi-Reel®"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.36,
+              "TotalPrice": 2.36
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.73,
+              "TotalPrice": 17.3
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.57,
+              "TotalPrice": 39.25
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.3954,
+              "TotalPrice": 139.54
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.31204,
+              "TotalPrice": 328.01
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.2618,
+              "TotalPrice": 630.9
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.25196,
+              "TotalPrice": 1251.96
+            }
+          ],
+          "MinimumOrderQuantity": 1,
+          "QuantityAvailableforPackageType": 7468,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true,
+          "DigiReelingFee": 9.5
+        },
+        {
+          "DigiKeyProductNumber": "296-26991-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.17679,
+              "TotalPrice": 2941.975
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.15048,
+              "TotalPrice": 5752.4
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.13731,
+              "TotalPrice": 8529.825
+            },
+            {
+              "BreakQuantity": 12500,
+              "UnitPrice": 1.12271,
+              "TotalPrice": 14033.875
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 5000,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        },
+        {
+          "DigiKeyProductNumber": "296-26991-1-ND",
+          "PackageType": {
+            "Id": 2,
+            "Name": "Cut Tape (CT)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 1,
+              "UnitPrice": 2.36,
+              "TotalPrice": 2.36
+            },
+            {
+              "BreakQuantity": 10,
+              "UnitPrice": 1.73,
+              "TotalPrice": 17.3
+            },
+            {
+              "BreakQuantity": 25,
+              "UnitPrice": 1.57,
+              "TotalPrice": 39.25
+            },
+            {
+              "BreakQuantity": 100,
+              "UnitPrice": 1.3954,
+              "TotalPrice": 139.54
+            },
+            {
+              "BreakQuantity": 250,
+              "UnitPrice": 1.31204,
+              "TotalPrice": 328.01
+            },
+            {
+              "BreakQuantity": 500,
+              "UnitPrice": 1.2618,
+              "TotalPrice": 630.9
+            },
+            {
+              "BreakQuantity": 1000,
+              "UnitPrice": 1.25196,
+              "TotalPrice": 1251.96
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 7468,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": true
+        }
+      ],
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "ProductUrl": "",
+      "IsDiscontinued": false,
+      "NormallyStocking": true,
+      "IsObsolete": false,
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "StandardPackage": 2500,
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070",
+      "MoistureSensitivityLevel": "1  (Unlimited)",
+      "IsBoNotAllowed": false,
+      "IsNcnr": false,
+      "Categories": [
+        {
+          "CategoryId": 32,
+          "Level": 0,
+          "Name": "Integrated Circuits (ICs)"
+        },
+        {
+          "CategoryId": 2025,
+          "Level": 1,
+          "Name": "Power Management (PMIC)"
+        },
+        {
+          "CategoryId": 739,
+          "Level": 2,
+          "Name": "Voltage Regulators - DC DC Switching Regulators"
+        }
+      ],
+      "ContainsLithium": false,
+      "ContainsMercury": false,
+      "IsEndOfLife": false,
+      "OtherNames": [
+        "296-26991-2",
+        "2156-TPS54331DR",
+        "TPS54331DR-ND",
+        "TEXTISTPS54331DR",
+        "296-26991-1",
+        "-TPS54331DRG4",
+        "296-26991-6",
+        "-TPS54331DRG4-NDR"
+      ]
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DRG4",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "ProductVariations": [
+        {
+          "DigiKeyProductNumber": "296-52802-2-ND",
+          "PackageType": {
+            "Id": 1,
+            "Name": "Tape & Reel (TR)"
+          },
+          "StandardPricing": [
+            {
+              "BreakQuantity": 2500,
+              "UnitPrice": 1.20192,
+              "TotalPrice": 3004.8
+            },
+            {
+              "BreakQuantity": 5000,
+              "UnitPrice": 1.17529,
+              "TotalPrice": 5876.45
+            },
+            {
+              "BreakQuantity": 7500,
+              "UnitPrice": 1.16196,
+              "TotalPrice": 8714.7
+            },
+            {
+              "BreakQuantity": 12500,
+              "UnitPrice": 1.14719,
+              "TotalPrice": 14339.875
+            }
+          ],
+          "MinimumOrderQuantity": 0,
+          "QuantityAvailableforPackageType": 0,
+          "MarketPlace": false,
+          "MyPricing": [],
+          "IsTariffActive": false
+        }
+      ],
+      "Description": {
+        "ProductDescription": "IC REG BUCK ADJ 3A 8SOIC",
+        "DetailedDescription": "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 3A 8-SOIC (0.154\", 3.90mm Width)"
+      },
+      "ProductUrl": "",
+      "IsDiscontinued": false,
+      "NormallyStocking": false,
+      "IsObsolete": false,
+      "ManufacturerLeadWeeks": "9",
+      "ManufacturerPublicQuantity": 0,
+      "StandardPackage": 2500,
+      "ExportControlClassNumber": "EAR99",
+      "HtsusCode": "8542.39.0070",
+      "MoistureSensitivityLevel": "1  (Unlimited)",
+      "IsBoNotAllowed": false,
+      "IsNcnr": false,
+      "Categories": [
+        {
+          "CategoryId": 32,
+          "Level": 0,
+          "Name": "Integrated Circuits (ICs)"
+        },
+        {
+          "CategoryId": 2025,
+          "Level": 1,
+          "Name": "Power Management (PMIC)"
+        },
+        {
+          "CategoryId": 739,
+          "Level": 2,
+          "Name": "Voltage Regulators - DC DC Switching Regulators"
+        }
+      ],
+      "ContainsLithium": false,
+      "ContainsMercury": false,
+      "IsEndOfLife": false,
+      "OtherNames": ["296-52802-1", "296-52802-2", "296-52802-6", "TPS54331DRG4-ND"]
+    }
+  ],
+  "ProductsCount": 2,
+  "SettingsUsed": {
+    "SearchLocale": {
+      "Site": "AU",
+      "Language": "en",
+      "Currency": "AUD"
+    },
+    "Filters": {}
+  }
+}

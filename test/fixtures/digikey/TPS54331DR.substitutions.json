@@ -1,0 +1,170 @@
+{
+  "ProductSubstitutes": [
+    {
+      "ManufacturerProductNumber": "AP63301WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63301WU-7/10491607",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "QuantityAvailable": 39000,
+      "DigiKeyProductNumber": "31-AP63301WU-7TR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP63301WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63301WU-7/10491607",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "QuantityAvailable": 1434,
+      "DigiKeyProductNumber": "31-AP63301WU-7CT-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP63301WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63301WU-7/10491607",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "DigiKeyProductNumber": "31-AP63301WU-7DKR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331GDR",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "SubstituteType": "Parametric Equivalent",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331GDR/2696979",
+      "Description": "IC REG BUCK ADJ 3A 8SOIC",
+      "UnitPrice": "1.77",
+      "QuantityAvailable": 2500,
+      "DigiKeyProductNumber": "296-50099-2-ND"
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331GDR",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "SubstituteType": "Parametric Equivalent",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331GDR/2696979",
+      "Description": "IC REG BUCK ADJ 3A 8SOIC",
+      "UnitPrice": "1.77",
+      "QuantityAvailable": 827,
+      "DigiKeyProductNumber": "296-50099-1-ND"
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331GDR",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "SubstituteType": "Parametric Equivalent",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331GDR/2696979",
+      "Description": "IC REG BUCK ADJ 3A 8SOIC",
+      "UnitPrice": "1.77",
+      "DigiKeyProductNumber": "296-50099-6-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP63300WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63300WU-7/10491510",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "DigiKeyProductNumber": "31-AP63300WU-7TR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP63300WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63300WU-7/10491510",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "DigiKeyProductNumber": "31-AP63300WU-7CT-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP63300WU-7",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP63300WU-7/10491510",
+      "Description": "IC REG BUCK ADJ 3A TSOT26",
+      "UnitPrice": "0.96",
+      "DigiKeyProductNumber": "31-AP63300WU-7DKR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP64351SP-13",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP64351SP-13/10420701",
+      "Description": "IC REG BUCK ADJ 3.5A 8SO",
+      "UnitPrice": "1.79",
+      "DigiKeyProductNumber": "31-AP64351SP-13TR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP64351SP-13",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP64351SP-13/10420701",
+      "Description": "IC REG BUCK ADJ 3.5A 8SO",
+      "UnitPrice": "1.79",
+      "DigiKeyProductNumber": "31-AP64351SP-13CT-ND"
+    },
+    {
+      "ManufacturerProductNumber": "AP64351SP-13",
+      "Manufacturer": {
+        "Name": "Diodes Incorporated",
+        "Id": 31
+      },
+      "SubstituteType": "Similar",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/diodes-incorporated/AP64351SP-13/10420701",
+      "Description": "IC REG BUCK ADJ 3.5A 8SO",
+      "UnitPrice": "1.79",
+      "DigiKeyProductNumber": "31-AP64351SP-13DKR-ND"
+    },
+    {
+      "ManufacturerProductNumber": "TPS54331DRG4",
+      "Manufacturer": {
+        "Name": "Texas Instruments",
+        "Id": 296
+      },
+      "SubstituteType": "Parametric Equivalent",
+      "ProductUrl": "https://www.digikey.com.au/en/products/detail/texas-instruments/TPS54331DRG4/2047964",
+      "Description": "IC REG BUCK ADJ 3A 8SOIC",
+      "UnitPrice": "0.82549",
+      "DigiKeyProductNumber": "296-52802-2-ND"
+    }
+  ],
+  "ProductSubstitutesCount": 13,
+  "SearchLocaleUsed": {
+    "Site": "AU",
+    "Language": "en",
+    "Currency": "AUD"
+  }
+}

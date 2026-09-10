@@ -1,0 +1,31 @@
+{
+  "MediaLinks": [
+    {
+      "MediaType": "Datasheets",
+      "Title": "MP1584 Datasheet",
+      "Url": "https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP1584EN-LF-Z/document_id/204/"
+    },
+    {
+      "MediaType": "Product Photos",
+      "Title": "8-SOICE-EP",
+      "Url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4020/1589%7E8SOICE-EP-3.9%7E%7E8.jpg",
+      "SmallPhoto": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/300/731/752/1589%7E8SOICE-EP-3.9%7E%7E8_sml.jpg",
+      "Thumbnail": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/731/752/1589%7E8SOICE-EP-3.9%7E%7E8_tmb.jpg"
+    },
+    {
+      "MediaType": "Environmental Information",
+      "Title": "MonolithicPower Systems Environmental Compliance Declaration",
+      "Url": "https://media.monolithicpower.com/mps_cms_document/m/o/monolithic_power_systems_environmental_compliance_declaration_august_2021.pdf"
+    },
+    {
+      "MediaType": "EDA Models",
+      "Title": "MP1584EN-LF-Z by SnapEDA",
+      "Url": "https://www.snapeda.com/parts/MP1584EN-LF-Z/Monolithic/view-part/?ref=digikey"
+    },
+    {
+      "MediaType": "EDA Models",
+      "Title": "MP1584EN-LF-Z by Ultra Librarian",
+      "Url": "https://app.ultralibrarian.com/details/5E626D9A-9AFC-11E9-AB3A-0A3560A4CCCC/Monolithic-Power-Systems/MP1584EN-LF-Z?ref=digikey"
+    }
+  ]
+}
