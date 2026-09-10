@@ -79,6 +79,7 @@ that supersedes the old one, and the old row's status changes to
 | D18 | 2026-09-10 | Entry-point shims in `bin/` and `scripts/` hold no logic; all logic lives in `src/` where per-file coverage applies. The gate scanner follows this: `src/gate/scan.ts` is the implementation, `scripts/gate.ts` the shim. | Keeps the coverage gate honest without excluding files. | active |
 | D19 | 2026-09-10 | Core schema conventions: strict objects everywhere; unit-pinned quantities per field; `QuantityRange` is `{ unit, min, max, typ? }` (one unit per range); fields the datasheet may not state are `.nullable()` and always present, fields that are genuinely optional annotations are `.optional()`; classification values are typed per axis. | Nullable-and-present makes "not stated" an explicit, provenance-carrying fact rather than an absent key. One unit per range removes a whole class of mismatch. | active |
 | D20 | 2026-09-10 | Zero warnings, enforced. `npm run lint` fails on any warning; every other tool must print none. A warning is fixed or silenced at its source with the reason recorded here. | User rule ("we should have no warnings"). Warnings that are tolerated become noise that hides the next real one. | active |
+| D21 | 2026-09-10 | CI runs on the user's self-hosted GitHub Actions runner (`[self-hosted, Linux, X64]`, name `localhost`) instead of `ubuntu-latest`. CI verifies poppler is installed rather than installing it, and runs are cancelled when superseded. | User request. The runner is the same WSL host the project targets, so CI exercises the real environment (Rocky Linux, poppler 24.02.0) and needs no package installs. One runner means queued duplicate runs must be cancelled. | active |
 
 ## 4. Status
 
@@ -93,7 +94,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M3  | Content-addressed cache | complete | 2026-09-10 |
 | M4  | Persistence (SQLite) | complete | 2026-09-10 |
 | M5  | Units, parsing, and normalisation | complete | 2026-09-10 |
-| M6  | PDF toolkit | not started | |
+| M6  | PDF toolkit | in progress | |
 | M7  | Digi-Key adapter | not started | |
 | M8  | Mouser adapter | not started | |
 | M9  | Nexar adapter with hard budget | not started | |

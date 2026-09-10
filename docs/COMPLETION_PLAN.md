@@ -100,9 +100,11 @@ before a single line of domain code exists.
       line. Tests for the scanner itself.
 - [x] 0.10 `src/errors.ts`: `ChipAgentError` base with `code`, `cause`,
       `details`; helper `isChipAgentError`. Tests.
-- [x] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: Node 22,
-      `npm ci`, `apt-get install poppler-utils`, `npm run check`. Runs on push
-      and pull request. No secrets. [R-26]
+- [x] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: runs on the
+      self-hosted runner (`[self-hosted, Linux, X64]`), pins Node 22 with
+      `actions/setup-node`, verifies poppler is present rather than installing
+      it, then `npm ci` and `npm run check`. Runs on push and pull request,
+      cancels superseded runs, no secrets. [R-26]
 - [x] 0.12 Git hooks via `simple-git-hooks`: `pre-push` runs `npm run check`.
       Document the bypass (`--no-verify`) as forbidden except for docs-only
       commits.

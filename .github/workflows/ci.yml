@@ -5,18 +5,44 @@ on:
     branches: [main]
   pull_request:
 
+# There is one self-hosted runner, so a superseded run must not hold the queue.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Suppress git's default-branch hint without writing to the runner's global config.
+  GIT_CONFIG_COUNT: 1
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - name: Configure git default branch
-        run: git config --global init.defaultBranch main
       - uses: actions/checkout@v7
+
       - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
-      - name: Install poppler
-        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      # poppler is a runtime dependency of the PDF toolkit. The runner provides
+      # it; CI verifies rather than installs, so a missing tool fails loudly
+      # instead of a package manager running unattended.
+      - name: Verify poppler
+        run: |
+          missing=0
+          for tool in pdftotext pdftoppm pdfinfo; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              "$tool" -v 2>&1 | head -1
+            else
+              echo "::error::$tool not found on this runner; install poppler-utils"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - run: npm ci
+
       - run: npm run check
