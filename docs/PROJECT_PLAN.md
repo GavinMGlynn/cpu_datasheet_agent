@@ -207,6 +207,34 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
+### 2026-09-10 — Session 5: Module 3 built, awaiting CI
+
+**Done**
+
+- `src/cache/`: canonical-JSON key hashing (`hashCacheKey`, `refOf`), the
+  `CacheStore` interface and `CacheMeta` sidecar schema, `FileCacheStore`
+  with sharded directories, atomic temp-file-and-rename writes, and
+  self-healing on corrupt or mismatched entries, three codecs, and the
+  `Cache` class whose `cached` method does TTL, force, in-flight
+  de-duplication, and statistics.
+- 66 new tests: key-order independence, namespace separation, a pinned
+  digest, binary round trip, every corruption and I/O failure path,
+  concurrent joins, forced calls during a flight, and fetch failure
+  recovery. Total 663 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- `fs.rm` with `force: true` ignores only ENOENT. When the path runs through
+  a regular file it throws ENOTDIR, so best-effort cleanup must swallow
+  everything or it masks the original error.
+- The pre-push hook checks the working tree, not the commit. Writing files
+  in parallel with a push makes the push fail on half-written tests; push
+  only when the tree is quiet.
+
+**Next**
+
+- Confirm CI, mark M3 complete, start M4 (SQLite persistence).
+
 ### 2026-09-10 — Session 4: Module 2 complete
 
 **Done**

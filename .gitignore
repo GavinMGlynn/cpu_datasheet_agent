@@ -1,7 +1,7 @@
 # Dependencies / build
 node_modules/
-dist/
-build/
+/dist/
+/build/
 *.tsbuildinfo
 
 # Secrets
@@ -10,8 +10,8 @@ build/
 !.env.example
 
 # Local data and caches (keyed network cache, SQLite DB, downloaded datasheets)
-cache/
-data/
+/cache/
+/data/
 *.sqlite
 *.sqlite3
 *.db
@@ -19,7 +19,7 @@ data/
 *.pdf
 
 # Logs
-logs/
+/logs/
 *.log
 
 # Editor / OS
@@ -29,4 +29,4 @@ logs/
 Thumbs.db
 
 # Test output
-coverage/
+/coverage/

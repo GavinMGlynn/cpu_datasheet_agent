@@ -218,25 +218,25 @@ that later becomes the eval dataset.
 Goal: every network call is cacheable by a hash of its request so reruns cost
 nothing. One function, one store interface, ready to be swapped for S3 later.
 
-- [ ] 3.1 `CacheKey`: `{ namespace: string, params: JsonValue }` hashed as
+- [x] 3.1 `CacheKey`: `{ namespace: string, params: JsonValue }` hashed as
       sha256 of a canonical JSON serialisation (sorted keys, no whitespace,
       normalised numbers). Tests prove key order independence and that
       different namespaces never collide.
-- [ ] 3.2 `CacheStore` interface: `get(hash)`, `put(hash, bytes, meta)`,
+- [x] 3.2 `CacheStore` interface: `get(hash)`, `put(hash, bytes, meta)`,
       `has(hash)`, `delete(hash)`, `stat(hash)`. `CacheMeta`: `createdAt`,
       `ttlSeconds?`, `contentType`, `sourceUrl?`, `size`, `sha256`.
-- [ ] 3.3 `FileCacheStore`: two-level sharded directories under
+- [x] 3.3 `FileCacheStore`: two-level sharded directories under
       `DATA_DIR/cache/<namespace>/ab/cd/<hash>` with a JSON sidecar for
       metadata. Atomic writes (temp file then rename). A missing or corrupt
       sidecar is a miss and is cleaned up.
-- [ ] 3.4 `cached(key, fetch, options)`: returns the cached value when present
+- [x] 3.4 `cached(key, fetch, options)`: returns the cached value when present
       and unexpired, otherwise calls `fetch`, stores the result, returns it.
       Options: `ttlSeconds`, `force` (bypass and overwrite), `codec`
       (`json` | `bytes` | `text`). In-flight de-duplication: concurrent calls
       for the same key share one `fetch`.
-- [ ] 3.5 `CacheStats` counter (hits, misses, forced) exposed for the ledger
+- [x] 3.5 `CacheStats` counter (hits, misses, forced) exposed for the ledger
       and the eval harness.
-- [ ] 3.6 Tests: hit, miss, TTL expiry, force, each codec round-trip
+- [x] 3.6 Tests: hit, miss, TTL expiry, force, each codec round-trip
       including binary PDFs, sharding paths, atomicity under a simulated crash
       (temp file left behind), in-flight de-duplication, corrupt sidecar
       recovery.
