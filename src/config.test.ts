@@ -45,6 +45,8 @@ describe('loadConfig defaults', () => {
         clientId: undefined,
         clientSecret: undefined,
         sandbox: false,
+        production: { clientId: undefined, clientSecret: undefined },
+        sandboxApp: { clientId: undefined, clientSecret: undefined },
         locale: { site: 'AU', language: 'en', currency: 'AUD' },
       },
       mouser: { apiKey: undefined },
@@ -95,6 +97,45 @@ describe('loadConfig defaults', () => {
     } finally {
       vi.unstubAllEnvs();
     }
+  });
+});
+
+describe('loadConfig Digi-Key credential selection', () => {
+  const both = {
+    DIGIKEY_CLIENT_ID: 'prod-id',
+    DIGIKEY_CLIENT_SECRET: 'prod-secret',
+    DIGIKEY_SANDBOX_CLIENT_ID: 'sand-id',
+    DIGIKEY_SANDBOX_CLIENT_SECRET: 'sand-secret',
+  };
+
+  it('selects the production pair by default', () => {
+    const config = load(both);
+
+    expect(config.digikey.sandbox).toBe(false);
+    expect(config.digikey.clientId).toBe('prod-id');
+    expect(config.digikey.clientSecret).toBe('prod-secret');
+  });
+
+  it('selects the sandbox pair when the sandbox is enabled', () => {
+    const config = load({ ...both, DIGIKEY_SANDBOX: '1' });
+
+    expect(config.digikey.sandbox).toBe(true);
+    expect(config.digikey.clientId).toBe('sand-id');
+    expect(config.digikey.clientSecret).toBe('sand-secret');
+  });
+
+  it('keeps both pairs available whichever is selected', () => {
+    const config = load({ ...both, DIGIKEY_SANDBOX: '1' });
+
+    expect(config.digikey.production).toEqual({ clientId: 'prod-id', clientSecret: 'prod-secret' });
+    expect(config.digikey.sandboxApp).toEqual({ clientId: 'sand-id', clientSecret: 'sand-secret' });
+  });
+
+  it('leaves the selected pair undefined when only the other is configured', () => {
+    const production = load({ DIGIKEY_CLIENT_ID: 'prod-id', DIGIKEY_SANDBOX: '1' });
+
+    expect(production.digikey.clientId).toBeUndefined();
+    expect(production.digikey.production.clientId).toBe('prod-id');
   });
 });
 
@@ -265,6 +306,8 @@ describe('loadConfig result', () => {
 
     expect(Object.isFrozen(config)).toBe(true);
     expect(Object.isFrozen(config.digikey)).toBe(true);
+    expect(Object.isFrozen(config.digikey.production)).toBe(true);
+    expect(Object.isFrozen(config.digikey.sandboxApp)).toBe(true);
     expect(Object.isFrozen(config.digikey.locale)).toBe(true);
     expect(Object.isFrozen(config.nexar)).toBe(true);
     expect(Object.isFrozen(config.agent)).toBe(true);

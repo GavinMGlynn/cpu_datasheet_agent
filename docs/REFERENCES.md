@@ -99,4 +99,5 @@ module README, or a code comment must have a row here.
 | R-50 | Project brief | `CLAUDE.md` | Scope, architecture, non-negotiables. |
 | R-51 | Project plan and history | `docs/PROJECT_PLAN.md` | Decisions, status, session log, open questions. |
 | R-52 | Completion plan | `docs/COMPLETION_PLAN.md` | Module-by-module task list and Definition of Done. |
+| R-54 | Architecture | `docs/ARCHITECTURE.md` | How the system works: layers, pipeline, module responsibilities, and the seams. |
 | R-53 | Repository | https://github.com/GavinMGlynn/cpu_datasheet_agent | Private repository. Every commit is pushed here (D15). |

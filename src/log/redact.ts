@@ -34,8 +34,10 @@ export const DEFAULT_KEY_PATTERNS: readonly RegExp[] = Object.freeze([
 /** Collects the credential values present in a validated config. */
 export function secretsFromConfig(config: Config): readonly string[] {
   const candidates = [
-    config.digikey.clientId,
-    config.digikey.clientSecret,
+    config.digikey.production.clientId,
+    config.digikey.production.clientSecret,
+    config.digikey.sandboxApp.clientId,
+    config.digikey.sandboxApp.clientSecret,
     config.mouser.apiKey,
     config.nexar.clientId,
     config.nexar.clientSecret,

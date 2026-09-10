@@ -18,7 +18,9 @@ Read these in order at the start of every session:
    questions. The pick-up and put-down checklists live here.
 2. `docs/COMPLETION_PLAN.md` — every task to 100%, in modules completed
    strictly in order. No MVP; a module is finished before the next starts.
-3. `docs/REFERENCES.md` — every external source we rely on, with its
+3. `docs/ARCHITECTURE.md` — how the system works: the pieces, what each
+   owns, and how they interact. Read this before changing a module boundary.
+4. `docs/REFERENCES.md` — every external source we rely on, with its
    verification status. Cite rows by ID.
 
 Every documentation change is committed and pushed immediately. Every

@@ -134,12 +134,22 @@ describe('createRedactor', () => {
 });
 
 describe('secretsFromConfig', () => {
-  it('collects only the credentials that are set', () => {
+  it('collects credentials from both Digi-Key environments, not only the selected one', () => {
     const config = loadConfig(
-      { DIGIKEY_CLIENT_ID: 'dk-id', MOUSER_API_KEY: 'mouser-key', ANTHROPIC_API_KEY: 'sk-ant-x' },
+      {
+        DIGIKEY_CLIENT_ID: 'dk-id',
+        DIGIKEY_SANDBOX_CLIENT_SECRET: 'dk-sandbox-secret',
+        MOUSER_API_KEY: 'mouser-key',
+        ANTHROPIC_API_KEY: 'sk-ant-x',
+      },
       { cwd: '/work' },
     );
-    expect(secretsFromConfig(config)).toEqual(['dk-id', 'mouser-key', 'sk-ant-x']);
+    expect(secretsFromConfig(config)).toEqual([
+      'dk-id',
+      'dk-sandbox-secret',
+      'mouser-key',
+      'sk-ant-x',
+    ]);
     expect(secretsFromConfig(loadConfig({}, { cwd: '/work' }))).toEqual([]);
   });
 });

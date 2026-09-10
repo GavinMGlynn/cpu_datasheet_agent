@@ -17,10 +17,21 @@ export interface DigiKeyLocale {
   readonly currency: string;
 }
 
+export interface DigiKeyCredentials {
+  readonly clientId: string | undefined;
+  readonly clientSecret: string | undefined;
+}
+
 export interface DigiKeyConfig {
+  /**
+   * Credentials for the selected environment. Sandbox and production apps are
+   * separate registrations, and each host rejects the other's pair.
+   */
   readonly clientId: string | undefined;
   readonly clientSecret: string | undefined;
   readonly sandbox: boolean;
+  readonly production: DigiKeyCredentials;
+  readonly sandboxApp: DigiKeyCredentials;
   readonly locale: DigiKeyLocale;
 }
 
@@ -177,6 +188,8 @@ const envSchema = z.object({
   DIGIKEY_CLIENT_ID: envString,
   DIGIKEY_CLIENT_SECRET: envString,
   DIGIKEY_SANDBOX: envBoolean(false),
+  DIGIKEY_SANDBOX_CLIENT_ID: envString,
+  DIGIKEY_SANDBOX_CLIENT_SECRET: envString,
   DIGIKEY_LOCALE_SITE: envPattern(/^[A-Z]{2}$/, 'a two-letter uppercase country code', 'AU'),
   DIGIKEY_LOCALE_LANGUAGE: envPattern(/^[a-z]{2}$/, 'a two-letter lowercase language code', 'en'),
   DIGIKEY_LOCALE_CURRENCY: envPattern(
@@ -226,9 +239,21 @@ export function loadConfig(env: EnvSource = process.env, options: LoadConfigOpti
   const cwd = options.cwd ?? process.cwd();
   return deepFreeze<Config>({
     digikey: {
-      clientId: values.DIGIKEY_CLIENT_ID,
-      clientSecret: values.DIGIKEY_CLIENT_SECRET,
+      clientId: values.DIGIKEY_SANDBOX
+        ? values.DIGIKEY_SANDBOX_CLIENT_ID
+        : values.DIGIKEY_CLIENT_ID,
+      clientSecret: values.DIGIKEY_SANDBOX
+        ? values.DIGIKEY_SANDBOX_CLIENT_SECRET
+        : values.DIGIKEY_CLIENT_SECRET,
       sandbox: values.DIGIKEY_SANDBOX,
+      production: {
+        clientId: values.DIGIKEY_CLIENT_ID,
+        clientSecret: values.DIGIKEY_CLIENT_SECRET,
+      },
+      sandboxApp: {
+        clientId: values.DIGIKEY_SANDBOX_CLIENT_ID,
+        clientSecret: values.DIGIKEY_SANDBOX_CLIENT_SECRET,
+      },
       locale: {
         site: values.DIGIKEY_LOCALE_SITE,
         language: values.DIGIKEY_LOCALE_LANGUAGE,
