@@ -364,6 +364,18 @@ per parameter: exact for enums, tolerance-based for numbers, and separately
 for whether the cited page was right. Reports are written per prompt version
 and model so two runs can be compared and a regression named.
 
+### Reports (`src/report/`) — built
+
+Renders a stored part as one standalone HTML page: every parameter beside its
+source and confidence, and each cited datasheet page beside the values taken
+from it. That last part is the reason the module exists, because checking an
+extraction means reading the page and the claim together, which a table cannot
+do.
+
+It is a generator rather than an application: no server, no port, no session
+state. The output has no document wrapper, so the same function serves a local
+file and a published page.
+
 ### Alternates query (`src/query/`) — planned
 
 The end goal. Filter by constraints, rank by unit price at the requested

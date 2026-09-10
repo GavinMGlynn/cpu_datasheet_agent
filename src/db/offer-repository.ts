@@ -1,4 +1,4 @@
-import { Offer, type PriceBreak } from '../core/offer.js';
+import { Offer, selectBestPrice, type BestPrice } from '../core/offer.js';
 import type { Currency, Distributor } from '../core/primitives.js';
 import { parseOrThrow } from '../core/validation-error.js';
 import { DbError, type Db } from './database.js';
@@ -21,14 +21,6 @@ interface OfferRow {
 interface BreakRow {
   quantity: number;
   unit_price: number;
-}
-
-export interface BestPrice {
-  readonly offer: Offer;
-  readonly priceBreak: PriceBreak;
-  readonly unitPrice: number;
-  readonly currency: Currency;
-  readonly quantity: number;
 }
 
 export class OfferRepository {
@@ -135,27 +127,6 @@ export class OfferRepository {
    * break at or below the quantity. Undefined when no offer qualifies.
    */
   bestPriceAt(partId: number, quantity: number, currency: Currency): BestPrice | undefined {
-    let best: BestPrice | undefined;
-    for (const offer of this.getOffers(partId)) {
-      if (offer.currency !== currency || quantity < offer.moq) {
-        continue;
-      }
-      const applicable = offer.priceBreaks
-        .filter((priceBreak) => priceBreak.quantity <= quantity)
-        .at(-1);
-      if (applicable === undefined) {
-        continue;
-      }
-      if (best === undefined || applicable.unitPrice < best.unitPrice) {
-        best = {
-          offer,
-          priceBreak: applicable,
-          unitPrice: applicable.unitPrice,
-          currency,
-          quantity,
-        };
-      }
-    }
-    return best;
+    return selectBestPrice(this.getOffers(partId), quantity, currency);
   }
 }

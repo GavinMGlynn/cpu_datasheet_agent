@@ -405,6 +405,35 @@ Product Information v4, cached and logged. [R-01] [R-02]
 
 ---
 
+## M7A — Part report generator
+
+Pulled forward out of sequence at the user's request (D26). Renders stored
+data as a standalone HTML page, because the one task a table cannot do is
+checking an extracted value against the page it was read from.
+
+- [x] 7A.1 `escapeHtml` for element content and attribute values, with tests
+      covering the characters real data contains (`8-SOIC (0.154", 3.90mm
+      Width)`).
+- [x] 7A.2 Value formatting: quantities in engineering notation, ranges,
+      booleans, enums, soft start, and an explicit "not stated" for a value
+      the datasheet does not give. Provenance rendered per source kind.
+- [x] 7A.3 `renderPartReport(part, options)` producing a `title`, a `style`
+      and body markup with no document wrapper, so one function serves both a
+      local file and the artifact publisher. Sections: summary, parameters,
+      cited pages, datasheet, offers, classifications, verifications.
+- [x] 7A.4 `collectPageImages(part, renderer)` rendering each cited page to a
+      data URI so the report is one self-contained file, with a size cap per
+      page and a structural interface so tests need no poppler.
+- [x] 7A.5 `selectBestPrice` moved into `src/core/offer.ts` so the report and
+      `OfferRepository.bestPriceAt` share one definition.
+- [x] 7A.6 `scripts/render-part-report.ts` wiring the database, the PDF
+      toolkit and the renderer together.
+- [x] 7A.7 Tests at 100% coverage, including escaping of markup in values,
+      every provenance kind, every empty section, and multiple cited pages.
+
+**Not in this module.** Evaluation-run reports belong to M16 and will reuse
+the same style and escaping.
+
 ## M8 — Mouser adapter
 
 Goal: part-number search, pricing, availability, and datasheet URL from the

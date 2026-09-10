@@ -1,6 +1,13 @@
 import { z } from 'zod';
 
-import { Currency, Distributor, Iso8601, ManufacturerName, RawMpn } from './primitives.js';
+import type { Currency } from './primitives.js';
+import {
+  Currency as CurrencySchema,
+  Distributor,
+  Iso8601,
+  ManufacturerName,
+  RawMpn,
+} from './primitives.js';
 import { DistributorProvenance } from './provenance.js';
 
 export const PACKAGINGS = ['cut_tape', 'reel', 'tube', 'tray', 'bulk', 'unknown'] as const;
@@ -20,7 +27,7 @@ export const Offer = z
     sku: z.string().trim().min(1).max(64),
     manufacturer: ManufacturerName,
     mpnAsListed: RawMpn,
-    currency: Currency,
+    currency: CurrencySchema,
     priceBreaks: z.array(PriceBreak),
     stock: z.number().int().min(0),
     moq: z.number().int().min(1),
@@ -56,3 +63,41 @@ export const Offer = z
     }
   });
 export type Offer = z.output<typeof Offer>;
+
+export interface BestPrice {
+  readonly offer: Offer;
+  readonly priceBreak: PriceBreak;
+  readonly unitPrice: number;
+  readonly currency: Currency;
+  readonly quantity: number;
+}
+
+/**
+ * The cheapest unit price for buying `quantity` in `currency`.
+ *
+ * Considers only offers whose minimum order quantity is met, and applies the
+ * highest price break at or below the quantity. Returns undefined when no
+ * offer qualifies; on a tie the first offer wins, so the order given decides.
+ */
+export function selectBestPrice(
+  offers: readonly Offer[],
+  quantity: number,
+  currency: Currency,
+): BestPrice | undefined {
+  let best: BestPrice | undefined;
+  for (const offer of offers) {
+    if (offer.currency !== currency || quantity < offer.moq) {
+      continue;
+    }
+    const applicable = offer.priceBreaks
+      .filter((priceBreak) => priceBreak.quantity <= quantity)
+      .at(-1);
+    if (applicable === undefined) {
+      continue;
+    }
+    if (best === undefined || applicable.unitPrice < best.unitPrice) {
+      best = { offer, priceBreak: applicable, unitPrice: applicable.unitPrice, currency, quantity };
+    }
+  }
+  return best;
+}

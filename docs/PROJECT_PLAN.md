@@ -84,6 +84,7 @@ that supersedes the old one, and the old row's status changes to
 | D23 | 2026-09-10 | No unreachable defensive fallbacks. Where `noUncheckedIndexedAccess` forces a check on a value the caller has already proved present, use a guarded helper (`group` for regex captures, `elementAt` for arrays) that throws a coded error and is tested directly. | A `?? ''` that can never run is untestable and hides a real off-by-one. The helper turns it into a reachable, named failure. | active |
 | D24 | 2026-09-10 | A distributor value that states a bound (`Up to 1MHz`) becomes a `max` or `min` fact, not a quantity and not a range. A value that is inconclusive (`Both` for Synchronous Rectifier, `Fixed, Adjustable` for Output Type, `-`) yields no fact at all. | Recording `Up to 1MHz` as a range would require inventing a lower end, and as a quantity would assert a fixed frequency the part does not have. `Both` corroborates nothing and the datasheet decides, so a fact would be a guess and an error would be noise. | active |
 | D25 | 2026-09-10 | Digi-Key response schemas are loose objects with every read field declared. | Digi-Key adds fields over time, so an unknown field is not a reason to reject a response; a declared field that changes type is. Validated against live responses rather than documentation, which is how the nested `AlternatePackagings` wrapper and the optional `BaseProductNumber.Name` were found. | active |
+| D26 | 2026-09-10 | Data is viewed through generated static HTML reports, not a web application. Pulled forward as module M7A, out of the planned sequence, at the user's request. | Only one viewing task needs a page: checking a value against the datasheet page it was read from. Queries answer the rest, and a report generator adds no server, port, session state, or thing to keep running. A real application is justified when the data outlives the terminal and other people need it, which is the deferred hosting world. | active |
 
 ## 4. Status
 
@@ -100,6 +101,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M5  | Units, parsing, and normalisation | complete | 2026-09-10 |
 | M6  | PDF toolkit | complete | 2026-09-10 |
 | M7  | Digi-Key adapter | complete | 2026-09-10 |
+| M7A | Part report generator | complete | 2026-09-10 |
 | M8  | Mouser adapter | not started | |
 | M9  | Nexar adapter with hard budget | not started | |
 | M10 | MPN resolution | not started | |
@@ -211,6 +213,40 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 10: report generator, Mouser unblocked
+
+**Done**
+
+- `src/report/`: `renderPartReport` produces a standalone page for one part,
+  with every parameter beside its source and confidence, the cited datasheet
+  pages beside the values taken from them, offers with price breaks,
+  classifications with their rules, and verifications. Output is a `title`, a
+  `style` and body markup with no document wrapper, which a browser renders
+  from a file and the artifact publisher accepts unchanged.
+- `collectPageImages` renders each cited page to a data URI so a report is one
+  file. `selectBestPrice` moved into core so the report and the offer
+  repository share one definition rather than two.
+- 1355 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- Answering "do we need a web site" honestly meant separating three different
+  viewing jobs. Only checking an extraction against its page wants a rendered
+  page; escalations want a prompt that records who answered, and eval
+  comparison already has a report planned in M16 (D26).
+- The first Mouser key supplied was for the Order and Cart APIs, which are a
+  separate registration from the Search API and were still pending
+  authorisation. The Search API key arrived separately and works.
+- Mouser returns **HTTP 200 with an `Errors` array** for a rejected key, so
+  the adapter cannot judge success by status code alone. That shapes M8's
+  request layer.
+
+**Next**
+
+- M8 (Mouser adapter), now unblocked. Endpoints confirmed live:
+  `POST /api/v1/search/partnumber` and `POST /api/v1/search/keyword`, with the
+  key as an `apiKey` query parameter.
 
 ### 2026-09-10 — Session 9: Module 7 complete, architecture document added
 
