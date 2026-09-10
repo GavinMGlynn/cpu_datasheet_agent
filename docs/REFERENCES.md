@@ -61,7 +61,7 @@ module README, or a code comment must have a row here.
 
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
-| R-20 | Poppler | https://poppler.freedesktop.org/ | `pdftotext`, `pdftoppm`, `pdfinfo` (D08). Installed as `poppler-utils`. | unverified |
+| R-20 | Poppler | https://poppler.freedesktop.org/ | `pdftotext`, `pdftoppm`, `pdfinfo` (D08). Installed as `poppler-utils` 24.02.0 and exercised for real by the Module 6 tests. | verified 2026-09-10 |
 | R-21 | TypeScript | https://www.typescriptlang.org/ | Language. Pinned to 6.0.3 (D17); 7.0.2 is outside the linter peer range. | unverified |
 | R-22 | Vitest | https://vitest.dev/ | Test runner, version 5.0.0 (D03). | unverified |
 | R-23 | Vitest coverage | https://vitest.dev/guide/coverage | `@vitest/coverage-v8`, per-file thresholds. | unverified |
@@ -70,8 +70,8 @@ module README, or a code comment must have a row here.
 | R-26 | GitHub Actions | https://docs.github.com/en/actions | CI (M0 task 0.11). | unverified |
 | R-27 | better-sqlite3 | https://github.com/WiseLibs/better-sqlite3 | SQLite driver, version 13.0.3, prebuilt binaries for major platforms (D05). | verified 2026-09-10 |
 | R-28 | fast-check | https://fast-check.dev/ | Property-based tests for parsers (M5), version 4.9.0. | unverified |
-| R-29 | pdf-lib | https://pdf-lib.js.org/ | Generating PDF test fixtures (M6), version 1.17.1. | unverified |
-| R-30 | Mock Service Worker | https://mswjs.io/ | HTTP interception in tests (D07), version 2.15.0. | unverified |
+| R-29 | pdf-lib | https://pdf-lib.js.org/ | Generating PDF test fixtures (M6), version 1.17.1. In use in `test/helpers/pdf-fixtures.ts`. | verified 2026-09-10 |
+| R-30 | Mock Service Worker | https://mswjs.io/ | HTTP interception in tests (D07), version 2.15.0. Its handler types do not resolve under type-aware linting, so all usage goes through one boundary module (D22). | verified 2026-09-10 |
 | R-34 | Zod | https://zod.dev/ | Schemas and validation (D06), version 4.6.1. | unverified |
 | R-35 | Node.js 22 documentation | https://nodejs.org/docs/latest-v22.x/api/ | Runtime APIs (`node:fs`, `node:child_process`, `fetch`). | unverified |
 | R-36 | simple-git-hooks | https://github.com/toplenboren/simple-git-hooks | Pre-push hook (M0 task 0.12), version 2.14.0. | unverified |

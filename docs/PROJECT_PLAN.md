@@ -80,6 +80,8 @@ that supersedes the old one, and the old row's status changes to
 | D19 | 2026-09-10 | Core schema conventions: strict objects everywhere; unit-pinned quantities per field; `QuantityRange` is `{ unit, min, max, typ? }` (one unit per range); fields the datasheet may not state are `.nullable()` and always present, fields that are genuinely optional annotations are `.optional()`; classification values are typed per axis. | Nullable-and-present makes "not stated" an explicit, provenance-carrying fact rather than an absent key. One unit per range removes a whole class of mismatch. | active |
 | D20 | 2026-09-10 | Zero warnings, enforced. `npm run lint` fails on any warning; every other tool must print none. A warning is fixed or silenced at its source with the reason recorded here. | User rule ("we should have no warnings"). Warnings that are tolerated become noise that hides the next real one. | active |
 | D21 | 2026-09-10 | CI runs on the user's self-hosted GitHub Actions runner (`[self-hosted, Linux, X64]`, name `localhost`) instead of `ubuntu-latest`. CI verifies poppler is installed rather than installing it, and runs are cancelled when superseded. | User request. The runner is the same WSL host the project targets, so CI exercises the real environment (Rocky Linux, poppler 24.02.0) and needs no package installs. One runner means queued duplicate runs must be cancelled. | active |
+| D22 | 2026-09-10 | All Mock Service Worker usage goes through `test/helpers/msw.ts`, the only file with an ESLint exception for the unsafe-call and unsafe-return rules. | msw's request-handler types do not resolve under type-aware linting even though `tsc` accepts them. Confining the boundary to one module keeps every other file strictly checked instead of disabling the rules for all tests. | active |
+| D23 | 2026-09-10 | No unreachable defensive fallbacks. Where `noUncheckedIndexedAccess` forces a check on a value the caller has already proved present, use a guarded helper (`group` for regex captures, `elementAt` for arrays) that throws a coded error and is tested directly. | A `?? ''` that can never run is untestable and hides a real off-by-one. The helper turns it into a reachable, named failure. | active |
 
 ## 4. Status
 
@@ -207,6 +209,43 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 8: Module 6 built, CI moved to the self-hosted runner
+
+**Done**
+
+- CI now runs on the user's self-hosted runner (`[self-hosted, Linux, X64]`,
+  D21). It verifies poppler rather than installing it, cancels superseded
+  runs, and suppresses git's default-branch hint through job environment
+  variables. First run green in 1m48s on runner `localhost`.
+- `src/pdf/`: the subprocess wrapper (timeout, output cap, typed failures,
+  injectable spawner), `popplerPreflight`, `fetchPdf` (redirects, retries with
+  backoff, size caps, content-type and magic-byte checks, all through the
+  cache), `PdfToolkit` with `pdfInfo`, `readPages`, `renderPage`, `allPages`,
+  and `findPages`, page shape metrics, and the section patterns.
+- Test fixtures are generated with `pdf-lib` at test time, so poppler is
+  exercised for real without committing a datasheet. HTTP is served by msw.
+  1153 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- msw's request-handler types do not resolve under type-aware linting while
+  `tsc` accepts them, which also meant an earlier typecheck had passed
+  vacuously. All msw usage now goes through one boundary module (D22).
+- `pdftotext -f N -l N` exits 99 for a page the document does not have, so
+  the toolkit checks the page count first and raises
+  `PDF_PAGE_OUT_OF_RANGE` instead of an opaque subprocess failure.
+- Two real bugs the coverage push surfaced: `pdfinfo` field parsing used
+  `\s+`, so an empty `Title:` absorbed the next line; and the fake child
+  process in a test emitted `close` before stream data was delivered, which
+  is not how a real process behaves.
+- Guarded helpers replaced dead `?? ''` fallbacks (D23).
+
+**Next**
+
+- Confirm CI, mark M6 complete, start M7 (Digi-Key adapter). M7 needs
+  credentials (open question Q1) before fixtures can be recorded; the request
+  layer and schemas can be built first.
 
 ### 2026-09-10 — Session 7: Module 5 complete
 

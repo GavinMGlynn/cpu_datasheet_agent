@@ -323,34 +323,34 @@ tolerances.
 Goal: fetch a datasheet, read pages as text, render pages as images, and
 locate the sections the agent needs. All through poppler, all cached.
 
-- [ ] 6.1 `Subprocess` wrapper: `run(bin, args, { timeoutMs, maxOutputBytes })`
+- [x] 6.1 `Subprocess` wrapper: `run(bin, args, { timeoutMs, maxOutputBytes })`
       returning stdout, stderr, exit code; kills on timeout; typed
       `SubprocessError`. Tests with a real child process and with an injected
       spawner for failure paths.
-- [ ] 6.2 `popplerPreflight()`: locates `pdftotext`, `pdftoppm`, `pdfinfo`,
+- [x] 6.2 `popplerPreflight()`: locates `pdftotext`, `pdftoppm`, `pdfinfo`,
       records versions, throws `PopplerMissingError` with install
       instructions if absent.
-- [ ] 6.3 `fetchPdf(url)`: through `cached()` (namespace `pdf`), follows
+- [x] 6.3 `fetchPdf(url)`: through `cached()` (namespace `pdf`), follows
       redirects up to a limit, enforces a size cap, checks `%PDF-` magic
       bytes, retries 5xx with backoff, sends a fixed User-Agent, returns
       `{ localPath, sha256, bytes }`. Content-type mismatches are errors.
-- [ ] 6.4 `pdfInfo(path)`: page count, title, producer, and the
+- [x] 6.4 `pdfInfo(path)`: page count, title, producer, and the
       encrypted flag via `pdfinfo`.
-- [ ] 6.5 `readPages(path, pages)`: `pdftotext -layout -f N -l N` per page,
+- [x] 6.5 `readPages(path, pages)`: `pdftotext -layout -f N -l N` per page,
       cached per `(sha256, page)`, returns `{ page, text, metrics }` where
       `metrics` are deterministic numbers the agent can use to decide whether
       a table is mangled: line count, numeric tokens without an adjacent
       label, columns detected by whitespace runs.
-- [ ] 6.6 `renderPage(path, page, dpi = 200)`: `pdftoppm -png -r 200 -f N -l
+- [x] 6.6 `renderPage(path, page, dpi = 200)`: `pdftoppm -png -r 200 -f N -l
       N -singlefile`, cached, returns PNG path and bytes.
-- [ ] 6.7 `findPages(path, patterns)`: full-text scan of all pages returning
+- [x] 6.7 `findPages(path, patterns)`: full-text scan of all pages returning
       matches per page for section headings: "Ordering Information",
       "Electrical Characteristics", "Absolute Maximum Ratings", "Recommended
       Operating Conditions", "Pin Configuration", "Package".
-- [ ] 6.8 Test fixture generator using `pdf-lib`: produces multi-page PDFs
+- [x] 6.8 Test fixture generator using `pdf-lib`: produces multi-page PDFs
       with known text, a mangled-looking table, and an ordering table.
       [R-29]
-- [ ] 6.9 Tests: every function against generated PDFs with real poppler;
+- [x] 6.9 Tests: every function against generated PDFs with real poppler;
       cache hits verified by counting subprocess invocations; every error
       path (timeout, missing binary, bad magic bytes, size cap, encrypted
       PDF).

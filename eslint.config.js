@@ -35,5 +35,16 @@ export default defineConfig(
     files: ['bin/**', 'scripts/**'],
     rules: { 'no-console': 'off' },
   },
+  {
+    // msw's request-handler types do not resolve under type-aware linting even
+    // though tsc accepts them. This one module wraps msw behind plain
+    // Request/Response signatures so no other file needs the exception.
+    files: ['test/helpers/msw.ts'],
+    rules: {
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+    },
+  },
   prettier,
 );
