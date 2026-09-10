@@ -10,6 +10,20 @@ this buck regulator that still meets my Vin range".
 This is a learning project as much as a working one — the point is to build a
 real agent with real tool use, not to wrap an API.
 
+## Working documents
+
+Read these in order at the start of every session:
+
+1. `docs/PROJECT_PLAN.md` — decisions, current status, session log, open
+   questions. The pick-up and put-down checklists live here.
+2. `docs/COMPLETION_PLAN.md` — every task to 100%, in modules completed
+   strictly in order. No MVP; a module is finished before the next starts.
+3. `docs/REFERENCES.md` — every external source we rely on, with its
+   verification status. Cite rows by ID.
+
+Every documentation change is committed and pushed immediately. Every
+commit is pushed.
+
 ## Stack
 
 - TypeScript / Node, running in WSL 2 on Windows 11
@@ -82,8 +96,9 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-- `chip-mcp-server.ts` exists: schema and tool definitions are real, all
-  network adapters are stubbed with `TODO` throws.
+- `chip-mcp-server.ts` was written earlier but is not in this repository (see
+  `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
+  are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
 - Nothing built yet: PDF extraction, the eval harness, the agent runner.
 
 ## Next steps
