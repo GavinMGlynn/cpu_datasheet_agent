@@ -1,0 +1,29 @@
+# Dependencies / build
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local data and caches (keyed network cache, SQLite DB, downloaded datasheets)
+cache/
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.pdf
+
+# Logs
+logs/
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
