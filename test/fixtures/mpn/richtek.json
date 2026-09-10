@@ -1,0 +1,56 @@
+[
+  {
+    "mpn": "RT8279GSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8279",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "EVB_RT8279GSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8279",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "RT6190GGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": null,
+    "packageCase": "40-WFQFN Exposed Pad",
+    "supplierPackage": "40-WQFN (5x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT6190GQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6190",
+    "packageCase": "40-WFQFN Exposed Pad",
+    "supplierPackage": "40-WQFN (5x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "EVB_RT6190GQW_02",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "EVB_RT6190GQW_01",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  }
+]

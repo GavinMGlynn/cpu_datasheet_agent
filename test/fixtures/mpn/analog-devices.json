@@ -1,0 +1,884 @@
+[
+  {
+    "mpn": "LT8610EMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610EMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AEMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610ABEMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610AEMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610IMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610IMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACIMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACEMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABHMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACHMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AXMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 175°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AEMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABEMSE-5#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610AEMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABEMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABIMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610ACIMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610AIMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABIMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610HMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACEMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610AHMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABHMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACHMSE-1#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACEMSE-1#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABIMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AIMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ACIMSE-1#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABHMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AIMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AHMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AHMSE-5#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610HMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610ABEMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610AIMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LT8610ABEMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LT8610ABIMSE-3.3#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "DC1749B",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC1749",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "DC2012A",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC2012",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "DC2139A",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC2139",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "LT8610ABEMSE-3.3#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610AEMSE-3.3#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610AEMSE-5#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610ACEMSE-1#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610ABIMSE-3.3#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610ABIMSE-5#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610AIMSE-3.3#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610AIMSE-5#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LT8610ACIMSE-1#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LT8610",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width) Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AEMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630EMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630EMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AIMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630AEDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630AEMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630EDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630AIMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630IDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630IMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630IMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AMPMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630MPMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630MPDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AEDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630EDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AHMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AIDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630HMSE#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630HDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AHDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630HMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LTC3630AMPDHC#PBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630IDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "DC2105A-A",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC2105",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "LTC3630AHMSE#WPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "DC2105A-B",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC2105",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "LTC3630AIMSE#WPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LTC3630AHMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AHDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AIDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AIMSE#WTRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630HDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AHMSE#WTRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AMPDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630AMPMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630MPDHC#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-WFDFN Exposed Pad",
+    "supplierPackage": "16-DFN (5x3)",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LTC3630MPMSE#TRPBF",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "LTC3630",
+    "packageCase": "16-TFSOP (0.118\", 3.00mm Width), 12 Leads, Exposed Pad",
+    "supplierPackage": "16-MSOP-EP",
+    "operatingTemperature": "-55°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "DC1877A",
+    "manufacturer": "Analog Devices Inc.",
+    "baseProductNumber": "DC1877",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MAX17503ATP+T",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "20-WFQFN Exposed Pad",
+    "supplierPackage": "20-TQFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MAX17503ATP+",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "20-WFQFN Exposed Pad",
+    "supplierPackage": "20-TQFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tray"]
+  },
+  {
+    "mpn": "MAX17503SATP+",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "20-WFQFN Exposed Pad",
+    "supplierPackage": "20-TQFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tray"]
+  },
+  {
+    "mpn": "MAXREFDES98EV#",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAXREFDES98",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MAXREFDES98#",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAXREFDES98",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MAX17503EVKITA#",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MAX17503SATP+T",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "20-WFQFN Exposed Pad",
+    "supplierPackage": "20-TQFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MAX17503EVKITB#",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MAX17503EVKITBE#",
+    "manufacturer": "Analog Devices Inc./Maxim Integrated",
+    "baseProductNumber": "MAX17503",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "mpn": "MCP16331T-E/CH",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16331",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16331T-E/MNYVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16331",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16331T-E/CHVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16331",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "BB22H52A",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIKROE-2762",
+    "manufacturer": "MikroElektronika",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIKROE-2917",
+    "manufacturer": "MikroElektronika",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "ADM00519",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00519",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2103YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2103",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  }
+]

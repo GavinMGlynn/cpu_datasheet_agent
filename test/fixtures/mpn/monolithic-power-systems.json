@@ -1,0 +1,551 @@
+[
+  {
+    "mpn": "MP2315GJ-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP2315",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MP2315SGJ-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP2315",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MP2315SGJ-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP2315",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "PMP23-AA1M1FA3CJ",
+    "manufacturer": "Endress+Hauser",
+    "baseProductNumber": null,
+    "packageCase": "Cylinder, Threaded",
+    "supplierPackage": "-",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MP2315GJ-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP2315",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MP1584EN-LF-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP1584",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOICE",
+    "operatingTemperature": "-20°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "K026-B",
+    "manufacturer": "M5Stack Technology Co., Ltd.",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Retail Package"]
+  },
+  {
+    "mpn": "M125",
+    "manufacturer": "M5Stack Technology Co., Ltd.",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "K025-B",
+    "manufacturer": "M5Stack Technology Co., Ltd.",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Retail Package"]
+  },
+  {
+    "mpn": "MP1584EN-LF-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MP1584",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOIC-EP",
+    "operatingTemperature": "-20°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "106990005",
+    "manufacturer": "Seeed Technology Co., Ltd",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MPQ4420GJ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4326BGRE-6000-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "14-PowerVFQFN",
+    "supplierPackage": "14-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4323CGDE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4323",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-QFN (2x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4420GJ-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4558DN-LF-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4558",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOICE",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4420HGJ-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4423HGQ-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4423",
+    "packageCase": "8-VDFN",
+    "supplierPackage": "8-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4228GRE-Q-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "22-VFQFN",
+    "supplierPackage": "22-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4576GQBE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4576",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "12-QFN (2.5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4423GQ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4423",
+    "packageCase": "8-VDFN",
+    "supplierPackage": "8-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4420AGJ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4241GLE-0000-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "21-PowerVFQFN",
+    "supplierPackage": "21-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4423AGQ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4423",
+    "packageCase": "8-VDFN",
+    "supplierPackage": "8-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4430GL-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4430",
+    "packageCase": "16-PowerVQFN",
+    "supplierPackage": "16-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4242BGVE-0000-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "22-PowerVFQFN",
+    "supplierPackage": "22-QFN (4x5)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4232GVE-0000-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "19-PowerVFQFN",
+    "supplierPackage": "19-QFN (4x5)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4560DN-AEC1-LF-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4560",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOICE",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4314GRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4314",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4573GQBE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4573",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "12-QFN (2.5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4313GRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4313",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4480GV-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4480",
+    "packageCase": "25-PowerVFQFN",
+    "supplierPackage": "25-QFN (4x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4436GRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4436",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4317GRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4317",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4210GU-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4210",
+    "packageCase": "27-VFQFN Exposed Pad",
+    "supplierPackage": "27-QFN (5x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4214GU-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "27-VFQFN Exposed Pad",
+    "supplierPackage": "27-QFN (5x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4371GVE-1000-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "23-PowerVFQFN",
+    "supplierPackage": "23-QFN (4x5)",
+    "operatingTemperature": "-",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4436AGRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4436",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4323CGRHE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4323",
+    "packageCase": "14-VFQFN",
+    "supplierPackage": "14-QFN (2.5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4323GDE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4323",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-QFN (2x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4322GDE-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4322",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-QFN (2x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4569GQ-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4569",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4323GDE-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4323",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-QFN (2x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4323GDE-33-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4323",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-QFN (2x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4228GRE-C-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "22-VFQFN",
+    "supplierPackage": "22-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4420HGJ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4423HGQ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4423",
+    "packageCase": "8-VDFN",
+    "supplierPackage": "8-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4420HGJ-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4420",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4558DQ-AEC1-LF-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4558",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4425BGJ-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4425",
+    "packageCase": "SOT-23-8 Thin, TSOT-23-8",
+    "supplierPackage": "TSOT-23-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4573GQBE-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4573",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "12-QFN (2.5x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4312GRE-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4312",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4570GF-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4570",
+    "packageCase": "20-TSSOP (0.173\", 4.40mm Width) Exposed Pad",
+    "supplierPackage": "20-TSSOP-EP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4436GRE-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4436",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4313GRE-33-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4313",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4347GLE-5-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4347",
+    "packageCase": "17-PowerVFQFN",
+    "supplierPackage": "17-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4341GLE-33-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4341",
+    "packageCase": "17-PowerVFQFN",
+    "supplierPackage": "17-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4317GRE-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4317",
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "20-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4470GL-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4470",
+    "packageCase": "20-VFQFN Exposed Pad",
+    "supplierPackage": "20-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4272GVE-0000-AEC1-Z",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": null,
+    "packageCase": "21-PowerVFQFN",
+    "supplierPackage": "21-QFN (4x5)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MPQ4470AGL-AEC1-P",
+    "manufacturer": "Monolithic Power Systems Inc.",
+    "baseProductNumber": "MPQ4470",
+    "packageCase": "20-VFQFN Exposed Pad",
+    "supplierPackage": "20-QFN (3x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  }
+]

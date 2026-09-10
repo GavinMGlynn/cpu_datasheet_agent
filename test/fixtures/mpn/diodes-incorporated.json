@@ -1,0 +1,902 @@
+[
+  {
+    "mpn": "AP63301WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63301",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63357DV-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63357",
+    "packageCase": "13-PowerVFDFN",
+    "supplierPackage": "V-DFN3020-13 (Type A)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63356DV-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63356",
+    "packageCase": "13-PowerVFDFN",
+    "supplierPackage": "V-DFN3020-13 (Type A)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63357QZV-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63357",
+    "packageCase": "13-PowerVFDFN",
+    "supplierPackage": "V-DFN3020-13/SWP (Type A1)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63356QZV-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63356",
+    "packageCase": "13-PowerVFDFN",
+    "supplierPackage": "V-DFN3020-13 (Type A)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "COM-21255",
+    "manufacturer": "SparkFun Electronics",
+    "baseProductNumber": "AP63357",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63300QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63300",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63301QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63301",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "COM-18357",
+    "manufacturer": "SparkFun Electronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "COM-21256",
+    "manufacturer": "SparkFun Electronics",
+    "baseProductNumber": "AP63357",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "COM-18356",
+    "manufacturer": "SparkFun Electronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP63356DV-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63356",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63357DV-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63357",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63205QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "FMAP-63-6-1/4-EN",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "FMAP-63-4-1/4-EN",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP63200WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63200",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63205WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63205",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63203WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63203",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63201WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63201",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63300WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63300",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63200QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63200",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63203QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63203",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63205QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63205",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63201QWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63201",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP63301WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63301",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63201WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63201",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63203WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63203",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63205WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63205",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63200WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63200",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63300WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63300",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63300QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63300",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63357QZV-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63357",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63301QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63301",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63356QZV-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP63356",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP63201QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP63200QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP63203QWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "DTAP6-32",
+    "manufacturer": "Greenlee Communications",
+    "baseProductNumber": "DTAP6",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "V1D1GHC4-1AP63-300",
+    "manufacturer": "Carling Technologies",
+    "baseProductNumber": "V1D1GHC4",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "YC9Z-RHU5AP63",
+    "manufacturer": "IDEC",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "YC9Z-RHU10AP63",
+    "manufacturer": "IDEC",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "FMAP-63-16-1/4-EN",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "FMAP-63-1-1/4-EN",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "EAMM-A-P6-38A-42A",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "EAMM-A-P6-38A-57A",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "EAMM-A-P6-38A-55A",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "EAMM-A-P6-38A-40A",
+    "manufacturer": "Festo Corporation",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "7000-P8LDA-P630100",
+    "manufacturer": "Murrelektronik, Inc",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "7000-P8BDA-P630050",
+    "manufacturer": "Murrelektronik, Inc",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62150Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62150",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62300TWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62200WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62301Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62301",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62150WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62150",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62301WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62301",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62250Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62250",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62800SJ-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62800",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "V-QFN2030-12 (Type A)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62200TWU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62200Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62201Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62201",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62201WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62201",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62300WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ND9AP6200",
+    "manufacturer": "Amphenol ICC (Commercial Products)",
+    "baseProductNumber": "ND9A",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62300Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62200WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62301WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62301",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62300Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62150WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62150",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62300WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62300TWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62300",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62200Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62500SJ-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62800SJ-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62201WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62201",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62301Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62301",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62250WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62250",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62250Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62250",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62400WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62401WU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP-6-21",
+    "manufacturer": "Amphenol Audio",
+    "baseProductNumber": "AP-6",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-25°C ~ 75°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP-6-22",
+    "manufacturer": "Amphenol Audio",
+    "baseProductNumber": "AP-6",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-25°C ~ 75°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62250WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62250",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62600SJ-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62600",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "V-QFN2030-12 (Type A)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62400WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62400",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62500SJ-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62500",
+    "packageCase": "12-VFQFN",
+    "supplierPackage": "V-QFN2030-12 (Type A)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62600SJ-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62600",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62150Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62150",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "3RT20151AP62",
+    "manufacturer": "Siemens",
+    "baseProductNumber": "3RT2015",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-25°C ~ 60°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62200TWU-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62200",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "AP62201Z6-EVM",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62201",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "3RT20161AP62",
+    "manufacturer": "Siemens",
+    "baseProductNumber": "3RT2016",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-25°C ~ 60°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "AP62401WU-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": "AP62401",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-26",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "AP62302Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62303Z6-7",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62250WU-7-N",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62300WU-7-N",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62300TWU-7-N",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62301WU-7-N",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "AP62CO5ZCW20-13",
+    "manufacturer": "Diodes Incorporated",
+    "baseProductNumber": null,
+    "packageCase": "20-PowerVFQFN",
+    "supplierPackage": "V-QFN3545-20 (SWP)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  }
+]

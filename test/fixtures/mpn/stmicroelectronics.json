@@ -1,0 +1,128 @@
+[
+  {
+    "mpn": "ST1S10PUR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S10",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1S10PHR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S10",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "PowerSO-8",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "STEVAL-ISA044V6",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ST1S10DEMOBOARD",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S10",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ST1S10PURDEMOBO",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S10",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ST1S10PHRDEMOBO",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S10",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "STEVAL-ISA044V5",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L7987LTR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7987",
+    "packageCase": "16-TSSOP (0.173\", 4.40mm Width) Exposed Pad",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L7987TR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7987",
+    "packageCase": "16-TSSOP (0.173\", 4.40mm Width) Exposed Pad",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L7987L",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7987",
+    "packageCase": "16-TSSOP (0.173\", 4.40mm Width) Exposed Pad",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "L7987",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7987",
+    "packageCase": "16-TSSOP (0.173\", 4.40mm Width) Exposed Pad",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "STEVAL-ISA198V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STEVAL-ISA152V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "FRCIR030-18-11P-F80-T108",
+    "manufacturer": "ITT Cannon, LLC",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  }
+]

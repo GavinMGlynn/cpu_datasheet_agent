@@ -1,0 +1,1352 @@
+[
+  {
+    "mpn": "TPS54202HDDCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54202",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "SOT-23-THIN",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54302DDCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54302",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "SOT-23-THIN",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54331DR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54331",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54231DR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54231",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54202DDCT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54202",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "SOT-23-THIN",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54335ADDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54335",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54331DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54331",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54062DGKR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54062",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-VSSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54332DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54332",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54060DGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54060",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5401DGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5401",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54218RTET",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54218",
+    "packageCase": "16-WFQFN Exposed Pad",
+    "supplierPackage": "16-WQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54040DGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54040",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54418RTER",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54418",
+    "packageCase": "16-WFQFN Exposed Pad",
+    "supplierPackage": "16-WQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54J061RPGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54",
+    "packageCase": "14-PowerTFQFN",
+    "supplierPackage": "14-VQFN-HR (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54061DRBT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54061",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-SON (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54140ADGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54140",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5410DR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5410",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54623RHLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54623",
+    "packageCase": "14-VFQFN Exposed Pad",
+    "supplierPackage": "14-VQFN (3.5x3.5)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54160DGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54160",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54160ADGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54160",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5420DR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5420",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54618RTER",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54618",
+    "packageCase": "16-WFQFN Exposed Pad",
+    "supplierPackage": "16-WQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54310PWPR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54310",
+    "packageCase": "20-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "20-HTSSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5410QDRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5410",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54260DGQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54260",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54160ADRCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54160",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-VSON (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54260DRCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54260",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-VSON (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54360BDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54360",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54360DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54360",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5420QDRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5420",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS548A28RWWR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS548",
+    "packageCase": "21-PowerVFQFN",
+    "supplierPackage": "21-VQFN-HR (4x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54821RHLT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54821",
+    "packageCase": "14-VFQFN Exposed Pad",
+    "supplierPackage": "14-VQFN (3.5x3.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54KC23RZRR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54",
+    "packageCase": "16-PowerWFQFN",
+    "supplierPackage": "16-WQFN-FCRLF (3x3.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54A24RTWR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54",
+    "packageCase": "24-WFQFN Exposed Pad",
+    "supplierPackage": "24-WQFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54340DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54340",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54540BDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54540",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54540DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54540",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54160DGQ",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54160",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "TPS54618RTET",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54618",
+    "packageCase": "16-WFQFN Exposed Pad",
+    "supplierPackage": "16-WQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS5430QDDARQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS5430",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54560BDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54560",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54360BQDDARQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54360",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54620RHLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54620",
+    "packageCase": "14-VFQFN Exposed Pad",
+    "supplierPackage": "14-VQFN (3.5x3.5)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54260QDGQRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54260",
+    "packageCase": "10-PowerTFSOP, 10-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "10-HVSSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54340DDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54340",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Bulk", "Tube"]
+  },
+  {
+    "mpn": "TPS548B28RWWR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS548",
+    "packageCase": "21-PowerVFQFN",
+    "supplierPackage": "21-VQFN-HR (4x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54560DDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54560",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54540BQDDARQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54540",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS54360DDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS54360",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "VLMR334BACB-GS08",
+    "manufacturer": "Vishay Semiconductor Opto Division",
+    "baseProductNumber": "VLMR334",
+    "packageCase": "2-SMD, J-Lead",
+    "supplierPackage": "2-PLCC",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630ARNXR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630BRNXR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "VLMR333U1AA-GS08",
+    "manufacturer": "Vishay Semiconductor Opto Division",
+    "baseProductNumber": "VLMR333",
+    "packageCase": "2-SMD, J-Lead",
+    "supplierPackage": "2-PLCC",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33610BDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33610",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33610ADDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33610",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33640DDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33640",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620AQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620CDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620BDDAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630CRNXR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620CQ5RNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630BDDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33630ADDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33620BRNXT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620ARNXT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620ADDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33620AQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630CDDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33630BRNXT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630CQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630BQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "VLMR335U1V2-GS08",
+    "manufacturer": "Vishay Semiconductor Opto Division",
+    "baseProductNumber": "VLMR335",
+    "packageCase": "2-SMD, J-Lead",
+    "supplierPackage": "2-PLCC",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TMS322512ALM-R33MTAA",
+    "manufacturer": "TDK",
+    "baseProductNumber": "TMS322512ALM",
+    "packageCase": "1210 (3225 Metric)",
+    "supplierPackage": "1210",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620APCQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620CQ3RNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620BQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620CQ5RNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620BDDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33620CDDA",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "8-PowerSOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SO PowerPad",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "LMR33630ARNXT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620CRNXT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630AQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TMS201210ALM-R33MTAA",
+    "manufacturer": "TDK",
+    "baseProductNumber": null,
+    "packageCase": "0805 (2012 Metric)",
+    "supplierPackage": "0805",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TMS252012ALM-R33MTAA",
+    "manufacturer": "TDK",
+    "baseProductNumber": null,
+    "packageCase": "1008 (2520 Metric)",
+    "supplierPackage": "1008",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "VLMR33T1U2-GS08",
+    "manufacturer": "Vishay Semiconductor Opto Division",
+    "baseProductNumber": "VLMR33",
+    "packageCase": "2-SMD, J-Lead",
+    "supplierPackage": "2-PLCC",
+    "operatingTemperature": "",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TMS201610ALM-R33MTAA",
+    "manufacturer": "TDK",
+    "baseProductNumber": null,
+    "packageCase": "0806 (2016 Metric)",
+    "supplierPackage": "0806",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630APCQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630APAQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630CQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620BQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620BRNXR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LMR33620CQRNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33630BQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "LMR33620APAQRNXRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "LMR33620AQ5RNXTQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33620",
+    "packageCase": "12-PowerVFQFN",
+    "supplierPackage": "12-VQFN-HR (3x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "COM-18000",
+    "manufacturer": "SparkFun Electronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "LMR33630ADDAEVM",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "LMR33630ARNXEVM",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "LMR33630CRNXEVM",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "LMR33630",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "TPS62A01DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62A01",
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS629203DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS629203",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62825DMQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62825",
+    "packageCase": "6-VFDFN",
+    "supplierPackage": "6-VSON-HR (1.5x1.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS629206DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS629206",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS6282533DMQR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS6282533",
+    "packageCase": "6-VFDFN",
+    "supplierPackage": "6-VSON-HR (1.5x1.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62932DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62932",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62808YKAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62808",
+    "packageCase": "6-XFBGA, DSBGA",
+    "supplierPackage": "6-DSBGA (1.05x0.70)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62933PDRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62933",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62933ODRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62933",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62933FDRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62933",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS629206QDRLRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS629206",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS629210DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS629210",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62172DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62172",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62823DLCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62823",
+    "packageCase": "8-PowerVFDFN",
+    "supplierPackage": "8-VSON-HR (2x1.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62933DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62933",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62200DBVR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62200",
+    "packageCase": "SC-74A, SOT-753",
+    "supplierPackage": "SOT-23-5",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62743YFPR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62743",
+    "packageCase": "8-XFBGA, DSBGA",
+    "supplierPackage": "8-DSBGA",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62821DLCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62821",
+    "packageCase": "8-PowerVFDFN",
+    "supplierPackage": "8-VSON-HR (2x1.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62120DCNR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62120",
+    "packageCase": "SOT-23-8",
+    "supplierPackage": "SOT-23-8",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62802YKAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62802",
+    "packageCase": "6-XFBGA, DSBGA",
+    "supplierPackage": "6-DSBGA (1.05x0.70)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62085RLTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62085",
+    "packageCase": "7-VFDFN",
+    "supplierPackage": "7-VSON-HR (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62740DSSR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62740",
+    "packageCase": "12-WFDFN Exposed Pad",
+    "supplierPackage": "12-WSON (2x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62901RPJR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62901",
+    "packageCase": "9-VFQFN",
+    "supplierPackage": "9-VQFN-HR (1.5x2)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS628502DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS628502",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62175DQCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62175",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WSON (3x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62822DLCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62822",
+    "packageCase": "8-PowerVFDFN",
+    "supplierPackage": "8-VSON-HR (2x1.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS628438YKAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS628438",
+    "packageCase": "6-XFBGA, DSBGA",
+    "supplierPackage": "6-DSBGA (1.05x0.70)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS628438DRLR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": null,
+    "packageCase": "SOT-563, SOT-666",
+    "supplierPackage": "SOT-563",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62801YKAR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62801",
+    "packageCase": "6-XFBGA, DSBGA",
+    "supplierPackage": "6-DSBGA (1.05x0.70)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62260DRVR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62260",
+    "packageCase": "6-WDFN Exposed Pad",
+    "supplierPackage": "6-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62160DGKR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62160",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-VSSOP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62163DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62163",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62902RPJR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62902",
+    "packageCase": "9-VFQFN",
+    "supplierPackage": "9-VQFN-HR (1.5x2)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62150ARGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62150",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62086RLTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62086",
+    "packageCase": "7-VFDFN",
+    "supplierPackage": "7-VSON-HR (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62177DQCR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62177",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WSON (3x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62162DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62162",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62172DSGT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62172",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62170DSGT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62170",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62152RGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62152",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62088YFPR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62088",
+    "packageCase": "6-XFBGA, DSBGA",
+    "supplierPackage": "6-DSBGA",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62080DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62080",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62082DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62082",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS628501QDRLRQ1",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS628501",
+    "packageCase": "SOT-583",
+    "supplierPackage": "SOT-583",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62175DQCT",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62175",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WSON (3x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62140ARGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62140",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62142RGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62142",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62143RGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62143",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62140RGTR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62140",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "TPS62065DSGR",
+    "manufacturer": "Texas Instruments",
+    "baseProductNumber": "TPS62065",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WSON (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  }
+]

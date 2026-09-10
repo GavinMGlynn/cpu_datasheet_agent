@@ -1,0 +1,290 @@
+[
+  {
+    "mpn": "NCP3170ADR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3170",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3170BDR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3170",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "SPS-READER-GEVK",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "SPS-READER",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV890430MW50TXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890430",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV890204MWR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890204",
+    "packageCase": "12-VDFN Exposed Pad",
+    "supplierPackage": "12-DFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV890200PDR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890200",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOIC-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV890104MWR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890104",
+    "packageCase": "12-VDFN Exposed Pad",
+    "supplierPackage": "12-DFN (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV890100MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890100",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV890130MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890130",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890430MW33TXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890430",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890100PDR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890100",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOIC-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NV890200PDR2GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NV890200",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890203MWGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890203",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890204MWGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890204",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890104MWGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890104",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890430MW50GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STR-PWRNCV890430-R0-GEVK",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890231MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890231",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890130PDR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890130",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOIC-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890203MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890203",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890101MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890101",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890131MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890131",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890230PDR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890230",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOIC-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890103MWTXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890103",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "SECO-PWRNCV890430-R0-GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NCV890430MW25TXG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890430",
+    "packageCase": "8-VDFN Exposed Pad",
+    "supplierPackage": "8-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV890103MWGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV890103",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NV890130PDR2GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NV890130",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NV890131MWTXGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NV890131",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NV890230PDR2GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NV890230",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "NV890231MWTXGEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NV890231",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "BDK-DCDC-GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "BDK-DCDC",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  }
+]
