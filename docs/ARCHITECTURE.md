@@ -8,6 +8,12 @@ Status marks in this document are accurate as of 2026-09-10: **built** means
 implemented with full tests and passing CI, **in progress** means partially
 implemented, **planned** means designed here but not yet written.
 
+A rendered version with the diagrams drawn is published at
+<https://claude.ai/code/artifact/917a3125-6999-40cd-b5f7-c57e1196cc37>. Its
+source is `docs/architecture.html`, which is committed alongside this file and
+excluded from formatting so it stays byte-identical to what is deployed. This
+Markdown file remains the source of record; update it first, then the page.
+
 ## 1. The shape of the problem
 
 Given a chip part number, produce a record of that part that a hardware

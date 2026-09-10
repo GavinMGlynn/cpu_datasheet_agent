@@ -6,3 +6,7 @@ ext/
 eval/results/
 package-lock.json
 *.md
+
+# Source of the published architecture page. Kept byte-identical to what is
+# deployed, so formatting must not rewrite it.
+docs/architecture.html

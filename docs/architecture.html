@@ -1,0 +1,823 @@
+<title>Datasheet Agent Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+
+<style>
+  :root {
+    --ground: #eef1ef;
+    --surface: #ffffff;
+    --surface-sunk: #f6f8f7;
+    --ink: #141917;
+    --muted: #5a6360;
+    --faint: #808a86;
+    --rule: #d7dcd9;
+    --rule-strong: #b9c1bd;
+
+    --det: #0d6f78;
+    --det-wash: #e2f0f1;
+    --agent: #5f47b0;
+    --agent-wash: #ece7f8;
+    --alarm: #9d3423;
+    --alarm-wash: #f7e7e3;
+
+    --measure: 34rem;
+    --wide: 56rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0d1211;
+      --surface: #161b1a;
+      --surface-sunk: #121716;
+      --ink: #e6ecea;
+      --muted: #9ba5a1;
+      --faint: #78827e;
+      --rule: #242b29;
+      --rule-strong: #333c39;
+
+      --det: #45b6c0;
+      --det-wash: #0f2a2c;
+      --agent: #a992f2;
+      --agent-wash: #221c38;
+      --alarm: #e59180;
+      --alarm-wash: #331914;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0d1211;
+    --surface: #161b1a;
+    --surface-sunk: #121716;
+    --ink: #e6ecea;
+    --muted: #9ba5a1;
+    --faint: #78827e;
+    --rule: #242b29;
+    --rule-strong: #333c39;
+
+    --det: #45b6c0;
+    --det-wash: #0f2a2c;
+    --agent: #a992f2;
+    --agent-wash: #221c38;
+    --alarm: #e59180;
+    --alarm-wash: #331914;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Literata, Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: grid;
+    gap: 1.25rem;
+    padding: 3.5rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    max-width: var(--measure);
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.06rem;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    list-style: none;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.76rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .facts b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: 3.25rem; }
+
+  h2 {
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0 0 1.25rem;
+    text-wrap: balance;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  h2 .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--det);
+    letter-spacing: 0.06em;
+  }
+
+  h3 {
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: 0.005em;
+    margin: 2rem 0 0.5rem;
+  }
+
+  p { max-width: var(--measure); margin: 0 0 1.05rem; }
+
+  .lede { font-size: 1.06rem; }
+
+  strong { font-weight: 600; }
+
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86em;
+  }
+
+  p code, li code, td code {
+    background: var(--surface-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.08em 0.32em;
+  }
+
+  ul.plain { max-width: var(--measure); padding-left: 1.1rem; margin: 0 0 1.05rem; }
+  ul.plain li { margin-bottom: 0.5rem; }
+
+  /* ---------- pull quote / claim ---------- */
+
+  .claim {
+    max-width: var(--measure);
+    margin: 1.75rem 0;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--alarm);
+    font-size: 1.08rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- figures ---------- */
+
+  figure {
+    margin: 2rem 0 2.25rem;
+    padding: 1.5rem 1.25rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+
+  figure svg { display: block; width: 100%; min-width: 480px; height: auto; color: var(--ink); }
+
+  figcaption {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 48rem;
+  }
+
+  /* ---------- tables ---------- */
+
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0 1.75rem; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 34rem;
+    font-size: 0.94rem;
+  }
+
+  caption {
+    text-align: left;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 0.6rem;
+  }
+
+  th {
+    text-align: left;
+    font-family: Archivo, sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1.5px solid var(--rule-strong);
+    padding: 0 1rem 0.5rem 0;
+  }
+
+  td {
+    vertical-align: top;
+    padding: 0.6rem 1rem 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  td:last-child, th:last-child { padding-right: 0; }
+
+  .modules td:first-child {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.84rem;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+
+  /* ---------- status marks ---------- */
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+
+  .status::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    flex: none;
+    border: 1.5px solid var(--rule-strong);
+  }
+
+  .status.built::before { background: var(--det); border-color: var(--det); }
+  .status.built { color: var(--det); }
+  .status.progress::before { background: linear-gradient(135deg, var(--det) 0 50%, transparent 50% 100%); border-color: var(--det); }
+  .status.planned::before { background: transparent; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 0 0 1.5rem;
+    padding: 0.75rem 0 0;
+    list-style: none;
+  }
+
+  /* ---------- ascii block ---------- */
+
+  pre {
+    margin: 1.5rem 0;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  pre .c { color: var(--muted); }
+
+  /* ---------- ratings table (datasheet nod) ---------- */
+
+  .ratings {
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .ratings table { min-width: 30rem; font-size: 0.92rem; }
+  .ratings caption {
+    padding: 0.8rem 1rem 0.7rem;
+    background: var(--ink);
+    color: var(--ground);
+    letter-spacing: 0.14em;
+  }
+  .ratings th { padding: 0.7rem 1rem 0.5rem; border-bottom: 1px solid var(--rule-strong); }
+  .ratings td { padding: 0.65rem 1rem; }
+  .ratings tr:last-child td { border-bottom: none; }
+  .ratings td:first-child { font-weight: 600; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--faint);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.76rem;
+    line-height: 1.7;
+  }
+
+  footer a { color: var(--det); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  footer a:focus-visible, a:focus-visible { outline: 2px solid var(--det); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: color 120ms ease; }
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .page { padding: 0 1.1rem 4rem; }
+    figure { padding: 1rem 0.85rem 0.9rem; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">Architecture · chip datasheet + pricing agent</p>
+    <h1>Datasheet Agent Architecture</h1>
+    <p class="standfirst">
+      Given a part number, produce a record a hardware engineer can trust: parameters,
+      where each one came from, what it costs, and how it is categorised. This is how
+      the pieces fit, and why the boundaries sit where they do.
+    </p>
+    <ul class="facts">
+      <li><b>7</b> modules built</li>
+      <li><b>1&#8239;157</b> tests</li>
+      <li><b>100%</b> coverage, per file</li>
+      <li>first category <b>buck regulators</b></li>
+      <li>status as of <b>2026-09-10</b></li>
+    </ul>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span> The problem shapes the design</h2>
+    <p class="lede">
+      Two properties of this domain drive every decision below. Neither is incidental.
+    </p>
+    <p>
+      <strong>A datasheet is a rendering, not a database.</strong> Values live in tables
+      that lose their structure when extracted as text. One datasheet usually covers a
+      whole family of part numbers, and the suffix that separates them
+      (<code>TPS54331D</code> from <code>TPS54331DR</code>) encodes packaging and
+      temperature grade rather than anything electrical.
+    </p>
+    <p>
+      <strong>A wrong answer is worse than no answer.</strong> A misread absolute maximum
+      input voltage does not produce a slightly worse recommendation. It produces a dead
+      board.
+    </p>
+    <p class="claim">
+      So every value carries where it came from, nothing is coerced into fitting, and
+      anything ambiguous stops and asks.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Two layers, one crossing point</h2>
+    <p>
+      The system is split in half, and the split is enforced by module boundaries rather
+      than by convention. The deterministic half fetches, parses, converts and stores;
+      given the same inputs it produces the same outputs every time, with no model in the
+      loop. The agent half does the one thing that genuinely needs judgement: reading a
+      page and deciding what the numbers mean.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 720 336" role="img" aria-label="The agent layer reaches the deterministic layer only through the tool surface; no arrow bypasses it.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <!-- agent band -->
+        <rect x="36" y="18" width="648" height="80" rx="10" fill="var(--agent-wash)" stroke="var(--agent)" stroke-width="1.5" stroke-dasharray="5 4"></rect>
+        <text x="52" y="40" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.4" fill="var(--agent)">AGENT LAYER — JUDGEMENT</text>
+        <rect x="60" y="50" width="272" height="34" rx="5" fill="var(--surface)" stroke="var(--agent)" stroke-width="1.2"></rect>
+        <text x="196" y="71" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">Extraction run</text>
+        <rect x="388" y="50" width="272" height="34" rx="5" fill="var(--surface)" stroke="var(--agent)" stroke-width="1.2"></rect>
+        <text x="524" y="71" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">Verification run</text>
+
+        <!-- arrows down into the tool surface -->
+        <line x1="196" y1="98" x2="196" y2="140" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"></line>
+        <line x1="524" y1="98" x2="524" y2="140" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"></line>
+        <text x="206" y="124" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">tool calls only</text>
+
+        <!-- tool surface -->
+        <rect x="36" y="144" width="648" height="58" rx="8" fill="var(--surface)" stroke="currentColor" stroke-width="2"></rect>
+        <text x="52" y="167" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.4" fill="currentColor">TOOL SURFACE</text>
+        <text x="52" y="187" font-family="Archivo, sans-serif" font-size="12.5" fill="var(--muted)">schema in · schema out · every call written to the ledger</text>
+
+        <!-- arrows down into the deterministic layer -->
+        <line x1="196" y1="202" x2="196" y2="240" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"></line>
+        <line x1="524" y1="202" x2="524" y2="240" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"></line>
+        <text x="206" y="226" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">typed handlers</text>
+
+        <!-- deterministic band -->
+        <rect x="36" y="244" width="648" height="76" rx="10" fill="var(--det-wash)" stroke="var(--det)" stroke-width="1.5" stroke-dasharray="5 4"></rect>
+        <text x="52" y="266" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.4" fill="var(--det)">DETERMINISTIC LAYER — NO JUDGEMENT</text>
+        <g font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" text-anchor="middle">
+          <rect x="52" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="100" y="296">adapters</text>
+          <rect x="156" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="204" y="296">PDF toolkit</text>
+          <rect x="260" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="308" y="296">units</text>
+          <rect x="364" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="412" y="296">classify</text>
+          <rect x="468" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="516" y="296">SQLite</text>
+          <rect x="572" y="278" width="96" height="28" rx="4" fill="var(--surface)" stroke="var(--det)" stroke-width="1"></rect>
+          <text x="620" y="296">cache</text>
+        </g>
+      </svg>
+      <figcaption>
+        The agent never touches the filesystem, the database or the network. Every path
+        from the top band to the bottom passes through the tool surface, where inputs and
+        outputs are validated and the call is recorded. The deterministic layer can be
+        proven correct by tests; the agent layer can only be measured against a golden
+        set. Keeping them apart means a failure lands on one side or the other.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> What happens to one part</h2>
+    <p>
+      Each stage is a separate tool call, so each is individually cached, logged and
+      re-runnable. Only two stages involve a model.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 920 244" role="img" aria-label="Nine pipeline stages from resolve to verify, with escalation branching out of resolve and reconcile, and a fresh-context boundary before verify.">
+        <defs>
+          <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <!-- fresh-context boundary -->
+        <line x1="808" y1="18" x2="808" y2="112" stroke="var(--agent)" stroke-width="1.4" stroke-dasharray="4 4"></line>
+        <text x="800" y="14" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--agent)">fresh context ▸</text>
+
+        <g font-family="Archivo, sans-serif" font-size="11.5" text-anchor="middle">
+          <!-- deterministic stages -->
+          <g fill="currentColor">
+            <rect x="16" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="60" y="60">resolve</text><text x="60" y="74" font-size="10" fill="var(--muted)">MPN</text>
+            <rect x="116" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="160" y="60">fetch</text><text x="160" y="74" font-size="10" fill="var(--muted)">offers</text>
+            <rect x="216" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="260" y="60">fetch</text><text x="260" y="74" font-size="10" fill="var(--muted)">datasheet</text>
+            <rect x="316" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="360" y="60">read</text><text x="360" y="74" font-size="10" fill="var(--muted)">pages</text>
+
+            <rect x="516" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="560" y="60">reconcile</text><text x="560" y="74" font-size="10" fill="var(--muted)">vs. offers</text>
+            <rect x="616" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="660" y="60">classify</text><text x="660" y="74" font-size="10" fill="var(--muted)">fixed axes</text>
+            <rect x="716" y="38" width="88" height="46" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+            <text x="760" y="60">persist</text><text x="760" y="74" font-size="10" fill="var(--muted)">validated</text>
+          </g>
+
+          <!-- judgement stages -->
+          <g fill="currentColor">
+            <rect x="416" y="38" width="88" height="46" rx="5" fill="var(--agent-wash)" stroke="var(--agent)" stroke-width="1.6"></rect>
+            <text x="460" y="60">extract</text><text x="460" y="74" font-size="10" fill="var(--agent)">judgement</text>
+            <rect x="816" y="38" width="88" height="46" rx="5" fill="var(--agent-wash)" stroke="var(--agent)" stroke-width="1.6"></rect>
+            <text x="860" y="60">verify</text><text x="860" y="74" font-size="10" fill="var(--agent)">judgement</text>
+          </g>
+        </g>
+
+        <!-- flow arrows -->
+        <g stroke="currentColor" stroke-width="1.3" marker-end="url(#ah2)">
+          <line x1="104" y1="61" x2="114" y2="61"></line>
+          <line x1="204" y1="61" x2="214" y2="61"></line>
+          <line x1="304" y1="61" x2="314" y2="61"></line>
+          <line x1="404" y1="61" x2="414" y2="61"></line>
+          <line x1="504" y1="61" x2="514" y2="61"></line>
+          <line x1="604" y1="61" x2="614" y2="61"></line>
+          <line x1="704" y1="61" x2="714" y2="61"></line>
+          <line x1="804" y1="61" x2="814" y2="61"></line>
+        </g>
+
+        <!-- escalation -->
+        <rect x="300" y="170" width="220" height="42" rx="6" fill="var(--alarm-wash)" stroke="var(--alarm)" stroke-width="1.5"></rect>
+        <text x="410" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--alarm)">ask_human</text>
+        <text x="410" y="203" text-anchor="middle" font-family="Archivo, sans-serif" font-size="10.5" fill="var(--muted)">escalation stored · run ends clean</text>
+
+        <polyline points="60,84 60,191 296,191" fill="none" stroke="var(--alarm)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah2)" color="var(--alarm)"></polyline>
+        <text x="72" y="183" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--alarm)">ambiguous MPN</text>
+
+        <polyline points="560,84 560,191 524,191" fill="none" stroke="var(--alarm)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah2)" color="var(--alarm)"></polyline>
+        <text x="570" y="140" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--alarm)">conflict on a</text>
+        <text x="570" y="153" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--alarm)">safety rating</text>
+      </svg>
+      <figcaption>
+        Verification runs in a context that has never seen the extraction transcript. A
+        model asked to check its own work in the same context agrees with itself; a model
+        given only a page and a claim does not. The isolation is structural: the
+        verification runner takes a part identifier, not a session, so there is no
+        parameter through which the transcript could arrive.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> The pieces</h2>
+
+    <ul class="legend">
+      <li class="status built">built · tested · in CI</li>
+      <li class="status progress">in progress</li>
+      <li class="status planned">planned</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table class="modules">
+        <caption>Modules, in build order</caption>
+        <thead>
+          <tr><th scope="col">Module</th><th scope="col">Owns</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>config · errors · util</td>
+            <td>Environment validated once into a frozen object, failing with every problem listed at once. One error base class with stable codes that callers branch on.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>core</td>
+            <td>The vocabulary: schemas for parts, quantities, provenance, offers, classifications, escalations. Everything else imports from here.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>log</td>
+            <td>JSON lines to stderr, secret redaction, and the append-only tool-call ledger that becomes the eval dataset.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>cache</td>
+            <td>Content-addressed store keyed by a canonical hash of the request. The only door to the network.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>db</td>
+            <td>SQLite behind repositories, transactional migrations, and the aggregate upsert that validates before it writes.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>units</td>
+            <td>Parsing, normalisation, comparison, and the distributor parametric maps. Pure functions, no I/O.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>pdf</td>
+            <td>Poppler behind a subprocess runner: fetch, page text with shape metrics, page rendering, section finding.</td>
+            <td><span class="status built">built</span></td>
+          </tr>
+          <tr>
+            <td>adapters/digikey</td>
+            <td>Primary source. OAuth token client, paced request layer, loose response schemas, offers per packaging variant.</td>
+            <td><span class="status progress">in progress</span></td>
+          </tr>
+          <tr>
+            <td>adapters/mouser</td>
+            <td>A second opinion on price and availability.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>adapters/nexar</td>
+            <td>Cross-distributor lookup, disabled by default behind a persisted lifetime budget.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>mpn</td>
+            <td>Suffix decoding and candidate matching. An unknown suffix decodes to nothing rather than a partial guess.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>reconcile · classify</td>
+            <td>Datasheet against distributor, then fixed categorisation axes with named rules.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>tools · mcp</td>
+            <td>One registry exposed twice: a stdio server for external clients, an in-process server for the runner.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>agent</td>
+            <td>Extraction and verification runs on the Agent SDK, with the money-gating hook.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>eval · query</td>
+            <td>Golden set, scorer, harness, and the alternates search that is the end goal.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Three that carry more weight than their size suggests</h3>
+    <p>
+      <strong>Page metrics.</strong> Alongside a page's text, the PDF toolkit returns
+      line counts, columns detected by whitespace runs, and how many lines hold numbers
+      with no label. Those numbers exist so the agent can decide to render a page as an
+      image without exercising judgement about it, which keeps a judgement call out of
+      the deterministic layer.
+    </p>
+    <p>
+      <strong>Numeric bounds in columns.</strong> Parameters are stored as JSON
+      <em>and</em> with their bounds extracted into columns. That is what makes the end
+      goal a SQL filter rather than a scan: every part whose input range covers
+      <span class="mono">8&#8239;V–36&#8239;V</span> at
+      <span class="mono">2&#8239;A</span>.
+    </p>
+    <p>
+      <strong>The budget counter.</strong> Nexar's evaluation tier allows 100 parts for
+      the lifetime of the account. Every operation reserves from a persisted counter
+      inside an immediate transaction <em>before</em> any network call, so the limit
+      cannot be exceeded even by a bug.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> How the pieces interact</h2>
+
+    <h3>The cache is the only door to the network</h3>
+    <figure>
+      <svg viewBox="0 0 720 208" role="img" aria-label="Adapters call cached(), which reaches the network only on a miss, then stores bytes through the CacheStore interface to disk.">
+        <defs>
+          <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <!-- network, reached only on a miss -->
+        <rect x="238" y="16" width="150" height="38" rx="5" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"></rect>
+        <text x="313" y="40" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="var(--muted)">network</text>
+        <line x1="290" y1="96" x2="290" y2="58" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah3)" color="var(--muted)"></line>
+        <line x1="340" y1="58" x2="340" y2="96" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah3)" color="var(--muted)"></line>
+        <text x="396" y="80" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">on a miss only</text>
+
+        <!-- main row -->
+        <rect x="24" y="98" width="152" height="52" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+        <text x="100" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">adapter ·</text>
+        <text x="100" y="138" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">PDF toolkit</text>
+
+        <rect x="238" y="98" width="150" height="52" rx="5" fill="var(--det-wash)" stroke="var(--det)" stroke-width="2"></rect>
+        <text x="313" y="122" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor">cached()</text>
+        <text x="313" y="138" text-anchor="middle" font-family="Archivo, sans-serif" font-size="10.5" fill="var(--muted)">the seam</text>
+
+        <rect x="450" y="98" width="130" height="52" rx="5" fill="var(--surface)" stroke="var(--det)" stroke-width="1.3"></rect>
+        <text x="515" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">CacheStore</text>
+        <text x="515" y="138" text-anchor="middle" font-family="Archivo, sans-serif" font-size="10.5" fill="var(--muted)">interface</text>
+
+        <rect x="626" y="98" width="70" height="52" rx="5" fill="var(--surface)" stroke="var(--rule-strong)" stroke-width="1.3"></rect>
+        <text x="661" y="128" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">disk</text>
+
+        <g stroke="currentColor" stroke-width="1.4" marker-end="url(#ah3)">
+          <line x1="176" y1="124" x2="236" y2="124"></line>
+          <line x1="388" y1="124" x2="448" y2="124"></line>
+          <line x1="580" y1="124" x2="624" y2="124"></line>
+        </g>
+        <text x="206" y="116" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">namespace</text>
+        <text x="206" y="146" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">+ params</text>
+        <text x="418" y="116" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">sha-256</text>
+
+        <text x="24" y="186" font-family="Archivo, sans-serif" font-size="11.5" fill="var(--muted)">Swap this one interface and the bytes live in S3 instead. Nothing above it changes.</text>
+      </svg>
+      <figcaption>
+        Nothing else calls <code>fetch</code>. This is why a rerun costs nothing, why the
+        eval harness can treat a cache miss as a test failure rather than a spend, and
+        why moving to object storage later is a single implementation swap. After a
+        fetch, the value returned is the decoded stored bytes, not the in-memory object,
+        so the first run and every rerun see exactly the same thing.
+      </figcaption>
+    </figure>
+
+    <h3>Provenance travels with the value, not beside it</h3>
+    <p>
+      A parameter is never a bare number anywhere in the system. It is a
+      <code>{ value, provenance, confidence }</code> triple from the moment it is
+      created, through reconciliation, into the database and out again. There is no stage
+      at which a value exists without knowing where it came from, because there is no
+      type for that.
+    </p>
+
+    <h3>Escalation is an outcome, not a failure</h3>
+    <p>
+      <code>ask_human</code> writes an escalation and returns; it never blocks. The part
+      is marked as needing a person and the run ends cleanly. A run that escalates has
+      succeeded at its actual job, which is to avoid asserting something it cannot
+      support.
+    </p>
+
+    <h3>On disk</h3>
+    <pre><span class="c">DATA_DIR/</span>
+├── cache/&lt;namespace&gt;/ab/cd/&lt;hash&gt;        <span class="c">the cached bytes</span>
+│                        &lt;hash&gt;.meta.json  <span class="c">metadata sidecar</span>
+├── ledger/YYYY-MM-DD.jsonl               <span class="c">one line per tool call</span>
+│         blobs/&lt;sha256&gt;.json             <span class="c">oversized tool outputs</span>
+├── tokens/digikey.json                   <span class="c">access token, mode 0600</span>
+└── chip.sqlite                           <span class="c">parts, offers, escalations, runs</span></pre>
+    <p>
+      None of it is committed. <code>.env</code> holds credentials and is gitignored; the
+      config loader is the only thing that reads it, and the redactor keeps its values
+      out of both the logs and the ledger.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> Rules, and what enforces them</h2>
+    <p>
+      Four rules govern the project. Each has a mechanism rather than an intention,
+      because an intention is not reviewable.
+    </p>
+
+    <div class="ratings">
+      <table>
+        <caption>Non-negotiables</caption>
+        <thead>
+          <tr><th scope="col">Rule</th><th scope="col">Mechanism</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Every parameter carries provenance</td>
+            <td>No schema exists for a datasheet value without a page number</td>
+          </tr>
+          <tr>
+            <td>Validate and reject, never coerce</td>
+            <td><code>upsertPart</code> parses the whole aggregate before it writes</td>
+          </tr>
+          <tr>
+            <td>Escalate, don't guess</td>
+            <td>A parameter in conflict makes <code>verified</code> status unrepresentable</td>
+          </tr>
+          <tr>
+            <td>Log every tool call</td>
+            <td><code>withLedger</code> wraps registration, not call sites</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Three engineering standards sit alongside them: a module is finished completely
+      before the next begins, coverage is 100% per file with the build failing otherwise,
+      and no tool in the pipeline may emit a warning.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> Deferred, deliberately</h2>
+    <p>
+      Hosting is designed for and not built: Fargate for the runner, S3 behind
+      <code>CacheStore</code>, Secrets Manager in place of <code>.env</code>, a queue for
+      work, and Postgres behind the same repository interfaces. Each is a swap at a seam
+      that already exists, which is the point of the seams. None of it happens until the
+      system runs reliably on one machine.
+    </p>
+  </section>
+
+  <footer>
+    Source of record: <code>docs/ARCHITECTURE.md</code> in
+    <a href="https://github.com/GavinMGlynn/cpu_datasheet_agent">GavinMGlynn/cpu_datasheet_agent</a>.<br>
+    Companion documents: PROJECT_PLAN.md (decisions and history) · COMPLETION_PLAN.md (every task to 100%) · REFERENCES.md (external sources).
+  </footer>
+
+</div>
