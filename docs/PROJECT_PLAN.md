@@ -89,8 +89,8 @@ items in `COMPLETION_PLAN.md` satisfied).
 | ------ | ---- | ------ | ------------ |
 | M0  | Foundation and tooling | complete | 2026-09-10 |
 | M1  | Domain model and validation | complete | 2026-09-10 |
-| M2  | Structured logging and tool-call ledger | in progress | |
-| M3  | Content-addressed cache | not started | |
+| M2  | Structured logging and tool-call ledger | complete | 2026-09-10 |
+| M3  | Content-addressed cache | in progress | |
 | M4  | Persistence (SQLite) | not started | |
 | M5  | Units, parsing, and normalisation | not started | |
 | M6  | PDF toolkit | not started | |
@@ -207,7 +207,7 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 4: Module 2 built, awaiting CI
+### 2026-09-10 — Session 4: Module 2 complete
 
 **Done**
 
@@ -229,9 +229,11 @@ change. Never edit past entries; add a new one.
   otherwise a bigint in a tool output crashes `JSON.stringify` instead of
   surfacing as a `ValidationError`.
 
+- CI run 34443836616 green, no warnings. M2 complete.
+
 **Next**
 
-- Confirm CI, mark M2 complete, start M3 (content-addressed cache).
+- M3 (content-addressed cache).
 
 ### 2026-09-10 — Session 3: Module 1 complete; zero-warnings rule
 
