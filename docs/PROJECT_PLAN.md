@@ -87,6 +87,7 @@ that supersedes the old one, and the old row's status changes to
 | D26 | 2026-09-10 | Data is viewed through generated static HTML reports, not a web application. Pulled forward as module M7A, out of the planned sequence, at the user's request. | Only one viewing task needs a page: checking a value against the datasheet page it was read from. Queries answer the rest, and a report generator adds no server, port, session state, or thing to keep running. A real application is justified when the data outlives the terminal and other people need it, which is the deferred hosting world. | active |
 | D27 | 2026-09-10 | Mouser is a price and availability source only. Its attribute mapping table is empty and every attribute name is reported as unmapped. | Across all 13 recorded switching regulators the Search API returned only `Packaging` and `Standard Pack Qty`, and one part in thirteen carried a datasheet URL. Mapping speculative names would be tested fiction; the table grows from real data or not at all. | active |
 | D28 | 2026-09-10 | Recording a tool call must never fail because of the value being recorded. `toErrorJson` drops undefined values before validation. | An error carrying an undefined detail made the ledger throw, replacing the original error with a validation failure. A logging path that destroys the information it exists to preserve is worse than one that drops a key. | active |
+| D29 | 2026-09-10 | Module 9 (Nexar) is deferred rather than built next. Modules continue at M10. | The paid Nexar tiers (Standard, Pro) exclude datasheets and tech specs, which are the only reason this project wanted Nexar; they include pricing and availability, which Digi-Key and Mouser already give for free. The free Evaluation tier includes everything but allows 100 matched parts for the lifetime of the account. Paying would buy less than we already have. | active |
 
 ## 4. Status
 
@@ -105,7 +106,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M7  | Digi-Key adapter | complete | 2026-09-10 |
 | M7A | Part report generator | complete | 2026-09-10 |
 | M8  | Mouser adapter | complete | 2026-09-10 |
-| M9  | Nexar adapter with hard budget | not started | |
+| M9  | Nexar adapter with hard budget | deferred (D29) | |
 | M10 | MPN resolution | not started | |
 | M11 | Reconciliation and classification | not started | |
 | M12 | Tool registry and MCP server | not started | |
@@ -215,6 +216,29 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 12: Nexar costs checked, Module 9 deferred
+
+**Done**
+
+- Checked the Nexar plan comparison rather than assuming the note in
+  `CLAUDE.md`. The finding changes the plan: datasheets and tech specs are
+  included only in the free Evaluation tier and in Enterprise. Standard and
+  Pro carry pricing and availability alone.
+- Deferred M9 and recorded why (D29). Work continues at M10.
+
+**Learned**
+
+- The paid Nexar tiers strip exactly the field this project would have paid
+  for. Digi-Key already returns a datasheet URL with 1000 free calls a day, so
+  a Standard subscription would buy less than we have.
+- The 100-part Evaluation allowance is lifetime, not monthly, so it is best
+  spent proving a specific need rather than on routine lookups.
+
+**Next**
+
+- M10 (MPN resolution), now unblocked with both distributors built and both
+  returning sibling part numbers.
 
 ### 2026-09-10 — Session 11: Module 8 complete
 

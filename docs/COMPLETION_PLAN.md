@@ -461,6 +461,14 @@ Mouser Search API. [R-03] [R-04]
 Goal: cross-distributor lookup and datasheet URL from Nexar, impossible to
 call past the lifetime allowance. [R-05] [R-06]
 
+**Deferred, and the reason matters (D29).** Checking the plans on 2026-09-10
+showed that datasheets and tech specs are included only in the free Evaluation
+tier (100 matched parts, lifetime) and in Enterprise. The Standard and Pro
+tiers exclude exactly the data that would justify Nexar here, leaving pricing
+and availability that Digi-Key and Mouser already provide for free. Build this
+module only if a specific need appears that the other two cannot meet, and
+spend the free 100 parts proving that need first.
+
 - [ ] 9.1 Confirm the GraphQL endpoint, identity endpoint, and the supply
       query names and shapes from the Nexar support articles; record in
       `src/adapters/nexar/README.md` with the date checked.
