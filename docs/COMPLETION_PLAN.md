@@ -496,28 +496,36 @@ spend the free 100 parts proving that need first.
 Goal: from a raw part number, identify the base part, decode its suffix, find
 the distributor listings that actually match, and escalate when ambiguous.
 
-- [ ] 10.1 `normaliseMpn(raw)`: trim, uppercase, collapse whitespace, strip
-      known distributor prefixes and "-ND" style suffixes, keep the original.
-- [ ] 10.2 Manufacturer suffix decoders, one file per manufacturer covered by
-      the golden set (at minimum Texas Instruments, Monolithic Power Systems,
-      Diodes Incorporated, Analog Devices, Richtek, onsemi, Microchip,
-      STMicroelectronics): return `{ basePart, package, temperatureGrade,
-      packaging, leadFinish?, extras }` or `null` when the pattern is unknown.
-      Never guess: unknown suffix means `null`, not a partial decode.
-- [ ] 10.3 Candidate gathering: query Digi-Key and Mouser (M7, M8) for the
-      normalised MPN, collect every listing, decode each listing's MPN.
-- [ ] 10.4 Matching: exact MPN match wins; otherwise base-part match with a
-      different packaging suffix only is a "packaging variant"; base-part
-      match with a different package or temperature grade is a "sibling", not
-      a match. More than one exact match with different manufacturers, or no
-      exact match and more than one sibling, produces an `Escalation` of kind
-      `ambiguous_mpn` with the candidates as options.
-- [ ] 10.5 Family detection: when a datasheet's ordering table (M6
-      `findPages` plus M5 parsing) lists several MPNs, link all of them to
-      the datasheet sha (M4 `linkMpn`).
-- [ ] 10.6 Tests: at least thirty real MPNs per manufacturer decoder group
-      hand-verified against the manufacturer's ordering guide, every
-      ambiguity rule, family linking against a generated ordering table.
+- [x] 10.1 `normaliseMpn(raw)`: trim, uppercase, remove whitespace, strip
+      known distributor prefixes and "-ND" style suffixes, keep the original
+      and list every removal.
+- [x] 10.2 Manufacturer suffix decoders, one file per manufacturer covered by
+      the golden set (Texas Instruments, Monolithic Power Systems, Diodes
+      Incorporated, Analog Devices, Richtek, onsemi, Microchip,
+      STMicroelectronics): return `{ family, basePart, package,
+      temperatureGrade, packaging, leadFinish, automotive, extras }` or `null`
+      when the pattern is unknown. Never guess: unknown suffix means `null`,
+      not a partial decode. Built as declarative tables compiled into one
+      pattern, so the pattern and the tables cannot drift apart.
+- [x] 10.3 Candidate gathering: query Digi-Key and Mouser (M7, M8) for the
+      normalised MPN, collect every listing, decode each listing's MPN. A
+      distributor that fails is recorded, not thrown.
+- [x] 10.4 Matching: exact MPN match wins; otherwise a base-part match
+      differing only in packaging, finish or value-added codes is a "packaging
+      variant"; a family match differing in package, grade or automotive
+      qualification is a "sibling", not a match. More than one exact match
+      with different manufacturers, or no exact match and more than one
+      sibling, produces an `Escalation` of kind `ambiguous_mpn` with the
+      candidates as options.
+- [x] 10.5 Family detection: the ordering-information pages (M6 `findPages`)
+      are scanned for part numbers that decode into the reference part's
+      family, and all of them are linked to the datasheet sha (M4 `linkMpn`).
+- [x] 10.6 Tests: a corpus of 570-odd real part numbers recorded live from
+      Digi-Key, at least thirty per manufacturer decoder group, with every
+      claimed package family, pin count and temperature range checked against
+      Digi-Key's own fields; the load-bearing suffix meanings checked against
+      the manufacturers' own documentation [R-62] to [R-66]; every ambiguity
+      rule; family linking against a generated ordering table.
 
 ---
 

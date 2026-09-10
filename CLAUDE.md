@@ -98,19 +98,27 @@ nothing from a schema you can't validate.
 
 ## Current state
 
+Modules M0 to M10 are complete: schemas, ledger, cache, SQLite, units, the
+PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, and
+MPN resolution. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md`
+section 4 is the authoritative status table.
+
 - `chip-mcp-server.ts` was written earlier but is not in this repository (see
   `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
   are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
-- Nothing built yet: PDF extraction, the eval harness, the agent runner.
+- Not built yet: reconciliation and classification, the tool registry and MCP
+  server, the golden eval set, the agent runner, the verification pass, the
+  eval harness, and the alternates query.
 
 ## Next steps
 
-1. Implement `digikeySearch` and `digikeyPricing` against the Digi-Key v4 API.
-2. Implement `fetchPdf`, `read_pages` (pdftotext -layout), `render_page`
-   (pdftoppm at 200dpi).
-3. Hand-characterise 20 parts as a golden eval set before trusting any
+1. M11: reconcile datasheet values against distributor parametrics, and
+   derive the classification axes.
+2. M12: the tool registry and the MCP server, exposed both over stdio and
+   in process.
+3. M13: hand-characterise 20 parts as a golden eval set before trusting any
    extraction output.
-4. Build the agent runner on the Agent SDK; add a PreToolUse hook gating
+4. M14: build the agent runner on the Agent SDK; add a PreToolUse hook gating
    anything that spends money.
 
 ## Deferred

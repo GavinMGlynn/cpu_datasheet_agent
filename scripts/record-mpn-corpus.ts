@@ -2,7 +2,7 @@
  * Records a corpus of real part numbers for the MPN decoders to be tested
  * against.
  *
- *   npx tsx scripts/record-mpn-corpus.ts
+ *   npx tsx scripts/record-mpn-corpus.ts && npm run format
  *
  * Each entry carries the part number alongside Digi-Key's own package,
  * packaging and temperature fields, so a decoder can be checked against an
@@ -23,10 +23,47 @@ const FAMILIES: readonly { readonly manufacturer: string; readonly keywords: rea
     { manufacturer: 'monolithic-power-systems', keywords: ['MP2315', 'MP1584', 'MPQ4'] },
     { manufacturer: 'diodes-incorporated', keywords: ['AP63', 'AP62'] },
     { manufacturer: 'analog-devices', keywords: ['LT8610', 'LTC3630', 'MAX17503'] },
-    { manufacturer: 'richtek', keywords: ['RT8279', 'RT6190'] },
-    { manufacturer: 'onsemi', keywords: ['NCP3170', 'NCV890'] },
-    { manufacturer: 'microchip', keywords: ['MCP16331', 'MIC2103'] },
-    { manufacturer: 'stmicroelectronics', keywords: ['ST1S10', 'L7987'] },
+    {
+      manufacturer: 'richtek',
+      keywords: [
+        'RT8279',
+        'RT6190',
+        'RT8272',
+        'RT7297',
+        'RT6206',
+        'RT8299',
+        'RT8296',
+        'RT6202',
+        'RT8259',
+        'RT8010',
+        'RT6208',
+        'RT8290',
+        'RT7278',
+        'RT8256',
+        'RT8237',
+      ],
+    },
+    {
+      manufacturer: 'onsemi',
+      keywords: ['NCP3170', 'NCV890', 'NCP1595', 'NCP3335', 'NCP6335', 'NCV891930'],
+    },
+    {
+      manufacturer: 'microchip',
+      keywords: [
+        'MCP16331',
+        'MIC2103',
+        'MCP16311',
+        'MCP16301',
+        'MIC23',
+        'MIC2101',
+        'MCP1603',
+        'MIC28',
+      ],
+    },
+    {
+      manufacturer: 'stmicroelectronics',
+      keywords: ['ST1S10', 'L7987', 'L6986', 'L7986', 'ST1S14', 'L5987', 'ST1PS01'],
+    },
   ];
 
 process.loadEnvFile('.env');

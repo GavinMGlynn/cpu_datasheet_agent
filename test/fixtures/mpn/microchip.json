@@ -70,5 +70,1337 @@
     "supplierPackage": "16-VQFN (3x3)",
     "operatingTemperature": "-40°C ~ 125°C (TJ)",
     "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16311T-E/MS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16311",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16311-E/MS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16311",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP16311T-E/MNY",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16311",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16311T-E/MSVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16311",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16311T-E/MNYVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16311",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16311-E/MSVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "ADM00467",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00467",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MCP16301T-I/CHY",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16301",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16301T-E/CH",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16301",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16301HT-E/CH",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16301",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16301T-E/CHVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16301",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16301T-450E/CHVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP16301",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP16301HT-E/CHVAO",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ADM00352",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00352",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ADM00399",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00399",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ADM00433",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00433",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "ARD00410",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ARD00410",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "ADM00360",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00360",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MIC23050-SYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23050",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23150-SYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23150",
+    "packageCase": "8-UFDFN",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23153YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23153",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23050-GYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23050",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23303YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23303",
+    "packageCase": "12-VFDFN Exposed Pad",
+    "supplierPackage": "12-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23158YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23158",
+    "packageCase": "20-VFQFN Exposed Pad, 20-MLF®",
+    "supplierPackage": "20-MLF® (3x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23150-GYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23150",
+    "packageCase": "8-UFDFN",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23150-4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23150",
+    "packageCase": "8-UFDFN",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23450-AAAYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23450",
+    "packageCase": "32-VFQFN Exposed Pad, 32-MLF®",
+    "supplierPackage": "32-MLF® (5x5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23030-GYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23030",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23030-AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23030",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23250-AAYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23250",
+    "packageCase": "12-UFDFN Exposed Pad, 12-TMLF®",
+    "supplierPackage": "12-TMLF® (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23031-CYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23031",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23150-55YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23150",
+    "packageCase": "8-UFDFN",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23050-CYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23050",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2333T-E/MS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23451-AAAYFL-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23451",
+    "packageCase": "26-VFQFN Exposed Pad",
+    "supplierPackage": "26-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23051-CGYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23051-16YML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23051-945YML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23250-GFHYMT",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC23250",
+    "packageCase": "10-UFDFN, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23356YFT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23356",
+    "packageCase": "16-PowerUFQFN",
+    "supplierPackage": "16-FTQFN (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC23163YMT-T5",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23163",
+    "packageCase": "10-UFDFN Exposed Pad",
+    "supplierPackage": "10-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC2341R-2YTQ",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2341",
+    "packageCase": "48-TQFP",
+    "supplierPackage": "48-TQFP (7x7)",
+    "operatingTemperature": "0°C ~ 70°C",
+    "packagings": ["Tray"]
+  },
+  {
+    "mpn": "MIC2341-2YTQ",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2341",
+    "packageCase": "48-TQFP",
+    "supplierPackage": "48-TQFP (7x7)",
+    "operatingTemperature": "0°C ~ 70°C",
+    "packagings": ["Tray"]
+  },
+  {
+    "mpn": "MIC23051-16YML TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2310-2ZTS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2310",
+    "packageCase": "24-TSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "24-TSSOP",
+    "operatingTemperature": "0°C ~ 70°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2310-1ZTS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2310",
+    "packageCase": "24-TSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "24-TSSOP",
+    "operatingTemperature": "0°C ~ 70°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2342-2YTQ",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2342",
+    "packageCase": "48-TQFP",
+    "supplierPackage": "48-TQFP (7x7)",
+    "operatingTemperature": "0°C ~ 70°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23201YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23201",
+    "packageCase": "10-VFQFN Exposed Pad, 10-MLF®",
+    "supplierPackage": "10-MLF® (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23050-4YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23050",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23031-GYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23031",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23051-CGYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23031-AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23031",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23250-S4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23250",
+    "packageCase": "10-UFDFN, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ADM00829",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "ADM00829",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIKROE-2765",
+    "manufacturer": "MikroElektronika",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC23030-4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23030",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23030-FYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23030",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23030-CYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23030",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC23031-4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23031",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23031-FYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23031",
+    "packageCase": "6-UFDFN Exposed Pad, 6-TMLF®",
+    "supplierPackage": "6-TMLF® (1.6x1.6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23051-16YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23051-945YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23051-C4YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23051",
+    "packageCase": "8-VFDFN Exposed Pad, 8-MLF®",
+    "supplierPackage": "8-MLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23155-GYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23155",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23156-0YCS-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23156",
+    "packageCase": "16-UFBGA, WLCSP",
+    "supplierPackage": "16-WLCSP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC23250-F4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23250",
+    "packageCase": "12-UFDFN Exposed Pad, 12-TMLF®",
+    "supplierPackage": "12-MLF™ (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23250-M4YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23250",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC23156-0YML-T5",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC23156",
+    "packageCase": "17-VFQFN, 17-MLF®",
+    "supplierPackage": "17-MLF® (2.8x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC2101YML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2101",
+    "packageCase": "16-VFQFN Exposed Pad",
+    "supplierPackage": "16-VQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603T-330I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603BT-330I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603T-180I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603T-ADJI/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603LT-180I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603BT-ADJI/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603-330I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603T-ADJI/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MCP1603EV",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "MCP1603LT-120I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603LT-150I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603LT-250I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603LT-330I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603LT-ADJI/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-120I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-250I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603BT-180I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-150I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-120I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-150I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-180I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-250I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603T-330I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MCP1603-120I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603-150I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603-180I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603-250I/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603-ADJI/MC",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-DFN (2x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MCP1603LT-080I/OS",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MCP1603",
+    "packageCase": "SOT-23-5 Thin, TSOT-23-5",
+    "supplierPackage": "TSOT-23-5",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "MIC2876-AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2876",
+    "packageCase": "8-UFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC280-0YM6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC28514T-E/PHA",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC28514",
+    "packageCase": "32-PowerVQFN",
+    "supplierPackage": "32-VQFN (6x6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC28515T-E/PHA",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC28515",
+    "packageCase": "32-PowerVQFN",
+    "supplierPackage": "32-VQFN (6x6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2860-2PYD6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2860",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2860-2PYC6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2860",
+    "packageCase": "6-TSSOP, SC-88, SOT-363",
+    "supplierPackage": "SC-70-6",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2876-5.0YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2876",
+    "packageCase": "8-UFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2841AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2841",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2843AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2843",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC281-0YM6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC281",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2877-5.0YFT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2877",
+    "packageCase": "8-UQFN",
+    "supplierPackage": "8-FTQFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2877-AYFT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2877",
+    "packageCase": "8-UQFN",
+    "supplierPackage": "8-FTQFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2876-5.25YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2876",
+    "packageCase": "8-UFDFN Exposed Pad",
+    "supplierPackage": "8-TDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC28510YJL-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC28510",
+    "packageCase": "28-PowerVQFN",
+    "supplierPackage": "28-QFN (5x6)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2842AYMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2842",
+    "packageCase": "10-UFDFN Exposed Pad, 10-TMLF®",
+    "supplierPackage": "10-TMLF® (2x2)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC281-4YM6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC281",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC280-6YM6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC280-1YM6-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2877-5.25YFT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2877",
+    "packageCase": "8-UQFN",
+    "supplierPackage": "8-FTQFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2800-G8SYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2800",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC2807-NGYML TR",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2807",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2827-B2YMT-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2827",
+    "packageCase": "14-UFQFN Exposed Pad, 14-TMLF®",
+    "supplierPackage": "14-TMLF® (2.5x2.5)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC281-4BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC281-7BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC281-5BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC281-2BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC281-0BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": null,
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-3BM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-2BM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-1BM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width)",
+    "supplierPackage": "8-SOIC",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-5BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-7BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-7BM6TS",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-3BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-4BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-1BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC280-2BM6",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC280",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-55°C ~ 125°C (TA)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-0BMM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-1BMM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-3BMM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-2BMM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": null,
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2810-4LSYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2810",
+    "packageCase": "16-VQFN Exposed Pad, 16-MLF®",
+    "supplierPackage": "16-MLF® (4x4)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC2800-G1JSYML-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC2800",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "MIC2800-GFMYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2800",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC284-0YMM-TR",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC284",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "MIC284-0YMM",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "MIC284",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-55°C ~ 125°C",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MIC2810-CGJYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2810",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2810-4GSYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2810",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2800-G4JYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2800",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "MIC2800-G7SYML",
+    "manufacturer": "Micrel Inc.",
+    "baseProductNumber": "MIC2800",
+    "packageCase": "16-VFQFN",
+    "supplierPackage": "16-QFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C",
+    "packagings": ["Bulk"]
   }
 ]

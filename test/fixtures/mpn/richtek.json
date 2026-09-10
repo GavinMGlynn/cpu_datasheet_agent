@@ -52,5 +52,383 @@
     "supplierPackage": "",
     "operatingTemperature": "",
     "packagings": ["Box"]
+  },
+  {
+    "mpn": "RT8272GSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8272",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT7297CHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7297",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT7297BHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7297",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT7297AHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7297",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "EVB_RT7297AHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7297",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "EVB_RT7297CHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7297",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "RT6206AHGSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT6206BHGSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT6206BHGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT6206AHGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "EVB_RT6206BHGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "EVB_RT6206AHGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6206",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "RT8299ZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8299",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8299AZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8299",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8299GSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8299",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8299AZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8299",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8299ZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8299",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "RT8296AHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8296",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8296AHGSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8296",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8296BHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8296",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8296BLZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8296",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "EVB_RT8296AHZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8296",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "RT8259GJ6",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8259",
+    "packageCase": "SOT-23-6 Thin, TSOT-23-6",
+    "supplierPackage": "TSOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "RT8259GE",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8259",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "1SET411312R0000",
+    "manufacturer": "TE Connectivity ENTRELEC",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk", "Bulk"]
+  },
+  {
+    "mpn": "RT8010BGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8010",
+    "packageCase": "8-WFDFN Exposed Pad",
+    "supplierPackage": "8-WDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "RT8010-33GQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8010",
+    "packageCase": "6-WDFN Exposed Pad",
+    "supplierPackage": "6-WDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8010GQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8010",
+    "packageCase": "6-WDFN Exposed Pad",
+    "supplierPackage": "6-WDFN (2x2)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8010AGQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8010",
+    "packageCase": "16-WFQFN Exposed Pad",
+    "supplierPackage": "16-WQFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "XRT8010IL-F",
+    "manufacturer": "MaxLinear, Inc.",
+    "baseProductNumber": null,
+    "packageCase": "16-VQFN Exposed Pad",
+    "supplierPackage": "16-QFN (4x4)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "RT6208GE",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6208",
+    "packageCase": "SOT-23-6",
+    "supplierPackage": "SOT-23-6",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "EVB_RT6208GE",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT6208",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "RT8290ZSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8290",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8290AGSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8290",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT7278GSP",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT7278",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-SOP-EP",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8237EZQW(2)",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8237CZQW(2)",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "RT8237FZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "RT8237AZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "RT8237CZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "RT8237HGQW(2)",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "RT8237EZQW",
+    "manufacturer": "Richtek USA Inc.",
+    "baseProductNumber": "RT8237",
+    "packageCase": "10-WFDFN Exposed Pad",
+    "supplierPackage": "10-WDFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
   }
 ]

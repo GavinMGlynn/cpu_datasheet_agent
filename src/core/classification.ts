@@ -17,6 +17,9 @@ export const PACKAGE_FAMILIES = [
   'to263',
   'other',
 ] as const;
+/** Package shape vocabulary, shared with the MPN decoders so one part is described one way. */
+export type PackageFamily = (typeof PACKAGE_FAMILIES)[number];
+
 export const TEMPERATURE_GRADES = ['commercial', 'industrial', 'extended', 'automotive'] as const;
 export const FEATURES = ['enable', 'power_good', 'soft_start', 'sync', 'light_load'] as const;
 

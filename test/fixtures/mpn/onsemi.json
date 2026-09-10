@@ -286,5 +286,356 @@
     "supplierPackage": "",
     "operatingTemperature": "",
     "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCP1595MNR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP1595",
+    "packageCase": "6-VDFN Exposed Pad",
+    "supplierPackage": "6-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP1595CMNTWG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP1595",
+    "packageCase": "6-VDFN Exposed Pad",
+    "supplierPackage": "6-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP1595AMNR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP1595",
+    "packageCase": "6-VDFN Exposed Pad",
+    "supplierPackage": "6-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP1595AMNTWG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP1595",
+    "packageCase": "6-VDFN Exposed Pad",
+    "supplierPackage": "6-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP1595MNT2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP1595",
+    "packageCase": "6-VDFN Exposed Pad",
+    "supplierPackage": "6-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 125°C (TA)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335ADM330R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335AMNADJR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335ADMADJR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335AMN330R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335ADM250R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335ADM300R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335ADM150R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335AMN300R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335AMN280R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCP3335AMN150R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335ADM280R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335AMN285R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP3335AMN250R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "NCP3335AMN180R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "NCP3335ADM285R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335ADM500R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335AMN500R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-DFN (3x3)",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP3335ADM180R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP3335",
+    "packageCase": "8-TSSOP, 8-MSOP (0.118\", 3.00mm Width)",
+    "supplierPackage": "8-MSOP",
+    "operatingTemperature": "-40°C ~ 85°C",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCP6335BFCCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335FFCCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335FFCT2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335DFCCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335DFCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335FFCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335GFCCT1G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCP6335EMT30TBG",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCP6335",
+    "packageCase": "20-UFBGA, WLCSP",
+    "supplierPackage": "20-WLCSP (1.62x2.02)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW00AR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV891930",
+    "packageCase": "24-VFQFN Exposed Pad",
+    "supplierPackage": "24-QFNW (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "NCV891930MW01R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV891930",
+    "packageCase": "24-VFQFN Exposed Pad",
+    "supplierPackage": "24-QFNW (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW01AR2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV891930",
+    "packageCase": "24-VFQFN Exposed Pad",
+    "supplierPackage": "24-QFNW (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "NCV891930MW00-50GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW00-33GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW01-40GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW01-365GEVB",
+    "manufacturer": "onsemi",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "NCV891930MW00R2G",
+    "manufacturer": "onsemi",
+    "baseProductNumber": "NCV891930",
+    "packageCase": "24-VFQFN Exposed Pad",
+    "supplierPackage": "24-QFNW (4x4)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
   }
 ]

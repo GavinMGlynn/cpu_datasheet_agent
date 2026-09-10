@@ -124,5 +124,437 @@
     "supplierPackage": "",
     "operatingTemperature": "",
     "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L6986TR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L6986ITR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L6986",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "9842 0605000",
+    "manufacturer": "Belden Inc.",
+    "baseProductNumber": "9842",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-30°C ~ 80°C",
+    "packagings": ["Spool"]
+  },
+  {
+    "mpn": "L6986H3V3",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "L6986HTR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "STEVAL-6986YT2DL",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STEVAL-L6986IV1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L6986F",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "MIKROE-3895",
+    "manufacturer": "MikroElektronika",
+    "baseProductNumber": "MIKROE",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L6986H3V3TR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "L6986H5V",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "L6986H",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "L6986H5VTR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "L6986FTR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L6986",
+    "packageCase": "16-PowerTSSOP (0.173\", 4.40mm Width)",
+    "supplierPackage": "16-HTSSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)"]
+  },
+  {
+    "mpn": "STEVAL-ISA206V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L7986ATR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L7986TR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L7986A",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "L7986TATR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L7986TA",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP-EP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "STEVAL-ISA100V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "STEVAL-ISA099V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L7986",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L7986",
+    "packageCase": "10-VFDFN Exposed Pad",
+    "supplierPackage": "10-VFQFPN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "ST1S14PHR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1S14",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP",
+    "operatingTemperature": "-40°C ~ 125°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "STEVAL-ISA095V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STEVAL-ISA104V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "STEVAL-ISC003V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": null,
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "L5987ATR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L5987",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L5987TR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L5987",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-VFQFPN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "L5987A",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L5987",
+    "packageCase": "8-SOIC (0.154\", 3.90mm Width) Exposed Pad",
+    "supplierPackage": "8-HSOP",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "STEVAL-ISA201V1",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "9873 0601000",
+    "manufacturer": "Belden Inc.",
+    "baseProductNumber": "9873",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "-20°C ~ 80°C",
+    "packagings": ["Spool"]
+  },
+  {
+    "mpn": "CDLL5987",
+    "manufacturer": "Microchip Technology",
+    "baseProductNumber": "CDLL5987",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "EVAL5987A",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "EVAL5987",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "EVAL5987",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "EVAL5987",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Box"]
+  },
+  {
+    "mpn": "L5987",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "L5987",
+    "packageCase": "8-VFDFN Exposed Pad",
+    "supplierPackage": "8-VFQFPN (3x3)",
+    "operatingTemperature": "-40°C ~ 150°C (TJ)",
+    "packagings": ["Tube"]
+  },
+  {
+    "mpn": "ST1PS01DJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01EJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01AJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01CJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01FJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01BJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "ST1PS01HJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)"]
+  },
+  {
+    "mpn": "ST1PS01GJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "ST1PS01",
+    "packageCase": "8-UFBGA, FCBGA",
+    "supplierPackage": "8-FlipChip (1.11x1.41)",
+    "operatingTemperature": "-40°C ~ 85°C (TA)",
+    "packagings": ["Tape & Reel (TR)", "Cut Tape (CT)", "Digi-Reel®"]
+  },
+  {
+    "mpn": "STEVAL-1PS01EJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STEVAL-1PS01AJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
+  },
+  {
+    "mpn": "STEVAL-1PS01DJR",
+    "manufacturer": "STMicroelectronics",
+    "baseProductNumber": "STEVAL",
+    "packageCase": "",
+    "supplierPackage": "",
+    "operatingTemperature": "",
+    "packagings": ["Bulk"]
   }
 ]

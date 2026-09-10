@@ -89,6 +89,10 @@ that supersedes the old one, and the old row's status changes to
 | D28 | 2026-09-10 | Recording a tool call must never fail because of the value being recorded. `toErrorJson` drops undefined values before validation. | An error carrying an undefined detail made the ledger throw, replacing the original error with a validation failure. A logging path that destroys the information it exists to preserve is worse than one that drops a key. | active |
 | D29 | 2026-09-10 | Module 9 (Nexar) is deferred rather than built next. Modules continue at M10. | The paid Nexar tiers (Standard, Pro) exclude datasheets and tech specs, which are the only reason this project wanted Nexar; they include pricing and availability, which Digi-Key and Mouser already give for free. The free Evaluation tier includes everything but allows 100 matched parts for the lifetime of the account. Paying would buy less than we already have. | active |
 | D30 | 2026-09-10 | An element14 (Farnell) key is held and configured, but no adapter is built yet. Revisit after M11 and M16. | Checked live, it is a real second parametric source, which Mouser is not: 32 electrical attributes for TPS54331DR. But it lists only 2 of 5 sample parts on the Australian store and 3 of 5 on the UK store, returns no datasheet field, and prices in the store's currency rather than AUD. The benefit is partial and only measurable once reconciliation and the eval exist. | active |
+| D31 | 2026-09-11 | A decoded part number carries both `family` (the number with every suffix removed) and `basePart` (the family plus every code that changes which part you receive, joined with hyphens). Matching compares `basePart`, package code, temperature grade and automotive qualification; only the reel, finish and value-added codes may differ for a "packaging variant". | The plan assumed the base part was the identity. It is not: `LMR33620A` and `LMR33620B` are different regulators, and Digi-Key's `BaseProductNumber` reports the family for both. Comparing families would call two different parts the same reel. Concatenating the codes was ambiguous (`NCV890430` + `50` and `NCV89043` + `050` collide), hence the hyphens. | active |
+| D32 | 2026-09-11 | Decoders are declarative tables compiled into one anchored pattern. A package code claims a family or a pin count only where it is proven, otherwise null. Meanings are checked against the recorded corpus first, and against manufacturer documentation for what the corpus cannot show. | The pattern is built from the tables the decode reads, so they cannot drift; `MPN_TABLE_MISSING` fires if they ever do. The corpus proved 466 family and 277 pin-count claims against Digi-Key's own fields, and TI's packaging guide [R-62] then disproved four pin counts the corpus had appeared to confirm, because a code that happens to appear on one pin count looks fixed. | active |
+| D33 | 2026-09-11 | `TemperatureGrade` carries `range` (operating) and `guaranteed` (tested and specified) separately. | Analog Devices E and I grades both operate from -40 °C to 125 °C, and Digi-Key reports them identically, but E is only guaranteed from 0 °C with the rest assured by design [R-64]. A -40 °C design that picks an E-grade part on its operating range has no promise at -40 °C. This is the kind of distinction no distributor field can show. | active |
+| D34 | 2026-09-11 | A decoded `packaging` is what the part number states about how the manufacturer ships the part. What a distributor stocks is `Offer.packaging`, and the two may disagree. | Both are true of different things: `AP62400WU-7` names a 7-inch reel and Digi-Key ships it in bulk. Reconciling them would destroy a fact rather than settle one. | active |
 
 ## 4. Status
 
@@ -108,7 +112,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M7A | Part report generator | complete | 2026-09-10 |
 | M8  | Mouser adapter | complete | 2026-09-10 |
 | M9  | Nexar adapter with hard budget | deferred (D29) | |
-| M10 | MPN resolution | not started | |
+| M10 | MPN resolution | complete | 2026-09-11 |
 | M11 | Reconciliation and classification | not started | |
 | M12 | Tool registry and MCP server | not started | |
 | M13 | Golden evaluation set | not started | |
@@ -217,6 +221,46 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 14: Module 10 complete
+
+**Done**
+
+- `src/mpn/`: `normaliseMpn`, a declarative decoder engine, eight
+  manufacturer decoders, candidate gathering across both distributors,
+  matching with `ambiguous_mpn` escalation, and datasheet family linking.
+- The corpus grew from 469 to 576 real part numbers so that every decoder
+  group has at least thirty (Richtek had six, Microchip six, ST thirteen).
+  571 of the 576 decode; the five that do not are listed by name in the
+  corpus test with the reason nobody can read them.
+- 1564 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- **The corpus can confirm a wrong claim.** Checking 466 package families and
+  277 pin counts against Digi-Key's own fields passed clean, and then TI's
+  packaging guide [R-62] showed that `D` is SOIC in 8, 14 *and* 16 leads,
+  `DBV` is SOT-23 in 5 and 6, and `RHL` is a 24-lead VQFN where Digi-Key
+  reports 14. A code that happens to appear on one pin count looks fixed. Four
+  pin-count claims were removed (D32).
+- **Two grades that look identical are not.** Digi-Key reports Analog Devices
+  E and I parts as -40 to 125 °C alike, but an E part is only guaranteed from
+  0 °C [R-64]. `TemperatureGrade` now carries the tested range separately
+  (D33). No distributor field could have shown this.
+- **Greedy variant groups quietly eat markers.** Read greedily, the `Q` of
+  `TPS5430QDDARQ1` becomes a version letter rather than the automotive
+  marker, and the `P` of `NCV890200PDR2G` leaves `D` behind, putting an
+  exposed-pad SOIC part in a plain SOIC. Four decoders had this bug; the unit
+  tests caught two that the corpus report had not, because both readings
+  decode.
+- **The version letter is part of the identity, not the packaging** (D31).
+  This is the plan's one wrong assumption about MPN resolution.
+- MPS `-Z` and `-P` are reel sizes [R-65], not the opaque markers they were
+  first recorded as; they now decode as `reel`.
+
+**Next**
+
+- M11: reconciliation and classification.
 
 ### 2026-09-10 — Session 13: element14 assessed, key held
 

@@ -94,6 +94,21 @@ module README, or a code comment must have a row here.
 | R-47 | Microchip | https://www.microchip.com/ | Datasheets for MCP parts in the golden set. | unverified |
 | R-48 | STMicroelectronics | https://www.st.com/ | Datasheets for ST parts in the golden set. | unverified |
 
+## Part-number nomenclature (Module 10)
+
+Sources for what a suffix means. Where one of these contradicts the recorded
+corpus, the corpus decides what is claimed and the contradiction is recorded
+in `src/mpn/README.md`; where the corpus cannot see a distinction at all, only
+these can.
+
+| ID   | Title | URL | Used for | Status |
+| ---- | ----- | --- | -------- | ------ |
+| R-62 | TI Analog and Logic Packaging Guide (SSZB138) | https://www.ti.com/lit/pdf/sszb138 | TI package designators against pin counts. Lists `D` as SOIC in 8, 14 and 16 leads, `DBV` as SOT-23 in 5 and 6, `RHL` as a 24-lead VQFN, `DCN` as SOT-23-8, `DRV` as WSON-6, `RTE` as WQFN-16, `RTW` as WQFN-24, `DRL` as a 6-lead SOT. Four pin-count claims were removed because of it. | verified 2026-09-11 (fetched, read with `pdftotext`) |
+| R-63 | Digi-Key TechForum: TI TPS series suffix options | https://forum.digikey.com/t/texas-instruments-tps-series-suffix-options/10484 | TI reel codes: `R` is a 3,000-part reel, `T` a 250-part reel. Both are tape and reel. | verified 2026-09-11 |
+| R-64 | Digi-Key TechForum: Analog Devices I vs E temperature spec | https://forum.digikey.com/t/analog-devices-inc-i-vs-e-temperature-spec/11958 | Linear Technology grade letters. `E` operates from -40 °C but is only guaranteed from 0 °C, the rest assured by design; `I` is guaranteed across -40 to 125 °C. Source of the `guaranteed` field on `TemperatureGrade`, which the corpus could not have shown: Digi-Key reports both grades as -40 to 125 °C. | verified 2026-09-11 |
+| R-65 | Digi-Key TechForum: MPS reel suffixes P and Z | https://forum.digikey.com/t/monolithic-power-systems-reel-suffixes-p-z/413 | MPS `-Z` is a full reel of 2,500 to 5,000 parts and `-P` a 500-part reel. Both are therefore decoded as `reel`, where they had been recorded as uninterpreted suffixes. | verified 2026-09-11 |
+| R-66 | Diodes Incorporated packaging and automotive suffixes | https://www.diodes.com/part/view/AP63203Q | Diodes `-7` is a 7-inch reel and `-13` a 13-inch reel; a `Q` before the package code marks an AEC-Q100 qualified part. | verified 2026-09-11 |
+
 ## Project documents
 
 | ID   | Title | Path | Purpose |
