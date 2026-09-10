@@ -104,7 +104,7 @@ before a single line of domain code exists.
       commits.
 - [x] 0.13 `README.md` at repo root: setup, environment, commands, and a link
       to `docs/`.
-- [ ] 0.14 First CI run green with a trivial `src/config.ts` test suite at
+- [x] 0.14 First CI run green with a trivial `src/config.ts` test suite at
       100% coverage.
 
 ---

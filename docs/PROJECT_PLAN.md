@@ -85,7 +85,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 
 | Module | Name | Status | Completed on |
 | ------ | ---- | ------ | ------------ |
-| M0  | Foundation and tooling | in progress | |
+| M0  | Foundation and tooling | complete | 2026-09-10 |
 | M1  | Domain model and validation | not started | |
 | M2  | Structured logging and tool-call ledger | not started | |
 | M3  | Content-addressed cache | not started | |
@@ -205,7 +205,7 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 2: Module 0 built, awaiting first CI run
+### 2026-09-10 — Session 2: Module 0 complete
 
 **Done**
 
@@ -237,10 +237,12 @@ change. Never edit past entries; add a new one.
   at 100%; `coverage/coverage-summary.json` still lists each file, which is
   what the per-file threshold checks.
 
+- First CI run (GitHub Actions run 34442298021) green in 45 seconds: poppler
+  install, `npm ci`, `npm run check`. Task 0.14 closed; M0 complete.
+
 **Next**
 
-- Push, confirm the first CI run is green (task 0.14), then mark M0 complete
-  and start M1 (domain model and validation).
+- Start M1 (domain model and validation).
 
 ### 2026-09-10 — Session 1: repository and planning documents
 
