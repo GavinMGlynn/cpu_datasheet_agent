@@ -1,0 +1,100 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "NCP3170ADR2G",
+        "Manufacturer": "onsemi",
+        "MouserPartNumber": "863-NCP3170ADR2G",
+        "Description": "Switching Voltage Regulators 3A SWITCHING REGULATOR",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/onsemi/NCP3170ADR2G?qs=Pqj8oIac8rV%2FqxRR%2FmSmyw%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "AvailabilityInStock": null,
+        "FactoryStock": null,
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "0 Days",
+        "LifecycleStatus": "End of Life",
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [],
+        "AlternatePackagings": null,
+        "SuggestedReplacement": "",
+        "ImagePath": "https://www.mouser.com/images/mouserelectronics/images/ITP_SOIC_8_new_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.00054
+        },
+        "AvailabilityOnOrder": [],
+        "InfoMessages": ["Mouser does not presently sell this product in your region."],
+        "SurchargeMessages": null,
+        "RestrictionMessage": "Mouser does not presently sell this product in your region.",
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "JPHTS",
+            "ComplianceValue": "854239099"
+          },
+          {
+            "ComplianceName": "TARIC",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399901"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "Philippines"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Not available"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "Not available"
+          }
+        ]
+      }
+    ]
+  }
+}

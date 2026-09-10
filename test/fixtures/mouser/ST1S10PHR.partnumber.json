@@ -1,0 +1,145 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "ST1S10PHR",
+        "Manufacturer": "STMicroelectronics",
+        "MouserPartNumber": "511-ST1S10PHR",
+        "Description": "Switching Voltage Regulators VOLTAGE REGULATOR",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/STMicroelectronics/ST1S10PHR?qs=qolwYojYp3QSBN7PdO5xhg%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "AvailabilityInStock": "0",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "210 Days",
+        "LifecycleStatus": "Not Recommended for New Designs",
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$1.72",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$1.27",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$1.15",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$1.02",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$0.96",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$0.918",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 2500,
+            "Price": "$0.862",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": null,
+        "SuggestedReplacement": "",
+        "ImagePath": "https://www.mouser.com/images/mouserelectronics/images/ITP_SOIC_8_new_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.00054
+        },
+        "AvailabilityOnOrder": [
+          {
+            "Quantity": 10886,
+            "Date": "2026-09-28T00:00:00"
+          }
+        ],
+        "InfoMessages": [],
+        "SurchargeMessages": [
+          {
+            "code": "TARIFF_US",
+            "message": "A tariff of 38% may be applied."
+          }
+        ],
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "JPHTS",
+            "ComplianceValue": "8542390990"
+          },
+          {
+            "ComplianceName": "TARIC",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "85423999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Not available"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "Not available"
+          }
+        ]
+      }
+    ]
+  }
+}

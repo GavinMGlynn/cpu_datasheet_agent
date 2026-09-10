@@ -298,3 +298,23 @@ describe('ToolCallLedger', () => {
     expect(Date.parse(record.startedAt)).toBeLessThanOrEqual(Date.now() + 1000);
   });
 });
+
+describe('recording an error that carries undefined details', () => {
+  it('drops the undefined rather than failing to record', async () => {
+    const ledger = make();
+    const failure = new ChipAgentError('E', 'failed', {
+      details: {
+        present: 1,
+        missing: undefined,
+        nested: { also: undefined, kept: 'yes' },
+        list: [undefined, 2],
+      },
+    });
+
+    const record = await ledger.end(ledger.begin('t', null, { spendsQuota: false }), {
+      error: failure,
+    });
+
+    expect(record.error?.details).toEqual({ present: 1, nested: { kept: 'yes' }, list: [null, 2] });
+  });
+});

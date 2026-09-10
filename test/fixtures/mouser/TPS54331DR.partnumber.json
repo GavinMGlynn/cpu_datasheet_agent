@@ -1,0 +1,157 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "TPS54331DR",
+        "Manufacturer": "Texas Instruments",
+        "MouserPartNumber": "595-TPS54331DR",
+        "Description": "Switching Voltage Regulators 3A 28V In Step Down SWIFT DC/DC Cnvrtr A A 595-TPS54331D",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Texas-Instruments/TPS54331DR?qs=QyYHynRG50rsSYcB%2Ftz4Yw%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "2573 In Stock",
+        "AvailabilityInStock": "2573",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "63 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$1.62",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$1.19",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$1.08",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$0.959",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$0.902",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 500,
+            "Price": "$0.867",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$0.86",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 2500,
+            "Price": "$0.86",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "TPS54331D"
+          },
+          {
+            "APMfrPN": " TPS54331DG4"
+          },
+          {
+            "APMfrPN": " TPS54331DRG4"
+          }
+        ],
+        "SuggestedReplacement": "595-TPS54331D",
+        "ImagePath": "https://www.mouser.com/images/texasinstruments/images/ITP_TI_SOIC-8_D_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.0000726
+        },
+        "AvailabilityOnOrder": [],
+        "InfoMessages": [],
+        "SalesMaximumOrderQty": "1001",
+        "SurchargeMessages": [
+          {
+            "code": "TARIFF_US",
+            "message": "A tariff of 38% may be applied."
+          }
+        ],
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390070"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "JPHTS",
+            "ComplianceValue": "8542390990"
+          },
+          {
+            "ComplianceName": "TARIC",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "China"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "LMR33630ADDAR",
+        "Manufacturer": "Texas Instruments",
+        "MouserPartNumber": "595-LMR33630ADDAR",
+        "Description": "Switching Voltage Regulators SIMPLE SWITCHER 3.8 V to 36V 3A Synchro A 595-LMR33630ADDA",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Texas-Instruments/LMR33630ADDAR?qs=r5DSvlrkXmJQkBTqgVdiDA%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "94 In Stock",
+        "AvailabilityInStock": "94",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "63 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$2.95",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$2.20",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$2.02",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$1.78",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$1.68",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 500,
+            "Price": "$1.65",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$1.60",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 2500,
+            "Price": "$1.49",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 5000,
+            "Price": "$1.46",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "LMR33630ADDA"
+          }
+        ],
+        "SuggestedReplacement": "595-LMR33630ADDA",
+        "ImagePath": "https://www.mouser.com/images/texasinstruments/images/ITP_TI_SO-PowerPad-8_DDA_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.0000761
+        },
+        "AvailabilityOnOrder": [
+          {
+            "Quantity": 12500,
+            "Date": "2026-10-22T00:00:00"
+          }
+        ],
+        "InfoMessages": [],
+        "SurchargeMessages": null,
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390070"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399901"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "United States"
+          }
+        ]
+      }
+    ]
+  }
+}

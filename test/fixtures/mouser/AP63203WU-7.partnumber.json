@@ -1,0 +1,133 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "AP63203WU-7",
+        "Manufacturer": "Diodes Incorporated",
+        "MouserPartNumber": "621-AP63203WU-7",
+        "Description": "Switching Voltage Regulators DCDC Conv HV Buck TSOT26 T&R 3K",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Diodes-Incorporated/AP63203WU-7?qs=u16ybLDytRZ1JqxbuLkMJw%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "76308 On Order",
+        "AvailabilityInStock": "0",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "224 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "3000"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$0.89",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$0.637",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$0.534",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$0.503",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 3000,
+            "Price": "$0.503",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": null,
+        "SuggestedReplacement": "",
+        "ImagePath": "https://www.mouser.com/images/diodesinc/images/TSOT-26-6_DSL.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.000008
+        },
+        "AvailabilityOnOrder": [
+          {
+            "Quantity": 22308,
+            "Date": "2026-09-18T00:00:00"
+          },
+          {
+            "Quantity": 54000,
+            "Date": "2026-11-27T00:00:00"
+          }
+        ],
+        "InfoMessages": [],
+        "SalesMaximumOrderQty": "200",
+        "SurchargeMessages": [
+          {
+            "code": "TARIFF_US",
+            "message": "A tariff of 38% may be applied."
+          }
+        ],
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Not available"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "Not available"
+          }
+        ]
+      }
+    ]
+  }
+}

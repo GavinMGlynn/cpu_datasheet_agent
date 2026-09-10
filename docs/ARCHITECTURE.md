@@ -258,7 +258,7 @@ locates the sections that matter, including ordering information, because one
 datasheet usually covers a family and the ordering table is what says which
 part numbers.
 
-### Distributor adapters (`src/adapters/`) — Digi-Key built
+### Distributor adapters (`src/adapters/`) — Digi-Key and Mouser built
 
 Each adapter owns its authentication, request layer, response schemas, and the
 mapping to core types. All of them share three properties: every call goes
@@ -281,7 +281,13 @@ declared, so one that changes type does fail.
 One product yields several offers, one per packaging variant, each with its
 own Digi-Key SKU, stock, minimum order quantity, and price breaks.
 
-**Mouser** (planned) is a second opinion on price and availability.
+**Mouser** is a second opinion on price and availability, and nothing more:
+its Search API publishes only packaging attributes for switching regulators,
+so the adapter maps none of them rather than inventing parametric data. Two of
+its behaviours shape the client. A rejected request still returns HTTP 200 with
+an errors array, so status alone never means success, and prices arrive as
+formatted strings in the account's currency, which need not match the one
+Digi-Key was asked for.
 
 **Nexar** (planned) is cross-distributor and returns datasheet URLs directly,
 but its evaluation tier allows 100 parts for the lifetime of the account. It

@@ -1,0 +1,87 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "LT8610AEMSE#PBF",
+        "Manufacturer": "Analog Devices",
+        "MouserPartNumber": "584-LT8610AEMSE#PBF",
+        "Description": "Switching Voltage Regulators 42V, 3.5A Sync Buck Reg w/ 2.5 A Q C",
+        "DataSheetUrl": "https://www.mouser.com/datasheet/3/1014/1/lt8610a-8610ab.pdf",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Analog-Devices/LT8610AEMSEPBF?qs=hVkxg5c3xu%252BXCM0J%252BSz08Q%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "AvailabilityInStock": null,
+        "FactoryStock": null,
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "0 Days",
+        "LifecycleStatus": "Restricted Availability",
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Tube"
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "37"
+          }
+        ],
+        "PriceBreaks": [],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "LT8610AEMSE#TRPBF"
+          }
+        ],
+        "SuggestedReplacement": "584-LT8610AEMSETRPBF",
+        "ImagePath": "https://www.mouser.com/images/adi/images/ITP_ADI_MSOP-16_05-08-1667_t.jpg",
+        "Reeling": false,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.000386145
+        },
+        "AvailabilityOnOrder": [],
+        "InfoMessages": ["Mouser does not presently sell this product in your region."],
+        "SurchargeMessages": null,
+        "RestrictionMessage": "Mouser does not presently sell this product in your region.",
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390070"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "Thailand"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Thailand"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "Taiwan"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "TPS54560BDDAR",
+        "Manufacturer": "Texas Instruments",
+        "MouserPartNumber": "595-TPS54560BDDAR",
+        "Description": "Switching Voltage Regulators 4.5-V to 60-V input 5-A step-down DC-D A A 595-TPS54560BDDA",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Texas-Instruments/TPS54560BDDAR?qs=gZXFycFWdAMPyxqrm5VZeg%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "7269 In Stock",
+        "AvailabilityInStock": "7269",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "112 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$5.76",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$4.40",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$4.06",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$3.68",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$3.52",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 500,
+            "Price": "$3.46",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$3.43",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 2500,
+            "Price": "$3.25",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "TPS54560BDDA"
+          }
+        ],
+        "SuggestedReplacement": "595-TPS54560BDDA",
+        "ImagePath": "https://www.mouser.com/images/texasinstruments/images/ITP_TI_SO-PowerPad-8_DDA_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.000098
+        },
+        "AvailabilityOnOrder": [],
+        "InfoMessages": [],
+        "SurchargeMessages": [
+          {
+            "code": "TARIFF_US",
+            "message": "A tariff of 8% may be applied."
+          }
+        ],
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "Taiwan"
+          }
+        ]
+      }
+    ]
+  }
+}

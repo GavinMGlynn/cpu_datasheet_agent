@@ -85,6 +85,8 @@ that supersedes the old one, and the old row's status changes to
 | D24 | 2026-09-10 | A distributor value that states a bound (`Up to 1MHz`) becomes a `max` or `min` fact, not a quantity and not a range. A value that is inconclusive (`Both` for Synchronous Rectifier, `Fixed, Adjustable` for Output Type, `-`) yields no fact at all. | Recording `Up to 1MHz` as a range would require inventing a lower end, and as a quantity would assert a fixed frequency the part does not have. `Both` corroborates nothing and the datasheet decides, so a fact would be a guess and an error would be noise. | active |
 | D25 | 2026-09-10 | Digi-Key response schemas are loose objects with every read field declared. | Digi-Key adds fields over time, so an unknown field is not a reason to reject a response; a declared field that changes type is. Validated against live responses rather than documentation, which is how the nested `AlternatePackagings` wrapper and the optional `BaseProductNumber.Name` were found. | active |
 | D26 | 2026-09-10 | Data is viewed through generated static HTML reports, not a web application. Pulled forward as module M7A, out of the planned sequence, at the user's request. | Only one viewing task needs a page: checking a value against the datasheet page it was read from. Queries answer the rest, and a report generator adds no server, port, session state, or thing to keep running. A real application is justified when the data outlives the terminal and other people need it, which is the deferred hosting world. | active |
+| D27 | 2026-09-10 | Mouser is a price and availability source only. Its attribute mapping table is empty and every attribute name is reported as unmapped. | Across all 13 recorded switching regulators the Search API returned only `Packaging` and `Standard Pack Qty`, and one part in thirteen carried a datasheet URL. Mapping speculative names would be tested fiction; the table grows from real data or not at all. | active |
+| D28 | 2026-09-10 | Recording a tool call must never fail because of the value being recorded. `toErrorJson` drops undefined values before validation. | An error carrying an undefined detail made the ledger throw, replacing the original error with a validation failure. A logging path that destroys the information it exists to preserve is worse than one that drops a key. | active |
 
 ## 4. Status
 
@@ -102,7 +104,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M6  | PDF toolkit | complete | 2026-09-10 |
 | M7  | Digi-Key adapter | complete | 2026-09-10 |
 | M7A | Part report generator | complete | 2026-09-10 |
-| M8  | Mouser adapter | not started | |
+| M8  | Mouser adapter | complete | 2026-09-10 |
 | M9  | Nexar adapter with hard budget | not started | |
 | M10 | MPN resolution | not started | |
 | M11 | Reconciliation and classification | not started | |
@@ -213,6 +215,44 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 11: Module 8 complete
+
+**Done**
+
+- `src/adapters/mouser/`: request layer with the key as a query parameter and
+  an explicit check for the `Errors` array, response schemas validated against
+  live data, mapping to one offer per listing with formatted-price parsing and
+  sibling part numbers, and cached, ledgered operations with `lookup`.
+- 15 fixtures recorded across 14 parts (13 listed, one not) plus a keyword
+  search. Live contract test passes, including an assertion that Mouser still
+  publishes no parametrics so the day that changes is noticed.
+- 1439 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- Mouser's Search API returns **only packaging attributes** for switching
+  regulators, and a datasheet URL for one part in thirteen. It is a price and
+  availability source, not a parametric one (D27). The speculative Mouser
+  mapping table written in M5 from guesswork has been emptied.
+- **A rejected request returns HTTP 200** with an `Errors` array, so status
+  alone never means success. This is why the first key failed silently at the
+  transport level while looking like a successful call.
+- Mouser prices are formatted strings (`"$1.62"`) in the account's currency,
+  which is USD here while Digi-Key is configured for AUD. Any comparison must
+  filter by currency rather than assume one.
+- Mouser lists one SKU per part with the packagings it offers as attributes,
+  where Digi-Key lists one SKU per packaging. A listing offering several
+  records `unknown` rather than picking one.
+- **A real bug the ledger caught**: an error detail holding `undefined` made
+  recording throw, so the caller saw a validation failure instead of the
+  failure being recorded. Fixed at both ends (D28).
+
+**Next**
+
+- M9 (Nexar adapter with the hard budget). Nexar credentials are needed, and
+  the evaluation tier allows 100 parts for the lifetime of the account, so it
+  stays disabled by default.
 
 ### 2026-09-10 — Session 10: report generator, Mouser unblocked
 

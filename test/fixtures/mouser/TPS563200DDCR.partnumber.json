@@ -1,0 +1,159 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "TPS563200DDCR",
+        "Manufacturer": "Texas Instruments",
+        "MouserPartNumber": "595-TPS563200DDCR",
+        "Description": "Switching Voltage Regulators 17 Vin 3A Sync SD Re g A 595-TPS563200DD A 595-TPS563200DDCT",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Texas-Instruments/TPS563200DDCR?qs=bT6MOr62zwLjxJIF4PA64g%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "10632 In Stock",
+        "AvailabilityInStock": "10632",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "112 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "3000"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$1.09",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$0.788",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$0.712",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$0.628",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$0.588",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 500,
+            "Price": "$0.564",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$0.55",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 3000,
+            "Price": "$0.518",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 6000,
+            "Price": "$0.506",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "TPS563200DDCT"
+          }
+        ],
+        "SuggestedReplacement": "595-TPS563200DDCT",
+        "ImagePath": "https://www.mouser.com/images/texasinstruments/images/ITP_TI_SOT-23-Thin-6_DDC_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.00003
+        },
+        "AvailabilityOnOrder": [
+          {
+            "Quantity": 21000,
+            "Date": "2027-01-07T00:00:00"
+          },
+          {
+            "Quantity": 24000,
+            "Date": "2027-02-11T00:00:00"
+          }
+        ],
+        "InfoMessages": [],
+        "SurchargeMessages": null,
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "JPHTS",
+            "ComplianceValue": "854239099"
+          },
+          {
+            "ComplianceName": "TARIC",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "China"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "United States"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -46,10 +46,34 @@ export function ledgerFileName(date: Date): string {
   return `${date.toISOString().slice(0, 10)}.jsonl`;
 }
 
+/**
+ * Drops keys whose value is `undefined`, recursively.
+ *
+ * `undefined` is not JSON, and the record schema rejects it. Without this, an
+ * error carrying an undefined detail would fail to record and the caller would
+ * see the logging failure instead of the failure it was recording.
+ */
+function jsonSafe(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => jsonSafe(item) ?? null);
+  }
+  if (typeof value !== 'object' || value === null) {
+    return value;
+  }
+  const out: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value)) {
+    const safe = jsonSafe(child);
+    if (safe !== undefined) {
+      out[key] = safe;
+    }
+  }
+  return out;
+}
+
 /** Serialises any thrown value into the ledger's error shape. */
 export function toErrorJson(error: unknown): Record<string, unknown> {
   if (isChipAgentError(error)) {
-    return { ...error.toJSON() };
+    return jsonSafe({ ...error.toJSON() }) as Record<string, unknown>;
   }
   if (error instanceof Error) {
     return { name: error.name, code: 'UNKNOWN', message: error.message, details: {} };

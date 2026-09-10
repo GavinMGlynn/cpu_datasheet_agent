@@ -439,17 +439,20 @@ the same style and escaping.
 Goal: part-number search, pricing, availability, and datasheet URL from the
 Mouser Search API. [R-03] [R-04]
 
-- [ ] 8.1 Confirm the endpoint paths, base URL, API-key parameter, and rate
-      limits from the Mouser API hub and record them with the date checked in
-      `src/adapters/mouser/README.md`. (Pages timed out on 2026-09-10; must
-      be re-checked.)
-- [ ] 8.2 Request layer: API key handling, rate limiter, backoff, typed
+- [x] 8.1 Endpoint paths, base URL, and the API-key parameter confirmed by
+      calling the live API rather than by reading the docs, which are behind a
+      script-rendered Swagger page. Recorded in `src/adapters/mouser/README.md`
+      with the date. Rate limits were not stated in any response header.
+- [x] 8.2 Request layer: API key handling, rate limiter, backoff, typed
       `MouserError`.
-- [ ] 8.3 Response schemas for part-number search and keyword search.
-- [ ] 8.4 Operations: `searchPartNumber(mpn)`, `searchKeyword(text)`, mapping
-      to `Offer[]`, parametrics, datasheet URL. Cached and logged.
-- [ ] 8.5 Fixture recorder and fixtures for the same ten candidates as 7.7.
-- [ ] 8.6 Tests as in 7.8, plus the live contract test.
+- [x] 8.3 Response schemas for part-number search and keyword search.
+- [x] 8.4 Operations: `searchPartNumber(mpn)`, `searchKeyword(text)`, mapping
+      to an `Offer`, sibling part numbers, and the datasheet URL. Cached and
+      logged. **No parametrics**: the Search API publishes only packaging
+      attributes for switching regulators, so mapping any would be invention.
+      See the module README.
+- [x] 8.5 Fixture recorder and fixtures for the same ten candidates as 7.7.
+- [x] 8.6 Tests as in 7.8, plus the live contract test.
 
 ---
 

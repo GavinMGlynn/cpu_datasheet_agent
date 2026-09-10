@@ -1,0 +1,155 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "ManufacturerPartNumber": "LM5164DDAR",
+        "Manufacturer": "Texas Instruments",
+        "MouserPartNumber": "595-LM5164DDAR",
+        "Description": "Switching Voltage Regulators 6-V to 100-V input 1 -A synchronous buck A 595-LM5164DDAT",
+        "DataSheetUrl": "",
+        "ProductDetailUrl": "https://www.mouser.com/en/ProductDetail/Texas-Instruments/LM5164DDAR?qs=PqoDHHvF64%2F0M%252BK9zcb2mw%3D%3D",
+        "Category": "Switching Voltage Regulators",
+        "Availability": "3872 In Stock",
+        "AvailabilityInStock": "3872",
+        "FactoryStock": "0",
+        "Min": "1",
+        "Mult": "1",
+        "LeadTime": "112 Days",
+        "LifecycleStatus": null,
+        "ProductAttributes": [
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Reel"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "Cut Tape"
+          },
+          {
+            "AttributeName": "Packaging",
+            "AttributeValue": "MouseReel",
+            "AttributeCost": "$7.00 MouseReel™ fee will be added and calculated in your shopping cart. All MouseReel™ orders are non-cancellable and non-returnable."
+          },
+          {
+            "AttributeName": "Standard Pack Qty",
+            "AttributeValue": "2500"
+          }
+        ],
+        "PriceBreaks": [
+          {
+            "Quantity": 1,
+            "Price": "$4.19",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 10,
+            "Price": "$3.17",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 25,
+            "Price": "$2.92",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 100,
+            "Price": "$2.64",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 250,
+            "Price": "$2.50",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 500,
+            "Price": "$2.49",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 1000,
+            "Price": "$2.34",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 2500,
+            "Price": "$2.28",
+            "Currency": "USD"
+          },
+          {
+            "Quantity": 5000,
+            "Price": "$2.27",
+            "Currency": "USD"
+          }
+        ],
+        "AlternatePackagings": [
+          {
+            "APMfrPN": "LM5164DDAT"
+          }
+        ],
+        "SuggestedReplacement": "595-LM5164DDAT",
+        "ImagePath": "https://www.mouser.com/images/texasinstruments/images/ITP_TI_SO-PowerPad-8_DDA_t.jpg",
+        "Reeling": true,
+        "ROHSStatus": "RoHS Compliant",
+        "MultiSimBlue": 0,
+        "UnitWeightKg": {
+          "UnitWeight": 0.0000973
+        },
+        "AvailabilityOnOrder": [
+          {
+            "Quantity": 15000,
+            "Date": "2027-04-08T00:00:00"
+          },
+          {
+            "Quantity": 10000,
+            "Date": "2027-05-04T00:00:00"
+          },
+          {
+            "Quantity": 10000,
+            "Date": "2027-05-07T00:00:00"
+          }
+        ],
+        "InfoMessages": [],
+        "SurchargeMessages": null,
+        "ProductCompliance": [
+          {
+            "ComplianceName": "USHTS",
+            "ComplianceValue": "8542390090"
+          },
+          {
+            "ComplianceName": "CNHTS",
+            "ComplianceValue": "8542399000"
+          },
+          {
+            "ComplianceName": "CAHTS",
+            "ComplianceValue": "8542390000"
+          },
+          {
+            "ComplianceName": "MXHTS",
+            "ComplianceValue": "8542399999"
+          },
+          {
+            "ComplianceName": "ECCN",
+            "ComplianceValue": "EAR99"
+          }
+        ],
+        "TradeCompliance": [
+          {
+            "ComplianceName": "Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Assembly Country of Origin",
+            "ComplianceValue": "Mexico"
+          },
+          {
+            "ComplianceName": "Country of Diffusion",
+            "ComplianceValue": "United States"
+          }
+        ]
+      }
+    ]
+  }
+}
