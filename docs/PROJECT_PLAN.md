@@ -96,7 +96,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M3  | Content-addressed cache | complete | 2026-09-10 |
 | M4  | Persistence (SQLite) | complete | 2026-09-10 |
 | M5  | Units, parsing, and normalisation | complete | 2026-09-10 |
-| M6  | PDF toolkit | in progress | |
+| M6  | PDF toolkit | complete | 2026-09-10 |
 | M7  | Digi-Key adapter | not started | |
 | M8  | Mouser adapter | not started | |
 | M9  | Nexar adapter with hard budget | not started | |
@@ -210,7 +210,7 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 8: Module 6 built, CI moved to the self-hosted runner
+### 2026-09-10 — Session 8: Module 6 complete, CI moved to the self-hosted runner
 
 **Done**
 
@@ -241,11 +241,15 @@ change. Never edit past entries; add a new one.
   is not how a real process behaves.
 - Guarded helpers replaced dead `?? ''` fallbacks (D23).
 
+- CI run 34461457662 green on runner `localhost`. M6 complete.
+
 **Next**
 
-- Confirm CI, mark M6 complete, start M7 (Digi-Key adapter). M7 needs
-  credentials (open question Q1) before fixtures can be recorded; the request
-  layer and schemas can be built first.
+- M7 (Digi-Key adapter) is blocked on credentials, open question Q1. Tasks
+  7.1 to 7.5 (token client, request layer, endpoint record, response schemas,
+  operations) can be written without them, but 7.6, 7.7, and 7.9 need live
+  calls to record fixtures, and a module is not complete until every task is.
+  Waiting for the answer rather than leaving a half-built module.
 
 ### 2026-09-10 — Session 7: Module 5 complete
 
