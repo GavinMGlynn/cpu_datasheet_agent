@@ -89,7 +89,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | ------ | ---- | ------ | ------------ |
 | M0  | Foundation and tooling | complete | 2026-09-10 |
 | M1  | Domain model and validation | complete | 2026-09-10 |
-| M2  | Structured logging and tool-call ledger | not started | |
+| M2  | Structured logging and tool-call ledger | in progress | |
 | M3  | Content-addressed cache | not started | |
 | M4  | Persistence (SQLite) | not started | |
 | M5  | Units, parsing, and normalisation | not started | |
@@ -206,6 +206,32 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 4: Module 2 built, awaiting CI
+
+**Done**
+
+- `src/log/`: structured JSON logger (stderr only, level filtering, child
+  loggers), redaction (secret values, secret-shaped patterns, secret-looking
+  keys, JSON-safe conversion of errors, dates, bigints, cycles), the
+  append-only `ToolCallLedger` (validated records, per-day files, queued
+  writes, blob sidecars for large outputs), the streaming `readLedger` with
+  filters and mandatory malformed-line reporting, and `withLedger`.
+- 58 new tests including concurrency (50 parallel ends, no interleaving),
+  midnight rollover, write failure recovery, and secret redaction through
+  the ledger path. Total 597 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- `Date` has whole-millisecond resolution, so a fractional clock step in a
+  test is silently truncated; test rounding contracts with integer steps.
+- Validate the record before serialising the output for the sidecar,
+  otherwise a bigint in a tool output crashes `JSON.stringify` instead of
+  surfacing as a `ValidationError`.
+
+**Next**
+
+- Confirm CI, mark M2 complete, start M3 (content-addressed cache).
 
 ### 2026-09-10 — Session 3: Module 1 complete; zero-warnings rule
 

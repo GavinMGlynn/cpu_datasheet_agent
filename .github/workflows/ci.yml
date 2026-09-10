@@ -9,7 +9,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Silence git default-branch hint
+      - name: Configure git default branch
         run: git config --global init.defaultBranch main
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7

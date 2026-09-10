@@ -189,25 +189,25 @@ attached to it. This is the contract every later module writes against.
 Goal: every tool call is recorded, inputs and outputs, in an append-only file
 that later becomes the eval dataset.
 
-- [ ] 2.1 `Logger` interface (`debug`, `info`, `warn`, `error`) emitting one
+- [x] 2.1 `Logger` interface (`debug`, `info`, `warn`, `error`) emitting one
       JSON object per line to stderr, never stdout. Level from config. Child
       loggers with bound fields.
-- [ ] 2.2 Secret redaction: any value matching configured secret patterns
+- [x] 2.2 Secret redaction: any value matching configured secret patterns
       (API keys, bearer tokens, `client_secret`) is replaced with
       `"[redacted]"` before serialisation. Tests prove secrets never reach the
       output for nested objects, arrays, and strings containing a secret.
-- [ ] 2.3 `ToolCallLedger`: `begin(tool, input, meta)` returns a record id;
+- [x] 2.3 `ToolCallLedger`: `begin(tool, input, meta)` returns a record id;
       `end(id, output | error)` writes one `ToolCallRecord` line to
       `DATA_DIR/ledger/YYYY-MM-DD.jsonl`. Writes are serialised through a
       queue so concurrent calls never interleave partial lines. Output larger
       than a configurable size is written to a sidecar file and referenced by
       path and sha256.
-- [ ] 2.4 `LedgerReader`: async iterator over records across day files,
+- [x] 2.4 `LedgerReader`: async iterator over records across day files,
       with filters by `sessionId`, `tool`, and time range. Malformed lines are
       reported with line number and skipped, never silently dropped.
-- [ ] 2.5 `withLedger(tool, handler)` wrapper used by M12 so no handler can be
+- [x] 2.5 `withLedger(tool, handler)` wrapper used by M12 so no handler can be
       registered without being logged.
-- [ ] 2.6 Tests: temp directory per test, concurrent writes, day rollover,
+- [x] 2.6 Tests: temp directory per test, concurrent writes, day rollover,
       sidecar threshold, reader filters, malformed line reporting, redaction
       through the ledger path.
 
