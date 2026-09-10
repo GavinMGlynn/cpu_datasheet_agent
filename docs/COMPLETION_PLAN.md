@@ -362,10 +362,14 @@ locate the sections the agent needs. All through poppler, all cached.
 Goal: search, product details, pricing, and datasheet URLs from Digi-Key
 Product Information v4, cached and logged. [R-01] [R-02]
 
-- [ ] 7.1 OAuth2 client-credentials token client: fetches from the Digi-Key
-      token endpoint, caches the token with expiry in memory and in
+- [ ] 7.1 OAuth2 client-credentials token client [R-60]: POSTs
+      `client_id`, `client_secret`, and `grant_type=client_credentials` as
+      form data to `https://api.digikey.com/v1/oauth2/token` (sandbox:
+      `https://sandbox-api.digikey.com/v1/oauth2/token`, selected by
+      `DIGIKEY_SANDBOX`). Caches the token with expiry in memory and in
       `DATA_DIR/tokens/`, refreshes ahead of expiry, retries once on 401.
-      Sandbox and production hosts selectable by `DIGIKEY_SANDBOX`.
+      **The token lives only 600 seconds**, so refresh-ahead is not optional:
+      a long extraction run will cross an expiry.
 - [ ] 7.2 Request layer: headers `X-DIGIKEY-Client-Id`,
       `X-DIGIKEY-Locale-Site`, `X-DIGIKEY-Locale-Language`,
       `X-DIGIKEY-Locale-Currency`; token-bucket rate limiter; backoff on 429
