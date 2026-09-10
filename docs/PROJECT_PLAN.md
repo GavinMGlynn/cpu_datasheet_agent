@@ -88,6 +88,7 @@ that supersedes the old one, and the old row's status changes to
 | D27 | 2026-09-10 | Mouser is a price and availability source only. Its attribute mapping table is empty and every attribute name is reported as unmapped. | Across all 13 recorded switching regulators the Search API returned only `Packaging` and `Standard Pack Qty`, and one part in thirteen carried a datasheet URL. Mapping speculative names would be tested fiction; the table grows from real data or not at all. | active |
 | D28 | 2026-09-10 | Recording a tool call must never fail because of the value being recorded. `toErrorJson` drops undefined values before validation. | An error carrying an undefined detail made the ledger throw, replacing the original error with a validation failure. A logging path that destroys the information it exists to preserve is worse than one that drops a key. | active |
 | D29 | 2026-09-10 | Module 9 (Nexar) is deferred rather than built next. Modules continue at M10. | The paid Nexar tiers (Standard, Pro) exclude datasheets and tech specs, which are the only reason this project wanted Nexar; they include pricing and availability, which Digi-Key and Mouser already give for free. The free Evaluation tier includes everything but allows 100 matched parts for the lifetime of the account. Paying would buy less than we already have. | active |
+| D30 | 2026-09-10 | An element14 (Farnell) key is held and configured, but no adapter is built yet. Revisit after M11 and M16. | Checked live, it is a real second parametric source, which Mouser is not: 32 electrical attributes for TPS54331DR. But it lists only 2 of 5 sample parts on the Australian store and 3 of 5 on the UK store, returns no datasheet field, and prices in the store's currency rather than AUD. The benefit is partial and only measurable once reconciliation and the eval exist. | active |
 
 ## 4. Status
 
@@ -216,6 +217,37 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 13: element14 assessed, key held
+
+**Done**
+
+- Registered key stored and verified live. `FARNELL_API_KEY` and
+  `FARNELL_STORE` added to the config, with the key redacted from logs and the
+  ledger like every other credential.
+- Recorded a part-number corpus of 469 real MPNs across eight manufacturers,
+  each paired with Digi-Key's own base product number, package and packaging,
+  so the M10 decoders can be verified against an independent source.
+
+**Learned**
+
+- **My earlier recommendation was partly wrong and the data corrected it.** I
+  argued for element14 on AUD pricing and datasheet links. It gives neither:
+  the Australian store lists 2 of 5 sample parts, there is no datasheet field
+  in the response at all, and prices come in the store's currency.
+- What it does give is real: 32 electrical attributes for TPS54331DR, against
+  Mouser's zero. It is the only free second parametric source found so far,
+  for the subset of parts it lists (D30).
+- The M10 corpus shows suffixes decompose far less cleanly than the plan
+  assumed. `TPS54331DDAR` runs a version letter, a package code and a reel
+  code together; `LT8610ABEMSE-3.3#TRPBF` also encodes a fixed output voltage;
+  the same Diodes suffix maps to two different packages. The decoders will
+  claim only what the corpus proves, which is what task 10.2 already demands.
+
+**Next**
+
+- Finish M10: normalisation, conservative decoders, candidate matching, and
+  family detection.
 
 ### 2026-09-10 — Session 12: Nexar costs checked, Module 9 deferred
 

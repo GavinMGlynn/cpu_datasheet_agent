@@ -39,6 +39,12 @@ export interface MouserConfig {
   readonly apiKey: string | undefined;
 }
 
+export interface FarnellConfig {
+  readonly apiKey: string | undefined;
+  /** Storefront the catalogue is read from, which decides currency and coverage. */
+  readonly store: string;
+}
+
 export interface NexarConfig {
   readonly clientId: string | undefined;
   readonly clientSecret: string | undefined;
@@ -60,6 +66,7 @@ export interface AgentConfig {
 export interface Config {
   readonly digikey: DigiKeyConfig;
   readonly mouser: MouserConfig;
+  readonly farnell: FarnellConfig;
   readonly nexar: NexarConfig;
   readonly anthropic: AnthropicConfig;
   readonly agent: AgentConfig;
@@ -198,6 +205,12 @@ const envSchema = z.object({
     'AUD',
   ),
   MOUSER_API_KEY: envString,
+  FARNELL_API_KEY: envString,
+  FARNELL_STORE: envPattern(
+    /^[a-z0-9.-]+\.(element14|farnell|newark)\.com$/,
+    'an element14 store such as au.element14.com',
+    'uk.farnell.com',
+  ),
   NEXAR_CLIENT_ID: envString,
   NEXAR_CLIENT_SECRET: envString,
   NEXAR_ENABLED: envBoolean(false),
@@ -261,6 +274,7 @@ export function loadConfig(env: EnvSource = process.env, options: LoadConfigOpti
       },
     },
     mouser: { apiKey: values.MOUSER_API_KEY },
+    farnell: { apiKey: values.FARNELL_API_KEY, store: values.FARNELL_STORE },
     nexar: {
       clientId: values.NEXAR_CLIENT_ID,
       clientSecret: values.NEXAR_CLIENT_SECRET,

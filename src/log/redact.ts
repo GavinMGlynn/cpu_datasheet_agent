@@ -39,6 +39,7 @@ export function secretsFromConfig(config: Config): readonly string[] {
     config.digikey.sandboxApp.clientId,
     config.digikey.sandboxApp.clientSecret,
     config.mouser.apiKey,
+    config.farnell.apiKey,
     config.nexar.clientId,
     config.nexar.clientSecret,
     config.anthropic.apiKey,

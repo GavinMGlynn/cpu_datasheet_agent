@@ -521,6 +521,20 @@ the distributor listings that actually match, and escalate when ambiguous.
 
 ---
 
+## M8A — element14 adapter (not scheduled)
+
+A key is held and configured (D30), but no adapter is built. element14 is the
+only free **second parametric** source found: 32 electrical attributes for
+TPS54331DR, against Mouser's none. Against that, it lists only 2 of 5 sample
+parts on the Australian store and 3 of 5 on the UK store, returns no datasheet
+field, and prices in the store's currency rather than AUD.
+
+Build it only if M11 reconciliation or the M16 evaluation shows that a second
+parametric opinion changes an outcome. Until then it would be a third adapter
+to maintain for an unmeasured benefit.
+
+---
+
 ## M11 — Reconciliation and classification
 
 Goal: compare datasheet-extracted values with distributor parametrics, flag

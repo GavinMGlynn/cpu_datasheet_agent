@@ -140,6 +140,7 @@ describe('secretsFromConfig', () => {
         DIGIKEY_CLIENT_ID: 'dk-id',
         DIGIKEY_SANDBOX_CLIENT_SECRET: 'dk-sandbox-secret',
         MOUSER_API_KEY: 'mouser-key',
+        FARNELL_API_KEY: 'farnell-key',
         ANTHROPIC_API_KEY: 'sk-ant-x',
       },
       { cwd: '/work' },
@@ -148,6 +149,7 @@ describe('secretsFromConfig', () => {
       'dk-id',
       'dk-sandbox-secret',
       'mouser-key',
+      'farnell-key',
       'sk-ant-x',
     ]);
     expect(secretsFromConfig(loadConfig({}, { cwd: '/work' }))).toEqual([]);

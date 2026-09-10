@@ -50,6 +50,7 @@ describe('loadConfig defaults', () => {
         locale: { site: 'AU', language: 'en', currency: 'AUD' },
       },
       mouser: { apiKey: undefined },
+      farnell: { apiKey: undefined, store: 'uk.farnell.com' },
       nexar: { clientId: undefined, clientSecret: undefined, enabled: false, budgetLimit: 90 },
       anthropic: { apiKey: undefined },
       agent: { model: 'claude-opus-5', effort: 'high' },
@@ -198,6 +199,28 @@ describe('loadConfig enums', () => {
     );
     expectIssue({ AGENT_EFFORT: 'extreme' }, 'AGENT_EFFORT', 'received "extreme"');
     expectIssue({ LOG_LEVEL: 'verbose' }, 'LOG_LEVEL', 'expected one of debug, info, warn, error');
+  });
+});
+
+describe('loadConfig Farnell store', () => {
+  it.each(['au.element14.com', 'uk.farnell.com', 'www.newark.com', 'sg.element14.com'])(
+    'accepts %s',
+    (store) => {
+      expect(load({ FARNELL_STORE: store }).farnell.store).toBe(store);
+    },
+  );
+
+  it.each(['element14.com', 'au.element14.co.uk', 'example.com', 'AU.ELEMENT14.COM'])(
+    'rejects %j',
+    (store) => {
+      expectIssue({ FARNELL_STORE: store }, 'FARNELL_STORE', 'element14 store');
+    },
+  );
+
+  it('keeps the key alongside the store', () => {
+    const config = load({ FARNELL_API_KEY: 'abc', FARNELL_STORE: 'au.element14.com' });
+
+    expect(config.farnell).toEqual({ apiKey: 'abc', store: 'au.element14.com' });
   });
 });
 
