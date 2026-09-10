@@ -34,6 +34,10 @@ References in square brackets, for example `[R-03]`, point at rows in
       `test:coverage` with 100% lines, statements, branches, and functions on
       every file the module touches.
 - [ ] CI is green on `main` for the commit that closes the module.
+- [ ] No warnings from any step of `npm run check` or from CI. Lint runs with
+      `--max-warnings 0`. A warning printed by any tool (npm, TypeScript,
+      ESLint, Vitest, Node, git, GitHub Actions) is a defect to fix or
+      silence at the source with a recorded reason, never to ignore.
 - [ ] The static gate passes: no `TODO`, `FIXME`, `.skip`, `.only`,
       `@ts-ignore`, `@ts-expect-error` without a test proving the error, `any`,
       or `eslint-disable` in `src/` or `test/`.

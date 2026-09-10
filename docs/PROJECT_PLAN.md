@@ -78,6 +78,7 @@ that supersedes the old one, and the old row's status changes to
 | D17 | 2026-09-10 | TypeScript pinned to 6.0.3, not the 7.x line. | `typescript-eslint` 8.70 declares a peer range of `>=4.8.4 <6.1.0`; TypeScript 7 is the native-compiler line and is outside it. Revisit when the linter supports 7. | active |
 | D18 | 2026-09-10 | Entry-point shims in `bin/` and `scripts/` hold no logic; all logic lives in `src/` where per-file coverage applies. The gate scanner follows this: `src/gate/scan.ts` is the implementation, `scripts/gate.ts` the shim. | Keeps the coverage gate honest without excluding files. | active |
 | D19 | 2026-09-10 | Core schema conventions: strict objects everywhere; unit-pinned quantities per field; `QuantityRange` is `{ unit, min, max, typ? }` (one unit per range); fields the datasheet may not state are `.nullable()` and always present, fields that are genuinely optional annotations are `.optional()`; classification values are typed per axis. | Nullable-and-present makes "not stated" an explicit, provenance-carrying fact rather than an absent key. One unit per range removes a whole class of mismatch. | active |
+| D20 | 2026-09-10 | Zero warnings, enforced. `npm run lint` fails on any warning; every other tool must print none. A warning is fixed or silenced at its source with the reason recorded here. | User rule ("we should have no warnings"). Warnings that are tolerated become noise that hides the next real one. | active |
 
 ## 4. Status
 
@@ -87,7 +88,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | Module | Name | Status | Completed on |
 | ------ | ---- | ------ | ------------ |
 | M0  | Foundation and tooling | complete | 2026-09-10 |
-| M1  | Domain model and validation | in progress | |
+| M1  | Domain model and validation | complete | 2026-09-10 |
 | M2  | Structured logging and tool-call ledger | not started | |
 | M3  | Content-addressed cache | not started | |
 | M4  | Persistence (SQLite) | not started | |
@@ -206,7 +207,7 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 3: Module 1 built, awaiting CI
+### 2026-09-10 — Session 3: Module 1 complete; zero-warnings rule
 
 **Done**
 
@@ -234,9 +235,17 @@ change. Never edit past entries; add a new one.
 - `no-unused-vars` needed `ignoreRestSiblings` for the
   `const { key: _key, ...rest }` idiom used to build "missing field" cases.
 
+- CI run 34443141793 green. M1 complete.
+- User rule adopted: no warnings anywhere (D20). Audit of every step found
+  two: a Vitest transform-cache hint (fixed by setting `fsModuleCache: true`
+  explicitly, which also speeds up reruns) and a git default-branch hint
+  inside the CI checkout step (fixed by setting `init.defaultBranch` before
+  checkout). `npm run lint` now fails on any warning. Definition of Done
+  gained a no-warnings item.
+
 **Next**
 
-- Confirm CI green, mark M1 complete, start M2 (logging and ledger).
+- Start M2 (structured logging and tool-call ledger).
 
 ### 2026-09-10 — Session 2: Module 0 complete
 

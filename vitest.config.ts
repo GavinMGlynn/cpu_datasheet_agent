@@ -6,6 +6,10 @@ import { defineConfig } from 'vitest/config';
 // and a row in docs/PROJECT_PLAN.md section 3.
 export default defineConfig({
   test: {
+    // Persist module transforms between runs (node_modules/.vitest-cache).
+    // Set explicitly: Vitest prints a performance hint when it is not, and the
+    // project runs with zero warnings (docs/PROJECT_PLAN.md D20).
+    fsModuleCache: true,
     include: ['src/**/*.test.ts', 'test/**/*.test.ts'],
     exclude: ['test/live/**', 'node_modules/**', 'dist/**'],
     coverage: {
