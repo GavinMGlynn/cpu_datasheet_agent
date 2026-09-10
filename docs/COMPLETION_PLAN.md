@@ -114,26 +114,26 @@ before a single line of domain code exists.
 Goal: the complete, strict schema for a buck regulator part and everything
 attached to it. This is the contract every later module writes against.
 
-- [ ] 1.1 Primitive schemas in `src/core/primitives.ts`: `Mpn` (raw and
+- [x] 1.1 Primitive schemas in `src/core/primitives.ts`: `Mpn` (raw and
       normalised forms), `ManufacturerName`, `Sha256`, `Iso8601`, `Url`,
       `PageNumber` (positive integer), `Currency` (ISO 4217 subset),
       `Percent`, `Celsius`.
-- [ ] 1.2 `Quantity` schema: `{ value: number, unit: Unit }` with `Unit` an
+- [x] 1.2 `Quantity` schema: `{ value: number, unit: Unit }` with `Unit` an
       enum of canonical SI units used by buck regulators (`V`, `A`, `Hz`, `s`,
       `Ohm`, `W`, `degC`, `percent`, `count`). Value must be finite. Ranges
       are a separate `QuantityRange` `{ min, max, typ? }` with `min <= max`
       and `typ` inside the range. A string is never accepted where a
       `Quantity` is expected (this is the "3 V to 32 V" rejection test).
-- [ ] 1.3 `Provenance` discriminated union:
+- [x] 1.3 `Provenance` discriminated union:
       `datasheet { sha256, page, quote? , method: "text" | "image" }`,
       `distributor { distributor, sku, fetchedAt, cacheKey }`,
       `human { note, recordedAt }`,
       `derived { from: ParameterKey[], rule }`.
       A `datasheet` provenance without a `page` is a schema error, not a
       warning.
-- [ ] 1.4 `Parameter<T>` wrapper: `{ value: T, provenance: Provenance,
+- [x] 1.4 `Parameter<T>` wrapper: `{ value: T, provenance: Provenance,
       confidence: "extracted" | "verified" | "conflict" }`.
-- [ ] 1.5 `BuckRegulatorParameters` schema, every field a `Parameter`:
+- [x] 1.5 `BuckRegulatorParameters` schema, every field a `Parameter`:
       `vinMin`, `vinMax`, `vinAbsMax`, `voutMin`, `voutMax`, `voutFixed`
       (nullable), `ioutMax`, `switchingFrequency` (`QuantityRange` or fixed),
       `feedbackReference`, `feedbackAccuracy`, `quiescentCurrent`,
@@ -146,34 +146,34 @@ attached to it. This is the contract every later module writes against.
       `minOnTime`, `maxDutyCycle`, `efficiencyPeak`, `rdsOnHigh`, `rdsOnLow`,
       `aecQ100`. Cross-field refinements: `vinMin < vinMax <= vinAbsMax`,
       `voutMin <= voutMax`, `operatingTempMin < operatingTempMax`.
-- [ ] 1.6 `Offer` schema: distributor, distributor SKU, manufacturer, MPN as
+- [x] 1.6 `Offer` schema: distributor, distributor SKU, manufacturer, MPN as
       listed, currency, `priceBreaks: [{ quantity, unitPrice }]` sorted and
       strictly increasing in quantity, `stock`, `moq`, `packaging`
       (`cut_tape` | `reel` | `tube` | `tray` | `bulk` | `unknown`),
       `fetchedAt`, `provenance` (distributor).
-- [ ] 1.7 `Datasheet` schema: `url`, `sha256`, `pageCount`, `fetchedAt`,
+- [x] 1.7 `Datasheet` schema: `url`, `sha256`, `pageCount`, `fetchedAt`,
       `localPath`, `coversMpns: Mpn[]` (from the ordering table; may be
       empty until M10 fills it).
-- [ ] 1.8 `Classification` schema: `axis`, `value`, `derivedFrom:
+- [x] 1.8 `Classification` schema: `axis`, `value`, `derivedFrom:
       ParameterKey[]`, `rule` (rule identifier, see M11).
-- [ ] 1.9 `Escalation` schema: `id`, `mpn`, `kind` (`ambiguous_mpn` |
+- [x] 1.9 `Escalation` schema: `id`, `mpn`, `kind` (`ambiguous_mpn` |
       `conflict` | `unreadable_safety_rating` | `other`), `question`,
       `context`, `options?`, `createdAt`, `resolution?` (`{ answer,
       resolvedAt, by }`).
-- [ ] 1.10 `Verification` schema: `parameterKey`, `verdict` (`confirmed` |
+- [x] 1.10 `Verification` schema: `parameterKey`, `verdict` (`confirmed` |
       `contradicted` | `not_found`), `quote?`, `page`, `checkedAt`,
       `promptVersion`, `model`.
-- [ ] 1.11 `Part` aggregate schema: `mpn`, `manufacturer`, `category`
+- [x] 1.11 `Part` aggregate schema: `mpn`, `manufacturer`, `category`
       (`buck_regulator` only for now), `parameters`, `datasheet?`, `offers`,
       `classifications`, `verifications`, `status` (`extracted` |
       `needs_human` | `verified` | `rejected`), `createdAt`, `updatedAt`.
       Strict: unknown keys rejected everywhere.
-- [ ] 1.12 `ToolCallRecord` schema for the ledger (M2): `id`, `sessionId`,
+- [x] 1.12 `ToolCallRecord` schema for the ledger (M2): `id`, `sessionId`,
       `parentId?`, `tool`, `input`, `output?`, `error?`, `startedAt`,
       `durationMs`, `spendsQuota`.
-- [ ] 1.13 `ValidationError` (extends `ChipAgentError`) that carries the Zod
+- [x] 1.13 `ValidationError` (extends `ChipAgentError`) that carries the Zod
       issue list flattened to `path`, `message`, `received`.
-- [ ] 1.14 Tests: for every schema, a table of accepted and rejected inputs,
+- [x] 1.14 Tests: for every schema, a table of accepted and rejected inputs,
       including the specific `CLAUDE.md` cases (string where range expected,
       missing page number, extra keys, conflicting min/max). Type-level tests
       with `expectTypeOf` that inferred types match the intended shapes.

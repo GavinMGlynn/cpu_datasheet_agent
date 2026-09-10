@@ -1,3 +1,98 @@
 # core
 
-Domain schemas and types (Module 1). Zod schemas for MPNs, quantities, provenance, parameters, offers, datasheets, classifications, escalations, verifications, and the `Part` aggregate. Every boundary in the project parses with these schemas and rejects unknown keys.
+Domain schemas and types (Module 1). Every boundary in the project parses with
+these Zod schemas. All objects are strict: an unknown key is an error. Nothing
+is coerced: a string where a number belongs is rejected, never parsed.
+
+Import from `src/core/index.ts`. Each schema `X` is exported alongside its
+inferred type `X`.
+
+## Primitives (`primitives.ts`)
+
+`RawMpn` (as given, trimmed), `NormalisedMpn` (uppercase, no whitespace),
+`ManufacturerName`, `Sha256` (lowercase hex), `Iso8601` (UTC, ends in `Z`),
+`Url` (http or https only), `PageNumber` (1-based integer), `Currency` (ISO
+4217 subset in `CURRENCIES`), `Percent` (0 to 100), `Celsius` (above absolute
+zero), `Distributor` (`digikey` | `mouser` | `nexar`).
+
+## Quantities (`quantity.ts`)
+
+- `Quantity` is `{ value: number, unit }` with `unit` from `UNITS`
+  (`V A Hz s Ohm W degC percent count`). Every unit except `degC` must be
+  non-negative; `percent` is capped at 100.
+- `QuantityRange` is `{ unit, min, max, typ? }` with `min <= typ <= max`. A
+  single value is never promoted to a range and a range is never collapsed to
+  a value.
+- `quantityOf(unit)` and `rangeOf(unit)` pin the unit, so a voltage field
+  cannot hold amps.
+
+## Provenance (`provenance.ts`)
+
+Discriminated on `source`:
+
+- `datasheet` — `sha256`, `page` (mandatory), `method` (`text` | `image`),
+  optional `quote`.
+- `distributor` — `distributor`, `sku`, `fetchedAt`, `cacheKey`.
+- `human` — `note`, `recordedAt`.
+- `derived` — `from` (one or more `ParameterKey`), `rule`.
+
+## Parameters (`parameter.ts`, `parameter-keys.ts`, `buck-regulator.ts`)
+
+`parameter(valueSchema)` wraps a value with `provenance` and `confidence`
+(`extracted` | `verified` | `conflict`). `PARAMETER_KEYS` lists the thirty
+buck-regulator parameters in schema order; a test keeps it equal to the keys
+of `BuckRegulatorParameters`.
+
+Nullable parameters (the datasheet may not state them): `voutFixed`,
+`feedbackReference`, `feedbackAccuracy`, `shutdownCurrent`, `minOnTime`,
+`maxDutyCycle`, `efficiencyPeak`, `rdsOnHigh`, `rdsOnLow`. Everything else is
+required and non-null. `switchingFrequency` is a fixed `Hz` quantity or an
+`Hz` range.
+
+Cross-field invariants: `vinMin < vinMax <= vinAbsMax`; `voutMin <= voutMax`;
+a non-null `voutFixed` equals both `voutMin` and `voutMax`;
+`operatingTempMin < operatingTempMax`; a non-synchronous part has
+`rdsOnLow: null`; a controller has both `rdsOn*` null; a part without soft
+start has no soft-start time.
+
+## Records
+
+- `Offer` — one distributor listing; price breaks strictly increasing in
+  quantity; the embedded distributor provenance must name the same
+  distributor and SKU.
+- `Datasheet` — URL, digest, page count, local path, and the MPNs the ordering
+  table covers (unique).
+- `Classification` — discriminated on `axis`; each axis has a fixed value set
+  (`VIN_CLASSES`, `IOUT_CLASSES`, `OUTPUT_TYPES`, `PACKAGE_FAMILIES`,
+  `TEMPERATURE_GRADES`, `FEATURES`). `CLASSIFICATION_AXES` lists the axes.
+- `Escalation` — a question for a person, with JSON `context`, optional
+  `options` (at least two), and an optional `resolution` not earlier than
+  `createdAt`.
+- `Verification` — a verdict on one parameter against one page. `confirmed`
+  and `contradicted` must quote; `not_found` must not.
+- `ToolCallRecord` — one ledger line with exactly one of `output` or `error`
+  (`ErrorJson` matches `ChipAgentError.toJSON()`).
+
+## Part (`part.ts`)
+
+The aggregate `upsert_part` stores. Beyond the field schemas it enforces:
+
+- a parameter citing a datasheet cites this part's datasheet (same digest) on
+  a page it has; a part without a datasheet has no datasheet-cited parameter;
+- `verified` status requires every parameter `verified`;
+- any parameter in `conflict` forces `needs_human` or `rejected`;
+- one classification per axis; one offer per distributor SKU;
+- `updatedAt` is not before `createdAt`.
+
+## Errors (`validation-error.ts`)
+
+`parseOrThrow(schema, value, subject)` returns the parsed value or throws
+`ValidationError` (`VALIDATION_FAILED`) whose `issues` carry the dot-joined
+`path` (`(root)` for the whole value), the message, and the `received` value
+at that path. `fromZodError` converts a Zod error the same way.
+
+## Test fixtures
+
+Builders for valid values live in `test/helpers/core-fixtures.ts`;
+`expectAccepts` and `expectRejects` in `test/helpers/schema.ts` assert that
+accepted values round-trip unchanged.

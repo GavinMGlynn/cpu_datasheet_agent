@@ -77,6 +77,7 @@ that supersedes the old one, and the old row's status changes to
 | D16 | 2026-09-10 | Secrets live only in `.env` (gitignored). `.env.example` lists every variable with a comment. `src/config.ts` validates the environment at startup and fails loudly on anything missing or malformed. | Prevents silent misconfiguration. | active |
 | D17 | 2026-09-10 | TypeScript pinned to 6.0.3, not the 7.x line. | `typescript-eslint` 8.70 declares a peer range of `>=4.8.4 <6.1.0`; TypeScript 7 is the native-compiler line and is outside it. Revisit when the linter supports 7. | active |
 | D18 | 2026-09-10 | Entry-point shims in `bin/` and `scripts/` hold no logic; all logic lives in `src/` where per-file coverage applies. The gate scanner follows this: `src/gate/scan.ts` is the implementation, `scripts/gate.ts` the shim. | Keeps the coverage gate honest without excluding files. | active |
+| D19 | 2026-09-10 | Core schema conventions: strict objects everywhere; unit-pinned quantities per field; `QuantityRange` is `{ unit, min, max, typ? }` (one unit per range); fields the datasheet may not state are `.nullable()` and always present, fields that are genuinely optional annotations are `.optional()`; classification values are typed per axis. | Nullable-and-present makes "not stated" an explicit, provenance-carrying fact rather than an absent key. One unit per range removes a whole class of mismatch. | active |
 
 ## 4. Status
 
@@ -86,7 +87,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | Module | Name | Status | Completed on |
 | ------ | ---- | ------ | ------------ |
 | M0  | Foundation and tooling | complete | 2026-09-10 |
-| M1  | Domain model and validation | not started | |
+| M1  | Domain model and validation | in progress | |
 | M2  | Structured logging and tool-call ledger | not started | |
 | M3  | Content-addressed cache | not started | |
 | M4  | Persistence (SQLite) | not started | |
@@ -204,6 +205,38 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 3: Module 1 built, awaiting CI
+
+**Done**
+
+- Implemented every core schema under `src/core/`: primitives, quantities
+  and unit-pinned factories, the four provenance kinds, the parameter
+  wrapper, the thirty-field `BuckRegulatorParameters` with its cross-field
+  invariants, `Offer`, `Datasheet`, `Classification` (typed per axis),
+  `Escalation`, `Verification`, `ToolCallRecord`, the `Part` aggregate with
+  its provenance and status invariants, and `ValidationError` /
+  `parseOrThrow`.
+- Test fixtures in `test/helpers/core-fixtures.ts` and the
+  `expectAccepts` / `expectRejects` helpers. 539 tests, 100% coverage on
+  every file, including the `CLAUDE.md` cases: a range written as text where
+  a quantity is expected, a datasheet citation without a page, unknown keys.
+- `src/core/README.md` documents the API and invariants. Decision D19
+  records the schema conventions.
+
+**Learned**
+
+- Zod 4 keeps `.shape` and `.options` available after `.superRefine`, so the
+  key-list and axis-list sync tests work directly against the schemas.
+- With `noUncheckedIndexedAccess`, guarding indexed array reads creates
+  branches that can never be false; iterate with `forEach` and a carried
+  `previous` instead so every branch stays reachable.
+- `no-unused-vars` needed `ignoreRestSiblings` for the
+  `const { key: _key, ...rest }` idiom used to build "missing field" cases.
+
+**Next**
+
+- Confirm CI green, mark M1 complete, start M2 (logging and ledger).
 
 ### 2026-09-10 — Session 2: Module 0 complete
 
