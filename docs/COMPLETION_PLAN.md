@@ -249,33 +249,33 @@ Goal: parts, parameters, offers, datasheets, classifications, verifications,
 escalations, and the Nexar budget stored durably behind a repository
 interface. `upsert_part` validates and rejects; it never coerces.
 
-- [ ] 4.1 `Database` wrapper over `better-sqlite3`: opens with WAL, foreign
+- [x] 4.1 `Database` wrapper over `better-sqlite3`: opens with WAL, foreign
       keys on, busy timeout; `:memory:` supported for tests. [R-27]
-- [ ] 4.2 Migrations: numbered SQL files under `src/db/migrations/`, applied
+- [x] 4.2 Migrations: numbered SQL files under `src/db/migrations/`, applied
       in a transaction, tracked in `schema_migrations`. Re-running is a
       no-op. A migration that fails rolls back completely.
-- [ ] 4.3 Schema: `parts`, `parameters` (one row per parameter with value
+- [x] 4.3 Schema: `parts`, `parameters` (one row per parameter with value
       JSON, unit, provenance columns, confidence), `datasheets`,
       `datasheet_mpns`, `offers`, `price_breaks`, `classifications`,
       `verifications`, `escalations`, `nexar_budget`, `runs` (for M14).
       Indices on `parts.mpn`, `parameters(part_id, key)`, `offers(part_id,
       distributor)`.
-- [ ] 4.4 `PartRepository`: `upsertPart(part)` parses with the M1 `Part`
+- [x] 4.4 `PartRepository`: `upsertPart(part)` parses with the M1 `Part`
       schema first and throws `ValidationError` on any issue, then writes
       part and parameters in one transaction; `getPart(mpn)`,
       `findParts(filter)` (by category, classification axis/value, numeric
       parameter ranges), `listByStatus(status)`.
-- [ ] 4.5 `OfferRepository`: `replaceOffers(partId, distributor, offers)`
+- [x] 4.5 `OfferRepository`: `replaceOffers(partId, distributor, offers)`
       (replaces that distributor's rows atomically), `getOffers(partId)`,
       `bestPriceAt(partId, quantity)`.
-- [ ] 4.6 `DatasheetRepository`: `record(datasheet)`, `getBySha(sha)`,
+- [x] 4.6 `DatasheetRepository`: `record(datasheet)`, `getBySha(sha)`,
       `linkMpn(sha, mpn)`, `mpnsCoveredBy(sha)`.
-- [ ] 4.7 `VerificationRepository` and `EscalationRepository`: create,
+- [x] 4.7 `VerificationRepository` and `EscalationRepository`: create,
       list open, resolve. Resolving an escalation records who and when.
-- [ ] 4.8 `NexarBudgetRepository`: `used()`, `limit()`, `reserve(n)` in a
+- [x] 4.8 `NexarBudgetRepository`: `used()`, `limit()`, `reserve(n)` in a
       transaction that fails with `BudgetExhaustedError` if `used + n >
       limit`.
-- [ ] 4.9 Tests on an in-memory database: migration idempotence and rollback,
+- [x] 4.9 Tests on an in-memory database: migration idempotence and rollback,
       every repository method, every rejection path of `upsertPart`
       (including the `CLAUDE.md` string-instead-of-range case), transaction
       atomicity when a later insert fails, foreign-key enforcement, budget

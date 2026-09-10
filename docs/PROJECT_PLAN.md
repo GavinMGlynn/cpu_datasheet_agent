@@ -90,8 +90,8 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M0  | Foundation and tooling | complete | 2026-09-10 |
 | M1  | Domain model and validation | complete | 2026-09-10 |
 | M2  | Structured logging and tool-call ledger | complete | 2026-09-10 |
-| M3  | Content-addressed cache | in progress | |
-| M4  | Persistence (SQLite) | not started | |
+| M3  | Content-addressed cache | complete | 2026-09-10 |
+| M4  | Persistence (SQLite) | in progress | |
 | M5  | Units, parsing, and normalisation | not started | |
 | M6  | PDF toolkit | not started | |
 | M7  | Digi-Key adapter | not started | |
@@ -207,7 +207,40 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 5: Module 3 built, awaiting CI
+### 2026-09-10 — Session 6: Module 4 built, awaiting CI
+
+**Done**
+
+- `src/db/`: `Db` wrapper over `better-sqlite3` 13.0.3 (WAL, foreign keys,
+  busy timeout), transactional migration runner with the full schema as
+  migration 0001, and repositories for parts (validated aggregate upsert,
+  filtered search on classifications and numeric parameter bounds), offers
+  (per-distributor replace, best price at quantity), datasheets,
+  verifications, escalations, and the Nexar budget (immediate-transaction
+  reservation).
+- 73 new tests: migration rollback and ordering, aggregate round trips,
+  child-row replacement, rollback when a later insert fails, cascade and
+  foreign-key enforcement, every filter clause, budget exhaustion and a
+  two-connection race on a file database. Total 736 tests, 100% coverage,
+  zero warnings.
+
+**Learned**
+
+- The `Part` invariant that `verified` status needs every parameter verified
+  caught my own test fixture. Good.
+- Read-side ordering must match write-side order for aggregates to round
+  trip unchanged; covered MPNs are returned in insertion order, not sorted.
+- `strictTypeChecked` and `stylisticTypeChecked` disagree on `as T` versus
+  `!` for removing `undefined`; a small `requireRow` helper with its own test
+  satisfies both and gives a real error code.
+- Migrations live in TypeScript modules holding SQL strings rather than
+  `.sql` files, so the build needs no asset copying (noted in the README).
+
+**Next**
+
+- Confirm CI, mark M4 complete, start M5 (units and normalisation).
+
+### 2026-09-10 — Session 5: Module 3 complete
 
 **Done**
 
@@ -231,9 +264,11 @@ change. Never edit past entries; add a new one.
   in parallel with a push makes the push fail on half-written tests; push
   only when the tree is quiet.
 
+- CI run 34444329069 green. M3 complete.
+
 **Next**
 
-- Confirm CI, mark M3 complete, start M4 (SQLite persistence).
+- M4 (SQLite persistence).
 
 ### 2026-09-10 — Session 4: Module 2 complete
 

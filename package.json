@@ -21,10 +21,12 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "better-sqlite3": "13.0.3",
     "zod": "4.6.1"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@types/better-sqlite3": "9.6.0",
     "@types/node": "22.20.2",
     "@vitest/coverage-v8": "5.0.0",
     "eslint": "10.10.0",
