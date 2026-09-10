@@ -1,0 +1,42 @@
+{
+  "name": "chip-datasheet-agent",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Agent that downloads chip datasheets, extracts parameters with provenance, pulls distributor pricing, and categorises parts.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:live": "LIVE_TESTS=1 vitest run --config vitest.live.config.ts",
+    "gate": "tsx scripts/gate.ts",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run gate",
+    "prepare": "simple-git-hooks"
+  },
+  "dependencies": {
+    "zod": "4.6.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.2",
+    "@vitest/coverage-v8": "5.0.0",
+    "eslint": "10.10.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.6",
+    "simple-git-hooks": "2.14.0",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "vitest": "5.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-push": "npm run check"
+  }
+}

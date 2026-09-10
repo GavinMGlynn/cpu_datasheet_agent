@@ -75,6 +75,8 @@ that supersedes the old one, and the old row's status changes to
 | D14 | 2026-09-10 | Digi-Key defaults: locale site AU, language en, currency AUD. Configurable through environment. | User is in Australia. Assumption, see open question Q4. | active |
 | D15 | 2026-09-10 | Every doc change is committed and pushed immediately. Every commit is pushed. | User rule. | active |
 | D16 | 2026-09-10 | Secrets live only in `.env` (gitignored). `.env.example` lists every variable with a comment. `src/config.ts` validates the environment at startup and fails loudly on anything missing or malformed. | Prevents silent misconfiguration. | active |
+| D17 | 2026-09-10 | TypeScript pinned to 6.0.3, not the 7.x line. | `typescript-eslint` 8.70 declares a peer range of `>=4.8.4 <6.1.0`; TypeScript 7 is the native-compiler line and is outside it. Revisit when the linter supports 7. | active |
+| D18 | 2026-09-10 | Entry-point shims in `bin/` and `scripts/` hold no logic; all logic lives in `src/` where per-file coverage applies. The gate scanner follows this: `src/gate/scan.ts` is the implementation, `scripts/gate.ts` the shim. | Keeps the coverage gate honest without excluding files. | active |
 
 ## 4. Status
 
@@ -83,7 +85,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 
 | Module | Name | Status | Completed on |
 | ------ | ---- | ------ | ------------ |
-| M0  | Foundation and tooling | not started | |
+| M0  | Foundation and tooling | in progress | |
 | M1  | Domain model and validation | not started | |
 | M2  | Structured logging and tool-call ledger | not started | |
 | M3  | Content-addressed cache | not started | |
@@ -183,7 +185,8 @@ userland, Linux 6.18 kernel).
 | Node | 22.23.1 | LTS line. |
 | npm | 10.9.8 | Package manager (no pnpm installed). |
 | gcc | 14.3.1 | Available for native modules if a prebuilt binary is missing. |
-| poppler-utils | not installed | Required by M0 task 0.1. |
+| poppler-utils | 24.02.0 | Installed 2026-09-10 via `dnf` (M0 task 0.1). `pdftotext`, `pdftoppm`, `pdfinfo` all report 24.02.0. |
+| OS | Rocky Linux 10.2 | WSL 2 distribution. |
 | GitHub CLI | authenticated as GavinMGlynn | Repo: `GavinMGlynn/cpu_datasheet_agent` (private). |
 
 Library versions observed on npm the same day, to be pinned in M0:
@@ -191,13 +194,53 @@ Library versions observed on npm the same day, to be pinned in M0:
 `zod` 4.6.1, `vitest` 5.0.0, `better-sqlite3` 13.0.3, `msw` 2.15.0,
 `pdf-lib` 1.17.1, `fast-check` 4.9.0, `typescript` 7.0.2,
 `typescript-eslint` 8.70.0, `eslint` 10.10.0, `prettier` 3.9.6, `tsx` 4.23.13.
-TypeScript 7 is the new native compiler line; M0 task 0.3 confirms that the
-lint toolchain supports it and falls back to the 5.x line if it does not.
+Outcome of M0 task 0.3: `typescript` is pinned to 6.0.3 (D17). Installed and
+pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
+`@eslint/js` 10.0.1, `eslint-config-prettier` 10.1.8, `prettier` 3.9.6,
+`vitest` 5.0.0, `@vitest/coverage-v8` 5.0.0, `zod` 4.6.1, `tsx` 4.23.13,
+`simple-git-hooks` 2.14.0, `@types/node` 22.20.2.
 
 ## 7. Development log
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-10 — Session 2: Module 0 built, awaiting first CI run
+
+**Done**
+
+- Installed `poppler-utils` 24.02.0 on the development machine.
+- Scaffolded the project: `package.json` with exact-pinned dependencies and
+  the `check` script, strict `tsconfig.json` plus `tsconfig.build.json`, ESLint
+  flat config with type-checked rules, Prettier, Vitest with 100% per-file
+  coverage thresholds, a separate opt-in live-test config, `.editorconfig`,
+  `.env.example`, the directory layout with a README in every module
+  directory, root `README.md`, GitHub Actions CI, and a `pre-push` hook that
+  runs `npm run check`.
+- Implemented and tested `src/errors.ts` (`ChipAgentError`), `src/config.ts`
+  (`loadConfig`, `ConfigError`, `ENV_VARIABLE_NAMES`), `src/util/deep-freeze.ts`,
+  and `src/gate/scan.ts` with the `scripts/gate.ts` shim. A test keeps
+  `.env.example` in lockstep with the config schema, and another runs the gate
+  over the real repository.
+- `npm run check` is green locally: 126 tests, 100% statements, branches,
+  functions, and lines on every file, gate clean.
+
+**Learned**
+
+- `typescript-eslint` does not yet accept TypeScript 7, so TypeScript is
+  pinned to 6.0.3 (D17). Zod 4 transforms and `exactOptionalPropertyTypes`
+  compile cleanly under it.
+- The gate scanner catches its own test file if constants or rule names spell
+  a forbidden token. Tokens are assembled from fragments and rule names avoid
+  the literal strings (see `src/gate/README.md`).
+- Vitest 5's text reporter prints an empty per-file table when every file is
+  at 100%; `coverage/coverage-summary.json` still lists each file, which is
+  what the per-file threshold checks.
+
+**Next**
+
+- Push, confirm the first CI run is green (task 0.14), then mark M0 complete
+  and start M1 (domain model and validation).
 
 ### 2026-09-10 — Session 1: repository and planning documents
 

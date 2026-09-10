@@ -62,7 +62,7 @@ module README, or a code comment must have a row here.
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
 | R-20 | Poppler | https://poppler.freedesktop.org/ | `pdftotext`, `pdftoppm`, `pdfinfo` (D08). Installed as `poppler-utils`. | unverified |
-| R-21 | TypeScript | https://www.typescriptlang.org/ | Language. Version 7.0.2 on npm at planning time; compatibility with the linter confirmed in M0 task 0.3. | unverified |
+| R-21 | TypeScript | https://www.typescriptlang.org/ | Language. Pinned to 6.0.3 (D17); 7.0.2 is outside the linter peer range. | unverified |
 | R-22 | Vitest | https://vitest.dev/ | Test runner, version 5.0.0 (D03). | unverified |
 | R-23 | Vitest coverage | https://vitest.dev/guide/coverage | `@vitest/coverage-v8`, per-file thresholds. | unverified |
 | R-24 | typescript-eslint | https://typescript-eslint.io/ | Lint rules `strictTypeChecked` and `stylisticTypeChecked`, version 8.70.0. | unverified |

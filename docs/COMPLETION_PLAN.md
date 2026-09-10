@@ -50,58 +50,59 @@ References in square brackets, for example `[R-03]`, point at rows in
 Goal: a repository where `npm run check` enforces every rule in this document
 before a single line of domain code exists.
 
-- [ ] 0.1 Install `poppler-utils` in the WSL distribution and record
+- [x] 0.1 Install `poppler-utils` in the WSL distribution and record
       `pdftotext -v`, `pdftoppm -v`, `pdfinfo -v` in `PROJECT_PLAN.md`
       section 6. [R-20]
-- [ ] 0.2 `package.json`: name, `"type": "module"`, `"engines": {"node": ">=22"}`,
+- [x] 0.2 `package.json`: name, `"type": "module"`, `"engines": {"node": ">=22"}`,
       `"private": true`, exact-pinned dependencies, scripts `build`,
       `typecheck`, `lint`, `format`, `format:check`, `test`, `test:coverage`,
       `test:live`, `check` (format:check, lint, typecheck, test:coverage, gate),
       `gate` (static grep gate from 0.9).
-- [ ] 0.3 `tsconfig.json`: `strict`, `module`/`moduleResolution` `NodeNext`,
+- [x] 0.3 `tsconfig.json`: `strict`, `module`/`moduleResolution` `NodeNext`,
       `target` ES2022, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
       `noImplicitOverride`, `noFallthroughCasesInSwitch`, `isolatedModules`,
       `verbatimModuleSyntax`. Separate `tsconfig.build.json` that excludes
       tests. Confirm the pinned TypeScript version works with
       `typescript-eslint`; if TypeScript 7 is not yet supported by the linter,
       pin the latest 5.x and record it as a decision. [R-21] [R-24]
-- [ ] 0.4 ESLint flat config with `typescript-eslint` `strictTypeChecked` and
+- [x] 0.4 ESLint flat config with `typescript-eslint` `strictTypeChecked` and
       `stylisticTypeChecked`, plus Prettier. Rule additions: `no-console`
       (error, allowed only in `bin/`), `@typescript-eslint/no-explicit-any`
       (error), `@typescript-eslint/switch-exhaustiveness-check` (error).
       [R-24] [R-25]
-- [ ] 0.5 Vitest config: coverage provider V8, `include: ["src/**"]`,
+- [x] 0.5 Vitest config: coverage provider V8, `include: ["src/**"]`,
       thresholds 100/100/100/100 with `perFile: true`, `reporter: ["text",
       "lcov", "json-summary"]`. `test:live` selects `test/live/**` and is
       skipped unless `LIVE_TESTS=1`. [R-22] [R-23]
-- [ ] 0.6 Create the directory layout from `PROJECT_PLAN.md` section 5 with a
+- [x] 0.6 Create the directory layout from `PROJECT_PLAN.md` section 5 with a
       `README.md` in each `src/` module directory stating its purpose (one
       paragraph; expanded when the module is built).
-- [ ] 0.7 `.env.example` listing every variable the project will ever read:
+- [x] 0.7 `.env.example` listing every variable the project will ever read:
       `DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `DIGIKEY_SANDBOX`,
       `DIGIKEY_LOCALE_SITE`, `DIGIKEY_LOCALE_LANGUAGE`,
       `DIGIKEY_LOCALE_CURRENCY`, `MOUSER_API_KEY`, `NEXAR_CLIENT_ID`,
       `NEXAR_CLIENT_SECRET`, `NEXAR_ENABLED`, `NEXAR_BUDGET_LIMIT`,
       `ANTHROPIC_API_KEY`, `AGENT_MODEL`, `AGENT_EFFORT`, `DATA_DIR`,
       `LOG_LEVEL`, `LIVE_TESTS`. Each with a comment.
-- [ ] 0.8 `src/config.ts`: Zod schema for the environment; `loadConfig(env)`
+- [x] 0.8 `src/config.ts`: Zod schema for the environment; `loadConfig(env)`
       returns a frozen typed config or throws `ConfigError` listing every
       missing or malformed variable at once. Adapter credentials are optional
       at load time and required at adapter construction time (so M0 to M6 run
       without any keys). Tests: every variable's valid and invalid forms,
       aggregate error message, defaults.
-- [ ] 0.9 `scripts/gate.ts`: scans `src/` and `test/` for the forbidden
+- [x] 0.9 Static gate: logic in `src/gate/scan.ts` (covered by tests), entry
+      shim `scripts/gate.ts`. Scans `src/`, `test/`, `scripts/`, `bin/` for the forbidden
       tokens listed in the Definition of Done and exits non-zero with file and
       line. Tests for the scanner itself.
-- [ ] 0.10 `src/errors.ts`: `ChipAgentError` base with `code`, `cause`,
+- [x] 0.10 `src/errors.ts`: `ChipAgentError` base with `code`, `cause`,
       `details`; helper `isChipAgentError`. Tests.
-- [ ] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: Node 22,
+- [x] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: Node 22,
       `npm ci`, `apt-get install poppler-utils`, `npm run check`. Runs on push
       and pull request. No secrets. [R-26]
-- [ ] 0.12 Git hooks via `simple-git-hooks`: `pre-push` runs `npm run check`.
+- [x] 0.12 Git hooks via `simple-git-hooks`: `pre-push` runs `npm run check`.
       Document the bypass (`--no-verify`) as forbidden except for docs-only
       commits.
-- [ ] 0.13 `README.md` at repo root: setup, environment, commands, and a link
+- [x] 0.13 `README.md` at repo root: setup, environment, commands, and a link
       to `docs/`.
 - [ ] 0.14 First CI run green with a trivial `src/config.ts` test suite at
       100% coverage.
