@@ -91,8 +91,8 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M1  | Domain model and validation | complete | 2026-09-10 |
 | M2  | Structured logging and tool-call ledger | complete | 2026-09-10 |
 | M3  | Content-addressed cache | complete | 2026-09-10 |
-| M4  | Persistence (SQLite) | in progress | |
-| M5  | Units, parsing, and normalisation | not started | |
+| M4  | Persistence (SQLite) | complete | 2026-09-10 |
+| M5  | Units, parsing, and normalisation | complete | 2026-09-10 |
 | M6  | PDF toolkit | not started | |
 | M7  | Digi-Key adapter | not started | |
 | M8  | Mouser adapter | not started | |
@@ -207,7 +207,39 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
-### 2026-09-10 — Session 6: Module 4 built, awaiting CI
+### 2026-09-10 — Session 7: Module 5 complete
+
+**Done**
+
+- `src/units/`: text normalisation, unit alias and prefix table,
+  `parseQuantity` / `parseRange` / `parseTemperatureRange` with exact
+  decimal scaling, canonical and engineering formatters, tolerance-based
+  comparison, and the Digi-Key and Mouser parametric mappers with
+  `parseDistributorValue` producing schema-keyed facts.
+- 277 new tests including fast-check round-trip properties for every unit.
+  Total about 1015 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- Build numbers from decimal text plus a prefix exponent
+  (`Number("70e-6")`) instead of multiplying; multiplication gives
+  `7.000000000000001e-05` and breaks exact round trips.
+- `+/-` must be stripped before range detection because `/` is also a range
+  separator.
+- Task 5.7 is complete against the parametric names known today and is
+  explicitly reopened when M7 and M8 record fixtures (see the module README).
+
+- Chased branch coverage from 98.8% back to 100% honestly: the gaps were
+  dead `?? ''` fallbacks on regex groups that always participate, forced by
+  `noUncheckedIndexedAccess`. Replaced with `src/util/regex.ts` `group()`,
+  which throws `REGEX_GROUP_MISSING` and is tested directly, and with
+  `siPrefix()` in place of a dead prefix-table fallback. 1034 tests.
+
+**Next**
+
+- Confirm CI, then M6 (PDF toolkit).
+
+### 2026-09-10 — Session 6: Module 4 complete
 
 **Done**
 
@@ -236,9 +268,11 @@ change. Never edit past entries; add a new one.
 - Migrations live in TypeScript modules holding SQL strings rather than
   `.sql` files, so the build needs no asset copying (noted in the README).
 
+- CI run 34445240661 green. M4 complete.
+
 **Next**
 
-- Confirm CI, mark M4 complete, start M5 (units and normalisation).
+- M5 (units and normalisation).
 
 ### 2026-09-10 — Session 5: Module 3 complete
 

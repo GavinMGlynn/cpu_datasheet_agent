@@ -289,28 +289,28 @@ Goal: turn the strings found in datasheets and distributor parametrics into
 canonical `Quantity` values, deterministically, and compare them with
 tolerances.
 
-- [ ] 5.1 Tokeniser for engineering notation: SI prefixes (`p` to `G`),
+- [x] 5.1 Tokeniser for engineering notation: SI prefixes (`p` to `G`),
       unit aliases (`V`, `Volt`, `A`, `mA`, `Hz`, `kHz`, `MHz`, `Ω`, `Ohm`,
       `ohm`, `°C`, `degC`, `C`, `%`), unicode variants (`µ`, `μ`, `u`, `Ω`,
       `Ω`), unicode minus and dashes, thin and non-breaking spaces, "3V3"
       style, `±`, `to`, `–`, `...`, and `/` as range separators.
-- [ ] 5.2 `parseQuantity(text, expectedUnit)` returns `Quantity` or a typed
+- [x] 5.2 `parseQuantity(text, expectedUnit)` returns `Quantity` or a typed
       `ParseError` with the reason. Never returns `NaN`. Rejects values whose
       unit family does not match `expectedUnit`.
-- [ ] 5.3 `parseRange(text, expectedUnit)` returns `QuantityRange` or
+- [x] 5.3 `parseRange(text, expectedUnit)` returns `QuantityRange` or
       `ParseError`; single values are not silently promoted to ranges.
-- [ ] 5.4 `parseTemperatureRange` for `-40°C to +125°C` and variants,
+- [x] 5.4 `parseTemperatureRange` for `-40°C to +125°C` and variants,
       including `TA` / `TJ` suffix detection returning the reference.
-- [ ] 5.5 `formatQuantity` producing a canonical string, with a property test
+- [x] 5.5 `formatQuantity` producing a canonical string, with a property test
       (`fast-check`) that `parse(format(q))` equals `q`. [R-28]
-- [ ] 5.6 `compareQuantities(a, b, tolerance)` with relative and absolute
+- [x] 5.6 `compareQuantities(a, b, tolerance)` with relative and absolute
       tolerance, unit conversion first, returning `equal` | `a_greater` |
       `b_greater` and the normalised difference.
-- [ ] 5.7 Distributor parametric mappers: `digikeyParameterToKey(name)` and
+- [x] 5.7 Distributor parametric mappers: `digikeyParameterToKey(name)` and
       `mouserAttributeToKey(name)` covering every buck-regulator attribute
       name seen in the M7/M8 fixtures, returning `null` for unmapped names.
       Every mapping row has a test.
-- [ ] 5.8 Tests: table-driven cases for every alias and separator, property
+- [x] 5.8 Tests: table-driven cases for every alias and separator, property
       tests for round trips and for "parse never throws anything but
       `ParseError`", exhaustive mapper coverage.
 
