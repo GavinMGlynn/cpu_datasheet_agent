@@ -1,0 +1,457 @@
+{
+  "mpn": "IR3899MTRPBF",
+  "manufacturer": "Infineon Technologies",
+  "category": "buck_regulator",
+  "reason": "A 9 A part, which nothing else in the set reaches, from a fourth manufacturer. A 21-V synchronous regulator in a PQFN with a programmable frequency, a clock input, a power-good output and a feedback reference of 0.5 V.",
+  "datasheet": {
+    "url": "https://www.infineon.com/dgdl/ir3899m.pdf?fileId=5546d462533600a4015355d5f3f71817",
+    "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+    "pageCount": 45,
+    "fetchedAt": "2026-09-11T09:05:00.000Z",
+    "localPath": "cache/pdf/ef/80/ef806c4dee239a023c961ff6aac381013962023d583e182ec6cba58469f389bd",
+    "coversMpns": ["IR3899MTRPBF"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Input Voltage Range** Vin MIN 5 MAX 21 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 21,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Input Voltage Range** Vin MIN 5 MAX 21 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 25,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 5,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings PVin, Vin -0.3V to 25V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Output Voltage Range: 0.5V to 0.86x Vin"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Output Voltage Range: 0.5V to 0.86x Vin"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Output Voltage Range: 0.5V to 0.86x Vin, set by an external divider"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 9,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Output Current Range IO MIN 0 MAX 9 A"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "unit": "Hz",
+        "min": 300000,
+        "max": 1500000
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Switching Frequency FS MIN 300 MAX 1500 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 7,
+        "method": "image",
+        "quote": "Feedback Voltage Vfb Vref and Vp pin floating TYP 0.5 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 7,
+        "method": "image",
+        "quote": "Accuracy -40C < Tj < +125C MIN -1.0 MAX +1.0 %"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 8,
+        "method": "text",
+        "quote": "The Electrical Characteristics give no operating quiescent current for the device"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 8,
+        "method": "text",
+        "quote": "The Electrical Characteristics give no shutdown current"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Single-Input Voltage, Synchronous Buck Regulator"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 18,
+        "method": "text",
+        "quote": "IR3899 includes two low Rds(on) MOSFETs using IR HEXFET technology"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Internal Digital Soft-Start/Soft-Stop"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Enable input with Voltage Monitoring Capability"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Programmable Power Good Output with tracking"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "selectable",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Selectable diode emulation mode for improved light load efficiency"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 7,
+        "method": "image",
+        "quote": "Sync Frequency Range Fsync MIN 270 MAX 1650 kHz"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Operating Junction Temperature TJ MIN -40 MAX 125 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Operating Junction Temperature TJ MIN -40 MAX 125 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 6,
+        "method": "text",
+        "quote": "Operating Junction Temperature TJ"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "PQFN 5x6",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 42,
+        "method": "text",
+        "quote": "PQFN devices should be handled as shown in the following figures"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 42,
+        "method": "text",
+        "quote": "PQFN"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 6e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 7,
+        "method": "image",
+        "quote": "Min Pulse Width Tmin(ctrl) MAX 60 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 86,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 7,
+        "method": "image",
+        "quote": "Max Duty Cycle Dmax Fs = 300kHz, PVin = Vin = 12V MIN 86 %"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "Efficiency (%) is shown as a curve on the front page"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 14,
+        "method": "text",
+        "quote": "RDSON OF MOSFETS OVER TEMPERATURE AT Vcc=6.4V is given as a curve, not a number"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 14,
+        "method": "text",
+        "quote": "RDSON OF MOSFETS OVER TEMPERATURE AT Vcc=6.4V is given as a curve, not a number"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "08fe759e281076d2283c956d5cdbb1966a07573c9de17d47a72f37f6f785802e",
+        "page": 1,
+        "method": "text",
+        "quote": "The features list no automotive qualification"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_12a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "qfn",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "sync", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "IR3899",
+    "basePart": "IR3899",
+    "packageFamily": "qfn",
+    "pins": null,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "shutdownCurrent": "Not stated.",
+    "efficiencyPeak": "Given only as curves, with no peak stated in text.",
+    "voutMax": "Not a number: the output range is stated as 0.5 V to 0.86 times the input, so the upper end moves with the input.",
+    "quiescentCurrent": "Not stated. The electrical tables specify the supply current of the internal LDO and the drivers, not a device quiescent current.",
+    "rdsOnHigh": "Given only as a curve of RDS(on) against temperature on page 14; the tables state no number.",
+    "rdsOnLow": "As rdsOnHigh: a curve, not a number.",
+    "lightLoadMode": "Selectable: diode emulation is enabled or disabled by a pin, so the part runs in forced PWM or skips as configured.",
+    "package": "The datasheet calls it PQFN throughout and gives the outline rather than a lead count, so no pin count is claimed.",
+    "ioutMax": "The Recommended Operating Conditions state 0 to 9 A, and the running header calls it a 9A SupIRBuck."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T10:20:00.000Z"
+}

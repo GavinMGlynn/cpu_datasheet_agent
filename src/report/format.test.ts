@@ -71,6 +71,13 @@ describe('formatParameterValue', () => {
   });
 });
 
+describe('a one-sided bound', () => {
+  it('reads as the limit it is', () => {
+    expect(formatParameterValue({ unit: 'Hz', max: 1_000_000 })).toBe('at most 1 MHz');
+    expect(formatParameterValue({ unit: 'Hz', min: 100_000 })).toBe('at least 100 kHz');
+  });
+});
+
 describe('formatObservedValue', () => {
   it.each([
     [{ kind: 'quantity', value: { value: 36, unit: 'V' } }, '36 V'],

@@ -44,8 +44,10 @@ buck-regulator parameters in schema order; a test keeps it equal to the keys
 of `BuckRegulatorParameters`.
 
 Nullable parameters (the datasheet may not state them): `voutFixed`,
-`feedbackReference`, `feedbackAccuracy`, `shutdownCurrent`, `minOnTime`,
-`maxDutyCycle`, `efficiencyPeak`, `rdsOnHigh`, `rdsOnLow`. Everything else is
+`voutMax`, `feedbackReference`, `feedbackAccuracy`, `shutdownCurrent`,
+`minOnTime`, `maxDutyCycle`, `efficiencyPeak`, `rdsOnHigh`, `rdsOnLow`.
+`voutMax` is null where a datasheet gives the upper output limit as an
+equation rather than a number, which TI's TPS54331 does. Everything else is
 required and non-null. `switchingFrequency` is a fixed `Hz` quantity or an
 `Hz` range.
 

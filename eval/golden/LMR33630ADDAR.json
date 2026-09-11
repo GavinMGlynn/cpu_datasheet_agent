@@ -1,0 +1,479 @@
+{
+  "mpn": "LMR33630ADDAR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "A 36-V, 3-A synchronous converter whose family differs by a version letter that sets the switching frequency (A 400 kHz, B 1.4 MHz, C 2.1 MHz) and by a package that changes the on-resistance. Covers vinClass le_42v with a power-good pin and an automatic PFM light-load mode, and is the part that makes the version letter part of the identity (D31).",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/lmr33630",
+    "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+    "pageCount": 60,
+    "fetchedAt": "2026-09-11T08:32:23.264Z",
+    "localPath": "cache/pdf/51/83/51835da3d596e0ea82f7c8b61132705f0a5c88afcf76e43e5efe8b7317758e5a",
+    "coversMpns": [
+      "LMR33630ADDA",
+      "LMR33630ADDAG4",
+      "LMR33630ADDAR",
+      "LMR33630ARNXR",
+      "LMR33630ARNXT"
+    ]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Recommended Operating Conditions: Input voltage VIN to PGND MIN 3.8 MAX 36 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 36,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "Input voltage range: 3.8 V to 36 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 38,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN to PGND -0.3 to 38 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 1,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Adjustable output voltage VOUT MIN 1 MAX 24 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 24,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Adjustable output voltage VOUT MIN 1 MAX 24 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Adjustable output voltage VOUT 1 to 24 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "Output current: 3 A"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 400000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "fSW Switching frequency \"A\" Version MIN 340 TYP 400 MAX 460 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 1,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "VFB Feedback voltage; ADJ option MIN 0.985 TYP 1 MAX 1.015 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1.5,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "VFB Feedback voltage MIN 0.985 TYP 1 MAX 1.015 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000024,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "IQ Operating quiescent current VFB = 1.2 V TYP 24 MAX 34 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000005,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "ISD Shutdown quiescent current EN = 0 TYP 5 MAX 10 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "LMR33630 SIMPLE SWITCHER 3.8-V to 36-V, 3-A Synchronous Step-down Voltage Converter"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "75-mOhm/50-mOhm RDS-ON power MOSFETs"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.004,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "tSS Internal soft-start time MIN 2.9 TYP 4 MAX 6 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 5,
+        "method": "text",
+        "quote": "Pin Functions: EN 3"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 5,
+        "method": "text",
+        "quote": "Pin Functions: PG 4"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "pfm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 15,
+        "method": "text",
+        "quote": "In auto mode, the device moves between PWM and PFM as the load changes."
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 5,
+        "method": "text",
+        "quote": "Pin Functions: PGND 1, VIN 2, EN 3, PG 4, FB 5, VCC 6, BOOT 7, SW 8"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Over the recommended operating temperature range of -40 C to 125 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "Over the recommended operating temperature range of -40 C to 125 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "Junction temperature range -40C to +125C"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "8-SO PowerPAD (DDA)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 41,
+        "method": "text",
+        "quote": "LMR33630ADDAR Active Production SO PowerPAD"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 41,
+        "method": "text",
+        "quote": "SO PowerPAD (DDA) | 8"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 6.8e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "Short minimum on-time of 68 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 95,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 6,
+        "method": "text",
+        "quote": "The maximum output voltage can be extended to 95% of VIN; contact TI for details."
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": {
+        "value": 95,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 1,
+        "method": "text",
+        "quote": "Peak efficiency > 95%"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.095,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS-ON-HS DDA package TYP 95 MAX 160 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.066,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS-ON-LS DDA package TYP 66 MAX 110 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "3b0920a4e56a0b3f5f214a6317d3c06cff6e541e5054024adc31c30acc50c04a",
+        "page": 41,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part; the automotive part is the separate LMR33630-Q1"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "soic",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "LMR33630",
+    "basePart": "LMR33630-A",
+    "packageFamily": "soic",
+    "pins": 8,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "rdsOnHigh": "The DDA package figure. The same silicon in the RNX HotRod package is 75 mOhm, which is the number the front page quotes.",
+    "rdsOnLow": "The DDA package figure; the RNX package is 50 mOhm.",
+    "switchingFrequency": "Set by the version letter, not by a pin: A is 400 kHz, B is 1.4 MHz and C is 2.1 MHz. This file is the A version.",
+    "maxDutyCycle": "Not a duty-cycle specification: page 6 says the output can be extended to 95% of VIN on request, which is the same constraint stated as a voltage.",
+    "operatingTempMax": "The recommended range is -40 to 125 C. The absolute maximum junction temperature is 150 C, with a note that operating above 125 C degrades lifetime."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T09:15:00.000Z"
+}

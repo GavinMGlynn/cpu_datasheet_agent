@@ -1,0 +1,472 @@
+{
+  "mpn": "TPS54331DDAR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The exposed-pad sibling of TPS54331DR: the same silicon and the same datasheet in the DDA PowerPAD package rather than the plain SOIC. It is the pair that shows what a package suffix changes and what it does not.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/tps54331",
+    "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+    "pageCount": 41,
+    "fetchedAt": "2026-09-11T08:10:47.140Z",
+    "localPath": "cache/pdf/d3/10/d310ee81bf1914b2f542b47304ed04a2f0b842b276acba31756ace0a1a9b02eb",
+    "coversMpns": [
+      "TPS54331D",
+      "TPS54331DDA",
+      "TPS54331DDAR",
+      "TPS54331DG4",
+      "TPS54331DR",
+      "TPS54331DRG4",
+      "TPS54331GDR"
+    ]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "Operating input voltage on (VIN pin) MIN 3.5 MAX 28 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 28,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "Operating input voltage on (VIN pin) MIN 3.5 MAX 28 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 30,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings: Input voltage VIN -0.3 to 30 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "Adjustable output voltage down to 0.8 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 21,
+        "method": "text",
+        "quote": "The upper limit of the output-voltage set point is constrained by the maximum duty cycle of 91% and is calculated with Equation 32."
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "Adjustable output voltage down to 0.8 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated 80-mΩ high-side MOSFET supports up to 3-A continuous output current"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 570000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 6,
+        "method": "text",
+        "quote": "Switching frequency VIN = 12 V, 25°C MIN 456 TYP 570 MAX 684 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "Voltage reference MIN 0.772 TYP 0.8 MAX 0.828 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 3.5,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "Voltage reference MIN 0.772 TYP 0.8 MAX 0.828 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.00011,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "Operating – non-switching supply current VSENSE = 0.85 V TYP 110 MAX 190 μA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000001,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "Shutdown supply current EN = 0 V, VIN = 12 V, –40°C to 85°C TYP 1 MAX 4 μA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "non_synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "The TPS54331 device is a 28-V, 3-A non-synchronous buck converter that integrates a low RDS(on) high-side MOSFET."
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "integrates a low RDS(on) high-side MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "SLOW START (SS PIN) Charge current V(SS) = 0.4 V 2 μA"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: EN 3"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 3,
+        "method": "text",
+        "quote": "BOOT 1, VIN 2, EN 3, SS 4, VSENSE 5, COMP 6, GND 7, PH 8"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "psm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "High efficiency at light loads with a pulse skipping Eco-mode"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 3,
+        "method": "text",
+        "quote": "BOOT 1, VIN 2, EN 3, SS 4, VSENSE 5, COMP 6, GND 7, PH 8"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature MIN –40 MAX 150 °C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 150,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature MIN –40 MAX 150 °C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "8-SO PowerPAD (DDA)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 29,
+        "method": "text",
+        "quote": "TPS54331DDAR Active Production SO PowerPAD (DDA) | 8 2500 | LARGE T&R"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 29,
+        "method": "text",
+        "quote": "TPS54331DDAR SO PowerPAD (DDA) | 8"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 1.05e-7,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 6,
+        "method": "text",
+        "quote": "Minimum controllable on time VIN = 12 V, 25°C TYP 105 MAX 130 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 90,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 6,
+        "method": "text",
+        "quote": "Maximum controllable duty ratio BOOT-PH = 6 V MIN 90% TYP 93%"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 23,
+        "method": "text",
+        "quote": "Efficiency - %"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.08,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 5,
+        "method": "text",
+        "quote": "HIGH-SIDE MOSFET On resistance BOOT-PH = 6 V, VIN = 12 V TYP 80 MAX 150 mΩ"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 1,
+        "method": "text",
+        "quote": "non-synchronous buck converter that integrates a low RDS(on) high-side MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "cf72dfd0ac69eec645b7b493de628dc1c3aa66f5f925a2ea9be6bb5c38260730",
+        "page": 29,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "non_synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "soic",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "TPS54331",
+    "basePart": "TPS54331",
+    "packageFamily": "soic",
+    "pins": 8,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "voutMax": "Not stated as a number: section 8.2.2.10 on page 21 gives the upper limit as Equation 32, in terms of the input voltage, duty cycle, on-resistance, diode drop and load.",
+    "feedbackAccuracy": "Arithmetic on the stated reference limits: 0.828 V and 0.772 V about 0.8 V is +/-3.5%. The datasheet states the limits, not the percentage.",
+    "quiescentCurrent": "Operating non-switching supply current, 110 uA typical. The 1 uA on the front page is the shutdown current, recorded separately.",
+    "maxDutyCycle": "The guaranteed minimum of the maximum controllable duty ratio (90%). The typical is 93%, and the application section on page 21 uses 91%.",
+    "efficiencyPeak": "Given only as curves in the Typical Characteristics on page 23, with no peak stated in text. Reading a number off a curve would be a guess.",
+    "rdsOnLow": "A non-synchronous converter: the low side is an external catch diode, so there is no low-side FET to have an on-resistance.",
+    "thermalPad": "The DDA orderable is the PowerPAD version of the same device; the DR orderable in the same family is the plain SOIC, and nothing else about the two differs.",
+    "package": "SO PowerPAD is TI’s name for an exposed-pad SOIC, which is why the package family is still soic."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:30:00.000Z"
+}

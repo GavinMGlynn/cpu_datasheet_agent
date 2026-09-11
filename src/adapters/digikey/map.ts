@@ -94,10 +94,55 @@ export function toOffers(product: DigiKeyProduct, context: OfferContext): Offer[
   return offers;
 }
 
-/** The datasheet URL from a product, if it has one. Often a manufacturer redirect. */
+/** How many times a wrapped URL is unwrapped before giving up. */
+const MAX_UNWRAPS = 4;
+const PERCENT_ENCODED = /%[0-9A-Fa-f]{2}/;
+
+/**
+ * Unwraps a distributor link that only points at the datasheet.
+ *
+ * Digi-Key gives every Texas Instruments part an interstitial —
+ * `ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=…` — which
+ * serves HTML, not a PDF, so fetching it fails on content type. The document
+ * itself is the `gotoUrl` parameter, sometimes encoded twice
+ * (`http%253A%252F%252F`), which is why this decodes in a loop rather than
+ * once.
+ *
+ * Anything that is not a wrapped link comes back unchanged, as does a
+ * `gotoUrl` that does not hold an http(s) URL: a link nobody can read is
+ * still better recorded than replaced with a guess.
+ */
+export function unwrapDatasheetUrl(url: string): string {
+  let current = url;
+  for (let unwrapped = 0; unwrapped < MAX_UNWRAPS; unwrapped += 1) {
+    let inner: string | null;
+    try {
+      inner = new URL(current).searchParams.get('gotoUrl');
+    } catch {
+      return current;
+    }
+    if (inner === null) {
+      return current;
+    }
+    let target = inner;
+    for (let decoded = 0; decoded < MAX_UNWRAPS && PERCENT_ENCODED.test(target); decoded += 1) {
+      target = decodeURIComponent(target);
+    }
+    if (!/^https?:\/\//i.test(target)) {
+      return current;
+    }
+    current = target;
+  }
+  return current;
+}
+
+/**
+ * The datasheet URL from a product, if it has one, with any distributor
+ * interstitial unwrapped.
+ */
 export function datasheetUrlOf(product: DigiKeyProduct): string | undefined {
   const url = product.DatasheetUrl;
-  return url === undefined || url.trim() === '' ? undefined : url;
+  return url === undefined || url.trim() === '' ? undefined : unwrapDatasheetUrl(url.trim());
 }
 
 /** The first datasheet link from the media endpoint. */

@@ -21,6 +21,15 @@ export interface RangeLike {
   readonly typ?: number | undefined;
 }
 
+/**
+ * One stated end and nothing about the other, as a union of the two shapes
+ * rather than a pair of optional fields: code that reads the end a value has
+ * should not need a fallback for the end it cannot have.
+ */
+export type BoundLike =
+  | { readonly unit: string; readonly min: number; readonly max?: undefined }
+  | { readonly unit: string; readonly max: number; readonly min?: undefined };
+
 export interface SoftStartLike {
   readonly present: boolean;
   readonly time: QuantityLike | null;
@@ -40,6 +49,18 @@ export function isRange(value: unknown): value is RangeLike {
     typeof value.unit === 'string' &&
     typeof value.min === 'number' &&
     typeof value.max === 'number'
+  );
+}
+
+/**
+ * A stated end with nothing about the other. Checked after {@link isRange},
+ * which a two-ended value satisfies.
+ */
+export function isBound(value: unknown): value is BoundLike {
+  return (
+    isObject(value) &&
+    typeof value.unit === 'string' &&
+    (typeof value.min === 'number') !== (typeof value.max === 'number')
   );
 }
 

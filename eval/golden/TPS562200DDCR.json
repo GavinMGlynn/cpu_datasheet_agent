@@ -1,0 +1,468 @@
+{
+  "mpn": "TPS562200DDCR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The 2 A sibling of TPS563200 on the same datasheet, differing only in output current and on-resistance. It is in the set so that an extraction has to tell two parts on one document apart.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/tps563200",
+    "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+    "pageCount": 36,
+    "fetchedAt": "2026-09-11T08:17:00.000Z",
+    "localPath": "cache/pdf/61/6b/616b285455bdefe753d01adbf03de330f7a8a747d356bc13bc81c0c29c745c15",
+    "coversMpns": ["TPS562200DDCR", "TPS562200DDCT", "TPS563200DDCR", "TPS563200DDCT"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 4.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "VIN Supply input voltage range MIN 4.5 MAX 17 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 17,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "VIN Supply input voltage range MIN 4.5 MAX 17 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 19,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings: Input voltage range VIN, EN -0.3 to 19 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.76,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage range: 0.76 V to 7 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 7,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage range: 0.76 V to 7 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage range: 0.76 V to 7 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 2,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "TPS562200 - 2-A converter with integrated 122-mOhm and 72-mOhm FETs"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 650000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Switching frequency: 650 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.765,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 7,
+        "method": "text",
+        "quote": "VFB(TH) VFB threshold voltage TA = 25C, VO = 1.05 V, continuous mode operation MIN 758 TYP 765 MAX 772 mV"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "1% feedback voltage accuracy (25C)"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.00023,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 7,
+        "method": "text",
+        "quote": "I(VIN) Operating - non-switching supply current TPS562200 TYP 230 MAX 330 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000003,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 7,
+        "method": "text",
+        "quote": "I(VINSDN) Shutdown supply current VIN current, TA = 25C, EN = 0 V TYP 3 MAX 10 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "TPS56x200 4.5-V to 17-V Input, 2-A, 3-A Synchronous Step-down Voltage Regulator in 6-Pin SOT-23"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "TPS562200 - 2-A converter with integrated 122-mOhm and 72-mOhm FETs"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.001,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Fixed soft start: 1 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 4,
+        "method": "text",
+        "quote": "EN 5 Enable input control. Active high and must be pulled up to enable the device."
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 4,
+        "method": "text",
+        "quote": "Pin Functions: GND 1, SW 2, VIN 3, VFB 4, EN 5, VBST 6"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "psm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 1,
+        "method": "text",
+        "quote": "Advanced Eco-mode pulse-skip"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 4,
+        "method": "text",
+        "quote": "Pin Functions: GND 1, SW 2, VIN 3, VFB 4, EN 5, VBST 6"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating free-air temperature MIN -40 MAX 85 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 85,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating free-air temperature MIN -40 MAX 85 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "ambient",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating free-air temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "6-SOT-23-THIN (DDC)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 29,
+        "method": "text",
+        "quote": "TPS562200DDCR Active Production SOT-23-THIN (DDC) | 6 3000 | LARGE T&R"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 29,
+        "method": "text",
+        "quote": "SOT-23-THIN (DDC) | 6"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 13,
+        "method": "text",
+        "quote": "7.3.1 The Adaptive On-Time Control And PWM Operation"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 65,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 26,
+        "method": "text",
+        "quote": "The maximum recommended operating duty cycle is 65%."
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 10,
+        "method": "text",
+        "quote": "Efficiency (%)"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.122,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS(on)h High side switch resistance TPS562200 122 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.072,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS(on)l Low side switch resistance TPS562200 72 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ec98a636c386d233ed2dfa01cc84cb6c73cd3cc25b0cadd27a2f1c6ca4a45df2",
+        "page": 29,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_18v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "sot23",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "industrial",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "TPS562200",
+    "basePart": "TPS562200",
+    "packageFamily": "sot23",
+    "pins": 6,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "ioutMax": "The 2 A version. Everything on this datasheet except the output current, the on-resistances and the quiescent current is shared with the TPS563200.",
+    "operatingTempMax": "The Recommended Operating Conditions give TA -40 to 85 C, which is what the description specifies the part over. The packaging addendum on page 29 shows -40 to 125 in its own Op temp column, and the electrical table is headed TJ -40 to 150 C.",
+    "maxDutyCycle": "A recommendation rather than a controllable-duty-ratio specification: page 26 says the maximum recommended operating duty cycle is 65%, which is what sets the minimum input voltage for a given output.",
+    "minOnTime": "Not stated. The part uses adaptive on-time control (section 7.3.1, page 13) and gives no minimum on time in any table.",
+    "efficiencyPeak": "Given only as curves in the Typical Characteristics, with no peak stated in text.",
+    "feedbackReference": "The continuous-mode threshold, 765 mV typical. In Eco-mode the threshold is 772 mV, which is the same reference measured a different way."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:15:00.000Z"
+}

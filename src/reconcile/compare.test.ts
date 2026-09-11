@@ -103,6 +103,110 @@ describe('numeric comparison', () => {
   });
 });
 
+describe('a stored limit', () => {
+  const upTo1MHz = { unit: 'Hz', max: 1_000_000 } as const;
+
+  it('agrees with the same limit, which is the one thing that corroborates it', () => {
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'max',
+        value: { value: 1_000_000, unit: 'Hz' },
+      }),
+    ).toBe('agree');
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'max',
+        value: { value: 2_200_000, unit: 'Hz' },
+      }),
+    ).toBe('conflict');
+  });
+
+  it('is contradicted by a value beyond it', () => {
+    expect(verdict('switchingFrequency', upTo1MHz, hertz(2_200_000))).toBe('conflict');
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'range',
+        value: { unit: 'Hz', min: 100_000, max: 2_200_000 },
+      }),
+    ).toBe('conflict');
+  });
+
+  it('is not confirmed by a value inside it: both are true of the same part', () => {
+    expect(verdict('switchingFrequency', upTo1MHz, hertz(570_000))).toBe('incomparable');
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'range',
+        value: { unit: 'Hz', min: 100_000, max: 900_000 },
+      }),
+    ).toBe('incomparable');
+  });
+
+  it('reads a lower limit the same way round', () => {
+    const from100kHz = { unit: 'Hz', min: 100_000 } as const;
+    expect(
+      verdict('switchingFrequency', from100kHz, {
+        kind: 'min',
+        value: { value: 100_000, unit: 'Hz' },
+      }),
+    ).toBe('agree');
+    expect(verdict('switchingFrequency', from100kHz, hertz(50_000))).toBe('conflict');
+    expect(verdict('switchingFrequency', from100kHz, hertz(570_000))).toBe('incomparable');
+    expect(
+      verdict('switchingFrequency', from100kHz, {
+        kind: 'max',
+        value: { value: 1_000_000, unit: 'Hz' },
+      }),
+    ).toBe('incomparable');
+    // A range is judged by its lower end against a lower limit.
+    expect(
+      verdict('switchingFrequency', from100kHz, {
+        kind: 'range',
+        value: { unit: 'Hz', min: 200_000, max: 2_200_000 },
+      }),
+    ).toBe('incomparable');
+    expect(
+      verdict('switchingFrequency', from100kHz, {
+        kind: 'range',
+        value: { unit: 'Hz', min: 50_000, max: 2_200_000 },
+      }),
+    ).toBe('conflict');
+  });
+
+  it('has nothing to say about a value that is not a number', () => {
+    expect(verdict('switchingFrequency', upTo1MHz, { kind: 'enum', value: 'fixed' })).toBe(
+      'incomparable',
+    );
+    expect(verdict('switchingFrequency', upTo1MHz, { kind: 'boolean', value: true })).toBe(
+      'incomparable',
+    );
+    expect(verdict('switchingFrequency', upTo1MHz, { kind: 'text', value: '570 kHz' })).toBe(
+      'incomparable',
+    );
+  });
+
+  it('reads a limit of the other kind as a value inside or beyond it', () => {
+    // An upper limit against a stated lower bound: the two speak about
+    // different ends, so only exceeding decides anything.
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'min',
+        value: { value: 100_000, unit: 'Hz' },
+      }),
+    ).toBe('incomparable');
+    expect(
+      verdict('switchingFrequency', upTo1MHz, {
+        kind: 'min',
+        value: { value: 2_200_000, unit: 'Hz' },
+      }),
+    ).toBe('conflict');
+  });
+
+  it('reads back as the limit it is', () => {
+    expect(describeExtracted(upTo1MHz)).toBe('at most 1 MHz');
+    expect(describeExtracted({ unit: 'Hz', min: 100_000 })).toBe('at least 100 kHz');
+  });
+});
+
 describe('non-numeric comparison', () => {
   it('compares enumerations by their value', () => {
     expect(verdict('topology', 'synchronous', { kind: 'enum', value: 'synchronous' })).toBe(

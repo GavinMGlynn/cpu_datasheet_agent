@@ -5,6 +5,7 @@ import { ValidationError } from '../../core/validation-error.js';
 import {
   datasheetUrlFromMedia,
   datasheetUrlOf,
+  unwrapDatasheetUrl,
   packagingOf,
   parametricFacts,
   toOffers,
@@ -294,5 +295,45 @@ describe('parametricFacts', () => {
       expect(failures, `${slug} produced parse failures`).toEqual([]);
       expect(facts.length, `${slug} produced no facts`).toBeGreaterThan(4);
     }
+  });
+});
+
+describe('unwrapDatasheetUrl', () => {
+  it('unwraps the interstitial Digi-Key gives every Texas Instruments part', () => {
+    expect(
+      unwrapDatasheetUrl(
+        'https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps54331',
+      ),
+    ).toBe('https://www.ti.com/lit/gpn/tps54331');
+  });
+
+  it('unwraps one encoded twice, as TPS62130 is', () => {
+    expect(
+      unwrapDatasheetUrl(
+        'https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Ftps62130',
+      ),
+    ).toBe('http://www.ti.com/lit/gpn/tps62130');
+  });
+
+  it('gives up rather than unwrapping forever', () => {
+    // Four wrappers deep is already absurd; a link that never bottoms out is
+    // returned as it was rather than chased.
+    let url = 'https://example.test/datasheet.pdf';
+    for (let depth = 0; depth < 6; depth += 1) {
+      url = `https://wrap.test/go?gotoUrl=${encodeURIComponent(url)}`;
+    }
+    expect(unwrapDatasheetUrl(url)).toContain('gotoUrl=');
+  });
+
+  it.each([
+    ['a direct link', 'https://www.diodes.com/assets/Datasheets/AP63200.pdf'],
+    ['a gotoUrl that is not a URL', 'https://example.test/x?gotoUrl=not-a-url'],
+    ['something that is not a URL at all', 'not a url'],
+  ])('leaves %s alone', (_label, url) => {
+    expect(unwrapDatasheetUrl(url)).toBe(url);
+  });
+
+  it('unwraps the URL a product carries', () => {
+    expect(datasheetUrlOf(product('TPS54331DR'))).toBe('https://www.ti.com/lit/gpn/tps54331');
   });
 });

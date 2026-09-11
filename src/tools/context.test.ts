@@ -37,13 +37,15 @@ describe('createToolContext', () => {
       expect(context.ledger.sessionId).toMatch(/[0-9a-f-]{36}/);
       expect(context.headless).toBe(true);
       expect(context.policy.allowConfirmedSpend).toBe(true);
-      expect(new Date(context.now()).toISOString()).toBe(context.now());
+      // One reading, compared with itself: two calls are a millisecond apart.
+      const stamp = context.now();
+      expect(new Date(stamp).toISOString()).toBe(stamp);
       expect(context.newId()).toMatch(/[0-9a-f-]{36}/);
       expect(context.toolkit).toBeDefined();
     } finally {
       db.close();
     }
-  });
+  }, 30_000);
 
   it('leaves out a distributor with no credentials rather than failing on first use', async () => {
     const { context, db } = await createToolContext({ config: config() });
@@ -53,7 +55,7 @@ describe('createToolContext', () => {
     } finally {
       db.close();
     }
-  });
+  }, 30_000);
 
   it('builds the distributors that are configured', async () => {
     const { context, db } = await createToolContext({
@@ -69,7 +71,7 @@ describe('createToolContext', () => {
     } finally {
       db.close();
     }
-  });
+  }, 30_000);
 
   it('takes the policy, session and clock it is given', async () => {
     const { context, db } = await createToolContext({
@@ -89,7 +91,7 @@ describe('createToolContext', () => {
     } finally {
       db.close();
     }
-  });
+  }, 30_000);
 
   it('opens the same database again on a second run', async () => {
     const first = await createToolContext({ config: config() });
@@ -109,5 +111,5 @@ describe('createToolContext', () => {
     } finally {
       second.db.close();
     }
-  });
+  }, 30_000);
 });

@@ -1,0 +1,465 @@
+{
+  "mpn": "AP62200WU-7",
+  "manufacturer": "Diodes Incorporated",
+  "category": "buck_regulator",
+  "reason": "An 18-V, 2-A synchronous converter whose datasheet covers five orderables differing in package, light-load mode and feedback voltage at once. It is the clearest case in the set of a part number that has to be decoded before any value on the document applies to it.",
+  "datasheet": {
+    "url": "https://www.diodes.com/assets/Datasheets/AP62200_AP62201_AP62200T.pdf",
+    "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+    "pageCount": 23,
+    "fetchedAt": "2026-09-11T09:30:00.000Z",
+    "localPath": "cache/pdf/90/bd/90bd1338c94f8d7546e24180c477683c660540a330129a56961c2ee5111a4909",
+    "coversMpns": ["AP62200Z6-7", "AP62200WU-7", "AP62201Z6-7", "AP62201WU-7", "AP62200TWU-7"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 4.2,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 4.2 MAX 18.0 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 18,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 4.2 MAX 18.0 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 20,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "image",
+        "quote": "Absolute Maximum Ratings VIN Supply Pin Voltage -0.3 to +20.0 (DC) V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "VOUT Output Voltage MIN 0.8 MAX 7.0 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 7,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "VOUT Output Voltage MIN 0.8 MAX 7.0 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "AP62200WU-7 TSOT26 (Standard) PFM/PWM 0.800 WU: the feedback voltage, set by an external divider"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 2,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 1,
+        "method": "text",
+        "quote": "4.2V TO 18V INPUT, 2A LOW IQ SYNCHRONOUS BUCK"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 750000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "fSW Oscillator Frequency VOUT = 5V, CCM TYP 750 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "AP62200WU-7 TSOT26 (Standard) PFM/PWM 0.800"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "The feedback voltage limits for this variant did not survive text extraction"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000135,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "IQ Quiescent Supply Current AP62200/AP62200T: VFB = 0.85V TYP 135 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.0000013,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "ISHDN Shutdown Supply Current VEN = 0V TYP 1.3 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 1,
+        "method": "text",
+        "quote": "fully integrates a 90mOhm high-side power MOSFET and a 65mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 1,
+        "method": "text",
+        "quote": "fully integrates a 90mOhm high-side power MOSFET and a 65mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.0025,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "tSS Soft-Start Time TYP 2.5 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "VEN Enable/UVLO Pin Voltage -0.3 to +8.0 V"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "The 6-pin TSOT26 and SOT563 pinouts carry no power-good output"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "pfm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "AP62200WU-7 TSOT26 (Standard) PFM/PWM, against AP62201WU-7 PWM Only"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "The ordering table lists no synchronisable version"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating Junction Temperature MIN -40 MAX +125 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating Junction Temperature MIN -40 MAX +125 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating Junction Temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "6-TSOT26",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "AP62200WU-7 TSOT26 (Standard)"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "TSOT26 (Standard)"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 9e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "tON_MIN Minimum On-Time TYP 90 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics give a minimum off-time of 220 ns rather than a maximum duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 3,
+        "method": "text",
+        "quote": "Efficiency is shown as curves, with no peak stated in text"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.09,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "RDS(ON)1 High-Side Power MOSFET On-Resistance TYP 90 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.065,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 6,
+        "method": "text",
+        "quote": "RDS(ON)2 Low-Side Power MOSFET On-Resistance TYP 65 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "4cfe71e009e17867d9ac07c27db52c9fa2ae1aecd88364d98eb34e6c5148b33e",
+        "page": 20,
+        "method": "text",
+        "quote": "The Ordering Information lists no automotive-qualified part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_18v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "sot23",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "AP62200",
+    "basePart": "AP62200",
+    "packageFamily": "sot23",
+    "pins": 6,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "efficiencyPeak": "Given only as curves in the typical characteristics, with no peak stated in text.",
+    "vinAbsMax": "Read from the rendered page: the row did not survive text extraction. The table gives 20 V for DC and 22 V for 400 ms, and the DC rating is the one a design must respect.",
+    "feedbackAccuracy": "The limit columns for this variant did not survive text extraction.",
+    "lightLoadMode": "The ordering table is what says this: AP62200WU-7 is PFM/PWM and AP62201WU-7, the same die in the same package, is PWM only.",
+    "feedbackReference": "The ordering table gives 0.800 V for this variant; the AP62200T in the same family regulates to 0.763 V.",
+    "maxDutyCycle": "Stated as a minimum off-time of 220 ns rather than a percentage."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:35:00.000Z"
+}

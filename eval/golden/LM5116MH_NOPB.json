@@ -1,0 +1,450 @@
+{
+  "mpn": "LM5116MH/NOPB",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The only controller in the set: it drives external MOSFETs, so it has no output current and no on-resistance of its own, and the ioutClass axis cannot be decided for it. A 100-V synchronous buck controller in a 20-pin HTSSOP with diode emulation and an external clock input.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/lm5116",
+    "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+    "pageCount": 45,
+    "fetchedAt": "2026-09-11T09:15:00.000Z",
+    "localPath": "cache/pdf/5a/73/5a73efd67b7fc4ac650db5995edd4efa1b7756c2cd2c7f33e2118700df72d2f2",
+    "coversMpns": ["LM5116MH/NOPB", "LM5116MHX/NOPB"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "Recommended Operating Conditions VIN MIN 6 MAX 100 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 100,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Wide operating range up to 100 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 100,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN to GND -0.3 to 100 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 1.215,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Programmable output from 1.215 V to 80 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 80,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Programmable output from 1.215 V to 80 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Programmable output from 1.215 V to 80 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "A controller: the output current is set by the external MOSFETs and inductor, and no table states one"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "unit": "Hz",
+        "max": 1000000
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Free-run or synchronous operation to 1 MHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 1.215,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 6,
+        "method": "text",
+        "quote": "VREF FB Reference Voltage Measured at FB pin, FB = COMP MIN 1.195 TYP 1.215 MAX 1.231 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1.5,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Precision 1.5% voltage reference"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.0012,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 6,
+        "method": "text",
+        "quote": "IBIAS VIN Operating Current TYP 1.2 MAX 1.7 mA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000001,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 6,
+        "method": "text",
+        "quote": "ISTDBY VIN Shutdown Current TYP 1 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "LM5116 Wide Range Synchronous Buck Controller"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "controller",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Drives standard or logic level MOSFETs with a robust 3.5-A peak gate drive"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Programmable soft start"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "UVLO 2 An external voltage divider can set an undervoltage shutdown threshold"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "The pin list has no power-good output"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "selectable",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Optional diode emulation mode"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "Free-run or synchronous operation to 1 MHz"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "Recommended Operating Ratings Junction Temperature -40 to 125 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "Recommended Operating Ratings Junction Temperature -40 to 125 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 4,
+        "method": "text",
+        "quote": "Junction Temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "20-HTSSOP (PWP)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 38,
+        "method": "text",
+        "quote": "LM5116MH/NOPB Active Production HTSSOP (PWP) | 20"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "HTSSOP-20 exposed pad"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no minimum controllable on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no maximum duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "No peak efficiency is stated"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "A controller has no integrated FETs, so no on-resistance of its own"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 1,
+        "method": "text",
+        "quote": "A controller has no integrated FETs, so no on-resistance of its own"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "5341823da6bf6d84552d869e8110c492d86c40a4ea50664c35cbbc6f5fae2ca2",
+        "page": 38,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "gt_60v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "controller",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "tssop",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "sync", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "LM5116",
+    "basePart": "LM5116",
+    "packageFamily": "tssop",
+    "pins": 20,
+    "packaging": "tube",
+    "automotive": false
+  },
+  "notes": {
+    "minOnTime": "Not stated in any table.",
+    "maxDutyCycle": "Not stated in any table.",
+    "efficiencyPeak": "Given only as curves, with no peak stated in text.",
+    "ioutMax": "A controller states no output current. Page 21 uses 7 A in a design example and page 27 says the part is most efficient between 2 A and 10 A with discrete SO-8 MOSFETs, but neither is a device rating, so the ioutClass axis is left undecided.",
+    "rdsOnHigh": "No integrated FETs: the on-resistance belongs to whatever MOSFETs the design uses.",
+    "rdsOnLow": "As rdsOnHigh.",
+    "switchingFrequency": "Programmable with an RT resistor and synchronisable, with only an upper limit of 1 MHz stated. The electrical table gives two measured points (200 kHz at 16 kOhm and 535 kHz at 5 kOhm) rather than a range.",
+    "enablePin": "The UVLO pin doubles as the enable: pulling it below its threshold shuts the controller down.",
+    "quiescentCurrent": "The VIN operating current with VCCX supplied externally, 1.2 mA. Without VCCX the same row gives 5.9 mA."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T10:45:00.000Z"
+}

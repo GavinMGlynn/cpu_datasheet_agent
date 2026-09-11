@@ -1,0 +1,465 @@
+{
+  "mpn": "TLV62569DBVR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The low-voltage end of the range: 2.5 V to 5.5 V in, 2 A out, in a 5-pin SOT-23. Covers vinClass le_5v5, and the case where a datasheet states a peak efficiency and a 100% duty cycle outright while specifying the soft-start time only for the other orderables in the family.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/tlv62569",
+    "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+    "pageCount": 30,
+    "fetchedAt": "2026-09-11T08:17:00.000Z",
+    "localPath": "cache/pdf/5d/e0/5de012c725114465ddb94c250dff9113ff23b8f05227c1a592b7b60a2f057cff",
+    "coversMpns": ["TLV62569DBVR", "TLV62569DBVRG4", "TLV62569DBVT"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 2.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Input voltage MIN 2.5 MAX 5.5 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 5.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Input voltage MIN 2.5 MAX 5.5 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 3,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN, EN, PG -0.3 to 6 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VOUT Output voltage MIN 0.6 MAX VIN V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VOUT Output voltage MIN 0.6 MAX VIN V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "Adjustable Output Voltage from 0.6 V to VIN"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 2,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "TLV62569 2-A High Efficiency Synchronous Buck Converter in SOT Package"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 1500000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 5,
+        "method": "text",
+        "quote": "fSW Switching frequency VOUT = 2.5 V TYP 1.5 MHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VFB Feedback regulation voltage MIN 0.588 TYP 0.6 MAX 0.612 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 2,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "VFB Feedback regulation voltage MIN 0.588 TYP 0.6 MAX 0.612 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000035,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "IQ Quiescent current into VIN pin Not switching TYP 35 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 1e-7,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "ISD Shutdown current into VIN pin EN = 0 V TYP 0.1 MAX 2 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "TLV62569 2-A High Efficiency Synchronous Buck Converter in SOT Package"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "Low RDS(ON) Switches 100 mOhm / 60 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "tSS Soft startup time TLV62569PDDC, TLV62569DRL TYP 900 us"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 3,
+        "method": "text",
+        "quote": "EN 1 Device enable logic input. Logic high enables the device, logic low disables it."
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 3,
+        "method": "text",
+        "quote": "PG - (no pin number for TLV62569DBV) Power good open drain output pin for TLV62569P"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "psm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "At light load, the device automatically enters Power Save Mode (PSM) to maintain high efficiency"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: EN 1, GND 2, SW 3, VIN 4, FB 5"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature MIN -40 MAX 125 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature MIN -40 MAX 125 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Operating junction temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "5-SOT-23 (DBV)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 16,
+        "method": "text",
+        "quote": "TLV62569DBVR Active Production SOT-23 (DBV) | 5 3000 | LARGE T&R"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 16,
+        "method": "text",
+        "quote": "SOT-23 (DBV) | 5"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 5,
+        "method": "text",
+        "quote": "Electrical Characteristics state no minimum on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 100,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "100% Duty Cycle for Lowest Dropout"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": {
+        "value": 95,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 1,
+        "method": "text",
+        "quote": "Up to 95% Efficiency"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.1,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 5,
+        "method": "text",
+        "quote": "RDS(on) High-side FET on resistance TYP 100 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.06,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 5,
+        "method": "text",
+        "quote": "RDS(on) Low-side FET on resistance TYP 60 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+        "page": 16,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_5v5",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "sot23",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "TLV62569",
+    "basePart": "TLV62569",
+    "packageFamily": "sot23",
+    "pins": 5,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "voutMax": "Not a number: the output range is stated as 0.6 V to VIN, so the upper end is whatever the input is. The 100% duty cycle on page 1 is what makes that true.",
+    "softStart": "Present but unspecified for this orderable: the 900 us soft-startup time on page 4 is given for TLV62569PDDC and TLV62569DRL, not for the DBV part.",
+    "powerGoodPin": "The pin table on page 3 gives PG a pin number for TLV62569P (SOT23-6) and TLV62569DRL only; the 5-pin DBV part this file describes has no PG pin.",
+    "feedbackAccuracy": "Arithmetic on the stated limits: 0.612 V and 0.588 V about 0.6 V is +/-2%. The datasheet states the limits, not the percentage.",
+    "minOnTime": "Not stated in any table.",
+    "ioutMax": "The 2 A in the title. The high-side current limit for this package is 3 A typical (page 5)."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T08:50:00.000Z"
+}

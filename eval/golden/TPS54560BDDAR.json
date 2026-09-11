@@ -1,0 +1,463 @@
+{
+  "mpn": "TPS54560BDDAR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "A 60-V, 5-A non-synchronous converter that synchronises to an external clock and has an adjustable switching frequency stated as a range. Covers vinClass le_60v, ioutClass le_6a, the sync feature, and a frequency held as a range rather than a single value.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/tps54560b",
+    "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+    "pageCount": 54,
+    "fetchedAt": "2026-09-11T08:32:25.488Z",
+    "localPath": "cache/pdf/a9/41/a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+    "coversMpns": ["TPS54560BDDA", "TPS54560BDDAR"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 4.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "TPS54560B 4.5-V to 60-V Input, 5-A step-down dc/dc converter with Eco-mode"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 60,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Supply input voltage MIN VO + VDO MAX 60 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 65,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN -0.3 to 65 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "VO Output voltage MIN 0.8 MAX 58.8 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 58.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "VO Output voltage MIN 0.8 MAX 58.8 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "VO Output voltage MIN 0.8 MAX 58.8 V, set by an external divider"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 5,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "IO Output current MIN 0 MAX 5 A"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "unit": "Hz",
+        "min": 100000,
+        "max": 2500000
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Switching frequency range using RT mode MIN 100 MAX 2500 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Voltage reference MIN 0.792 TYP 0.8 MAX 0.808 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Voltage reference MIN 0.792 TYP 0.8 MAX 0.808 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000146,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Operating: nonswitching supply current FB = 0.9 V, TA = 25C TYP 146 MAX 175 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.00000225,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Shutdown supply current EN = 0 V, 25C, 4.5 V <= VIN <= 60 V TYP 2.25 MAX 4.5 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "non_synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "92-mOhm high-side MOSFET, with an external catch diode"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "92-mOhm high-side MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.0021,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "Soft-start time fSW = 500 kHz, 10% to 90% 2.1 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 3,
+        "method": "text",
+        "quote": "EN 3 Enable pin, with internal pullup current source. Pull below 1.2 V to disable."
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: BOOT 1, VIN 2, EN 3, RT/CLK 4, FB 5, COMP 6, GND 7, SW 8"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "psm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "High efficiency at light loads with pulse skipping Eco-mode"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "Synchronizes to external clock"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Junction Temperature MIN -40 MAX 150 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 150,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Junction Temperature MIN -40 MAX 150 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 4,
+        "method": "text",
+        "quote": "TJ Junction Temperature"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "8-SO PowerPAD (DDA)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 42,
+        "method": "text",
+        "quote": "TPS54560BDDAR Active Production SO PowerPAD 2500 | LARGE T&R"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 42,
+        "method": "text",
+        "quote": "SO PowerPAD (DDA) | 8"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "The Electrical Characteristics give a current limit threshold delay of 60 ns and no minimum on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no maximum duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 35,
+        "method": "text",
+        "quote": "Efficiency (%)"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.092,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 5,
+        "method": "text",
+        "quote": "On-resistance VIN = 12 V, BOOT-SW = 6 V TYP 92 MAX 190 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 1,
+        "method": "text",
+        "quote": "A non-synchronous converter with a single high-side MOSFET and an external catch diode"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "a941117b779ded588724f785356659557c85382e02c22056165609695ed7336d",
+        "page": 42,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_60v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_6a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "non_synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "soic",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "sync", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "TPS54560",
+    "basePart": "TPS54560-B",
+    "packageFamily": "soic",
+    "pins": 8,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "switchingFrequency": "Set by an RT resistor over 100 kHz to 2.5 MHz, or by an external clock over 160 kHz to 2.3 MHz. Recorded as the RT-mode range, which is the wider of the two and the one the front page quotes.",
+    "softStart": "The internal soft-start time depends on the switching frequency: 2.1 ms at 500 kHz and 0.42 ms at 2.5 MHz. Recorded at 500 kHz, which is the frequency the typical application uses.",
+    "rdsOnLow": "A non-synchronous converter: the low side is an external catch diode.",
+    "minOnTime": "Not stated in any table.",
+    "maxDutyCycle": "Not stated as a percentage.",
+    "efficiencyPeak": "Given only as curves, with no peak stated in text."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T09:25:00.000Z"
+}

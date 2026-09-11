@@ -59,6 +59,17 @@ describe('vinClass', () => {
 });
 
 describe('ioutClass', () => {
+  it('leaves the axis undecided for a controller, which has no output current', () => {
+    const result = tryClassify(parameters({ ioutMax: param(null) }));
+    expect(result.undecided).toEqual([
+      {
+        axis: 'ioutClass',
+        missing: [],
+        reason: 'ioutMax is null, as it is for a controller',
+      },
+    ]);
+  });
+
   it.each([
     [0.5, 'le_1a'],
     [1, 'le_1a'],

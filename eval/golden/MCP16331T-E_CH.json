@@ -1,0 +1,463 @@
+{
+  "mpn": "MCP16331T-E/CH",
+  "manufacturer": "Microchip Technology",
+  "category": "buck_regulator",
+  "reason": "The first automotive part in the set: AEC-Q100 Grade 1 qualified, from a third manufacturer. A 50-V, 500-mA non-synchronous regulator in a 6-pin SOT-23, and the only part whose quiescent current is stated in milliamps rather than microamps.",
+  "datasheet": {
+    "url": "https://ww1.microchip.com/downloads/en/DeviceDoc/20005308C.pdf",
+    "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+    "pageCount": 44,
+    "fetchedAt": "2026-09-11T09:00:00.000Z",
+    "localPath": "cache/pdf/30/a8/30a88f9114d844c5550d093f534d45151b286ddd7d33701bf9896d766a61462c",
+    "coversMpns": ["MCP16331T-E/CH", "MCP16331T-E/MNY"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 4.4,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Input Voltage VIN MIN 4.4 MAX 50 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 50,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Input Voltage VIN MIN 4.4 MAX 50 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 54,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 3,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN, SW -0.5V to 54V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 2,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Output Voltage Range: 2.0V to 24V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 24,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Output Voltage Range: 2.0V to 24V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Adjustable Output Voltage"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 0.5,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Output Current IOUT MIN 500 mA"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 500000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Switching Frequency fSW MIN 425 TYP 500 MAX 550 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Feedback Voltage VFB MIN 0.784 TYP 0.800 MAX 0.816 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 2,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "2% Output Voltage Accuracy"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.001,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Quiescent Current IQ TYP 1 MAX 1.7 mA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000006,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Quiescent Current - Shutdown IQ TYP 6 MAX 10 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "non_synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated N-Channel Buck Switch: 600 mOhm, with an external catch diode"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated N-Channel Buck Switch: 600 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Internal Soft Start"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Internal Pull-up on the Enable pin"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "The features list no power-good output"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "none",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "The features list no light-load mode"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "The features list no clock input"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 3,
+        "method": "text",
+        "quote": "Ambient Temperature with Power Applied -40C to +125C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 3,
+        "method": "text",
+        "quote": "Ambient Temperature with Power Applied -40C to +125C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "ambient",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 3,
+        "method": "text",
+        "quote": "Ambient Temperature with Power Applied"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "6-SOT-23 (CH)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 38,
+        "method": "text",
+        "quote": "6-Lead Plastic Small Outline Transistor (CH, CHY) [SOT-23]"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 38,
+        "method": "text",
+        "quote": "6-Lead Plastic Small Outline Transistor (CH, CHY) [SOT-23]"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "The Electrical Characteristics give a minimum duty cycle of 1%, not a minimum on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 93,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "Maximum Duty Cycle DCMAX MIN 90 TYP 93 %"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": {
+        "value": 96,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Up to 96% Efficiency"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.6,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 4,
+        "method": "text",
+        "quote": "NMOS Switch-On Resistance RDS(ON) TYP 0.6 Ohm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "A non-synchronous regulator: the low side is an external catch diode"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "bfd74d5f66667f16f0b2ad5f05fc8b895fa8fd6ccddc635412779af833b31dcf",
+        "page": 1,
+        "method": "text",
+        "quote": "Qualification: AEC-Q100 Rev. G, Grade 1 (-40C to 125C)"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_60v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_1a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "non_synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "sot23",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "automotive",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "MCP16331",
+    "basePart": "MCP16331",
+    "packageFamily": "sot23",
+    "pins": 6,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "aecQ100": "The qualification is a device-level claim on page 1, not a suffix: the T is tape and reel, E the temperature grade and CH the package, so the part number says nothing about it. That is why the decoded automotive flag below is false while the parameter is true.",
+    "ioutMax": "Specified as a minimum of 500 mA over the whole input range. Page 1 quotes up to 1.2 A at 3.3 V and 5 V outputs with VIN above 12 V in the SOT-23 package at 25 C.",
+    "minOnTime": "Not stated. The table gives a minimum duty cycle of 1% instead.",
+    "lightLoadMode": "Nothing in the datasheet names a light-load mode for this part, so none is claimed."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T10:05:00.000Z"
+}

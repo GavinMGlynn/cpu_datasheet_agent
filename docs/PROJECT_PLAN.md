@@ -102,6 +102,10 @@ that supersedes the old one, and the old row's status changes to
 | D41 | 2026-09-11 | `fetch_datasheet` is not gated by the quota policy; the distributor APIs are. | The gate exists for money and quota (D12). A manufacturer's PDF costs neither, and it is what every extraction reads; gating it would mean asking permission to do the main work. The fetcher's own retry, redirect and size limits are what keep it polite. | active |
 | D42 | 2026-09-11 | The MCP server advertises the strict input schema it enforces (`additionalProperties: false`), which takes one cast because the SDK's registration type names a stripping object. | Advertised loose, the transport silently drops an argument the tool never agreed to ignore — the coercion this project refuses everywhere else. Strict at runtime is accepted by the SDK and refuses an unrecognised argument with the key in the message, which is a better answer than a silently different call. | active |
 | D43 | 2026-09-11 | The MCP surface uses the v2 SDK (`@modelcontextprotocol/server`), and the in-process server is tested through the tool definitions rather than through a client. | The Agent SDK peer-depends on and bundles the 1.x line, so the server object it builds cannot be driven by a v2 client: an in-memory transport between them fails inside the SDK. Exposing `sdkTools()` and calling the handlers tests what actually matters — that every tool is present and behaves — without pinning the project to whichever line the Agent SDK bundles next. | active |
+| D44 | 2026-09-11 | A parameter is nullable wherever a real datasheet may state something other than a number: `voutMax`, `ioutMax`, `quiescentCurrent`, `switchingFrequency`. A switching frequency may also be a one-sided bound (`QuantityBound`), a shape distinct from both a value and a range. | Reading twenty-one datasheets found all four. TI's TPS54331 gives the output limit as an equation in Vin, duty cycle and load; a controller such as LM5116 has no output current of its own; Infineon's IR3899 states no device quiescent current; LM5164's frequency is programmable and stated only as "up to 1 MHz". Recording a bound as a range would invent the end nobody stated, and as a value would assert a frequency the part does not run at (D24, on the datasheet side). | active |
+| D45 | 2026-09-11 | `datasheetUrlOf` unwraps a distributor link that only points at the document: a `gotoUrl` parameter is followed, decoding repeatedly, and anything else is returned unchanged. | Digi-Key gives every Texas Instruments part an interstitial `suppproductinfo.tsp` page that serves HTML, so fetching it fails on content type; six of the thirteen recorded products are affected, and TPS62130's is encoded twice. The knowledge is Digi-Key's, so it belongs in the Digi-Key adapter rather than in the PDF fetcher. | active |
+| D46 | 2026-09-11 | The golden set holds only parts whose datasheets can be fetched without scraping or defeating a bot wall. Texas Instruments, Diodes, Microchip and Infineon qualify; Monolithic Power Systems, ST, onsemi and Analog Devices do not. | `CLAUDE.md` forbids scraping and bot-wall evasion, and that rule does not stop at distributors. MPS returns an HTML viewer for every document URL, ST and Analog Devices refuse the request, onsemi redirects to a landing page, and Rohm blocks the referral link Digi-Key publishes while serving its own CDN fine. The plan asked for six manufacturers; four is what the rules allow, and the set says so rather than quietly meeting the number. | active |
+| D47 | 2026-09-11 | The golden readings were made by this model, not by a person, and every file records that in `readBy`. The set is a baseline and a regression net, not an independent reference, until a person reviews it (Q6). | Measuring an automated extraction against a careful reading by the same model family cannot catch a misreading that comes from how the model reads. Saying so in the set itself is what stops a later eval score being read as more than it is. | active |
 
 ## 4. Status
 
@@ -124,7 +128,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M10 | MPN resolution | complete | 2026-09-11 |
 | M11 | Reconciliation and classification | complete | 2026-09-11 |
 | M12 | Tool registry and MCP server | complete, bar 12.7 (Q3) | 2026-09-11 |
-| M13 | Golden evaluation set | not started | |
+| M13 | Golden evaluation set | complete | 2026-09-11 |
 | M14 | Agent runner (extraction) | not started | |
 | M15 | Verification pass | not started | |
 | M16 | Evaluation harness | not started | |
@@ -230,6 +234,54 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 17: Module 13 complete
+
+**Done**
+
+- Twenty-one parts in `eval/golden/`, each read page by page: every
+  parameter with the page it came from, every null with a note saying what
+  the page holds instead, the classifications derived by hand, and what the
+  part number should decode to.
+- `scripts/prepare-golden.ts`: fetches a datasheet through the cache, maps
+  its sections, writes the pages worth reading, renders a page on request and
+  finds a phrase across the document.
+- `src/eval/`: the `GoldenPart` schema, the loader, and the scorer —
+  per-parameter correct/wrong/missing/extra/absent with citations scored
+  separately, and set-level precision, recall and provenance accuracy.
+- `test/eval/golden-set.test.ts` validates every file against the schemas,
+  the citations against the page counts, the classifications against the
+  rules, and the decoders against the ordering tables.
+- 2002 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- **Reading twenty-one datasheets corrected the schema four times.** An
+  output maximum can be an equation, a controller has no output current, a
+  quiescent current is not always specified, and an adjustable frequency is
+  often "up to 1 MHz" with no lower end. Each is now nullable or has a shape
+  of its own (D44). No amount of thinking about the schema found these; one
+  afternoon of reading found all four.
+- **Text extraction swapped two values that matter.** The TPS62130 electrical
+  table interleaves the high- and low-side on-resistance rows, so the text
+  reads 40 mΩ where the datasheet says 90 mΩ. The rendered page is what
+  caught it, which is exactly the gotcha `CLAUDE.md` names — and it means 23
+  values in the set carry `method: "image"`.
+- **Half the industry will not serve a PDF to a plain client.** MPS returns an
+  HTML viewer, ST and Analog Devices refuse, onsemi redirects. The set holds
+  four manufacturers rather than six because the alternative was defeating a
+  bot wall (D46).
+- **Digi-Key's datasheet link is often not the datasheet.** Every TI part gets
+  an interstitial page whose `gotoUrl` holds the document, sometimes encoded
+  twice (D45), and `LT8610AEMSE-PBF` points at the LTpowerCAD help file
+  instead of the part's datasheet.
+- **The set measures what it can.** These readings are the model's, not a
+  person's, so the eval is a regression net rather than an independent
+  reference until someone reviews it (D47, Q6).
+
+**Next**
+
+- M14: the agent runner on the Agent SDK, with the money-gating hook.
 
 ### 2026-09-11 — Session 16: Module 12 complete
 
@@ -831,3 +883,4 @@ resolved here.
 | Q3 | `CLAUDE.md` references an existing `chip-mcp-server.ts`. It is not in the repo. Is there a copy to add? | M12 | open |
 | Q4 | Digi-Key locale defaults AU / en / AUD acceptable? (D14) | M7 | open (assumed yes) |
 | Q5 | Default model `claude-opus-5` at effort `high` for extraction and verification (D11). Acceptable cost-wise? | M14 | open (assumed yes) |
+| Q6 | The twenty-one golden parts were read by the model, not by a person (D47). Will you review them — or a sample — so the set becomes an independent reference rather than a baseline? `eval/golden/README.md` says what each file holds. | M16 | open |

@@ -388,28 +388,27 @@ fresh. Its isolation is structural rather than a matter of prompt discipline:
 there is no parameter through which the extraction transcript could reach it,
 and a test asserts the fake harness receives no resumed session.
 
-### Golden set and evaluation (`eval/`, `src/eval/`) — planned
+### Golden set and evaluation (`eval/`, `src/eval/`)
 
-Twenty parts characterised by hand, every value with a page number. Nothing
-the agent produces is trusted until it is measured against them.
+Twenty-one buck regulators read datasheet by datasheet, every value carrying
+the page it came from and every null carrying a note saying what the page
+holds instead. Six of the datasheets cover more than one part in the set,
+which is the case the whole project exists for.
 
-The harness runs extraction over the golden set with all network served from
-cache, where a cache miss is a test failure rather than a spend, and scores
-per parameter: exact for enums, tolerance-based for numbers, and separately
-for whether the cited page was right. Reports are written per prompt version
-and model so two runs can be compared and a regression named.
+The scorer compares an extraction with a golden part per parameter:
+`correct`, `wrong`, `missing`, `extra` and `absent`. **`extra` is scored
+apart from `wrong`** — a value invented where the datasheet says nothing is a
+different failure from one misread — and citations are scored apart from
+values, with a bucket for landing one page away.
 
-### Reports (`src/report/`) — built
+Numbers are compared with the same per-parameter tolerance reconciliation
+uses, so "correct" means one thing in both places.
 
-Renders a stored part as one standalone HTML page: every parameter beside its
-source and confidence, and each cited datasheet page beside the values taken
-from it. That last part is the reason the module exists, because checking an
-extraction means reading the page and the claim together, which a table cannot
-do.
-
-It is a generator rather than an application: no server, no port, no session
-state. The output has no document wrapper, so the same function serves a local
-file and a published page.
+The readings are the model's own, made deliberately page by page rather than
+by the pipeline under test. That makes the set a regression net and a floor,
+not an independent reference: a misreading that comes from how the model
+reads would appear on both sides. The files say so, and a human review is the
+open question that would change it.
 
 ### Alternates query (`src/query/`) — planned
 

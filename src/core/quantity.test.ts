@@ -1,7 +1,15 @@
 import { describe, it } from 'vitest';
 
 import { expectAccepts, expectRejects } from '../../test/helpers/schema.js';
-import { Quantity, QuantityRange, UNITS, quantityOf, rangeOf } from './quantity.js';
+import {
+  Quantity,
+  QuantityRange,
+  UNITS,
+  quantityOf,
+  rangeOf,
+  QuantityBound,
+  boundOf,
+} from './quantity.js';
 
 describe('Quantity', () => {
   it.each(UNITS)('accepts a non-negative value in %s', (unit) => {
@@ -99,5 +107,33 @@ describe('rangeOf', () => {
     expectRejects(hertz, { unit: 'V', min: 1, max: 2 }, 'unit');
     expectRejects(hertz, { unit: 'Hz', min: 3, max: 2 }, 'max');
     expectRejects(hertz, { unit: 'Hz', min: 1, max: 2, typ: 3 }, 'typ');
+  });
+});
+
+describe('QuantityBound', () => {
+  it.each([
+    ['an upper end alone', { unit: 'Hz', max: 1_000_000 }],
+    ['a lower end alone', { unit: 'V', min: 3 }],
+    ['a negative lower end in degrees', { unit: 'degC', min: -40 }],
+  ])('accepts %s', (_label, value) => {
+    expectAccepts(QuantityBound, value);
+  });
+
+  it.each([
+    ['neither end', { unit: 'Hz' }],
+    ['both ends, which is a range', { unit: 'Hz', min: 100, max: 1000 }],
+    ['a negative frequency', { unit: 'Hz', max: -1 }],
+    ['a value instead of an end', { unit: 'Hz', value: 1000 }],
+  ])('rejects %s', (_label, value) => {
+    expectRejects(QuantityBound, value);
+  });
+
+  it('pins the unit when built with boundOf', () => {
+    const hertz = boundOf('Hz');
+    expectAccepts(hertz, { unit: 'Hz', max: 1_000_000 });
+    expectRejects(hertz, { unit: 'V', max: 5 });
+    expectRejects(hertz, { unit: 'Hz', min: 100, max: 1000 });
+    expectRejects(hertz, { unit: 'Hz' });
+    expectRejects(hertz, { unit: 'Hz', max: -1 });
   });
 });

@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { parameter } from './parameter.js';
 import { Celsius } from './primitives.js';
-import { quantityOf, rangeOf } from './quantity.js';
+import { boundOf, quantityOf, rangeOf } from './quantity.js';
 
 export const TOPOLOGIES = ['synchronous', 'non_synchronous'] as const;
 export const Topology = z.enum(TOPOLOGIES);
@@ -52,15 +52,34 @@ const SHAPE = {
   vinMax: parameter(volts),
   vinAbsMax: parameter(volts),
   voutMin: parameter(volts),
-  voutMax: parameter(volts),
+  /**
+   * The upper end of the output range, or null where the datasheet gives no
+   * number for it. TI's TPS54331 states the upper limit as an equation in
+   * terms of the input voltage, duty cycle and load, which is a fact about
+   * the part that no single voltage can carry.
+   */
+  voutMax: parameter(volts.nullable()),
   /** Fixed output voltage, or null for an adjustable part. */
   voutFixed: parameter(volts.nullable()),
-  ioutMax: parameter(amps),
-  /** Fixed frequency, or the adjustable range. */
-  switchingFrequency: parameter(z.union([hertz, rangeOf('Hz')])),
+  /**
+   * Null for a controller: the output current is set by the external FETs and
+   * inductor, and TI's LM5116 datasheet states none for the device itself.
+   */
+  ioutMax: parameter(amps.nullable()),
+  /**
+   * A fixed frequency, the adjustable range, or the one end a datasheet
+   * states — TI's LM5164 says only "up to 1 MHz". Null where nothing is
+   * stated at all.
+   */
+  switchingFrequency: parameter(z.union([hertz, rangeOf('Hz'), boundOf('Hz')]).nullable()),
   feedbackReference: parameter(volts.nullable()),
   feedbackAccuracy: parameter(percent.nullable()),
-  quiescentCurrent: parameter(amps),
+  /**
+   * Null where the datasheet states none: Infineon's IR3899 specifies the
+   * supply current of its internal LDO and drivers, and no device quiescent
+   * current at all.
+   */
+  quiescentCurrent: parameter(amps.nullable()),
   shutdownCurrent: parameter(amps.nullable()),
   topology: parameter(Topology),
   integration: parameter(Integration),
@@ -99,14 +118,12 @@ export const BuckRegulatorParameters = z.strictObject(SHAPE).superRefine((p, ctx
   if (p.vinMax.value.value > p.vinAbsMax.value.value) {
     issue(['vinAbsMax', 'value', 'value'], 'vinAbsMax must be greater than or equal to vinMax');
   }
-  if (p.voutMin.value.value > p.voutMax.value.value) {
+  const voutMax = p.voutMax.value;
+  if (voutMax !== null && p.voutMin.value.value > voutMax.value) {
     issue(['voutMax', 'value', 'value'], 'voutMax must be greater than or equal to voutMin');
   }
   const fixed = p.voutFixed.value;
-  if (
-    fixed !== null &&
-    (fixed.value !== p.voutMin.value.value || fixed.value !== p.voutMax.value.value)
-  ) {
+  if (fixed !== null && (fixed.value !== p.voutMin.value.value || fixed.value !== voutMax?.value)) {
     issue(
       ['voutFixed', 'value', 'value'],
       'a fixed-output part must have voutMin and voutMax equal to voutFixed',

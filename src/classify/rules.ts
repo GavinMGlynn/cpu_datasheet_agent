@@ -103,11 +103,17 @@ export const CLASSIFICATION_RULES: readonly ClassificationRule[] = Object.freeze
       if (!got.ok) {
         return missingParameters(got.missing);
       }
+      const ioutMax = got.values.ioutMax;
+      if (ioutMax === null) {
+        // A controller has no output current of its own: it is whatever the
+        // external FETs and inductor allow.
+        return undecidedBecause('ioutMax is null, as it is for a controller');
+      }
       return {
         kind: 'classified',
         classification: {
           axis: 'ioutClass',
-          value: band(got.values.ioutMax.value, IOUT_BANDS, 'gt_12a'),
+          value: band(ioutMax.value, IOUT_BANDS, 'gt_12a'),
           derivedFrom: ['ioutMax'],
           rule: 'iout-class.v1',
         },

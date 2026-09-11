@@ -1,0 +1,463 @@
+{
+  "mpn": "AP63357DV-7",
+  "manufacturer": "Diodes Incorporated",
+  "category": "buck_regulator",
+  "reason": "A 3.5-A synchronous converter in a 13-pad V-DFN, which is the only DFN in the set, and the part whose suffix says its light-load behaviour: the DV-7 is the PFM/PWM version while the AP63356 in the same package is PWM only.",
+  "datasheet": {
+    "url": "https://www.diodes.com/assets/Datasheets/AP63356-AP63357.pdf",
+    "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+    "pageCount": 29,
+    "fetchedAt": "2026-09-11T09:20:00.000Z",
+    "localPath": "cache/pdf/fb/3c/fb3c6299d33dc47580053a9d01c1c8caef9fe966f6b69c547f4da4071c140ca9",
+    "coversMpns": ["AP63356DV-7", "AP63357DV-7"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 5,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 3.8 MAX 32 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 32,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 5,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 3.8 MAX 32 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 35,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VEN Enable/UVLO Pin Voltage -0.3 to +35.0 V, matching the supply rating"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM MIN 0.792 TYP 0.800 MAX 0.808 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no output voltage range"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "The output is set by an external divider against the 0.8 V feedback voltage"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3.5,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 1,
+        "method": "text",
+        "quote": "3.8V TO 32V INPUT, 3.5A LOW IQ SYNCHRONOUS BUCK WITH ENHANCED EMI REDUCTION"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 450000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "fSW Oscillator Frequency MIN 400 TYP 450 MAX 500 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM MIN 0.792 TYP 0.800 MAX 0.808 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM MIN 0.792 TYP 0.800 MAX 0.808 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000022,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "IQ Quiescent Supply Current AP63357 TYP 22 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000001,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "ISHDN Shutdown Supply Current VEN = 0V TYP 1 MAX 3 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 1,
+        "method": "text",
+        "quote": "fully integrates a 74mOhm high-side power MOSFET and a 40mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 1,
+        "method": "text",
+        "quote": "fully integrates a 74mOhm high-side power MOSFET and a 40mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.004,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "tSS Soft-Start Time TYP 4 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 4,
+        "method": "text",
+        "quote": "VEN Enable/UVLO Pin Voltage"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "The V-DFN3020-13 pinout includes a PG output"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "pfm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "AP63357DV-7 PFM/PWM, against AP63356DV-7 PWM Only"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "The ordering table lists no synchronisable version"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range MIN -40 MAX +85 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 85,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range MIN -40 MAX +85 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "ambient",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 5,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "13-V-DFN3020",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "DV: V-DFN3020-13"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "V-DFN3020-13, a no-lead package with an exposed pad"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no minimum on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no maximum duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 3,
+        "method": "text",
+        "quote": "Efficiency is shown as curves, with no peak stated in text"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.074,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "RDS(ON)1 High-Side Power MOSFET On-Resistance TYP 74 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.04,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 6,
+        "method": "text",
+        "quote": "RDS(ON)2 Low-Side Power MOSFET On-Resistance TYP 40 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "82b3f784fa3d02018795d7f450e84fbfe69add4209c67bf4af1d018f775093fe",
+        "page": 27,
+        "method": "text",
+        "quote": "The Ordering Information lists no automotive-qualified part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_6a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "dfn",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "industrial",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "AP63357",
+    "basePart": "AP63357",
+    "packageFamily": "dfn",
+    "pins": 13,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "minOnTime": "Not stated in any table.",
+    "maxDutyCycle": "Not stated in any table.",
+    "vinAbsMax": "The absolute maximum table gives the enable pin 35 V, which is the highest supply-referenced rating stated; the supply row itself did not survive text extraction cleanly.",
+    "voutMax": "Not stated: the tables give the feedback voltage and the input range, not an output range.",
+    "lightLoadMode": "The ordering table is what says this: AP63357DV-7 is the PFM/PWM version, and AP63356DV-7 in the same package is PWM only.",
+    "ioutMax": "The 3.5 A in the title, repeated in the layout note on page 26.",
+    "efficiencyPeak": "Given only as curves."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T10:55:00.000Z"
+}

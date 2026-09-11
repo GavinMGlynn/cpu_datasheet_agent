@@ -266,25 +266,23 @@ describe('BuckRegulatorParameters', () => {
   });
 
   describe('nullability', () => {
-    it.each([
-      'vinMin',
-      'vinMax',
-      'ioutMax',
-      'quiescentCurrent',
-      'package',
-      'topology',
-      'enablePin',
-      'aecQ100',
-    ])('rejects null for required parameter %s', (key) => {
-      expectRejects(
-        BuckRegulatorParameters,
-        buckParameters({ [key]: param(null) }),
-        `${key}.value`,
-      );
-    });
+    it.each(['vinMin', 'vinMax', 'package', 'topology', 'enablePin', 'aecQ100'])(
+      'rejects null for required parameter %s',
+      (key) => {
+        expectRejects(
+          BuckRegulatorParameters,
+          buckParameters({ [key]: param(null) }),
+          `${key}.value`,
+        );
+      },
+    );
 
     it.each([
       'voutFixed',
+      'voutMax',
+      'ioutMax',
+      'quiescentCurrent',
+      'switchingFrequency',
       'feedbackReference',
       'feedbackAccuracy',
       'shutdownCurrent',
@@ -295,6 +293,54 @@ describe('BuckRegulatorParameters', () => {
     ])('accepts null for optional parameter %s', (key) => {
       expectAccepts(BuckRegulatorParameters, buckParameters({ [key]: param(null) }));
     });
+  });
+});
+
+describe('the parameters a datasheet may state as something other than a number', () => {
+  it('accepts a null output current, as a controller has', () => {
+    // The LM5116 is a controller: its output current is whatever the external
+    // FETs and inductor allow, and the datasheet states none.
+    expectAccepts(BuckRegulatorParameters, buckParameters({ ioutMax: param(null) }));
+  });
+
+  it('accepts a one-sided switching frequency, as an adjustable part has', () => {
+    expectAccepts(
+      BuckRegulatorParameters,
+      buckParameters({ switchingFrequency: param({ unit: 'Hz', max: 1_000_000 }) }),
+    );
+    expectRejects(
+      BuckRegulatorParameters,
+      buckParameters({ switchingFrequency: param({ unit: 'Hz' }) }),
+      'switchingFrequency',
+    );
+  });
+});
+
+describe('voutMax', () => {
+  it('accepts null, for a datasheet that gives the upper limit as an equation', () => {
+    // TI's TPS54331 states the upper output limit in terms of the input
+    // voltage, duty cycle and load: a fact no single voltage can carry.
+    expectAccepts(BuckRegulatorParameters, buckParameters({ voutMax: param(null, 20) }));
+  });
+
+  it('still refuses a fixed-output part whose upper limit is unstated', () => {
+    expectRejects(
+      BuckRegulatorParameters,
+      buckParameters({
+        voutFixed: param(q(3.3, 'V')),
+        voutMin: param(q(3.3, 'V')),
+        voutMax: param(null),
+      }),
+      'voutFixed',
+    );
+  });
+
+  it('still refuses an upper limit below the lower one', () => {
+    expectRejects(
+      BuckRegulatorParameters,
+      buckParameters({ voutMin: param(q(5, 'V')), voutMax: param(q(1, 'V')) }),
+      'voutMax',
+    );
   });
 });
 

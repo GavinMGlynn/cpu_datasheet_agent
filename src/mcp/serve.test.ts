@@ -47,7 +47,7 @@ describe('serveMcpStdio', () => {
     await client.close();
     stop();
     await expect(serving).resolves.toBeUndefined();
-  });
+  }, 30_000);
 
   it('stops on a signal when nothing else says when to stop', async () => {
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -63,7 +63,7 @@ describe('serveMcpStdio', () => {
     process.emit('SIGINT');
 
     await expect(serving).resolves.toBeUndefined();
-  });
+  }, 30_000);
 
   it('reports a transport error to stderr without ending the session', async () => {
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -101,7 +101,7 @@ describe('serveMcpStdio', () => {
 
     const reported = lines.find((line) => line.includes('mcp transport error'));
     expect(reported).toContain('the pipe hiccuped');
-  });
+  }, 30_000);
 
   it('reads the process environment and serves this process\u2019s stdio by default', async () => {
     const previous = process.env.DATA_DIR;
@@ -118,11 +118,11 @@ describe('serveMcpStdio', () => {
         process.env.DATA_DIR = previous;
       }
     }
-  });
+  }, 30_000);
 
   it('fails loudly when the environment is not configured', async () => {
     await expect(
       serveMcpStdio({ env: { DATA_DIR: root, LOG_LEVEL: 'chatty' }, until: Promise.resolve() }),
     ).rejects.toMatchObject({ code: 'CONFIG_INVALID' });
-  });
+  }, 30_000);
 });

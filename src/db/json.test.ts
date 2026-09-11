@@ -31,4 +31,8 @@ describe('numericBounds', () => {
   ])('returns undefined for %s', (_label, value) => {
     expect(numericBounds(value)).toBeUndefined();
   });
+  it('indexes a one-sided bound on the end it states', () => {
+    expect(numericBounds({ unit: 'Hz', max: 1_000_000 })).toEqual({ max: 1_000_000, unit: 'Hz' });
+    expect(numericBounds({ unit: 'Hz', min: 100_000 })).toEqual({ min: 100_000, unit: 'Hz' });
+  });
 });

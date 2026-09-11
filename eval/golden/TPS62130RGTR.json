@@ -1,0 +1,467 @@
+{
+  "mpn": "TPS62130RGTR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "A 17-V, 3-A synchronous converter in a 16-pin QFN with a power-good output, a pin-selectable switching frequency and a soft start set by an external capacitor. Covers packageFamily qfn, and is the part whose electrical table text extraction mangles badly enough to swap the high- and low-side on-resistances, so those values are read from the rendered page.",
+  "datasheet": {
+    "url": "http://www.ti.com/lit/gpn/tps62130",
+    "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+    "pageCount": 43,
+    "fetchedAt": "2026-09-11T08:32:27.000Z",
+    "localPath": "cache/pdf/21/29/21294ec7cbcce6249ad586085581a24fd020e667970f067a9886cd190188ef14",
+    "coversMpns": ["TPS62130ARGTR", "TPS62130ARGTT", "TPS62130RGTR"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "VIN Input voltage range MIN 3 MAX 17 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 17,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "VIN Input voltage range MIN 3 MAX 17 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 20,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings AVIN, PVIN -0.3 to 20 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 0.9,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "Output voltage range (TPS62130) VIN >= VOUT MIN 0.9 MAX 6.0 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "Output voltage range (TPS62130) VIN >= VOUT MIN 0.9 MAX 6.0 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 1,
+        "method": "text",
+        "quote": "Adjustable output voltage from 0.9 V to 6 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 1,
+        "method": "text",
+        "quote": "Up to 3-A output current"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "unit": "Hz",
+        "min": 1250000,
+        "max": 2500000
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "FSW Switching Frequency Select (Low = 2.5 MHz, High = 1.25 MHz for typical operation)"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 0.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "Initial output voltage accuracy PWM mode operation MIN 785.6 TYP 800 MAX 814.4 mV"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1.8,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "Initial output voltage accuracy PWM mode operation MIN 785.6 TYP 800 MAX 814.4 mV"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000017,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "IQ Operating quiescent current EN=High, IOUT = 0 mA, device not switching TYP 17 MAX 30 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.0000015,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "ISD Shutdown current EN=Low TYP 1.5 MAX 25 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "POWER SWITCH High-side MOSFET ON-resistance and Low-side MOSFET ON-resistance"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "POWER SWITCH High-side MOSFET ON-resistance 90 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "SS/TR Soft-Start/Tracking Pin. An external capacitor connected to this pin sets the internal voltage rise time."
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: EN"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: PG 4"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "psm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 1,
+        "method": "text",
+        "quote": "Seamless power save mode transition"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "FSW selects between two fixed frequencies; there is no clock input pin"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "over operating junction temperature (TJ = -40C to 125C)"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "over operating junction temperature (TJ = -40C to 125C)"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "over operating junction temperature (TJ = -40C to 125C)"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "16-VQFN (RGT)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 32,
+        "method": "text",
+        "quote": "TPS62130RGTR Active Production VQFN (RGT) | 16"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 3,
+        "method": "text",
+        "quote": "Exposed Thermal Pad"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "The Electrical Characteristics state no minimum on time"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 100,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 1,
+        "method": "text",
+        "quote": "100% duty cycle mode"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 19,
+        "method": "text",
+        "quote": "Figure 9-4. Efficiency with 1.25 MHz"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.09,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "RDS(ON) High-side MOSFET ON-resistance VIN>=6V TYP 90 MAX 170 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.04,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 5,
+        "method": "image",
+        "quote": "RDS(ON) Low-side MOSFET ON-resistance VIN>=6V TYP 40 MAX 70 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "f9b1af285622c0cf1a5991f9641a6e64c5e6d899e52cc0b1632808742019579f",
+        "page": 32,
+        "method": "text",
+        "quote": "PACKAGING INFORMATION lists no automotive-qualified orderable part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_18v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "qfn",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "TPS62130",
+    "basePart": "TPS62130",
+    "packageFamily": "qfn",
+    "pins": 16,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "rdsOnHigh": "Read from the rendered page. Text extraction of this table interleaves the high- and low-side rows, giving the low-side figure (40 mOhm) where the high-side one (90 mOhm) belongs.",
+    "rdsOnLow": "Read from the rendered page, for the same reason as rdsOnHigh.",
+    "switchingFrequency": "Two selectable values rather than a continuous range: the FSW pin picks approximately 2.5 MHz (low) or 1.25 MHz (high). Recorded as the span they cover, with the caveat that nothing between them is available.",
+    "softStart": "Present and programmable: an external capacitor on SS/TR sets the rise time, so the datasheet states no fixed time.",
+    "externalSync": "The FSW pin selects between two internal frequencies. It is not a clock input, so the part does not synchronise to an external clock.",
+    "efficiencyPeak": "Given only as curves, with no peak stated in text.",
+    "minOnTime": "Not stated in any table."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T09:40:00.000Z"
+}

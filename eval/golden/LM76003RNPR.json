@@ -1,0 +1,464 @@
+{
+  "mpn": "LM76003RNPR",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "A 60-V, 3.5-A synchronous regulator in a 30-pad WQFN with a SYNC/MODE pin, a soft start that is internal unless a capacitor extends it, and an output range stated as a fraction of the input. Adds a second 60-V part in a different package family from TPS54560B.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/gpn/lm76003",
+    "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+    "pageCount": 59,
+    "fetchedAt": "2026-09-11T09:25:00.000Z",
+    "localPath": "cache/pdf/91/65/9165315a4d214d5080254f39c5b92f5af0cd9594eba4f144a5eb37d9c50a4710",
+    "coversMpns": ["LM76002RNPR", "LM76002RNPT", "LM76003RNPR", "LM76003RNPT"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Input voltage 3.5 V to 60 V (65 V maximum)"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 60,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Input voltage 3.5 V to 60 V (65 V maximum)"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 65,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Input voltage 3.5 V to 60 V (65 V maximum)"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 1,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage 1 V to 95% VIN"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage 1 V to 95% VIN"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage 1 V to 95% VIN, set by an external divider"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3.5,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "LM76002/LM76003 3.5-V to 60-V, 2.5-A/3.5-A Synchronous Step-Down Voltage Regulator"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 500000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "Switching frequency setting pin. If floating, the default switching frequency is 500 kHz."
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 1.006,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "VFB Feedback voltage PWM mode MIN 0.987 TYP 1.006 MAX 1.017 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1.5,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "VFB Feedback voltage PWM mode MIN 0.987 TYP 1.006 MAX 1.017 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000021,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "Operating quiescent current VEN = 2 V, VFB = 1.5 V, VBIAS = 3.3 V TYP 21 MAX 50 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 9e-7,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "Shutdown current VEN = 2 V, VFB = 1.5 V, VBIAS = 3.3 V TYP 0.9 MAX 12 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated synchronous rectification"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS_ON_HS IOUT = 1 A, VBIAS = VOUT = 3.3 V TYP 95 MAX 150 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.0063,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "Soft-start-control pin. Leave this pin floating to use the 6.3-ms internal soft-start time."
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "VEN is used in the quiescent and shutdown current conditions"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "The pin list includes a power-good output"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "selectable",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "SYNC/MODE: PWM under light loads, constant switching frequency over load; tie to external clock to synchronise"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 4,
+        "method": "text",
+        "quote": "SYNC/MODE ... tie to external clock"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "Limits apply over the recommended operating junction temperature (TJ) range of -40C to +125C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "Limits apply over the recommended operating junction temperature (TJ) range of -40C to +125C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "recommended operating junction temperature (TJ) range"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "30-WQFN (RNP)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 56,
+        "method": "text",
+        "quote": "RNP0030G WQFN - 0.8 mm max height"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 56,
+        "method": "text",
+        "quote": "WQFN with an exposed pad"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 6.5e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "tON-MIN = 65 ns (typical)"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 95,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "Output voltage 1 V to 95% VIN"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "No peak efficiency is stated in text"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.095,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "RDS_ON_HS IOUT = 1 A, VBIAS = VOUT = 3.3 V TYP 95 MAX 150 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 7,
+        "method": "text",
+        "quote": "The low-side on-resistance row did not survive text extraction and was not read from the rendered page"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "1ef4ab645f7e32029a52062d2d32b622f576f345b9038c72da19055b60a91040",
+        "page": 1,
+        "method": "text",
+        "quote": "The features list no automotive qualification; the automotive part is the separate LM76003-Q1"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_60v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_6a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "qfn",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "sync", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "LM76003",
+    "basePart": "LM76003",
+    "packageFamily": "qfn",
+    "pins": 30,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "efficiencyPeak": "Given only as curves, with no peak stated in text.",
+    "voutMax": "Not a number: the output range is stated as 1 V to 95% of the input, so the upper end moves with the input. The same 95% is recorded as the maximum duty cycle.",
+    "switchingFrequency": "The default with the RT pin floating. A resistor sets it anywhere in the programmable range, and the SYNC pin overrides it with an external clock.",
+    "rdsOnLow": "The row is in the same table as the high-side one but did not survive text extraction; it was left null rather than guessed at.",
+    "softStart": "Internal 6.3 ms, extendable with a capacitor on the soft-start pin."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:05:00.000Z"
+}

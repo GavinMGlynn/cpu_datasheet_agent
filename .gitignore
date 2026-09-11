@@ -30,3 +30,8 @@ Thumbs.db
 
 # Test output
 /coverage/
+
+# Golden-set working files: datasheet text and rendered pages, which are the
+# manufacturers' copyright. The golden JSON files beside them hold only the
+# values read out of them, with the page each came from.
+/eval/golden/work/

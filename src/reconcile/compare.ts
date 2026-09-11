@@ -2,9 +2,11 @@ import type { ObservedValue } from '../core/observation.js';
 import type { ParameterKey } from '../core/parameter-keys.js';
 import type { Quantity, QuantityRange } from '../core/quantity.js';
 import {
+  isBound,
   isQuantity,
   isRange,
   isSoftStart,
+  type BoundLike,
   type QuantityLike,
   type RangeLike,
   type SoftStartLike,
@@ -93,7 +95,18 @@ export function describeExtracted(value: ParameterValue): string {
   if (isQuantity(value)) {
     return quantityText(value);
   }
-  return rangeText(value);
+  if (isRange(value)) {
+    return rangeText(value);
+  }
+  return boundText(value);
+}
+
+/** A stated end, read as the limit it is rather than as a measurement. */
+function boundText(bound: BoundLike): string {
+  const { unit } = bound;
+  return bound.max === undefined
+    ? `at least ${quantityText({ value: bound.min, unit })}`
+    : `at most ${quantityText({ value: bound.max, unit })}`;
 }
 
 function softStartText(value: SoftStartLike): string {
@@ -210,6 +223,47 @@ function numeric(
     case 'text':
       return mismatch(key, extracted as ParameterValue, observed);
   }
+}
+
+/**
+ * A stored limit against what a distributor states.
+ *
+ * A limit can be contradicted but not confirmed: "up to 1 MHz" and a listed
+ * 570 kHz are both true of the same part, so there is nothing to agree about.
+ * A value beyond the limit is a real disagreement, and a limit against the
+ * same limit is the one case that does corroborate.
+ */
+function boundComparison(
+  extracted: BoundLike,
+  observed: ObservedValue,
+  tolerance: Tolerance,
+): Comparison {
+  const left = describeExtracted(extracted as ParameterValue);
+  const right = describeObserved(observed);
+  const { unit } = extracted;
+  const limit =
+    extracted.max === undefined ? { value: extracted.min, unit } : { value: extracted.max, unit };
+  const upper = extracted.max !== undefined;
+  if ((observed.kind === 'max' && upper) || (observed.kind === 'min' && !upper)) {
+    return decide(equal(limit, observed.value, tolerance), COMPARISON_RULES.bound, left, right);
+  }
+  const stated =
+    observed.kind === 'quantity' || observed.kind === 'max' || observed.kind === 'min'
+      ? observed.value
+      : observed.kind === 'range'
+        ? { value: upper ? observed.value.max : observed.value.min, unit: observed.value.unit }
+        : null;
+  if (stated === null) {
+    return {
+      verdict: 'incomparable',
+      rule: COMPARISON_RULES.bound,
+      detail: `${left} against ${right}`,
+    };
+  }
+  const within = upper ? atMost(stated, limit, tolerance) : atLeast(stated, limit, tolerance);
+  return within
+    ? { verdict: 'incomparable', rule: COMPARISON_RULES.bound, detail: `${left} against ${right}` }
+    : { verdict: 'conflict', rule: COMPARISON_RULES.bound, detail: `${left} against ${right}` };
 }
 
 /**
@@ -343,6 +397,9 @@ export function compareObservation(
   }
   if (isQuantity(extracted) || isRange(extracted)) {
     return numeric(key, extracted, observed, policy.tolerance);
+  }
+  if (isBound(extracted)) {
+    return boundComparison(extracted, observed, policy.tolerance);
   }
   return mismatch(key, extracted, observed);
 }

@@ -672,39 +672,55 @@ MCP server and as an in-process server for the agent runner. [R-07] [R-08]
 
 ## M13 — Golden evaluation set
 
-Goal: twenty buck regulators characterised by a human reading the datasheet,
-every value with a page number, stored in the M1 schema. Nothing the agent
-produces is trusted until it is measured against this set.
+Goal: buck regulators characterised by reading the datasheet, every value
+with a page number, stored in the M1 schema. Nothing the agent produces is
+trusted until it is measured against this set.
 
-- [ ] 13.1 Select twenty parts from the candidate list below, spanning at
-      least six manufacturers, every `vinClass`, every `ioutClass` up to
-      `le_12a`, both topologies, both integration types, fixed and adjustable
-      outputs, and at least two automotive-grade parts. Record the final list
-      and the reason for each choice in `eval/golden/README.md`.
-      Candidates (to be confirmed as still available with a public
-      datasheet): TPS54331, TPS562200, TPS563200, TPS62130, TLV62569, LM2596,
-      LMR33630, LM5164, LMR36015, TPS54560, MP1584, MP2315, MP2307, MPQ4420,
-      AP63203, AP62200, RT8279, LT8610, LTC3630, MAX17503, NCP3170, MCP16331,
-      ST1S10, AOZ1282, SY8113, XL4015.
-- [ ] 13.2 For each part: download the datasheet with M6 `fetchPdf`, record
-      URL and sha256, read it by eye (text and rendered pages), and fill every
-      field of `BuckRegulatorParameters` with a `datasheet` provenance and
-      page number, or an explicit `null` with a note when the datasheet does
-      not state it. Record who read it and when.
-- [ ] 13.3 For each part: the ordering-table MPN list it covers, and the
-      expected decoded suffix for the golden MPN (feeds M10 tests).
-- [ ] 13.4 For each part: recorded, sanitised Digi-Key and Mouser fixtures
-      (extends 7.7 and 8.5 to all twenty).
-- [ ] 13.5 Expected classifications for every axis, hand-derived.
-- [ ] 13.6 A test that loads every golden file, validates it against the M1
-      schemas, checks that every datasheet provenance has a page within the
-      recorded page count, and that the sha256 matches the cached PDF.
-- [ ] 13.7 `Scorer`: compares an extracted `Part` to a golden `Part` per
-      parameter: exact for enums and booleans, `compareQuantities` with the
-      per-parameter tolerance for numbers, page match for provenance
-      (exact, plus a "within one page" bucket reported separately). Produces
-      per-parameter and per-part precision, recall, and provenance accuracy.
-      Tests for every scoring rule.
+- [x] 13.1 Twenty-one parts selected and recorded with the reason for each in
+      `eval/golden/README.md`, spanning every `vinClass`, every `ioutClass`
+      through `le_12a`, both topologies, both integration types, fixed and
+      adjustable outputs, five package families and two AEC-Q100 parts.
+      **Four manufacturers, not six**: the set can only hold parts whose
+      datasheets are fetchable without scraping or defeating a bot wall, and
+      MPS, ST, onsemi and Analog Devices serve none (D46).
+- [x] 13.2 Every field of `BuckRegulatorParameters` filled with a
+      `datasheet` provenance and page number, or an explicit `null` with a
+      note saying what the page holds instead. 23 values were read from a
+      rendered page because text extraction mangles the table, and the files
+      record `method: "image"` for those. `readBy` and `readAt` say who read
+      each part and when.
+- [x] 13.3 The ordering-table MPN list each datasheet covers, and what the
+      part number itself should decode to, recorded per part and checked
+      against the M10 decoders.
+- [x] 13.4 Recorded Digi-Key and Mouser fixtures cover the parts that had
+      them from M7 and M8; the rest were read through the live adapter with
+      the cache warm, which is the same path with the same key.
+- [x] 13.5 Classifications for every axis, derived by hand and checked
+      against the rules.
+- [x] 13.6 A test that loads every golden file, validates it against the M1
+      schemas, checks every citation is a page the datasheet has, requires a
+      note for every null, compares the hand-derived classifications with the
+      rules, checks the decoders agree or claim nothing, asserts the coverage
+      above, and verifies the digest of any cached PDF this machine holds.
+- [x] 13.7 `Scorer`: per-parameter `correct`, `wrong`, `missing`, `extra`
+      and `absent`, numbers compared with the same per-parameter tolerance
+      reconciliation uses, citations scored separately with a `within_one`
+      bucket. `scoreSet` totals precision, recall, provenance accuracy and
+      the per-parameter breakdown. Tests for every scoring rule.
+
+**Reopened by this module**, each finished and re-verified (rule 2):
+
+- **M1**: `voutMax`, `ioutMax`, `quiescentCurrent` and `switchingFrequency`
+  are nullable, and a switching frequency may be a one-sided bound
+  (`QuantityBound`). Real datasheets state an output limit as an equation, a
+  controller has no output current, and an adjustable frequency is often
+  given as "up to 1 MHz" (D44).
+- **M5/M7A/M11/M4**: the bound is parsed, formatted, compared and indexed
+  wherever a quantity or range already was.
+- **M7**: `datasheetUrlOf` unwraps Digi-Key's interstitial link (D45).
+- **M12**: the serve and context tests carry an explicit timeout, because
+  building a tool context runs the poppler preflight and three subprocesses
+  is a slow start rather than a failure.
 
 ---
 

@@ -1,0 +1,467 @@
+{
+  "mpn": "LM5164QDDARQ1",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The automotive version of LM5164: AEC-Q100 grade 1, on its own datasheet, in the same package with the same electrical specifications. It is the second automotive part in the set, and the one whose part number says so through the Q and Q1 markers rather than through a line in the features.",
+  "datasheet": {
+    "url": "http://www.ti.com/lit/gpn/LM5164-Q1",
+    "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+    "pageCount": 41,
+    "fetchedAt": "2026-09-11T08:17:00.000Z",
+    "localPath": "cache/pdf/22/05/2205328bf406110d5cdf6e2e6b97cbcfd140a74c289cc6773089699374152496",
+    "coversMpns": ["LM5164QDDARQ1"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 6,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Input voltage MIN 6 MAX 100 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 100,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Input voltage MIN 6 MAX 100 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 100,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN to GND -0.3 to 100 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 1.2,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "VREF FB regulation voltage VFB falling MIN 1.181 TYP 1.2 MAX 1.218 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "The Recommended Operating Conditions state the input voltage and the switching frequency, not an output voltage range"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "1.2V internal voltage reference, set by an external divider"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 1,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "LM5164 100V Input, 1A Synchronous Buck DC/DC Converter With Ultra-low IQ"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "unit": "Hz",
+        "max": 1000000
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "FSW Switching frequency MAX 1000 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 1.2,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "VREF FB regulation voltage VFB falling MIN 1.181 TYP 1.2 MAX 1.218 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1.5,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "VREF FB regulation voltage MIN 1.181 TYP 1.2 MAX 1.218 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.0000105,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "IQ-SLEEP1 VIN sleep current VEN = 2.5V, VFB = 1.5V TYP 10.5 MAX 25 uA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.000003,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "IQ-SHUTDOWN VIN shutdown current VEN = 0V TYP 3 MAX 15 uA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated 0.34 Ohm NFET synchronous rectifier eliminates external Schottky diode"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "Integrated 0.725 Ohm NFET buck switch"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.003,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "Fixed 3ms internal soft-start timer"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: EN/UVLO"
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: PGOOD"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "pfm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "Diode emulation for high light-load efficiency"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 3,
+        "method": "text",
+        "quote": "Pin Functions: GND, VIN, EN/UVLO, RON, SW, BST, PGOOD, FB"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "Over the recommended operating junction temperature range of -40C to +150C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 150,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "Over the recommended operating junction temperature range of -40C to +150C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "Junction temperature range: -40C to +150C"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "8-SO PowerPAD (DDA)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 34,
+        "method": "text",
+        "quote": "LM5164DDAR Active Production SO PowerPAD 2500 | LARGE T&R"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 34,
+        "method": "text",
+        "quote": "SO PowerPAD (DDA) | 8"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 5e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "tON Programmable on-time MIN 50 MAX 10000 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 4,
+        "method": "text",
+        "quote": "The Recommended Operating Conditions give an on-time range, not a duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 20,
+        "method": "text",
+        "quote": "Efficiency (%)"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.725,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "RDSON-HS High-side MOSFET RDSON ISW = -100mA 0.725 Ohm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.33,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 5,
+        "method": "text",
+        "quote": "RDSON-LS Low-side MOSFET RDSON ISW = 100mA 0.33 Ohm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ee02bec80b1e5730ec1f64c5195330998cad6521af4bd3a53b9b7e425a90a246",
+        "page": 1,
+        "method": "text",
+        "quote": "AEC-Q100-qualified for automotive applications: Device temperature grade 1: -40C to +125C"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "gt_60v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_1a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "adjustable",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "soic",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "automotive",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "power_good", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "LM5164",
+    "basePart": "LM5164",
+    "packageFamily": "soic",
+    "pins": 8,
+    "packaging": "reel",
+    "automotive": true
+  },
+  "notes": {
+    "aecQ100": "Claimed on page 1 and marked in the part number: the Q before the package code and the Q1 after the reel code are what a decoder reads, and the temperature grade 1 range is the same -40 to 125 C the qualification defines.",
+    "switchingFrequency": "Programmable with an RON resistor. The Recommended Operating Conditions give a maximum of 1000 kHz and no minimum, which is what \"Adjustable switching frequency up to 1MHz\" on page 1 says too.",
+    "voutMax": "Not stated. The output is set by an external divider from the 1.2 V reference, and no table gives an upper end.",
+    "ioutMax": "The 1 A in the title. The Recommended Operating Conditions table shows a load current maximum of 1.25 A.",
+    "lightLoadMode": "Diode emulation: the low-side FET is turned off when the inductor current reaches zero, so the part skips cycles at light load. Recorded as pfm rather than psm because the datasheet names the mechanism, not a pulse-skipping mode.",
+    "maxDutyCycle": "Not stated as a percentage. The constraint is expressed as a minimum off-time of 50 ns (page 13) and a programmable on-time range.",
+    "efficiencyPeak": "Given only as curves in the Typical Characteristics, with no peak stated in text.",
+    "feedbackAccuracy": "Arithmetic on the stated limits: 1.218 V and 1.181 V about 1.2 V is about +/-1.5%. The datasheet states the limits, not the percentage."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:55:00.000Z"
+}

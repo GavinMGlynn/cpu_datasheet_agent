@@ -1,0 +1,467 @@
+{
+  "mpn": "AP63203WU-7",
+  "manufacturer": "Diodes Incorporated",
+  "category": "buck_regulator",
+  "reason": "A fixed 3.3 V output, which nothing else in the set has, from a second manufacturer. A 32-V, 2-A synchronous converter in a 6-pin TSOT with PFM at light load and an ambient temperature specification.",
+  "datasheet": {
+    "url": "https://www.diodes.com/assets/Datasheets/AP63200-AP63201-AP63203-AP63205.pdf",
+    "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+    "pageCount": 18,
+    "fetchedAt": "2026-09-11T08:52:00.000Z",
+    "localPath": "cache/pdf/8e/47/8e475f71444c9b7591bf20f02a089ff99e9b6899eb7ddc82e8ebe0be6bc30a5a",
+    "coversMpns": ["AP63200WU-7", "AP63201WU-7", "AP63203WU-7", "AP63205WU-7"]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 3.8,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 3.8 MAX 32 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 32,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "VIN Supply Voltage MIN 3.8 MAX 32 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 35,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "Absolute Maximum Ratings VIN Supply Voltage -0.3 to +35.0 (DC) V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM, AP63203 MIN 3.27 TYP 3.30 MAX 3.33 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM, AP63203 MIN 3.27 TYP 3.30 MAX 3.33 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 12,
+        "method": "text",
+        "quote": "The AP63203 and AP63205 have fixed output voltages of 3.3V and 5V, respectively."
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 2,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "3.8V TO 32V INPUT, 2A LOW IQ SYNCHRONOUS BUCK WITH ENHANCED EMI REDUCTION"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 1100000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "Switching Frequency 1.1MHz: AP63203 and AP63205"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM, AP63203 MIN 3.27 TYP 3.30 MAX 3.33 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 1,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "VFB Feedback Voltage CCM, AP63203 MIN 3.27 TYP 3.30 MAX 3.33 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.000022,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "22uA Ultralow Quiescent Current"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "ISHDN Shutdown Supply Current VEN = 0V, with no typical stated in the extracted row"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "a 2A, synchronous buck converter ... integrates a 125mOhm high-side power MOSFET and a 68mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "fully integrates a 125mOhm high-side power MOSFET and a 68mOhm low-side power MOSFET"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": true,
+        "time": {
+          "value": 0.004,
+          "unit": "s"
+        }
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "tSS Soft-Start Period 4 ms"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 2,
+        "method": "text",
+        "quote": "EN 2 Enable Input. EN is a digital input that turns the regulator on or off."
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 2,
+        "method": "text",
+        "quote": "Pin Assignments: VIN, EN, GND, FB, SW, BST in a TSOT26"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "pfm",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 1,
+        "method": "text",
+        "quote": "Supports Pulse Frequency Modulation (PFM): AP63200, AP63203, and AP63205"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 2,
+        "method": "text",
+        "quote": "Pin Assignments: VIN, EN, GND, FB, SW, BST in a TSOT26"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range MIN -40 MAX +85 C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 85,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range MIN -40 MAX +85 C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "ambient",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 4,
+        "method": "text",
+        "quote": "TA Operating Ambient Temperature Range"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "6-TSOT26",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 16,
+        "method": "text",
+        "quote": "AP63203WU-7 TSOT26 PWM/PFM 1100kHz 3.3V WU 3000 7\" Tape & Reel"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 16,
+        "method": "text",
+        "quote": "TSOT26"
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": {
+        "value": 8e-8,
+        "unit": "s"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "tON Minimum On Time TYP 80 ns"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "The Electrical Characteristics state no maximum duty cycle"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 2,
+        "method": "text",
+        "quote": "Figure 2. Efficiency vs. Output Current"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": {
+        "value": 0.125,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "RDS(ON)1 High-Side Switch On-Resistance 125 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": {
+        "value": 0.068,
+        "unit": "Ohm"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 5,
+        "method": "text",
+        "quote": "RDS(ON)2 Low-Side Switch On-Resistance 68 mOhm"
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722",
+        "page": 16,
+        "method": "text",
+        "quote": "The Ordering Information lists no automotive-qualified part"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "fixed",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "sot23",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "industrial",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable", "soft_start", "light_load"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "AP63203",
+    "basePart": "AP63203",
+    "packageFamily": "sot23",
+    "pins": 6,
+    "packaging": "reel",
+    "automotive": false
+  },
+  "notes": {
+    "feedbackReference": "For the fixed 3.3 V part the FB pin senses the output directly, so the feedback voltage and the output voltage are the same number. The adjustable parts in the same family regulate FB to 0.8 V.",
+    "shutdownCurrent": "The row is present but its typical and maximum columns did not survive text extraction; not read from the rendered page because nothing else on this part needed it.",
+    "voutMax": "A fixed-output part: the schema requires voutMin and voutMax to equal voutFixed, and all three are the 3.3 V the part regulates to.",
+    "efficiencyPeak": "Given only as curves, with no peak stated in text.",
+    "maxDutyCycle": "Not stated in any table."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T09:55:00.000Z"
+}

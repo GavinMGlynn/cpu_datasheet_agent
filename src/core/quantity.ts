@@ -93,3 +93,47 @@ export function rangeOf<U extends Unit>(
       checkRange(range, ctx);
     });
 }
+
+/**
+ * One stated end and nothing about the other.
+ *
+ * A datasheet sometimes gives only a limit: TI's LM5164 has an adjustable
+ * switching frequency and states "up to 1 MHz", with no lower end anywhere.
+ * Recording that as a range would mean inventing the end it does not state,
+ * and recording it as a value would assert a frequency the part does not run
+ * at. This is the same distinction the distributor mapping already draws
+ * (D24), on the datasheet side.
+ *
+ * A union of the two shapes, not a pair of optional fields: a value with both
+ * ends is a {@link QuantityRange}, and neither member accepts one, so the two
+ * cannot be confused. Code that reads the end a bound has needs no fallback
+ * for the end it cannot have.
+ */
+export function boundOf<U extends Unit>(
+  unit: U,
+): z.ZodUnion<
+  [
+    z.ZodObject<{ unit: z.ZodLiteral<U>; min: z.ZodNumber }, z.core.$strict>,
+    z.ZodObject<{ unit: z.ZodLiteral<U>; max: z.ZodNumber }, z.core.$strict>,
+  ]
+> {
+  return z.union([
+    z.strictObject({ unit: z.literal(unit), min: z.number() }).superRefine((bound, ctx) => {
+      checkMagnitude(unit, bound.min, ctx, ['min']);
+    }),
+    z.strictObject({ unit: z.literal(unit), max: z.number() }).superRefine((bound, ctx) => {
+      checkMagnitude(unit, bound.max, ctx, ['max']);
+    }),
+  ]);
+}
+
+/** A {@link boundOf} value at any unit. */
+export const QuantityBound = z.union([
+  z.strictObject({ unit: Unit, min: z.number() }).superRefine((bound, ctx) => {
+    checkMagnitude(bound.unit, bound.min, ctx, ['min']);
+  }),
+  z.strictObject({ unit: Unit, max: z.number() }).superRefine((bound, ctx) => {
+    checkMagnitude(bound.unit, bound.max, ctx, ['max']);
+  }),
+]);
+export type QuantityBound = z.output<typeof QuantityBound>;

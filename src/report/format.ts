@@ -1,6 +1,6 @@
 import type { ObservedValue } from '../core/observation.js';
 import type { Provenance } from '../core/provenance.js';
-import { isQuantity, isRange, isSoftStart } from '../core/value-shapes.js';
+import { isBound, isQuantity, isRange, isSoftStart } from '../core/value-shapes.js';
 import { formatEngineering, formatRange } from '../units/index.js';
 
 /** Text shown when a datasheet does not state a value. */
@@ -34,6 +34,11 @@ export function formatParameterValue(value: unknown): string {
   }
   if (isRange(value)) {
     return formatRange(value as never);
+  }
+  if (isBound(value)) {
+    return value.max === undefined
+      ? `at least ${formatEngineering({ value: value.min, unit: value.unit } as never)}`
+      : `at most ${formatEngineering({ value: value.max, unit: value.unit } as never)}`;
   }
   return JSON.stringify(value);
 }
