@@ -21,11 +21,14 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "0.3.267",
+    "@modelcontextprotocol/server": "2.0.0",
     "better-sqlite3": "13.0.3",
     "zod": "4.6.1"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@modelcontextprotocol/client": "2.0.0",
     "@types/better-sqlite3": "9.6.0",
     "@types/node": "22.20.2",
     "@vitest/coverage-v8": "5.0.0",

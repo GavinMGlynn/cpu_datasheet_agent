@@ -1,4 +1,7 @@
-import type { BuckRegulatorParameters } from '../core/buck-regulator.js';
+import type {
+  BuckRegulatorParameters,
+  PartialBuckRegulatorParameters,
+} from '../core/buck-regulator.js';
 import type { DistributorProvenance } from '../core/provenance.js';
 import type { ObservedValue } from '../core/observation.js';
 import type { ParameterKey } from '../core/parameter-keys.js';
@@ -11,7 +14,7 @@ export type ParameterValue = BuckRegulatorParameters[ParameterKey]['value'];
  * whatever is there, and a parameter nobody extracted is reported as
  * `distributor_only` rather than invented.
  */
-export type ParameterSet = Partial<BuckRegulatorParameters>;
+export type ParameterSet = PartialBuckRegulatorParameters;
 
 /** One distributor's parametric facts, with the provenance they carry. */
 export interface DistributorParametrics {

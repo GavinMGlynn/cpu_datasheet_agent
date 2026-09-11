@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "chip-datasheet-agent": {
+      "command": "npx",
+      "args": ["tsx", "bin/chip-mcp.ts"],
+      "env": {}
+    }
+  }
+}

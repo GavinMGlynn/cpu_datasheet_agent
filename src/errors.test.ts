@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ChipAgentError, isChipAgentError } from './errors.js';
+import { ChipAgentError, describeError, isChipAgentError } from './errors.js';
 
 class SampleError extends ChipAgentError {}
 
@@ -104,5 +104,22 @@ describe('isChipAgentError', () => {
     expect(isChipAgentError({ code: 'A', message: 'a' })).toBe(false);
     expect(isChipAgentError(null)).toBe(false);
     expect(isChipAgentError(undefined)).toBe(false);
+  });
+});
+
+describe('describeError', () => {
+  it('keeps the code of one of our errors', () => {
+    expect(describeError(new ChipAgentError('SOME_CODE', 'went wrong'))).toEqual({
+      code: 'SOME_CODE',
+      message: 'went wrong',
+    });
+  });
+
+  it('keeps whatever String makes of anything else', () => {
+    expect(describeError(new RangeError('out of range'))).toEqual({
+      code: 'UNKNOWN',
+      message: 'RangeError: out of range',
+    });
+    expect(describeError('just a string')).toEqual({ code: 'UNKNOWN', message: 'just a string' });
   });
 });

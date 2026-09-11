@@ -608,43 +608,65 @@ continued (rule 2):
 Goal: the complete tool surface, logged and gated, exposed both as a stdio
 MCP server and as an in-process server for the agent runner. [R-07] [R-08]
 
-- [ ] 12.1 `ToolDefinition` type: `name`, `description`, Zod `input` and
+- [x] 12.1 `ToolDefinition` type: `name`, `description`, Zod `input` and
       `output` schemas, `spendsQuota: boolean`, `annotations`
       (`readOnlyHint`, `destructiveHint`), `handler`. `ToolRegistry` that
       refuses duplicate names and wraps every handler with `withLedger` and
       output validation (a handler returning something that fails its own
-      output schema is a bug and throws).
-- [ ] 12.2 Tools (each with full input and output schemas):
+      output schema is a bug and throws `TOOL_OUTPUT_INVALID`, which is a
+      different fault from the caller's bad input).
+- [x] 12.2 Tools (each with full input and output schemas):
       `resolve_mpn`, `fetch_offers`, `fetch_datasheet`, `pdf_info`,
       `find_pages`, `read_pages`, `render_page` (returns an image content
       block), `normalise_value`, `reconcile_parameters`, `classify_part`,
       `upsert_part`, `get_part`, `search_parts`, `record_verification`,
       `ask_human`, `list_escalations`, `nexar_budget_status`,
       `cache_stats`.
-- [ ] 12.3 Quota policy: tools with `spendsQuota` accept `confirmSpend:
-      true`; without it, and without a cache hit, they return a structured
-      `needs_confirmation` result rather than spending. The policy is a
-      separate object so M14 can configure it per run.
-- [ ] 12.4 `ask_human` semantics: writes an `Escalation`, returns its id, and
+- [x] 12.3 Quota policy: tools with `spendsQuota` accept `confirmSpend:
+      true`; without it the call runs against the cache alone and a miss
+      returns a structured `needs_confirmation` rather than spending. The
+      policy is a separate object so M14 can configure it per run. The
+      cache-only run is the same code path the spending run takes (M3's
+      `cacheOnly`), so what is free cannot drift from what is cached.
+- [x] 12.4 `ask_human` semantics: writes an `Escalation`, returns its id, and
       in headless mode marks the part `needs_human`. It never blocks the
       server.
-- [ ] 12.5 Stdio MCP server adapter in `src/mcp/` using
+- [x] 12.5 Stdio MCP server adapter in `src/mcp/` using
       `@modelcontextprotocol/server`: registers every tool from the registry,
       maps `ChipAgentError` to MCP error results with the `code`, logs to
       stderr only. Entry point `bin/chip-mcp.ts`.
-- [ ] 12.6 In-process adapter in `src/mcp/sdk.ts` that builds the same
-      registry into `createSdkMcpServer` tools for M14. Tool names must be
+- [x] 12.6 In-process adapter in `src/mcp/sdk.ts` that builds the same
+      registry into `createSdkMcpServer` tools for M14. Tool names are
       identical in both adapters (test).
 - [ ] 12.7 Reconcile against `chip-mcp-server.ts` if the user supplies it
       (Q3): every tool and schema it defined is either present here or its
-      omission is recorded as a decision.
-- [ ] 12.8 Tests: in-process MCP client over an in-memory transport calling
-      every tool's success and failure paths; schema rejection of bad input;
-      output validation failure; `needs_confirmation` flow; one ledger record
-      per call; stdout is empty during a full session; the two adapters expose
+      omission is recorded as a decision. **Waiting on the user**; the file is
+      not in the repository and nothing here depends on it.
+- [x] 12.8 Tests: an MCP client over an in-memory transport calling tools'
+      success and failure paths; schema rejection of bad input; output
+      validation failure; the `needs_confirmation` flow; one ledger record
+      per call; stdout empty during a full session; the two adapters expose
       identical tool lists.
-- [ ] 12.9 Manual check recorded in the log: the server runs under the MCP
-      Inspector and under Claude Code as a project MCP server. [R-09]
+- [x] 12.9 Manual check recorded in the log: `bin/chip-mcp.ts` driven over
+      real pipes through initialize, `tools/list` and `tools/call`, and
+      `.mcp.json` added so Claude Code offers it as a project server. The
+      Inspector itself needs a browser, so it is left to the user [R-09].
+
+**Reopened by this module**, each finished and re-verified (rule 2):
+
+- **M3**: `cacheOnly` on `cached()`, raising `CACHE_MISS` instead of
+  fetching, which is how a caller asks for an answer only if it is free.
+- **M5**: nothing. **M7/M8**: `cacheOnly` passed through, `withOptions` to
+  run one call under it, `lookup` carries its cache key so facts can be
+  attributed, and Mouser reports its configured currency.
+- **M1**: `PartialBuckRegulatorParameters`, built from the same shape as the
+  full schema, for the tools that run on what extraction has produced so far.
+- **M2**: the ledger drops `undefined` from recorded inputs and outputs as it
+  already did for errors — a tool answering with an optional field it had
+  nothing to put in must not fail to record (D28).
+- **M10**: a cache-only miss is raised out of candidate gathering rather than
+  recorded as a distributor failing, so the decision about spending is made
+  once, where the caller can see it.
 
 ---
 

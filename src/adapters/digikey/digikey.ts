@@ -65,6 +65,12 @@ export interface DigiKeyApiOptions {
   readonly ttlSeconds?: Partial<Record<OperationName, number>>;
   /** Bypass the cache and refetch. Spends quota on every call. */
   readonly force?: boolean;
+  /**
+   * Answer from the cache or fail with `CACHE_MISS`. This is how a caller
+   * asks for the answer only if it is free, running the same key path the
+   * spending call runs.
+   */
+  readonly cacheOnly?: boolean;
 }
 
 export interface PartLookup {
@@ -78,6 +84,9 @@ export interface PartLookup {
   readonly failures: readonly ParametricFailure[];
   /** The family part number, when Digi-Key reports one. */
   readonly baseProductNumber: string | undefined;
+  /** Provenance for anything read out of this response. */
+  readonly cacheKey: string;
+  readonly fetchedAt: string;
   readonly product: DigiKeyProduct;
   readonly hit: boolean;
 }
@@ -96,6 +105,15 @@ export class DigiKeyApi {
 
   get currency(): Currency {
     return this.options.locale.currency as Currency;
+  }
+
+  /**
+   * The same API with some options changed, sharing the client, cache and
+   * ledger. Used to run one call under `cacheOnly` without building a second
+   * client or duplicating how a cache key is made.
+   */
+  withOptions(overrides: Partial<DigiKeyApiOptions>): DigiKeyApi {
+    return new DigiKeyApi({ ...this.options, ...overrides });
   }
 
   searchKeyword(keywords: string, limit = 10): Promise<DigiKeyResult<KeywordSearchResponse>> {
@@ -180,6 +198,8 @@ export class DigiKeyApi {
       unmapped: parametrics.unmapped,
       failures: parametrics.failures,
       baseProductNumber: product.BaseProductNumber?.Name,
+      cacheKey: details.cacheKey,
+      fetchedAt: details.fetchedAt,
       product,
       hit: details.hit,
     };
@@ -211,6 +231,7 @@ export class DigiKeyApi {
           codec: jsonCodec<T>(),
           ttlSeconds: this.options.ttlSeconds?.[operation] ?? DEFAULT_TTL_SECONDS[operation],
           ...(this.options.force === undefined ? {} : { force: this.options.force }),
+          ...(this.options.cacheOnly === undefined ? {} : { cacheOnly: this.options.cacheOnly }),
         },
       );
       const result: DigiKeyResult<T> = {

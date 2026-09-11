@@ -103,6 +103,21 @@ describe('fetchPdf', () => {
     expect(requests).toHaveLength(1);
   });
 
+  it('answers a cache-only call from the store and refuses to download on a miss', async () => {
+    servePdf();
+
+    await expect(fetchPdf(deps, URL_A, { cacheOnly: true })).rejects.toMatchObject({
+      code: 'CACHE_MISS',
+    });
+    expect(requests).toHaveLength(0);
+
+    await fetchPdf(deps, URL_A);
+    server.resetHandlers();
+
+    expect((await fetchPdf(deps, URL_A, { cacheOnly: true })).hit).toBe(true);
+    expect(requests).toHaveLength(1);
+  });
+
   it('refetches when forced', async () => {
     servePdf();
     await fetchPdf(deps, URL_A);

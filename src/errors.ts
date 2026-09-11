@@ -53,6 +53,19 @@ export function isChipAgentError(value: unknown): value is ChipAgentError {
   return value instanceof ChipAgentError;
 }
 
+/**
+ * A thrown value reduced to the two fields a record needs.
+ *
+ * Anything that is not one of this project's errors keeps whatever `String`
+ * makes of it, prefix and all: the point is that a person reading the record
+ * can tell what went wrong, not that it reads tidily.
+ */
+export function describeError(error: unknown): { readonly code: string; readonly message: string } {
+  return isChipAgentError(error)
+    ? { code: error.code, message: error.message }
+    : { code: 'UNKNOWN', message: String(error) };
+}
+
 function serialiseCause(cause: unknown): unknown {
   if (isChipAgentError(cause)) {
     return cause.toJSON();

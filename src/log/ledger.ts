@@ -51,7 +51,9 @@ export function ledgerFileName(date: Date): string {
  *
  * `undefined` is not JSON, and the record schema rejects it. Without this, an
  * error carrying an undefined detail would fail to record and the caller would
- * see the logging failure instead of the failure it was recording.
+ * see the logging failure instead of the failure it was recording (D28) — and
+ * a tool answering with an optional field it had nothing to put in would do
+ * the same, though every transport drops it on the way out.
  */
 function jsonSafe(value: unknown): unknown {
   if (Array.isArray(value)) {
@@ -139,7 +141,7 @@ export class ToolCallLedger {
       sessionId: this.options.sessionId,
       ...(call.parentId === undefined ? {} : { parentId: call.parentId }),
       tool: call.tool,
-      input: this.redact(call.input) ?? null,
+      input: jsonSafe(this.redact(call.input)) ?? null,
       startedAt: call.startedAt.toISOString(),
       durationMs,
       spendsQuota: call.spendsQuota,
@@ -148,7 +150,7 @@ export class ToolCallLedger {
     const candidate =
       'error' in outcome
         ? { ...base, error: this.redact(toErrorJson(outcome.error)) }
-        : { ...base, output: this.redact(outcome.output) ?? null };
+        : { ...base, output: jsonSafe(this.redact(outcome.output)) ?? null };
     const validated = parseOrThrow(ToolCallRecord, candidate, subject);
     const record =
       validated.output === undefined

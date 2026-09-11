@@ -43,12 +43,18 @@ interface VerificationRow {
   model: string;
 }
 
+/**
+ * Optional fields here accept an explicit `undefined` as well as being
+ * absent. Filters arrive from validated JSON — a tool call, a query string —
+ * where a key present and undefined is the ordinary shape, and making each
+ * caller strip those keys first buys nothing.
+ */
 export interface ParameterFilter {
   readonly key: ParameterKey;
   /** The parameter's value (or its whole range) must be at least this. */
-  readonly min?: number;
+  readonly min?: number | undefined;
   /** The parameter's value (or its whole range) must be at most this. */
-  readonly max?: number;
+  readonly max?: number | undefined;
 }
 
 export interface ClassificationFilter {
@@ -58,11 +64,11 @@ export interface ClassificationFilter {
 }
 
 export interface PartFilter {
-  readonly category?: Category;
-  readonly status?: PartStatus;
-  readonly classifications?: readonly ClassificationFilter[];
-  readonly parameters?: readonly ParameterFilter[];
-  readonly limit?: number;
+  readonly category?: Category | undefined;
+  readonly status?: PartStatus | undefined;
+  readonly classifications?: readonly ClassificationFilter[] | undefined;
+  readonly parameters?: readonly ParameterFilter[] | undefined;
+  readonly limit?: number | undefined;
 }
 
 const PART_COLUMNS =

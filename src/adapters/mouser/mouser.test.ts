@@ -123,6 +123,12 @@ describe('operations', () => {
   });
 });
 
+describe('the configured currency', () => {
+  it('is what prices are read as when Mouser names none', () => {
+    expect(api().currency).toBe('AUD');
+  });
+});
+
 describe('caching', () => {
   it('serves a repeat call from the cache', async () => {
     servePart();
@@ -133,6 +139,21 @@ describe('caching', () => {
 
     expect(second.hit).toBe(true);
     expect(second.cacheKey).toBe(first.cacheKey);
+    expect(requests).toBe(1);
+  });
+
+  it('answers a cache-only call from the store and refuses to spend on a miss', async () => {
+    servePart();
+    const free = api().withOptions({ cacheOnly: true });
+
+    await expect(free.searchPartNumber('TPS54331DR')).rejects.toMatchObject({
+      code: 'CACHE_MISS',
+    });
+    expect(requests).toBe(0);
+
+    await api().searchPartNumber('TPS54331DR');
+
+    expect((await free.searchPartNumber('TPS54331DR')).hit).toBe(true);
     expect(requests).toBe(1);
   });
 

@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 import { z } from 'zod';
@@ -238,6 +239,23 @@ export const ENV_VARIABLE_NAMES: readonly string[] = Object.freeze(Object.keys(e
  * run without any keys. Throws {@link ConfigError} listing every invalid
  * variable at once.
  */
+/**
+ * Loads a `.env` file into `process.env` when there is one, and says whether
+ * it did.
+ *
+ * Entry points call this before {@link loadConfig}: credentials live in
+ * `.env` (D16) and nothing else puts them in the environment. A missing file
+ * is normal — in CI, and anywhere the environment is already set — so it is
+ * not an error.
+ */
+export function loadEnvFileIfPresent(file = '.env'): boolean {
+  if (!existsSync(file)) {
+    return false;
+  }
+  process.loadEnvFile(file);
+  return true;
+}
+
 export function loadConfig(env: EnvSource = process.env, options: LoadConfigOptions = {}): Config {
   const parsed = envSchema.safeParse(env);
   if (!parsed.success) {

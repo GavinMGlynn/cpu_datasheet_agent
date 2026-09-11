@@ -6,6 +6,7 @@ import { KeywordSearchResponse } from '../adapters/digikey/schemas.js';
 import { MouserSearchResponse } from '../adapters/mouser/schemas.js';
 import { DigiKeyError } from '../adapters/digikey/errors.js';
 import { MouserError } from '../adapters/mouser/errors.js';
+import { CacheMissError } from '../cache/index.js';
 import { gatherCandidates, type SearchResult } from './candidates.js';
 
 const FIXTURES = path.resolve(import.meta.dirname, '..', '..', 'test', 'fixtures');
@@ -32,6 +33,12 @@ const digikey = {
     Promise.resolve(result(digikeySearch)),
 };
 
+const uncachedMouser = {
+  currency: 'USD' as const,
+  searchKeyword: (): Promise<SearchResult<MouserSearchResponse>> =>
+    Promise.reject(new CacheMissError('CACHE_MISS', 'nothing stored')),
+};
+
 const mouser = {
   currency: 'USD' as const,
   searchKeyword: (): Promise<SearchResult<MouserSearchResponse>> =>
@@ -39,6 +46,23 @@ const mouser = {
 };
 
 describe('gatherCandidates', () => {
+  it('lets a cache-only miss out rather than recording it as a distributor failing', async () => {
+    const uncached = {
+      currency: 'AUD' as const,
+      searchKeyword: (): Promise<SearchResult<KeywordSearchResponse>> =>
+        Promise.reject(new CacheMissError('CACHE_MISS', 'nothing stored')),
+    };
+
+    // The caller asked for an answer only if it were free; that it is not is
+    // the answer, and it is theirs to act on rather than a failure to record.
+    await expect(
+      gatherCandidates({ digikey: uncached, mouser }, 'TPS54331DR'),
+    ).rejects.toMatchObject({ code: 'CACHE_MISS' });
+    await expect(gatherCandidates({ mouser: uncachedMouser }, 'TPS54331DR')).rejects.toMatchObject({
+      code: 'CACHE_MISS',
+    });
+  });
+
   it('collects every listing from both distributors', async () => {
     const gathering = await gatherCandidates({ digikey, mouser }, 'TPS54331DR');
     expect(gathering.query).toBe('TPS54331DR');

@@ -14,11 +14,12 @@ interface EscalationRow {
   resolution_json: string | null;
 }
 
+/** Optional fields accept an explicit `undefined`; see `ParameterFilter`. */
 export interface EscalationFilter {
-  readonly mpn?: string;
-  readonly kind?: EscalationKind;
+  readonly mpn?: string | undefined;
+  readonly kind?: EscalationKind | undefined;
   /** true: only resolved; false: only open; omitted: both. */
-  readonly resolved?: boolean;
+  readonly resolved?: boolean | undefined;
 }
 
 function hydrate(row: EscalationRow): Escalation {

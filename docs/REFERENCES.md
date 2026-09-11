@@ -38,9 +38,9 @@ module README, or a code comment must have a row here.
 
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
-| R-07 | MCP TypeScript SDK repository | https://github.com/modelcontextprotocol/typescript-sdk | v2 stable line, packages `@modelcontextprotocol/server` (2.0.0) and `@modelcontextprotocol/client` (2.0.0), `McpServer` class. Targets the 2026-07-28 MCP spec. The 1.x line is `@modelcontextprotocol/sdk`. | verified 2026-09-10 |
+| R-07 | MCP TypeScript SDK repository | https://github.com/modelcontextprotocol/typescript-sdk | v2 stable line, packages `@modelcontextprotocol/server` (2.0.0) and `@modelcontextprotocol/client` (2.0.0), `McpServer` class. Targets the 2026-07-28 MCP spec. The 1.x line is `@modelcontextprotocol/sdk`, which the Agent SDK still peer-depends on and bundles. | verified 2026-09-11; both packages installed and pinned in M12, `registerTool`, `serveStdio`, `InMemoryTransport` and the client's `listTools`/`callTool` all exercised in tests |
 | R-08 | Model Context Protocol specification and docs | https://modelcontextprotocol.io/ | Protocol semantics: tools, resources, stdio transport, error results. | unverified |
-| R-09 | MCP Inspector | https://github.com/modelcontextprotocol/inspector | Manual check of the stdio server in M12 task 12.9. | unverified |
+| R-09 | MCP Inspector | https://github.com/modelcontextprotocol/inspector | Manual check of the stdio server in M12 task 12.9. Needs a browser, so the equivalent check was done by driving `bin/chip-mcp.ts` over real pipes instead (see the session 16 log). | unverified |
 
 ## Claude and the Agent SDK
 

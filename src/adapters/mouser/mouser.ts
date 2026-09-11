@@ -34,6 +34,8 @@ export interface MouserApiOptions {
   readonly ledger?: ToolCallLedger;
   readonly ttlSeconds?: number;
   readonly force?: boolean;
+  /** Answer from the cache or fail with `CACHE_MISS`; never spends. */
+  readonly cacheOnly?: boolean;
 }
 
 export interface PartLookup {
@@ -47,6 +49,9 @@ export interface PartLookup {
   /** Attribute names carrying no schema parameter, reported rather than dropped. */
   readonly unmapped: readonly string[];
   readonly part: MouserPart;
+  /** Provenance for anything read out of this response. */
+  readonly cacheKey: string;
+  readonly fetchedAt: string;
   readonly hit: boolean;
 }
 
@@ -59,6 +64,24 @@ export interface PartLookup {
  */
 export class MouserApi {
   constructor(private readonly options: MouserApiOptions) {}
+
+  /**
+   * The currency prices are read as when Mouser does not name one. Mouser
+   * prices in the store's own currency and does not always say which, so this
+   * is configured rather than discovered.
+   */
+  get currency(): Currency {
+    return this.options.fallbackCurrency;
+  }
+
+  /**
+   * The same API with some options changed, sharing the client, cache and
+   * ledger. Used to run one call under `cacheOnly` without duplicating how a
+   * cache key is made.
+   */
+  withOptions(overrides: Partial<MouserApiOptions>): MouserApi {
+    return new MouserApi({ ...this.options, ...overrides });
+  }
 
   /** Exact part-number search. Returns the response even when it found nothing. */
   searchPartNumber(mpn: string): Promise<MouserResult<MouserSearchResponse>> {
@@ -109,6 +132,8 @@ export class MouserApi {
       siblings: siblingMpns(part),
       unmapped: unmappedAttributes(part),
       part,
+      cacheKey: result.cacheKey,
+      fetchedAt: result.fetchedAt,
       hit: result.hit,
     };
   }
@@ -130,6 +155,7 @@ export class MouserApi {
           codec: jsonCodec<T>(),
           ttlSeconds: this.options.ttlSeconds ?? DEFAULT_TTL_SECONDS,
           ...(this.options.force === undefined ? {} : { force: this.options.force }),
+          ...(this.options.cacheOnly === undefined ? {} : { cacheOnly: this.options.cacheOnly }),
         },
       );
       const result: MouserResult<T> = {

@@ -318,3 +318,23 @@ describe('recording an error that carries undefined details', () => {
     expect(record.error?.details).toEqual({ present: 1, nested: { kept: 'yes' }, list: [null, 2] });
   });
 });
+
+describe('values that are not JSON', () => {
+  it('drops an undefined field from an input and an output', async () => {
+    const ledger = make();
+    const id = ledger.begin(
+      'lookup',
+      { mpn: 'TPS54331DR', hint: undefined },
+      {
+        spendsQuota: true,
+      },
+    );
+
+    await ledger.end(id, { output: { found: true, datasheetUrl: undefined } });
+    await ledger.flush();
+
+    const [record] = await readLines();
+    expect(record?.input).toEqual({ mpn: 'TPS54331DR' });
+    expect(record?.output).toEqual({ found: true });
+  });
+});

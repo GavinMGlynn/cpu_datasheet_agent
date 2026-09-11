@@ -3,11 +3,13 @@ import { describe, expect, it } from 'vitest';
 import { buckParameters, param, q } from '../../test/helpers/core-fixtures.js';
 import { expectAccepts, expectRejects } from '../../test/helpers/schema.js';
 import {
+  BUCK_REGULATOR_SHAPE,
   BuckRegulatorParameters,
   INTEGRATIONS,
   Integration,
   LIGHT_LOAD_MODES,
   LightLoadMode,
+  PartialBuckRegulatorParameters,
   SoftStart,
   TEMPERATURE_REFERENCES,
   TOPOLOGIES,
@@ -293,5 +295,29 @@ describe('BuckRegulatorParameters', () => {
     ])('accepts null for optional parameter %s', (key) => {
       expectAccepts(BuckRegulatorParameters, buckParameters({ [key]: param(null) }));
     });
+  });
+});
+
+describe('PartialBuckRegulatorParameters', () => {
+  it('accepts an empty set and any subset, each parameter still shape-checked', () => {
+    expectAccepts(PartialBuckRegulatorParameters, {});
+    expectAccepts(PartialBuckRegulatorParameters, { vinMax: param(q(28, 'V')) });
+    // The CLAUDE.md case: a string where a quantity belongs is still rejected.
+    expectRejects(PartialBuckRegulatorParameters, { vinMax: param('3 V to 32 V') }, 'vinMax');
+    expectRejects(PartialBuckRegulatorParameters, { nope: param(q(1, 'V')) });
+  });
+
+  it('drops the cross-field checks, which upsert_part still applies', () => {
+    // vinMax below vinMin: absurd as a whole part, unremarkable as a fragment
+    // of one being built.
+    expectAccepts(PartialBuckRegulatorParameters, {
+      vinMin: param(q(28, 'V')),
+      vinMax: param(q(3, 'V')),
+    });
+  });
+
+  it('is built from the same shape as the full schema', () => {
+    expect(Object.keys(BUCK_REGULATOR_SHAPE).sort()).toEqual([...PARAMETER_KEYS].sort());
+    expect(Object.isFrozen(BUCK_REGULATOR_SHAPE)).toBe(true);
   });
 });

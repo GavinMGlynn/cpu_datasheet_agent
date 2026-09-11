@@ -1,4 +1,5 @@
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 import { describe, expect, it, vi } from 'vitest';
@@ -9,6 +10,7 @@ import {
   ENV_VARIABLE_NAMES,
   LOG_LEVELS,
   loadConfig,
+  loadEnvFileIfPresent,
   type EnvSource,
 } from './config.js';
 import { isChipAgentError } from './errors.js';
@@ -346,5 +348,24 @@ describe('.env.example', () => {
       .filter((name): name is string => name !== undefined);
 
     expect(listed).toEqual([...ENV_VARIABLE_NAMES]);
+  });
+});
+
+describe('loadEnvFileIfPresent', () => {
+  it('loads a file when there is one and says so', async () => {
+    const dir = await mkdtemp(path.join(tmpdir(), 'env-'));
+    const file = path.join(dir, '.env');
+    await writeFile(file, 'CHIP_TEST_VARIABLE=from-the-file\n');
+    try {
+      expect(loadEnvFileIfPresent(file)).toBe(true);
+      expect(process.env.CHIP_TEST_VARIABLE).toBe('from-the-file');
+    } finally {
+      delete process.env.CHIP_TEST_VARIABLE;
+      await rm(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('says so when there is none, which is normal in CI', () => {
+    expect(loadEnvFileIfPresent('/nowhere/.env')).toBe(false);
   });
 });

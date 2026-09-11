@@ -34,6 +34,8 @@ export interface FetchPdfOptions {
   readonly userAgent?: string;
   /** Bypass the cached copy and refetch. */
   readonly force?: boolean;
+  /** Answer from the cache or fail with `CACHE_MISS`; never downloads. */
+  readonly cacheOnly?: boolean;
 }
 
 export interface FetchedPdf {
@@ -208,7 +210,11 @@ export async function fetchPdf(
       const { value, contentType } = await download();
       return { value, contentType, sourceUrl: url };
     },
-    { codec: bytesCodec, ...(options.force === undefined ? {} : { force: options.force }) },
+    {
+      codec: bytesCodec,
+      ...(options.force === undefined ? {} : { force: options.force }),
+      ...(options.cacheOnly === undefined ? {} : { cacheOnly: options.cacheOnly }),
+    },
   );
 
   return {

@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Cache, isExpired, type FetchResult } from './cache.js';
+import { Cache, CacheMissError, isExpired, type FetchResult } from './cache.js';
 import { bytesCodec, jsonCodec, textCodec } from './codec.js';
 import { hashCacheKey } from './key.js';
 import { FileCacheStore, type CacheMeta } from './store.js';
@@ -231,6 +231,53 @@ describe('Cache.cached', () => {
     });
     expect(hit.value.equals(bytes)).toBe(true);
     expect(hit.meta.size).toBe(6);
+  });
+
+  describe('cacheOnly', () => {
+    it('serves a stored entry without fetching', async () => {
+      await cache.cached(KEY, () => Promise.resolve({ value: 'stored' }), { codec: textCodec });
+      const fetch = vi.fn(() => Promise.resolve({ value: 'fresh' }));
+
+      const result = await cache.cached(KEY, fetch, { codec: textCodec, cacheOnly: true });
+
+      expect(result.value).toBe('stored');
+      expect(result.hit).toBe(true);
+      expect(fetch).not.toHaveBeenCalled();
+    });
+
+    it('throws CACHE_MISS rather than fetching when nothing is stored', async () => {
+      const fetch = vi.fn(() => Promise.resolve({ value: 'fresh' }));
+
+      await expect(
+        cache.cached(KEY, fetch, { codec: textCodec, cacheOnly: true }),
+      ).rejects.toMatchObject({ code: 'CACHE_MISS' });
+      expect(fetch).not.toHaveBeenCalled();
+    });
+
+    it('throws CACHE_MISS for an expired entry', async () => {
+      await cache.cached(KEY, () => Promise.resolve({ value: 'stale' }), {
+        codec: textCodec,
+        ttlSeconds: 60,
+      });
+      now = T0 + 61_000;
+
+      await expect(
+        cache.cached(KEY, () => Promise.resolve({ value: 'fresh' }), {
+          codec: textCodec,
+          cacheOnly: true,
+        }),
+      ).rejects.toMatchObject({ code: 'CACHE_MISS' });
+    });
+
+    it('refuses to be combined with force', () => {
+      expect(() =>
+        cache.cached(KEY, () => Promise.resolve({ value: 'x' }), {
+          codec: textCodec,
+          cacheOnly: true,
+          force: true,
+        }),
+      ).toThrow(CacheMissError);
+    });
   });
 
   it('resets statistics', () => {

@@ -176,6 +176,21 @@ describe('caching', () => {
     expect(requests).toHaveLength(2);
   });
 
+  it('answers a cache-only call from the store and refuses to spend on a miss', async () => {
+    serve(MPN, 'productdetails', 'TPS54331DR.productdetails.json');
+    const free = api().withOptions({ cacheOnly: true });
+
+    // Nothing stored yet: the answer is not free, and no request is made.
+    await expect(free.productDetails(MPN)).rejects.toMatchObject({ code: 'CACHE_MISS' });
+    expect(requests).toHaveLength(0);
+
+    await api().productDetails(MPN);
+    const cached = await free.productDetails(MPN);
+
+    expect(cached.hit).toBe(true);
+    expect(requests).toHaveLength(1);
+  });
+
   it('applies a per-operation lifetime, defaulting by how fast the data moves', async () => {
     expect(DEFAULT_TTL_SECONDS.pricing).toBe(86_400);
     expect(DEFAULT_TTL_SECONDS.media).toBe(604_800);

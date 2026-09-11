@@ -98,6 +98,10 @@ that supersedes the old one, and the old row's status changes to
 | D37 | 2026-09-11 | Packages are compared as a shape family and a lead count, never as text, and `other` (a recognised shape outside the vocabulary) is distinct from null (nothing readable). Where a text names two families, a stated body width decides: 3.00 mm MSOP, 4.40 mm TSSOP, 3.90 mm SOIC. | `8-PowerSOIC (0.154", 3.90mm Width)` and `8-SOIC PowerPAD (DDA)` are one package written twice, so text equality would report a conflict on nearly every part. Collapsing `other` into null would let a BGA and a threaded cylinder agree. The widths are Digi-Key's own, and its supplier field corroborates the reading on 100-odd corpus rows. | active |
 | D38 | 2026-09-11 | Observations of one parameter combine per parameter: `all` by default (one distributor disagreeing is a conflict even if another agrees), `any` for `package` (one agreeing description settles it). | Two distributors are two readings of one part, and a reading that disagrees is the whole point of reconciling. Digi-Key's `Package / Case` and `Supplier Device Package` are two descriptions of one thing, and its own two fields disagree on 9 of 547 recorded parts — DFN against QFN — so requiring both would escalate a distributor's internal inconsistency to a person. | active |
 | D39 | 2026-09-11 | A temperature grade is the widest envelope the part's operating range covers completely (extended -40…125 °C, industrial -40…85 °C, commercial 0…70 °C), and a range covering none of them is undecided rather than forced into the nearest. | A 0 °C to 125 °C part does not reach industrial's -40 °C, and claiming it does is the error that matters; calling it commercial understates its top end but promises nothing false. The grade describes the range as stated, whatever it is referenced to, with `temperatureReference` kept on the parameter for the junction-against-ambient distinction a single word cannot carry. | active |
+| D40 | 2026-09-11 | A tool asks whether an answer is free by running the real call under `cacheOnly`, which raises `CACHE_MISS` instead of fetching. Nothing predicts what is cached. | A prediction is a second implementation of the cache key, and two implementations of a key drift. Running the same path means the answer to "would this spend?" is produced by the code that would spend. It also keeps the question in one place: `withSpend` turns the miss into `needs_confirmation`, and every spending tool inherits that. | active |
+| D41 | 2026-09-11 | `fetch_datasheet` is not gated by the quota policy; the distributor APIs are. | The gate exists for money and quota (D12). A manufacturer's PDF costs neither, and it is what every extraction reads; gating it would mean asking permission to do the main work. The fetcher's own retry, redirect and size limits are what keep it polite. | active |
+| D42 | 2026-09-11 | The MCP server advertises the strict input schema it enforces (`additionalProperties: false`), which takes one cast because the SDK's registration type names a stripping object. | Advertised loose, the transport silently drops an argument the tool never agreed to ignore — the coercion this project refuses everywhere else. Strict at runtime is accepted by the SDK and refuses an unrecognised argument with the key in the message, which is a better answer than a silently different call. | active |
+| D43 | 2026-09-11 | The MCP surface uses the v2 SDK (`@modelcontextprotocol/server`), and the in-process server is tested through the tool definitions rather than through a client. | The Agent SDK peer-depends on and bundles the 1.x line, so the server object it builds cannot be driven by a v2 client: an in-memory transport between them fails inside the SDK. Exposing `sdkTools()` and calling the handlers tests what actually matters — that every tool is present and behaves — without pinning the project to whichever line the Agent SDK bundles next. | active |
 
 ## 4. Status
 
@@ -119,7 +123,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M9  | Nexar adapter with hard budget | deferred (D29) | |
 | M10 | MPN resolution | complete | 2026-09-11 |
 | M11 | Reconciliation and classification | complete | 2026-09-11 |
-| M12 | Tool registry and MCP server | not started | |
+| M12 | Tool registry and MCP server | complete, bar 12.7 (Q3) | 2026-09-11 |
 | M13 | Golden evaluation set | not started | |
 | M14 | Agent runner (extraction) | not started | |
 | M15 | Verification pass | not started | |
@@ -226,6 +230,54 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 16: Module 12 complete
+
+**Done**
+
+- `src/tools/`: the registry (validated in, validated out, ledgered), the
+  quota policy, and all eighteen tools the plan names, with a composition
+  root that wires one context from configuration.
+- `src/mcp/`: the stdio server, the in-process server for M14, one shared
+  result mapping, and `bin/chip-mcp.ts`.
+- Reopened M1 (a partial parameter schema), M2 (the ledger drops undefined
+  from inputs and outputs), M3 (`cacheOnly`), M7/M8 (`cacheOnly`,
+  `withOptions`, cache keys on lookups, Mouser's currency) and M10 (a cache
+  miss is not a distributor failure).
+- Checked by hand: `bin/chip-mcp.ts` driven over real pipes through
+  initialize, `tools/list` (18 tools) and `tools/call` (`get_part`), with
+  the logs on stderr and only protocol frames on stdout, stopping cleanly on
+  SIGINT. `.mcp.json` added so Claude Code offers it as a project server.
+- 1925 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- **"Is this cached?" must not be a second implementation.** The first design
+  was a probe that rebuilt the cache key to predict a hit. Running the real
+  call under `cacheOnly` instead means the prediction and the call cannot
+  disagree, and it put the whole question in one helper (D40).
+- **A loose schema is a coercion.** Advertising the stripping object the SDK's
+  type asks for means a client's unknown argument is dropped and the call runs
+  as if it had never been sent. One cast buys `additionalProperties: false`
+  and a refusal that names the key (D42).
+- **The two SDKs are on different major lines.** The Agent SDK bundles the 1.x
+  MCP SDK, so the in-process server cannot be driven by a v2 client at all —
+  an in-memory transport between them fails inside the SDK. Testing the tool
+  definitions directly proves the thing that matters without pinning us to
+  their choice (D43).
+- **A tool that answers with an optional field it has nothing to put in broke
+  the ledger.** `undefined` is not JSON, and the record schema rejected it;
+  Mouser listings carry no datasheet URL, so the first Mouser candidate to
+  reach a tool result failed the call it was recording. The ledger now drops
+  undefined from inputs and outputs as it already did for errors (D28).
+- A flaky coverage result had the same shape as session 15's: a path that only
+  runs when the machine is fast enough. Both times the fix was to test the
+  thing directly rather than through timing.
+
+**Next**
+
+- M13: hand-characterise twenty parts as the golden set, before anything
+  trusts an extraction.
 
 ### 2026-09-11 — Session 15: Module 11 complete
 

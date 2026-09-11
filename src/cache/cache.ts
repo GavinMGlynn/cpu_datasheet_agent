@@ -1,6 +1,17 @@
+import { ChipAgentError } from '../errors.js';
 import type { Codec } from './codec.js';
 import { refOf, type CacheKey } from './key.js';
 import { sha256Of, type CacheMeta, type CacheStore } from './store.js';
+
+/**
+ * Raised when a cache-only call finds nothing to serve.
+ *
+ * | Code | Meaning |
+ * | --- | --- |
+ * | `CACHE_MISS` | `cacheOnly` was set and the store holds no unexpired entry. The caller asked for the answer only if it were free. |
+ * | `CACHE_OPTIONS_CONFLICT` | `cacheOnly` and `force` together: one forbids fetching and the other demands it. |
+ */
+export class CacheMissError extends ChipAgentError {}
 
 export interface FetchResult<T> {
   readonly value: T;
@@ -14,6 +25,13 @@ export interface CachedOptions<T> {
   readonly ttlSeconds?: number;
   /** Bypass the stored entry and overwrite it. */
   readonly force?: boolean;
+  /**
+   * Serve from the store or fail: a miss throws `CACHE_MISS` rather than
+   * fetching. This is how a caller asks whether an answer is free without
+   * risking a spend, and it runs the same key path the real call runs, so the
+   * two cannot disagree about what is cached.
+   */
+  readonly cacheOnly?: boolean;
   /** Content type recorded when the fetch result does not supply one. */
   readonly contentType?: string;
 }
@@ -84,6 +102,13 @@ export class Cache {
     fetch: () => Promise<FetchResult<T>>,
     options: CachedOptions<T>,
   ): Promise<CachedResult<T>> {
+    if (options.cacheOnly === true && options.force === true) {
+      throw new CacheMissError(
+        'CACHE_OPTIONS_CONFLICT',
+        'cacheOnly and force cannot both be set: one forbids fetching and the other demands it',
+        { details: { namespace: key.namespace } },
+      );
+    }
     const ref = refOf(key);
     const running = this.inflight.get(ref.hash);
     if (running !== undefined && options.force !== true) {
@@ -118,6 +143,13 @@ export class Cache {
         this.counters.hits += 1;
         return { value: codec.decode(entry.bytes), hash, hit: true, meta: entry.meta };
       }
+    }
+    if (options.cacheOnly === true) {
+      throw new CacheMissError(
+        'CACHE_MISS',
+        `no cached entry for ${ref.namespace}, and this call may not fetch`,
+        { details: { namespace: ref.namespace, hash } },
+      );
     }
     const fetched = await fetch();
     const bytes = codec.encode(fetched.value);

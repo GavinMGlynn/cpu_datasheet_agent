@@ -1,5 +1,5 @@
 import type { Classification, ClassificationAxis } from '../core/classification.js';
-import type { BuckRegulatorParameters } from '../core/buck-regulator.js';
+import type { PartialBuckRegulatorParameters } from '../core/buck-regulator.js';
 import type { ParameterKey } from '../core/parameter-keys.js';
 
 /**
@@ -7,7 +7,7 @@ import type { ParameterKey } from '../core/parameter-keys.js';
  * whatever extraction has produced so far, and an axis whose parameters are
  * missing is reported rather than guessed.
  */
-export type ParameterSet = Partial<BuckRegulatorParameters>;
+export type ParameterSet = PartialBuckRegulatorParameters;
 
 /** Why an axis produced no value. */
 export interface UndecidedAxis {

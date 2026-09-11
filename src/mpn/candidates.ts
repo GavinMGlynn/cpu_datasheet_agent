@@ -8,7 +8,8 @@ import {
 import type { MouserSearchResponse } from '../adapters/mouser/schemas.js';
 import type { Offer } from '../core/offer.js';
 import type { Currency, Distributor } from '../core/primitives.js';
-import { isChipAgentError } from '../errors.js';
+import { CacheMissError } from '../cache/index.js';
+import { describeError } from '../errors.js';
 import { decoderFor } from './decoders/index.js';
 import { MpnError } from './errors.js';
 import { normaliseMpn } from './normalise.js';
@@ -87,16 +88,12 @@ export interface GatherOptions {
 const DEFAULT_LIMIT = 10;
 
 /**
- * A failure reduced to two fields for the record.
- *
- * Anything that is not one of this project's errors keeps whatever `String`
- * makes of it, prefix and all: the point is that a person reading the
- * gathering can tell what went wrong, not that it reads tidily.
+ * A cache-only call that found nothing is not a distributor failing: it is
+ * the caller having asked for an answer only if it were free. It travels out
+ * of the gathering untouched, so whoever asked can decide whether to spend.
  */
-function describe(error: unknown): { code: string; message: string } {
-  return isChipAgentError(error)
-    ? { code: error.code, message: error.message }
-    : { code: 'UNKNOWN', message: String(error) };
+function isCacheMiss(error: unknown): boolean {
+  return error instanceof CacheMissError && error.code === 'CACHE_MISS';
 }
 
 function decodeListing(mpn: string, manufacturer: string): DecodedMpn | null {
@@ -126,7 +123,11 @@ async function digikeyCandidates(
     try {
       mpn = normaliseMpn(listed).mpn;
     } catch (error) {
-      skipped.push({ distributor: 'digikey', mpnAsListed: listed, reason: describe(error).code });
+      skipped.push({
+        distributor: 'digikey',
+        mpnAsListed: listed,
+        reason: describeError(error).code,
+      });
       continue;
     }
     const family = product.BaseProductNumber?.Name;
@@ -161,7 +162,11 @@ async function mouserCandidates(
     try {
       mpn = normaliseMpn(listed).mpn;
     } catch (error) {
-      skipped.push({ distributor: 'mouser', mpnAsListed: listed, reason: describe(error).code });
+      skipped.push({
+        distributor: 'mouser',
+        mpnAsListed: listed,
+        reason: describeError(error).code,
+      });
       continue;
     }
     candidates.push({
@@ -206,14 +211,20 @@ export async function gatherCandidates(
     try {
       await digikeyCandidates(sources.digikey, query, limit, candidates, skipped);
     } catch (error) {
-      failures.push({ distributor: 'digikey', ...describe(error) });
+      if (isCacheMiss(error)) {
+        throw error;
+      }
+      failures.push({ distributor: 'digikey', ...describeError(error) });
     }
   }
   if (sources.mouser !== undefined) {
     try {
       await mouserCandidates(sources.mouser, query, limit, candidates, skipped);
     } catch (error) {
-      failures.push({ distributor: 'mouser', ...describe(error) });
+      if (isCacheMiss(error)) {
+        throw error;
+      }
+      failures.push({ distributor: 'mouser', ...describeError(error) });
     }
   }
   if (candidates.length === 0 && failures.length > 0) {

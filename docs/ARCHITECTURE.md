@@ -345,21 +345,31 @@ produced it. An axis whose parameters are missing, or whose values decide no
 value on that axis, is reported as undecided rather than guessed: `classify`
 returns every axis or a typed error naming what it could not decide.
 
-### Tool surface and MCP (`src/tools/`, `src/mcp/`) — planned
+### Tool surface and MCP (`src/tools/`, `src/mcp/`)
 
 Tool handlers are transport-agnostic functions with Zod schemas on both input
 and output. The registry refuses duplicate names and wraps every handler with
 ledger recording and output validation: a handler that returns something
-failing its own output schema is a bug and throws.
+failing its own output schema is a bug and throws, with a different code from
+a caller's bad input.
 
 The same registry is exposed twice. As a **stdio MCP server** for external
 clients such as Claude Code or the MCP Inspector, and as an **in-process SDK
 server** for the agent runner. One implementation, two thin adapters, and a
 test asserts both expose identical tool lists.
 
-Tools that can spend money or quota are flagged. Without explicit
-confirmation, and without a cache hit, such a tool returns a structured
-`needs_confirmation` result rather than spending.
+What the server advertises is what it enforces: strict input schemas, so an
+argument the tool does not take is refused with the key in the message rather
+than dropped on the way in. A failure comes back as an error result carrying
+the code, because the model is meant to read it and decide what to do next.
+
+**Spending is gated by running the real call under a cache-only mode.** A tool
+that can spend distributor quota accepts `confirmSpend`; without it, the call
+runs against the cache alone, and only a question that would actually cost
+something comes back as `needs_confirmation` with the input to resend. The
+policy deciding this is a separate object, so the agent runner sets it per run
+and the tools never know why. Nothing predicts what is cached: the free path
+is the same code as the spending path, so the two cannot disagree.
 
 ### Agent runner (`src/agent/`) — planned
 
