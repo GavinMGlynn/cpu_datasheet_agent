@@ -98,11 +98,11 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M15 are complete: schemas, ledger, cache, SQLite, units, the
+Modules M0 to M15 are complete, and M16 bar its baseline run: schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
-server, the golden evaluation set, the extraction runner, and the verification
-pass. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the
+server, the golden evaluation set, the extraction runner, the verification pass, and
+the evaluation harness. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the
 authoritative status table.
 
 - An extraction runs headless: `npx tsx bin/chip-run.ts extract <mpn>`. Money
@@ -116,14 +116,14 @@ authoritative status table.
 - `chip-mcp-server.ts` was written earlier but is not in this repository (see
   `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
   are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
-- Not built yet: the evaluation harness and the alternates query.
+- `npx tsx bin/chip-eval.ts run` scores the golden set end to end, offline
+  except for the model calls, and writes a report under `eval/results/`.
+- Not built yet: the alternates query.
 
 ## Next steps
 
-1. M16: the evaluation harness — the golden set end to end, scored per
-   parameter.
-2. M17: the alternates query, with the pin-compatibility caveat stated.
-3. M18: release and end-to-end sign-off.
+1. M17: the alternates query, with the pin-compatibility caveat stated.
+2. M18: release and end-to-end sign-off.
 
 ## Deferred
 

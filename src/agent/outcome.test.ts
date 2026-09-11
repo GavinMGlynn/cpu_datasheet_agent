@@ -47,6 +47,7 @@ describe('summariseCalls', () => {
       toolCalls: 0,
       toolFailures: [],
       spendDenials: 0,
+      needsConfirmation: 0,
       stored: false,
     });
   });
@@ -57,12 +58,16 @@ describe('summariseCalls', () => {
     await record('spend_gate', { output: 'not an object' });
     await record('read_pages', { output: { pages: [] } });
     await record('read_pages', { error: new Error('no such page') });
+    await record('fetch_offers', {
+      output: { status: 'needs_confirmation', tool: 'fetch_offers' },
+    });
     await record('upsert_part', { output: { part: {} } });
 
     expect(await summariseCalls(ledger, PARENT, note)).toEqual({
-      toolCalls: 3,
+      toolCalls: 4,
       toolFailures: ['read_pages'],
       spendDenials: 1,
+      needsConfirmation: 1,
       stored: true,
     });
   });
@@ -74,6 +79,7 @@ describe('summariseCalls', () => {
       toolCalls: 0,
       toolFailures: [],
       spendDenials: 0,
+      needsConfirmation: 0,
       stored: false,
     });
   });

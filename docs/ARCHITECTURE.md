@@ -425,27 +425,33 @@ had cited the wrong page for the thirtieth — a value that was right, with
 provenance that was not. Nothing in the extraction run could have noticed, and
 that is the whole argument for the second context.
 
-### Golden set and evaluation (`eval/`, `src/eval/`)
+### Golden set and evaluation (`eval/`, `src/eval/`) — built
 
-Twenty-one buck regulators read datasheet by datasheet, every value carrying
+Twenty-two buck regulators read datasheet by datasheet, every value carrying
 the page it came from and every null carrying a note saying what the page
 holds instead. Six of the datasheets cover more than one part in the set,
-which is the case the whole project exists for.
+which is the case the project exists for.
 
-The scorer compares an extraction with a golden part per parameter:
-`correct`, `wrong`, `missing`, `extra` and `absent`. **`extra` is scored
-apart from `wrong`** — a value invented where the datasheet says nothing is a
-different failure from one misread — and citations are scored apart from
-values, with a bucket for landing one page away.
+The scorer marks each parameter `correct`, `wrong`, `missing`, `extra` or
+`absent`, and scores citations separately with `within_one` reported apart
+from `exact`. `extra` — a value invented where the datasheet says nothing — is
+counted on its own so an extraction that guesses cannot hide behind one that
+misreads.
 
-Numbers are compared with the same per-parameter tolerance reconciliation
-uses, so "correct" means one thing in both places.
+The harness runs the set end to end and writes a report under
+`eval/results/<timestamp>-<prompt version>-<model>/`: the JSON to compare
+against and the Markdown to read. Two rules keep the number honest. Every run
+is a no-spend run, so the evaluation costs model calls and nothing else and
+can be repeated; a part whose run wanted something uncached is named as
+starved rather than averaged in. And every run gets a database of its own,
+because the tool surface can read a stored part and a run that reads an
+earlier run's answer measures nothing (D55).
 
-The readings are the model's own, made deliberately page by page rather than
-by the pipeline under test. That makes the set a regression net and a floor,
-not an independent reference: a misreading that comes from how the model
-reads would appear on both sides. The files say so, and a human review is the
-open question that would change it.
+`compare` diffs two reports parameter by parameter and flags anything that
+scored worse — including a value that stayed right while its citation
+drifted. `replay` rebuilds a run from the ledger. `health` checks the
+measurement rather than the extraction: no part counted twice, no parameter
+with fewer than three parts stating it (D56).
 
 ### Alternates query (`src/query/`) — planned
 

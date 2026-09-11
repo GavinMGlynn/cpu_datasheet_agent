@@ -10,6 +10,13 @@ export interface LedgerSummary {
   readonly toolFailures: readonly string[];
   /** Calls the money gate refused. */
   readonly spendDenials: number;
+  /**
+   * Calls that answered `needs_confirmation`: the run asked for something
+   * that was not cached and it had no budget to fetch it. Not a failure in
+   * itself, and a failure in an evaluation, where every answer is supposed to
+   * be on disk already.
+   */
+  readonly needsConfirmation: number;
   /** Whether a part was stored. */
   readonly stored: boolean;
 }
@@ -35,6 +42,7 @@ export async function summariseCalls(
 ): Promise<LedgerSummary> {
   let toolCalls = 0;
   let spendDenials = 0;
+  let needsConfirmation = 0;
   let stored = false;
   const toolFailures: string[] = [];
   for await (const record of readLedger(ledger.dir, { sessionId: ledger.sessionId }, onMalformed)) {
@@ -52,11 +60,14 @@ export async function summariseCalls(
       toolFailures.push(record.tool);
       continue;
     }
+    if (isRecord(record.output) && record.output.status === 'needs_confirmation') {
+      needsConfirmation += 1;
+    }
     if (record.tool === 'upsert_part') {
       stored = true;
     }
   }
-  return { toolCalls, toolFailures, spendDenials, stored };
+  return { toolCalls, toolFailures, spendDenials, needsConfirmation, stored };
 }
 
 /** How the harness says a run ended. */

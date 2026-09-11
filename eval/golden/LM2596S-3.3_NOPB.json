@@ -1,0 +1,472 @@
+{
+  "mpn": "LM2596S-3.3/NOPB",
+  "manufacturer": "Texas Instruments",
+  "category": "buck_regulator",
+  "reason": "The only fixed-output part in the set outside the Diodes AP632xx family, and the oldest design in it: a 1999 non-synchronous regulator with an internal bipolar switch specified by saturation voltage rather than on-resistance, a 150-kHz fixed oscillator, 100% maximum duty cycle, and a TO-263 tab instead of a thermal pad. Its part number carries the output voltage, which the decoder does not read.",
+  "datasheet": {
+    "url": "https://www.ti.com/lit/ds/symlink/lm2596.pdf",
+    "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+    "pageCount": 47,
+    "fetchedAt": "2026-09-11T10:55:00.000Z",
+    "localPath": "cache/pdf/6d/6f/6d6f427fc7246720b676b19d62462f3a88ae819d01993e3e101721134935ea5f",
+    "coversMpns": [
+      "LM2596S-3.3/NOPB",
+      "LM2596S-5.0/NOPB",
+      "LM2596S-12/NOPB",
+      "LM2596S-ADJ/NOPB",
+      "LM2596SX-3.3/NOPB"
+    ]
+  },
+  "parameters": {
+    "vinMin": {
+      "value": {
+        "value": 4.5,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Supply voltage 4.5 40 V"
+      },
+      "confidence": "verified"
+    },
+    "vinMax": {
+      "value": {
+        "value": 40,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Supply voltage 4.5 40 V"
+      },
+      "confidence": "verified"
+    },
+    "vinAbsMax": {
+      "value": {
+        "value": 45,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Maximum supply voltage (VIN) 45 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMin": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "VOUT Output voltage 4.75 V ≤ VIN ≤ 40 V, 0.2 A ≤ ILOAD ≤ 3 A TJ = 25°C 3.168 3.3 3.432 V"
+      },
+      "confidence": "verified"
+    },
+    "voutMax": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "VOUT Output voltage 4.75 V ≤ VIN ≤ 40 V, 0.2 A ≤ ILOAD ≤ 3 A TJ = 25°C 3.168 3.3 3.432 V"
+      },
+      "confidence": "verified"
+    },
+    "voutFixed": {
+      "value": {
+        "value": 3.3,
+        "unit": "V"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "VOUT Output voltage 4.75 V ≤ VIN ≤ 40 V, 0.2 A ≤ ILOAD ≤ 3 A TJ = 25°C 3.168 3.3 3.432 V"
+      },
+      "confidence": "verified"
+    },
+    "ioutMax": {
+      "value": {
+        "value": 3,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 1,
+        "method": "text",
+        "quote": "3-A output load current"
+      },
+      "confidence": "verified"
+    },
+    "switchingFrequency": {
+      "value": {
+        "value": 150000,
+        "unit": "Hz"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "fO Oscillator frequency TJ = 25°C 127 150 173 kHz"
+      },
+      "confidence": "verified"
+    },
+    "feedbackReference": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "VFB Feedback voltage 4.5 V ≤ VIN ≤ 40 V, 0.2 A ≤ ILOAD ≤ 3 A TYP 1.23 V"
+      },
+      "confidence": "verified"
+    },
+    "feedbackAccuracy": {
+      "value": {
+        "value": 4,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "VOUT Output voltage 4.75 V ≤ VIN ≤ 40 V, 0.2 A ≤ ILOAD ≤ 3 A TJ = 25°C 3.168 3.3 3.432 V"
+      },
+      "confidence": "verified"
+    },
+    "quiescentCurrent": {
+      "value": {
+        "value": 0.005,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "IQ Operating quiescent current TYP 5 MAX 10 mA"
+      },
+      "confidence": "verified"
+    },
+    "shutdownCurrent": {
+      "value": {
+        "value": 0.00008,
+        "unit": "A"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "ISTBY Current standby quiescent ON/OFF pin = 5 V (OFF) TJ = 25°C 80 200 μA"
+      },
+      "confidence": "verified"
+    },
+    "topology": {
+      "value": "non_synchronous",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "External components such as the catch diode, inductor, input and output capacitors can affect switching regulator system performance."
+      },
+      "confidence": "verified"
+    },
+    "integration": {
+      "value": "integrated_fet",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 4,
+        "method": "text",
+        "quote": "Output O Internal switch. The voltage at this pin switches between approximately (+VIN − VSAT) and approximately −0.5 V"
+      },
+      "confidence": "verified"
+    },
+    "softStart": {
+      "value": {
+        "present": false,
+        "time": null
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 4,
+        "method": "text",
+        "quote": "1 VIN, 2 Output, 3 Ground, 4 Feedback, 5 ON/OFF"
+      },
+      "confidence": "verified"
+    },
+    "enablePin": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 4,
+        "method": "text",
+        "quote": "ON/OFF I Allows the switching regulator circuit to be shut down using logic signals thus dropping the total input supply current to approximately 80 µA."
+      },
+      "confidence": "verified"
+    },
+    "powerGoodPin": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 4,
+        "method": "text",
+        "quote": "1 VIN, 2 Output, 3 Ground, 4 Feedback, 5 ON/OFF"
+      },
+      "confidence": "verified"
+    },
+    "lightLoadMode": {
+      "value": "none",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 1,
+        "method": "text",
+        "quote": "150-kHz fixed-frequency internal oscillator"
+      },
+      "confidence": "verified"
+    },
+    "externalSync": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 4,
+        "method": "text",
+        "quote": "1 VIN, 2 Output, 3 Ground, 4 Feedback, 5 ON/OFF"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMin": {
+      "value": {
+        "value": -40,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Temperature –40 125 °C"
+      },
+      "confidence": "verified"
+    },
+    "operatingTempMax": {
+      "value": {
+        "value": 125,
+        "unit": "degC"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Temperature –40 125 °C"
+      },
+      "confidence": "verified"
+    },
+    "temperatureReference": {
+      "value": "junction",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "–40°C ≤ TJ ≤ 125°C"
+      },
+      "confidence": "verified"
+    },
+    "package": {
+      "value": "5-DDPAK/TO-263 (KTT)",
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 37,
+        "method": "text",
+        "quote": "LM2596S-3.3/NOPB Active Production DDPAK/TO-263 (KTT) | 5 45 | TUBE"
+      },
+      "confidence": "verified"
+    },
+    "thermalPad": {
+      "value": true,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 5,
+        "method": "text",
+        "quote": "Junction to ambient thermal resistance with the TO-263 package tab soldered to a single sided printed circuit board with 0.5 in2 of 1-oz copper area."
+      },
+      "confidence": "verified"
+    },
+    "minOnTime": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "DC Max duty cycle (ON) 100% Min duty cycle (OFF) 0%"
+      },
+      "confidence": "verified"
+    },
+    "maxDutyCycle": {
+      "value": {
+        "value": 100,
+        "unit": "percent"
+      },
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "DC Max duty cycle (ON) 100%"
+      },
+      "confidence": "verified"
+    },
+    "efficiencyPeak": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "η Efficiency VIN = 12 V, ILOAD = 3 A 73%"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnHigh": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 7,
+        "method": "text",
+        "quote": "VSAT Saturation voltage IOUT = 3 A TJ = 25°C TYP 1.16 MAX 1.4 V"
+      },
+      "confidence": "verified"
+    },
+    "rdsOnLow": {
+      "value": null,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 6,
+        "method": "text",
+        "quote": "External components such as the catch diode, inductor, input and output capacitors can affect switching regulator system performance."
+      },
+      "confidence": "verified"
+    },
+    "aecQ100": {
+      "value": false,
+      "provenance": {
+        "source": "datasheet",
+        "sha256": "2eec90879908cf711b84d4f0c5d534c3cd12c576d25254b7019247435af4ab0f",
+        "page": 37,
+        "method": "text",
+        "quote": "Op temp (°C) -40 to 125"
+      },
+      "confidence": "verified"
+    }
+  },
+  "classifications": [
+    {
+      "axis": "vinClass",
+      "value": "le_42v",
+      "derivedFrom": ["vinMax"],
+      "rule": "vin-class.v1"
+    },
+    {
+      "axis": "ioutClass",
+      "value": "le_3a",
+      "derivedFrom": ["ioutMax"],
+      "rule": "iout-class.v1"
+    },
+    {
+      "axis": "topology",
+      "value": "non_synchronous",
+      "derivedFrom": ["topology"],
+      "rule": "topology.v1"
+    },
+    {
+      "axis": "integration",
+      "value": "integrated_fet",
+      "derivedFrom": ["integration"],
+      "rule": "integration.v1"
+    },
+    {
+      "axis": "outputType",
+      "value": "fixed",
+      "derivedFrom": ["voutFixed"],
+      "rule": "output-type.v1"
+    },
+    {
+      "axis": "packageFamily",
+      "value": "to263",
+      "derivedFrom": ["package"],
+      "rule": "package-family.v1"
+    },
+    {
+      "axis": "temperatureGrade",
+      "value": "extended",
+      "derivedFrom": ["operatingTempMin", "operatingTempMax", "aecQ100"],
+      "rule": "temperature-grade.v1"
+    },
+    {
+      "axis": "features",
+      "value": ["enable"],
+      "derivedFrom": ["enablePin", "powerGoodPin", "softStart", "externalSync", "lightLoadMode"],
+      "rule": "features.v1"
+    }
+  ],
+  "decoded": {
+    "family": "LM2596",
+    "basePart": "LM2596-3.3",
+    "packageFamily": "to263",
+    "pins": 5,
+    "packaging": "tube",
+    "automotive": false
+  },
+  "notes": {
+    "vinMin": "The operating conditions on page 5 give 4.5 V for the family. The 3.3-V version's output regulation is specified over 4.75 V to 40 V (page 6); the lower figure is the device rating and the higher one is the condition its output limits are guaranteed under.",
+    "voutFixed": "A fixed 3.3-V version: the feedback pin connects straight to the output, so the output voltage is the part number rather than a resistor divider.",
+    "feedbackReference": "The 1.23-V feedback voltage on page 6 belongs to the adjustable version (section 7.8). The fixed 3.3-V version senses the output directly, and the datasheet states no reference for it.",
+    "feedbackAccuracy": "Arithmetic on the stated output limits: 3.168 V and 3.432 V about 3.3 V is +/-4%. The datasheet states the limits, not the percentage, and the +/-4% on page 1 is quoted for the adjustable version.",
+    "softStart": "Five pins, none of them a soft-start pin. The absolute maximum ratings table on page 5 lists SD/SS, Delay and Flag pins, which this device does not have; the pin functions table on page 4 is the one that describes the LM2596.",
+    "lightLoadMode": "A fixed 150-kHz oscillator and no power-save or pulse-skipping mode anywhere in the datasheet.",
+    "minOnTime": "No minimum on time is stated. The only duty-cycle limits are the 100% maximum and 0% minimum on page 7.",
+    "efficiencyPeak": "The only efficiency figure for the 3.3-V version is 73% at VIN = 12 V and ILOAD = 3 A, which is a full-load point rather than a peak. The typical characteristics show curves; reading a peak off one would be a guess.",
+    "rdsOnHigh": "This is a bipolar switch specified by saturation voltage: 1.16 V typical at 3 A. There is no on-resistance in the datasheet.",
+    "rdsOnLow": "Non-synchronous: the low side is an external catch diode, so the device has no low-side switch.",
+    "thermalPad": "The TO-263 tab is the thermal path, and the thermal information on page 5 specifies the junction-to-ambient resistance by how much copper the tab is soldered to.",
+    "package": "The orderable addendum gives the package as DDPAK/TO-263 (KTT) with five pins, in a 45-piece tube. The tape-and-reel orderable is LM2596SX-3.3/NOPB.",
+    "aecQ100": "No automotive-qualified orderable and no AEC-Q100 claim anywhere in the datasheet."
+  },
+  "readBy": "claude-opus-5, reading the datasheet text page by page",
+  "readAt": "2026-09-11T11:00:00.000Z"
+}

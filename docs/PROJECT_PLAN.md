@@ -113,6 +113,8 @@ that supersedes the old one, and the old row's status changes to
 | D52 | 2026-09-11 | `record_verification` takes what the reader read — the parameter, the verdict, the page, the quote — and the run stamps when it was read and which prompt and model read it. A context with no run refuses the call. | A model asked to stamp its own timestamp is a model inventing one, and a model asked to name its own version is a model that can name the wrong one. The two facts the system knows are the system's to record. | active |
 | D53 | 2026-09-11 | A part written back after a verification pass carries that pass's verdicts in its aggregate. | Storing a part replaces its child rows. The first real verification run recorded thirty verdicts, wrote the part back to mark the parameters verified, and erased all thirty in the same call. The aggregate owns its verifications, so the pass has to hand them over with it. | active |
 | D54 | 2026-09-11 | A verification run's result is a statement about the part: `verified` only when every value cited a page and every one was confirmed; `needs_human` when a page contradicted a value or a safety rating could not be found; `rejected` otherwise, with the reason naming how many of how many were confirmed. | A value not found on the page it cites is a provenance error, not a wrong value, and calling it a conflict would send a person to adjudicate a question nobody is asking. Saying "confirmed 29 of 30, 1 not found on the page it cites" says exactly what happened. | active |
+| D55 | 2026-09-11 | An evaluation run gets a database of its own and a cache warmed beforehand by `scripts/warm-eval-cache.ts`. A part whose run asked for something uncached is reported as starved rather than scored. | The tool surface includes `get_part`: a run reading the answer out of an earlier run's work would score perfectly and measure nothing. And a score for a part whose datasheet was not on disk is a measurement of the cache, not of the prompt — so it is named rather than averaged in. | active |
+| D56 | 2026-09-11 | A parameter fewer than three golden parts state is a health failure, not a score. Adding `LM2596S-3.3/NOPB` gave `voutFixed` its third example. | A parameter two parts state is measured on a sample of two: one lucky reading looks like a capability and one unlucky one like a defect. The check found it on the day it was written, and the answer was to read another datasheet rather than to lower the bar. | active |
 
 ## 4. Status
 
@@ -138,7 +140,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M13 | Golden evaluation set | complete | 2026-09-11 |
 | M14 | Agent runner (extraction) | complete | 2026-09-11 |
 | M15 | Verification pass | complete | 2026-09-11 |
-| M16 | Evaluation harness | not started | |
+| M16 | Evaluation harness | in progress (16.7 running) | |
 | M17 | Alternates query | not started | |
 | M18 | Release and end-to-end sign-off | not started | |
 

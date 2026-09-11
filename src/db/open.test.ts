@@ -1,3 +1,7 @@
+import { existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import { DatasheetRepository } from './datasheet-repository.js';
@@ -18,6 +22,21 @@ describe('openDatabase', () => {
       MIGRATIONS.map((migration) => migration.name),
     );
     db.close();
+  });
+});
+
+describe('openDatabase on a path nobody has written to', () => {
+  it('makes the directory rather than refusing to open', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'open-'));
+    const file = path.join(root, 'eval-runs', 'one.sqlite');
+    try {
+      const db = openDatabase(file);
+      expect(existsSync(file)).toBe(true);
+      expect(appliedMigrations(db)).toHaveLength(MIGRATIONS.length);
+      db.close();
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });
 

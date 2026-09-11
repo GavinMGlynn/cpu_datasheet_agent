@@ -117,6 +117,9 @@ export interface AgentRun<T> {
   readonly run: FinishedRun;
   /** What was said and called, as the ledger keeps it. */
   readonly transcript: readonly TranscriptEntry[];
+  /** The ledger entry this run's calls hang under, for anything reading them back. */
+  readonly callId: string;
+  readonly summary: LedgerSummary;
   readonly extra: T;
 }
 
@@ -231,7 +234,7 @@ export async function executeRun<T>(spec: RunSpec<T>): Promise<AgentRun<T>> {
         turns: run.turns,
         costUsd: run.costUsd,
       });
-      return { run, transcript, extra: conclusion.extra };
+      return { run, transcript, callId, summary, extra: conclusion.extra };
     },
   );
 

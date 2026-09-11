@@ -21,6 +21,12 @@ export interface ToolContextOptions {
   readonly headless?: boolean;
   readonly now?: () => string;
   readonly newId?: () => string;
+  /**
+   * Where the database lives. Defaults to `chip.sqlite` in the data
+   * directory; an evaluation points it at a database of its own so a run
+   * cannot read the answer out of a part an earlier run stored.
+   */
+  readonly databasePath?: string;
 }
 
 export interface BuiltToolContext {
@@ -42,7 +48,7 @@ export async function createToolContext(options: ToolContextOptions): Promise<Bu
   const { config } = options;
   const store = new FileCacheStore(path.join(config.dataDir, 'cache'));
   const cache = new Cache({ store });
-  const db = openDatabase(path.join(config.dataDir, 'chip.sqlite'));
+  const db = openDatabase(options.databasePath ?? path.join(config.dataDir, 'chip.sqlite'));
   const repositories = createRepositories(db);
   const ledger = new ToolCallLedger({
     dir: path.join(config.dataDir, 'ledger'),

@@ -1,6 +1,6 @@
 # eval/golden
 
-Twenty-one buck regulators characterised by reading their datasheets, one
+Twenty-two buck regulators characterised by reading their datasheets, one
 JSON file per part, validated against the core schemas. Nothing the agent
 produces is trusted until it is measured against these (Module 13).
 
@@ -49,6 +49,7 @@ that reason.
 | `AP63357DV-7` | Diodes | 32 V | 3.5 A | dfn | `82b3f784` |
 | `IR3899MTRPBF` | Infineon | 21 V | 9 A | qfn | `08fe759e` |
 | `MCP16331T-E/CH` | Microchip | 50 V | 0.5 A | sot23 | `bfd74d5f` |
+| `LM2596S-3.3/NOPB` | Texas Instruments | 40 V | 3 A | to263 | `2eec9087` |
 | `LM5116MH/NOPB` | Texas Instruments | 100 V | controller | tssop | `5341823d` |
 | `LM5164DDAR` | Texas Instruments | 100 V | 1 A | soic | `cce03619` |
 | `LM5164QDDARQ1` | Texas Instruments | 100 V | 1 A | soic | `ee02bec8` |
@@ -64,6 +65,12 @@ that reason.
 | `TPS563200DDCR` | Texas Instruments | 17 V | 3 A | sot23 | `ec98a636` |
 | `TPS62130RGTR` | Texas Instruments | 17 V | 3 A | qfn | `f9b1af28` |
 
+The set also holds one part specified the old way. TI's LM2596, from 1999,
+gives its switch a saturation voltage rather than an on-resistance, runs at a
+fixed 150 kHz, reaches 100% duty cycle, and cools through a TO-263 tab. Every
+one of those is a shape the schema has to accept without inventing a number
+for the shape it expected.
+
 Six datasheets cover more than one part in the set. That is the case the
 project exists for: "the datasheet for this part number" is usually a lie,
 and an extraction has to tell `TPS562200DDCR` from `TPS563200DDCR`, or
@@ -76,8 +83,10 @@ table rather than from the document.
 - **Output current**: 0.5 A to 9 A, plus one controller that states none.
 - **Topology**: synchronous and non-synchronous.
 - **Integration**: integrated-FET converters and one controller (LM5116).
-- **Output**: adjustable, and two fixed parts (3.3 V and 5 V).
-- **Package**: SOT-23, SOIC, QFN, DFN, TSSOP.
+- **Output**: adjustable, and three fixed parts (3.3 V, 3.3 V and 5 V) —
+  three because a parameter only two parts state is measured on a sample of
+  two, which `chip-eval health` refuses to call a measurement.
+- **Package**: SOT-23, SOIC, QFN, DFN, TSSOP, TO-263.
 - **Temperature grade**: commercial through automotive, with two AEC-Q100
   parts (MCP16331 and LM5164-Q1).
 

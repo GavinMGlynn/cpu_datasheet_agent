@@ -804,23 +804,25 @@ Goal: run extraction and verification over the golden set offline, score
 against the golden files, and report regressions between prompt versions and
 models.
 
-- [ ] 16.1 `runEval(config)`: for every golden part, run extraction with all
+- [x] 16.1 `runEval(config)`: for every golden part, run extraction with all
       network served from cache (a cache miss is a test failure, not a
-      spend), then score with the M13 scorer.
-- [ ] 16.2 Report: JSON and Markdown under `eval/results/<timestamp>-<prompt
+      spend), then score with the M13 scorer. Each run gets a database of its
+      own, and `scripts/warm-eval-cache.ts` fills the cache first (D55).
+- [x] 16.2 Report: JSON and Markdown under `eval/results/<timestamp>-<prompt
       version>-<model>/` with per-part and aggregate precision, recall,
       provenance accuracy, escalation counts, turns, cost, and duration.
-- [ ] 16.3 Comparison: `eval compare <a> <b>` diffs two result directories
+- [x] 16.3 Comparison: `eval compare <a> <b>` diffs two result directories
       and flags any parameter whose score dropped.
-- [ ] 16.4 Replay: `eval replay <session id>` reconstructs a run's tool calls
+- [x] 16.4 Replay: `eval replay <session id>` reconstructs a run's tool calls
       from the ledger for inspection.
-- [ ] 16.5 Eval health checks per the eval checklist [R-33]: golden set has
+- [x] 16.5 Eval health checks per the eval checklist [R-33]: golden set has
       no duplicate parts, every parameter has at least three golden examples,
       the scorer is tested for false positives, and the report states the
-      prompt version and model.
-- [ ] 16.6 Tests: harness with a fake runner and fake cache, report
+      prompt version and model. `chip-eval health` runs them; the three-example
+      rule sent M13 back for a third fixed-output part (D56).
+- [x] 16.6 Tests: harness with a fake runner and fake cache, report
       rendering, comparison logic, replay.
-- [ ] 16.7 Baseline: full eval over the twenty golden parts with
+- [ ] 16.7 Baseline: full eval over the twenty-two golden parts with
       `extract.v1` and `claude-opus-5`, results committed under
       `eval/results/`, summary in `PROJECT_PLAN.md`.
 
