@@ -1,43 +1,7 @@
+import type { ObservedValue } from '../core/observation.js';
 import type { Provenance } from '../core/provenance.js';
+import { isQuantity, isRange, isSoftStart } from '../core/value-shapes.js';
 import { formatEngineering, formatRange } from '../units/index.js';
-
-interface QuantityLike {
-  readonly value: number;
-  readonly unit: string;
-}
-
-interface RangeLike {
-  readonly unit: string;
-  readonly min: number;
-  readonly max: number;
-  readonly typ?: number;
-}
-
-interface SoftStartLike {
-  readonly present: boolean;
-  readonly time: QuantityLike | null;
-}
-
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
-}
-
-export function isQuantity(value: unknown): value is QuantityLike {
-  return isObject(value) && typeof value.value === 'number' && typeof value.unit === 'string';
-}
-
-export function isRange(value: unknown): value is RangeLike {
-  return (
-    isObject(value) &&
-    typeof value.unit === 'string' &&
-    typeof value.min === 'number' &&
-    typeof value.max === 'number'
-  );
-}
-
-export function isSoftStart(value: unknown): value is SoftStartLike {
-  return isObject(value) && typeof value.present === 'boolean' && 'time' in value;
-}
 
 /** Text shown when a datasheet does not state a value. */
 export const NOT_STATED = 'not stated';
@@ -72,6 +36,26 @@ export function formatParameterValue(value: unknown): string {
     return formatRange(value as never);
   }
   return JSON.stringify(value);
+}
+
+/**
+ * Renders a distributor's stated value, including the bound kinds: `Up to
+ * 1MHz` is recorded as a maximum, and showing it as a plain number would
+ * turn a limit into a measurement.
+ */
+export function formatObservedValue(observed: ObservedValue): string {
+  switch (observed.kind) {
+    case 'max':
+      return `at most ${formatParameterValue(observed.value)}`;
+    case 'min':
+      return `at least ${formatParameterValue(observed.value)}`;
+    case 'quantity':
+    case 'range':
+    case 'enum':
+    case 'boolean':
+    case 'text':
+      return formatParameterValue(observed.value);
+  }
 }
 
 /** A short description of where a value came from. */

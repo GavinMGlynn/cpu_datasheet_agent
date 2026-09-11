@@ -73,9 +73,17 @@ that carry no schema parameter. Lookup ignores case and spacing.
 quantities, quantity-or-range (switching frequency), output voltage (fixed
 value, or a range plus `voutFixed: adjustable`), temperature range with an
 optional reference, `Synchronous Rectifier` yes/no to topology, `Output
-Type` to `voutFixed` fixed/adjustable, and `Control Features` to the four
-feature booleans (absent features are false). Provenance is attached by the
+Type` to `voutFixed` fixed/adjustable, and `Control Features` to the feature
+booleans it names. A fact is an `ObservedValue` from `src/core/` plus its
+parameter key, so a value that later disagrees with the datasheet is stored on
+the parameter exactly as it was observed. Provenance is attached by the
 adapters.
+
+**A control feature the list does not name yields no fact.** Recording `false`
+would assert that the part lacks it, and the field is a short description
+rather than an inventory; none of the 13 recorded Digi-Key regulators carries
+the field at all, so there is no evidence it is exhaustive. This is D24's rule
+(an inconclusive value yields no fact) applied to absence.
 
 The name tables hold the parametric names known at the time of writing.
 Modules 7 and 8 must extend them from recorded fixtures and re-run these

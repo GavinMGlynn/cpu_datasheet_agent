@@ -48,6 +48,7 @@ tbody th { font-weight: 600; white-space: nowrap; }
 .badge.verified, .badge.confirmed { color: var(--ok); }
 .badge.extracted { color: var(--muted); }
 .badge.conflict, .badge.contradicted, .badge.rejected { color: var(--alarm); }
+.conflict { color: var(--alarm); font-size: .85em; margin-top: .2rem; }
 .badge.needs_human, .badge.not_found { color: var(--warn); }
 .pairs { display: grid; gap: .4rem; margin: 0 0 1rem; }
 .summary { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .75rem 1.5rem; }

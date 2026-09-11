@@ -6,6 +6,7 @@ import {
   OTHER_SHA,
   buckParameters,
   classification,
+  conflict,
   humanProvenance,
   offer,
   param,
@@ -129,6 +130,28 @@ describe('Part', () => {
       const parameters = buckParameters({ vinMax: param(q(28, 'V'), 4, 'conflict') });
       expectRejects(Part, part({ parameters, status: 'extracted' }), 'status');
     });
+  });
+
+  describe('recorded conflicts', () => {
+    const conflicted = (confidence: string): Loose =>
+      buckParameters({
+        vinMax: { ...param(q(28, 'V'), 4, confidence), conflicts: [conflict()] },
+      });
+
+    it('accepts a conflict recorded on a parameter in conflict', () => {
+      expectAccepts(Part, part({ parameters: conflicted('conflict'), status: 'needs_human' }));
+    });
+
+    it.each(['extracted', 'verified'])(
+      'rejects a conflict recorded on a %s parameter',
+      (confidence) => {
+        expectRejects(
+          Part,
+          part({ parameters: conflicted(confidence), status: 'needs_human' }),
+          'parameters.vinMax.confidence',
+        );
+      },
+    );
   });
 
   describe('uniqueness', () => {

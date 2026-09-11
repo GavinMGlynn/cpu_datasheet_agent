@@ -20,6 +20,7 @@ export type PartStatus = z.output<typeof PartStatus>;
  * The aggregate stored by `upsert_part`. Invariants enforced here:
  * - a parameter citing a datasheet must cite this part's datasheet, on a page it has;
  * - `verified` status requires every parameter to be verified;
+ * - a parameter carrying a distributor conflict has confidence `conflict`;
  * - a parameter in conflict forces `needs_human` or `rejected`;
  * - one classification per axis, one offer per distributor SKU;
  * - `updatedAt` is not before `createdAt`.
@@ -44,7 +45,13 @@ export const Part = z
     };
 
     for (const key of PARAMETER_KEYS) {
-      const { provenance } = part.parameters[key];
+      const { provenance, conflicts, confidence } = part.parameters[key];
+      if (conflicts !== undefined && confidence !== 'conflict') {
+        issue(
+          ['parameters', key, 'confidence'],
+          'a parameter carrying a distributor conflict must have confidence "conflict"',
+        );
+      }
       if (provenance.source !== 'datasheet') {
         continue;
       }

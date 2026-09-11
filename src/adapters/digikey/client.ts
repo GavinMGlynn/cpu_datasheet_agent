@@ -46,7 +46,12 @@ export interface RequestSpec {
 
 const RETRYABLE = new Set([408, 429, 500, 502, 503, 504]);
 
-const defaultSleep = (ms: number): Promise<void> =>
+/**
+ * The wait used when no sleep is injected. Exported so a test can cover it
+ * directly: reaching it through the throttle needs a request to finish faster
+ * than the minimum interval, which a loaded machine does not guarantee.
+ */
+export const defaultSleep = (ms: number): Promise<void> =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });

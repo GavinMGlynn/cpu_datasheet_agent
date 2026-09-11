@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buckParameters,
   classification,
+  conflict,
   datasheet,
   distributorProvenance,
   humanProvenance,
@@ -113,6 +114,28 @@ describe('parameters', () => {
 
     expect(html).toContain('badge conflict');
     expect(html).toContain('needs human');
+  });
+
+  it('shows the disagreeing distributor value beside the stored one', () => {
+    const html = render({
+      parameters: buckParameters({
+        vinMax: {
+          ...param(q(28, 'V'), 4, 'conflict'),
+          conflicts: [
+            conflict(),
+            conflict({
+              observed: { kind: 'max', value: q(1_000_000, 'Hz') },
+              rule: 'bound.v1',
+            }),
+          ],
+        },
+      }),
+      status: 'needs_human',
+    });
+
+    expect(html).toContain('<div class="conflict">digikey 296-28446-1-ND: 36 V</div>');
+    expect(html).toContain('<div class="conflict">digikey 296-28446-1-ND: at most 1 MHz</div>');
+    expect(html).toContain('28 V<div class="conflict">');
   });
 
   it('describes every kind of source', () => {

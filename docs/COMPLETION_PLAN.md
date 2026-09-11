@@ -548,29 +548,58 @@ to maintain for an unmeasured benefit.
 Goal: compare datasheet-extracted values with distributor parametrics, flag
 conflicts, and derive categorisation axes deterministically.
 
-- [ ] 11.1 `reconcile(extracted, distributorParametrics)`: for each parameter
+- [x] 11.1 `reconcile(extracted, distributorParametrics)`: for each parameter
       present in both, `compareQuantities` with per-parameter tolerance;
       outcomes `agree`, `conflict`, `datasheet_only`, `distributor_only`.
-- [ ] 11.2 Safety-relevant parameter list (`vinAbsMax`, `vinMax`, `ioutMax`,
+      A `null` value means the datasheet did not state the parameter, except
+      `voutFixed` where it states that the part is adjustable. An observation
+      that cannot be compared corroborates nothing: the outcome is
+      `datasheet_only` with the observation recorded, never `agree`.
+- [x] 11.2 Safety-relevant parameter list (`vinAbsMax`, `vinMax`, `ioutMax`,
       `operatingTempMin`, `operatingTempMax`, `rdsOn*`): a conflict here
       always produces an `Escalation` of kind `conflict` and marks the
-      parameter `confidence: "conflict"`. It is never auto-resolved.
-- [ ] 11.3 Non-safety conflicts keep the datasheet value, record the
-      distributor value in the parameter's provenance details, and mark
+      parameter `confidence: "conflict"`. It is never auto-resolved. One
+      escalation per parameter however many distributors disagree, carrying
+      both readings as options and the cited page.
+- [x] 11.3 Non-safety conflicts keep the datasheet value, record the
+      distributor value in the parameter's `conflicts` (M1 reopened to add
+      it, with a matching column in M4 and a report row in M7A), and mark
       `conflict`.
-- [ ] 11.4 Classification rules, each a pure function with an identifier:
-      `vinClass` (`le_5v5`, `le_18v`, `le_42v`, `le_60v`, `gt_60v`),
-      `ioutClass` (`le_1a`, `le_3a`, `le_6a`, `le_12a`, `gt_12a`),
-      `topology`, `integration`, `outputType` (`fixed` | `adjustable`),
-      `packageFamily` (SOT-23, SOIC, QFN, TSSOP, DFN, other) from the
-      package string, `temperatureGrade` (`commercial`, `industrial`,
-      `extended`, `automotive`) from the range and `aecQ100`, `features`
-      (set of `enable`, `power_good`, `soft_start`, `sync`, `light_load`).
-      Every classification records `derivedFrom` and the rule id.
-- [ ] 11.5 `classify(parameters)` returns all axes or a typed error listing
+- [x] 11.4 Classification rules, each a pure function with an identifier:
+      `vinClass`, `ioutClass`, `topology`, `integration`, `outputType`,
+      `packageFamily` from the package string, `temperatureGrade` from the
+      range and `aecQ100`, `features`. Every classification records
+      `derivedFrom` and the rule id. A grade is the widest envelope the
+      part's range covers completely, so a 0 °C to 125 °C part is commercial.
+- [x] 11.5 `classify(parameters)` returns all axes or a typed error listing
       the missing parameters; it never returns a partial silently.
-- [ ] 11.6 Tests: every outcome of reconcile, every safety escalation, every
-      rule at its boundaries, missing-parameter reporting.
+      `tryClassify` returns what could be decided alongside the axes that
+      could not, with the reason for each.
+- [x] 11.6 Tests: every outcome of reconcile, every safety escalation, every
+      rule at its boundaries, missing-parameter reporting, and the package
+      parser checked against Digi-Key's two package fields for all 746
+      recorded parts — 547 comparable pairs, 543 agreeing, the nine that
+      disagree listed by part number as Digi-Key's own fields contradicting
+      each other.
+
+**Reopened by this module**, each finished and re-verified before the work
+continued (rule 2):
+
+- **M1**: `ObservedValue` and `ParameterConflict` schemas, a `conflicts`
+  annotation on `parameter()`, the `Part` invariant that a parameter
+  carrying one has confidence `conflict`, and the value-shape guards moved
+  into `src/core/` from the report, where reconcile also needs them.
+- **M4**: migration 0002 adds `parameters.conflicts_json`; the repository
+  round-trips it, absent rather than null when nothing disagreed.
+- **M5**: `DistributorFact` is now `ObservedValue` plus its key, so a fact is
+  stored exactly as observed; `Control Features` claims only the features it
+  names, because a feature the list omits is not a part without it.
+- **M7**: `defaultSleep` exported and covered directly. Reaching it through
+  the throttle needs a request to finish inside the minimum interval, which a
+  loaded machine does not guarantee — a flaky coverage failure, not a flaky
+  test.
+- **M7A**: a parameter in conflict shows each disagreeing distributor value
+  under the stored one.
 
 ---
 

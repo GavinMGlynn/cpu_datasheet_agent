@@ -6,6 +6,7 @@ import {
   NOT_STATED,
   citedPage,
   citedQuote,
+  formatObservedValue,
   formatParameterValue,
   formatPrice,
   formatProvenance,
@@ -33,6 +34,8 @@ interface ParameterRow {
   readonly confidence: string;
   readonly page: number | undefined;
   readonly quote: string | undefined;
+  /** Distributor values that disagree with this one, as `source: value`. */
+  readonly conflicts: readonly string[];
 }
 
 function rowsOf(part: Part): readonly ParameterRow[] {
@@ -45,6 +48,10 @@ function rowsOf(part: Part): readonly ParameterRow[] {
       confidence: parameter.confidence,
       page: citedPage(parameter.provenance),
       quote: citedQuote(parameter.provenance),
+      conflicts: (parameter.conflicts ?? []).map(
+        (conflict) =>
+          `${formatProvenance(conflict.provenance)}: ${formatObservedValue(conflict.observed)}`,
+      ),
     };
   });
 }
@@ -59,9 +66,14 @@ function parameterTable(rows: readonly ParameterRow[]): string {
       const quote =
         row.quote === undefined ? '' : `<div class="quote">${escapeHtml(row.quote)}</div>`;
       const notStated = row.value === NOT_STATED ? ' class="muted"' : '';
+      // The disagreeing value sits under the stored one: the point of reading
+      // a report on a part in conflict is seeing both numbers at once.
+      const conflicts = row.conflicts
+        .map((conflict) => `<div class="conflict">${escapeHtml(conflict)}</div>`)
+        .join('');
       return `<tr>
   <th scope="row"><code>${escapeHtml(row.key)}</code></th>
-  <td${notStated}>${escapeHtml(row.value)}</td>
+  <td${notStated}>${escapeHtml(row.value)}${conflicts}</td>
   <td>${escapeHtml(row.provenance)}${quote}</td>
   <td>${tag('span', `badge ${row.confidence}`, row.confidence)}</td>
 </tr>`;

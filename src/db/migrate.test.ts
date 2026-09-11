@@ -102,7 +102,9 @@ describe('applyMigrations', () => {
     first.close();
     const second = new Db(file);
     expect(applyMigrations(second, MIGRATIONS, clock)).toEqual([]);
-    expect(appliedMigrations(second).map((row) => row.name)).toEqual(['initial']);
+    expect(appliedMigrations(second).map((row) => row.name)).toEqual(
+      MIGRATIONS.map((migration) => migration.name),
+    );
     second.close();
   });
 });

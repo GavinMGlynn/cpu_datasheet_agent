@@ -28,6 +28,11 @@ quantity), every parameter with its value, source and confidence, the cited
 pages, the datasheet, offers with price breaks, classifications with the rule
 that produced each, and verifications with verdict, page and quote.
 
+A parameter carrying distributor conflicts shows each disagreeing value under
+the stored one, as `digikey 296-28446-1-ND: 36 V`. A part in conflict is read
+to see both numbers at once, and a bound keeps its wording (`at most 1 MHz`),
+because showing a limit as a plain number turns it into a measurement.
+
 Values are shown in engineering notation (`570 kHz`, not `570000 Hz`) because
 the report is read against a datasheet, which writes them the same way. That is
 display only; the stored value stays canonical.

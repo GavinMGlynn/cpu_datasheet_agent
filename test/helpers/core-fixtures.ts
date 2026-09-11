@@ -42,6 +42,16 @@ export function derivedProvenance(overrides: Loose = {}): Loose {
   return { source: 'derived', from: ['vinMin', 'vinMax'], rule: 'vin-class.v1', ...overrides };
 }
 
+/** A distributor value that disagrees with the one a parameter holds. */
+export function conflict(overrides: Loose = {}): Loose {
+  return {
+    observed: { kind: 'quantity', value: q(36, 'V') },
+    provenance: distributorProvenance(),
+    rule: 'quantity-tolerance.v1',
+    ...overrides,
+  };
+}
+
 export function param(value: unknown, page = 5, confidence = 'extracted'): Loose {
   return { value, provenance: datasheetProvenance(page), confidence };
 }

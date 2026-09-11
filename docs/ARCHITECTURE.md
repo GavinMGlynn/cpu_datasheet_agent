@@ -4,7 +4,7 @@ How the system is put together: the pieces, what each one owns, and how they
 interact. `CLAUDE.md` states the rules this design serves;
 `docs/COMPLETION_PLAN.md` tracks what is built.
 
-Status marks in this document are accurate as of 2026-09-10: **built** means
+Status marks in this document are accurate as of 2026-09-11: **built** means
 implemented with full tests and passing CI, **in progress** means partially
 implemented, **planned** means designed here but not yet written.
 
@@ -295,7 +295,7 @@ is therefore disabled by default and every operation reserves from the
 persisted budget counter *before* any network call, so the limit cannot be
 exceeded even by a bug.
 
-### MPN resolution (`src/mpn/`) — planned
+### MPN resolution (`src/mpn/`)
 
 Normalise the raw part number, decode the manufacturer suffix into base part,
 package, temperature grade, and packaging, then match against distributor
@@ -308,7 +308,7 @@ is a *sibling*, not a match, and several plausible candidates escalate.
 Digi-Key's `BaseProductNumber` field gives the family part number directly,
 which corroborates the decoded suffix rather than replacing it.
 
-### Reconciliation and classification (`src/reconcile/`, `src/classify/`) — planned
+### Reconciliation and classification (`src/reconcile/`, `src/classify/`)
 
 Reconciliation compares each extracted value with the distributor's, using
 per-parameter tolerances. Outcomes are agreement, conflict, or present on only
@@ -317,14 +317,33 @@ one side.
 The asymmetry that matters: a conflict on a safety-relevant parameter, such as
 absolute maximum input voltage or maximum output current, always escalates and
 is never auto-resolved. A conflict elsewhere keeps the datasheet value, records
-the distributor's alongside it, and marks the parameter as in conflict, which
-by the `Part` schema forces the part out of `verified` status.
+the distributor's alongside it on the parameter, and marks the parameter as in
+conflict, which by the `Part` schema forces the part out of `verified` status.
+
+Nothing is adopted from a distributor. A value the datasheet did not state is
+reported as `distributor_only` for the agent to act on, never written in: a
+value with no page behind it is not an extracted value.
+
+Three decisions carry most of the weight:
+
+- **A value nobody could compare corroborates nothing.** Where a comparison is
+  impossible — a package text naming no shape — the outcome is
+  `datasheet_only` with the observation recorded, not agreement.
+- **Packages are compared as shapes, not words.** `8-PowerSOIC (0.154",
+  3.90mm Width)` and `8-SOIC PowerPAD (DDA)` are one package written twice.
+- **Several observations of one parameter combine per parameter.** Two
+  distributors are two readings of one part, so either disagreeing is a
+  conflict; Digi-Key's two package fields are two descriptions of one thing,
+  and its own fields disagree on 9 of 547 recorded parts, so one agreeing
+  settles it.
 
 Classification is a set of pure functions, each with an identifier, producing
 fixed axes: input voltage class, output current class, topology, integration,
 output type, package family, temperature grade, and a feature set. Every
 classification records which parameters it was derived from and which rule
-produced it.
+produced it. An axis whose parameters are missing, or whose values decide no
+value on that axis, is reported as undecided rather than guessed: `classify`
+returns every axis or a typed error naming what it could not decide.
 
 ### Tool surface and MCP (`src/tools/`, `src/mcp/`) — planned
 

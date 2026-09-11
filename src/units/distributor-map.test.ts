@@ -156,7 +156,7 @@ describe('parseDistributorValue', () => {
     expect(() => parseDistributorValue(dk('Output Type'), 'Switchable')).toThrow(ParseError);
   });
 
-  it('parses control features into booleans, absent ones false', () => {
+  it('claims only the control features the list names', () => {
     expect(
       parseDistributorValue(dk('Control Features'), 'Enable, Power Good, Soft-Start, Sync'),
     ).toEqual([
@@ -165,18 +165,21 @@ describe('parseDistributorValue', () => {
       { kind: 'boolean', key: 'softStart', value: true },
       { kind: 'boolean', key: 'externalSync', value: true },
     ]);
+    // A feature the list does not mention yields nothing rather than a false:
+    // the list is a description, not an inventory of what the part lacks.
     expect(parseDistributorValue(dk('Control Features'), 'Enable')).toEqual([
       { kind: 'boolean', key: 'enablePin', value: true },
-      { kind: 'boolean', key: 'powerGoodPin', value: false },
-      { kind: 'boolean', key: 'softStart', value: false },
-      { kind: 'boolean', key: 'externalSync', value: false },
     ]);
     expect(
       parseDistributorValue(
         dk('Control Features'),
         'Frequency Control, Synchronizable, Soft Start',
-      ).map((fact) => fact.value),
-    ).toEqual([false, false, true, true]);
+      ),
+    ).toEqual([
+      { kind: 'boolean', key: 'softStart', value: true },
+      { kind: 'boolean', key: 'externalSync', value: true },
+    ]);
+    expect(parseDistributorValue(dk('Control Features'), 'Frequency Control')).toEqual([]);
   });
 
   it('passes package text through', () => {

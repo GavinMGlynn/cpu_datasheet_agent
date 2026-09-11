@@ -21,13 +21,19 @@ coerced. Every read re-validates, so a corrupted row surfaces as a
   holding SQL strings, listed in `migrations/index.ts`; append only.
 - `requireRow(row, what)` unwraps a row that must exist (`DB_ROW_MISSING`).
 
-## Schema (migration 0001)
+## Schema (migrations 0001, 0002)
 
 `datasheets`, `datasheet_mpns`, `parts`, `parameters` (one row per parameter
 with the value as JSON plus `numeric_min`, `numeric_max`, and `unit` for
 filtering), `offers`, `price_breaks`, `classifications`, `verifications`,
 `escalations`, `nexar_budget` (single row, seeded with limit 90), and `runs`
 (for the agent runner). Child rows cascade on part deletion.
+
+Migration 0002 adds `parameters.conflicts_json`, holding the distributor
+values that disagree with the stored one (Module 11). It is null when nothing
+disagreed, and reads back as an absent key rather than a null one, because the
+schema's optional annotation means "nothing disagreed" and a null would be an
+unknown value.
 
 ## Repositories
 

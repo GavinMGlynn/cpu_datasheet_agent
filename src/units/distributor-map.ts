@@ -1,5 +1,6 @@
+import type { ObservedValue } from '../core/observation.js';
 import type { ParameterKey } from '../core/parameter-keys.js';
-import type { Quantity, QuantityRange, Unit } from '../core/quantity.js';
+import type { Quantity, Unit } from '../core/quantity.js';
 import { normaliseText } from './normalise.js';
 import {
   ParseError,
@@ -28,23 +29,14 @@ export interface DistributorMapping {
 }
 
 /**
- * One value learned from a distributor attribute. Provenance is added by the
- * adapter.
+ * One value learned from a distributor attribute: an {@link ObservedValue}
+ * plus the parameter key it informs. Provenance is added by the adapter.
  *
- * `max` and `min` carry a stated bound rather than a value: Digi-Key writes
- * `Up to 1MHz` for an adjustable frequency, which says the parameter is at
- * most 1 MHz and says nothing about its lower end. Recording that as a range
- * would require inventing the other end, and recording it as a quantity would
- * assert a fixed value the part does not have.
+ * Sharing the shape with the core schema is deliberate. A fact that turns out
+ * to disagree with the datasheet is stored on the parameter as it was
+ * observed, so nothing is reshaped between reading it and recording it.
  */
-export type DistributorFact =
-  | { readonly kind: 'quantity'; readonly key: ParameterKey; readonly value: Quantity }
-  | { readonly kind: 'max'; readonly key: ParameterKey; readonly value: Quantity }
-  | { readonly kind: 'min'; readonly key: ParameterKey; readonly value: Quantity }
-  | { readonly kind: 'range'; readonly key: ParameterKey; readonly value: QuantityRange }
-  | { readonly kind: 'enum'; readonly key: ParameterKey; readonly value: string }
-  | { readonly kind: 'boolean'; readonly key: ParameterKey; readonly value: boolean }
-  | { readonly kind: 'text'; readonly key: ParameterKey; readonly value: string };
+export type DistributorFact = ObservedValue & { readonly key: ParameterKey };
 
 const TEMPERATURE: DistributorMapping = {
   keys: ['operatingTempMin', 'operatingTempMax', 'temperatureReference'],
@@ -270,10 +262,14 @@ export function parseDistributorValue(
     }
     case 'control_features': {
       const listed = text.toLowerCase();
-      return FEATURE_KEYS.map(([pattern, featureKey]) => ({
+      // Only the features the list names are claimed. A feature the list does
+      // not mention is not a part without it: the list is a short description,
+      // not an inventory, and a false here would contradict the datasheet's
+      // own reading of a part that has the feature.
+      return FEATURE_KEYS.filter(([pattern]) => pattern.test(listed)).map(([, featureKey]) => ({
         kind: 'boolean',
         key: featureKey,
-        value: pattern.test(listed),
+        value: true,
       }));
     }
     case 'text':

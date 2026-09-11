@@ -4,6 +4,7 @@ import { ValidationError } from '../core/validation-error.js';
 import {
   buckParameters,
   classification,
+  conflict,
   distributorProvenance,
   humanProvenance,
   offer,
@@ -81,6 +82,27 @@ describe('PartRepository.upsertPart', () => {
     expect(count('classifications')).toBe(1);
     expect(count('verifications')).toBe(1);
     expect(count('datasheets')).toBe(1);
+  });
+
+  it('round-trips a recorded distributor conflict, and stores none as absent', () => {
+    const input = part({
+      status: 'needs_human',
+      parameters: buckParameters({
+        vinMax: { ...param(q(28, 'V'), 4, 'conflict'), conflicts: [conflict()] },
+      }),
+    });
+    expect(repo.upsertPart(input)).toEqual(input);
+    const stored = repo.getPart('TPS54331DR');
+    expect(stored?.parameters.vinMax.conflicts).toEqual([conflict()]);
+    // Nothing disagreed about vinMin, so the key is absent rather than null.
+    expect(stored?.parameters.vinMin).not.toHaveProperty('conflicts');
+    expect(
+      db.raw
+        .prepare<[], { conflicts_json: string | null }>(
+          "SELECT conflicts_json FROM parameters WHERE key = 'vinMin'",
+        )
+        .get()?.conflicts_json,
+    ).toBeNull();
   });
 
   it('replaces every child row on update', () => {

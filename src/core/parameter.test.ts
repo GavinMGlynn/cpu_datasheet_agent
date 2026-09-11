@@ -82,6 +82,38 @@ describe('parameter', () => {
     expectRejects(volts, value);
   });
 
+  it('accepts recorded distributor conflicts', () => {
+    expectAccepts(volts, {
+      value: { value: 5, unit: 'V' },
+      provenance: datasheetProvenance(),
+      confidence: 'conflict',
+      conflicts: [
+        {
+          observed: { kind: 'quantity', value: { value: 5.5, unit: 'V' } },
+          provenance: distributorProvenance(),
+          rule: 'quantity-tolerance.v1',
+        },
+      ],
+    });
+  });
+
+  it.each([
+    ['an empty conflict list', []],
+    ['a conflict without a rule', [{ observed: { kind: 'boolean', value: true }, provenance: 0 }]],
+    ['a bare value as a conflict', [{ value: 5.5 }]],
+  ])('rejects %s', (_label, conflicts) => {
+    expectRejects(
+      volts,
+      {
+        value: { value: 5, unit: 'V' },
+        provenance: datasheetProvenance(),
+        confidence: 'conflict',
+        conflicts,
+      },
+      'conflicts',
+    );
+  });
+
   it('infers the wrapped value type', () => {
     const schema = parameter(z.boolean());
     const parsed = schema.parse({

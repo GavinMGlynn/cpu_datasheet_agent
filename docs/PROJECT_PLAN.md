@@ -93,6 +93,11 @@ that supersedes the old one, and the old row's status changes to
 | D32 | 2026-09-11 | Decoders are declarative tables compiled into one anchored pattern. A package code claims a family or a pin count only where it is proven, otherwise null. Meanings are checked against the recorded corpus first, and against manufacturer documentation for what the corpus cannot show. | The pattern is built from the tables the decode reads, so they cannot drift; `MPN_TABLE_MISSING` fires if they ever do. The corpus proved 466 family and 277 pin-count claims against Digi-Key's own fields, and TI's packaging guide [R-62] then disproved four pin counts the corpus had appeared to confirm, because a code that happens to appear on one pin count looks fixed. | active |
 | D33 | 2026-09-11 | `TemperatureGrade` carries `range` (operating) and `guaranteed` (tested and specified) separately. | Analog Devices E and I grades both operate from -40 °C to 125 °C, and Digi-Key reports them identically, but E is only guaranteed from 0 °C with the rest assured by design [R-64]. A -40 °C design that picks an E-grade part on its operating range has no promise at -40 °C. This is the kind of distinction no distributor field can show. | active |
 | D34 | 2026-09-11 | A decoded `packaging` is what the part number states about how the manufacturer ships the part. What a distributor stocks is `Offer.packaging`, and the two may disagree. | Both are true of different things: `AP62400WU-7` names a 7-inch reel and Digi-Key ships it in bulk. Reconciling them would destroy a fact rather than settle one. | active |
+| D35 | 2026-09-11 | A parameter carries `conflicts`: the distributor values that disagree with it, each with its provenance and the id of the comparison rule. `Part` requires a parameter carrying one to have confidence `conflict`. | Task 11.3 says to record the distributor value on the parameter, and the M1 schema had nowhere to put it. Keeping it on the parameter means the part carries its own disagreement: a reader sees both numbers and where each came from, instead of a bare `conflict` badge and a lost value. | active |
+| D36 | 2026-09-11 | A distributor attribute claims only what it names. `Control Features` yields a fact for each feature listed and none for the rest, where it previously yielded `false` for the rest. | A `false` from absence asserts that the part lacks the feature, and the field is a short description rather than an inventory. None of the 13 recorded Digi-Key regulators carries the field at all, so there is no evidence it is exhaustive. The cost of being wrong is a human called to arbitrate a Digi-Key omission; this is D24 applied to absence. | active |
+| D37 | 2026-09-11 | Packages are compared as a shape family and a lead count, never as text, and `other` (a recognised shape outside the vocabulary) is distinct from null (nothing readable). Where a text names two families, a stated body width decides: 3.00 mm MSOP, 4.40 mm TSSOP, 3.90 mm SOIC. | `8-PowerSOIC (0.154", 3.90mm Width)` and `8-SOIC PowerPAD (DDA)` are one package written twice, so text equality would report a conflict on nearly every part. Collapsing `other` into null would let a BGA and a threaded cylinder agree. The widths are Digi-Key's own, and its supplier field corroborates the reading on 100-odd corpus rows. | active |
+| D38 | 2026-09-11 | Observations of one parameter combine per parameter: `all` by default (one distributor disagreeing is a conflict even if another agrees), `any` for `package` (one agreeing description settles it). | Two distributors are two readings of one part, and a reading that disagrees is the whole point of reconciling. Digi-Key's `Package / Case` and `Supplier Device Package` are two descriptions of one thing, and its own two fields disagree on 9 of 547 recorded parts — DFN against QFN — so requiring both would escalate a distributor's internal inconsistency to a person. | active |
+| D39 | 2026-09-11 | A temperature grade is the widest envelope the part's operating range covers completely (extended -40…125 °C, industrial -40…85 °C, commercial 0…70 °C), and a range covering none of them is undecided rather than forced into the nearest. | A 0 °C to 125 °C part does not reach industrial's -40 °C, and claiming it does is the error that matters; calling it commercial understates its top end but promises nothing false. The grade describes the range as stated, whatever it is referenced to, with `temperatureReference` kept on the parameter for the junction-against-ambient distinction a single word cannot carry. | active |
 
 ## 4. Status
 
@@ -113,7 +118,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M8  | Mouser adapter | complete | 2026-09-10 |
 | M9  | Nexar adapter with hard budget | deferred (D29) | |
 | M10 | MPN resolution | complete | 2026-09-11 |
-| M11 | Reconciliation and classification | not started | |
+| M11 | Reconciliation and classification | complete | 2026-09-11 |
 | M12 | Tool registry and MCP server | not started | |
 | M13 | Golden evaluation set | not started | |
 | M14 | Agent runner (extraction) | not started | |
@@ -221,6 +226,56 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 15: Module 11 complete
+
+**Done**
+
+- `src/reconcile/`: per-parameter policy (tolerance, safety, how several
+  observations combine, and why each tolerance is what it is), comparison
+  rules for every pairing of a stored value with a distributor's, and a
+  driver that records conflicts on the parameter, sets confidence, and
+  escalates the safety ones.
+- `src/classify/`: eight named, versioned rules producing every axis, a
+  package-text parser shared with reconciliation, and `classify` /
+  `tryClassify` — all axes or a typed error naming what could not be decided.
+- Reopened and re-verified M1 (the `conflicts` annotation and the value-shape
+  guards), M4 (migration 0002), M5 (facts stored as observed; control
+  features claim only what they name), M7 (a flaky coverage path made
+  deterministic) and M7A (conflicts shown in the report).
+- 1772 tests, 100% coverage, zero warnings.
+
+**Learned**
+
+- **Digi-Key contradicts itself, and the corpus shows where.** Its two package
+  fields disagree on 9 of 547 recorded parts: `Package / Case` says DFN where
+  `Supplier Device Package` says QFN, for MPS `GQ`/`DQ` parts and three ST
+  `L59xx`/`L79xx` parts. The M10 decoder reads those same codes as QFN, so
+  two of three readings agree — and requiring both fields to agree would have
+  escalated a distributor's internal inconsistency to a person (D38).
+- **A false from absence is an invented fact.** The `Control Features`
+  mapping turned an unlisted feature into `false`, which would have put parts
+  into `needs_human` over a Digi-Key omission. No recorded regulator carries
+  the field at all, so nothing was lost by claiming only what it names (D36).
+- **A tolerance is a judgement that has to be written down.** `voutMax` needs
+  ten percent because Digi-Key publishes a duty-cycle-limited maximum
+  (17.28 V against an 18 V input) where the datasheet states a regulation
+  range; temperatures need none, because grades are whole degrees and a
+  difference is a junction range against an ambient one. Every policy row
+  carries its reason so a bad call is arguable from the data rather than the
+  code.
+- **The plan's word "provenance" in task 11.3 had nowhere to go.** Recording a
+  distributor's disagreeing value needed a field the M1 schema did not have,
+  so M1, M4 and M7A were reopened rather than the value being dropped into an
+  escalation and lost (D35).
+- A flaky coverage failure surfaced under a loaded full-suite run: the real
+  `setTimeout` path is only reached when a request finishes inside the
+  throttle's minimum interval. Exporting the helper and testing it directly
+  makes the check deterministic.
+
+**Next**
+
+- M12: the tool registry and the MCP server, over stdio and in process.
 
 ### 2026-09-11 — Session 14: Module 10 complete
 

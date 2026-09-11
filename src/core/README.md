@@ -49,11 +49,33 @@ Nullable parameters (the datasheet may not state them): `voutFixed`,
 required and non-null. `switchingFrequency` is a fixed `Hz` quantity or an
 `Hz` range.
 
+A parameter may also carry `conflicts`: distributor values that disagree
+with the one it holds, each an `ObservedValue` with the `DistributorProvenance`
+it came from and the id of the comparison rule that judged them to disagree.
+The key is absent when nothing disagreed and never an empty list. Module 11
+writes it; `Part` requires any parameter carrying one to have confidence
+`conflict`.
+
 Cross-field invariants: `vinMin < vinMax <= vinAbsMax`; `voutMin <= voutMax`;
 a non-null `voutFixed` equals both `voutMin` and `voutMax`;
 `operatingTempMin < operatingTempMax`; a non-synchronous part has
 `rdsOnLow: null`; a controller has both `rdsOn*` null; a part without soft
 start has no soft-start time.
+
+## Observations (`observation.ts`)
+
+`ObservedValue` is a value as a distributor states it: `quantity`, `max`,
+`min` (a stated bound rather than a value), `range`, `enum`, `boolean`, or
+`text`. `DistributorFact` in `src/units/` is this shape plus the parameter
+key, so a fact can be stored on a parameter without being reshaped.
+`ParameterConflict` pairs one with its provenance and the rule that decided.
+
+## Value shapes (`value-shapes.ts`)
+
+`isQuantity`, `isRange` and `isSoftStart` tell which shape a parameter value
+is, for code that reads values generically — rendering them, comparing them
+with a distributor's. Structural rather than schema parses, because they run
+on values that have already been validated.
 
 ## Records
 
@@ -80,6 +102,7 @@ The aggregate `upsert_part` stores. Beyond the field schemas it enforces:
 - a parameter citing a datasheet cites this part's datasheet (same digest) on
   a page it has; a part without a datasheet has no datasheet-cited parameter;
 - `verified` status requires every parameter `verified`;
+- a parameter carrying a distributor conflict has confidence `conflict`;
 - any parameter in `conflict` forces `needs_human` or `rejected`;
 - one classification per axis; one offer per distributor SKU;
 - `updatedAt` is not before `createdAt`.

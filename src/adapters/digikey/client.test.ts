@@ -10,7 +10,7 @@ import {
   statusBody,
   textBody,
 } from '../../../test/helpers/msw.js';
-import { DigiKeyClient, type DigiKeyClientOptions } from './client.js';
+import { DigiKeyClient, defaultSleep, type DigiKeyClientOptions } from './client.js';
 import { MemoryTokenStore, PRODUCTION_HOST, SANDBOX_HOST, TOKEN_PATH } from './token.js';
 
 const server = setupServer();
@@ -212,6 +212,12 @@ describe('pacing', () => {
 });
 
 describe('defaults', () => {
+  it('sleeps for real when no sleep is injected', async () => {
+    const started = Date.now();
+    await defaultSleep(5);
+    expect(Date.now() - started).toBeGreaterThanOrEqual(4);
+  });
+
   it('waits and reads the clock for real when neither is injected', async () => {
     server.use(onGet(URL, () => jsonBody({ ok: true })));
     // No token store either: the token client provides an in-memory one.

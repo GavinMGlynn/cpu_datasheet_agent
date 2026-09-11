@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { DatasheetRepository } from './datasheet-repository.js';
 import { EscalationRepository } from './escalation-repository.js';
+import { MIGRATIONS } from './migrations/index.js';
 import { appliedMigrations } from './migrate.js';
 import { NexarBudgetRepository } from './nexar-budget-repository.js';
 import { OfferRepository } from './offer-repository.js';
@@ -12,7 +13,9 @@ import { VerificationRepository } from './verification-repository.js';
 describe('openDatabase', () => {
   it('opens and migrates', () => {
     const db = openDatabase(':memory:');
-    expect(appliedMigrations(db).map((row) => row.name)).toEqual(['initial']);
+    expect(appliedMigrations(db).map((row) => row.name)).toEqual(
+      MIGRATIONS.map((migration) => migration.name),
+    );
     db.close();
   });
 });

@@ -1,15 +1,15 @@
+import { isQuantity, isRange, isSoftStart } from '../core/value-shapes.js';
 import { describe, expect, it } from 'vitest';
 
+import type { ObservedValue } from '../core/observation.js';
 import {
   NOT_STATED,
   citedPage,
   citedQuote,
+  formatObservedValue,
   formatParameterValue,
   formatPrice,
   formatProvenance,
-  isQuantity,
-  isRange,
-  isSoftStart,
 } from './format.js';
 
 describe('type guards', () => {
@@ -68,6 +68,20 @@ describe('formatParameterValue', () => {
   it('falls back to JSON for a shape it does not know', () => {
     expect(formatParameterValue({ unexpected: 1 })).toBe('{"unexpected":1}');
     expect(formatParameterValue(42)).toBe('42');
+  });
+});
+
+describe('formatObservedValue', () => {
+  it.each([
+    [{ kind: 'quantity', value: { value: 36, unit: 'V' } }, '36 V'],
+    [{ kind: 'max', value: { value: 1_000_000, unit: 'Hz' } }, 'at most 1 MHz'],
+    [{ kind: 'min', value: { value: 3, unit: 'V' } }, 'at least 3 V'],
+    [{ kind: 'range', value: { unit: 'Hz', min: 100_000, max: 1_500_000 } }, '100000 ~ 1500000 Hz'],
+    [{ kind: 'enum', value: 'adjustable' }, 'adjustable'],
+    [{ kind: 'boolean', value: true }, 'yes'],
+    [{ kind: 'text', value: '8-SOIC' }, '8-SOIC'],
+  ])('renders %j as %s', (observed, expected) => {
+    expect(formatObservedValue(observed as ObservedValue)).toBe(expected);
   });
 });
 

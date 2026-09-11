@@ -23,6 +23,7 @@ interface ParameterRow {
   value_json: string;
   provenance_json: string;
   confidence: string;
+  conflicts_json: string | null;
 }
 
 interface ClassificationRow {
@@ -118,10 +119,20 @@ export class PartRepository {
   private replaceParameters(partId: number, part: Part): void {
     this.db.raw.prepare<[number]>('DELETE FROM parameters WHERE part_id = ?').run(partId);
     const insert = this.db.raw.prepare<
-      [number, string, string, number | null, number | null, string | null, string, string]
+      [
+        number,
+        string,
+        string,
+        number | null,
+        number | null,
+        string | null,
+        string,
+        string,
+        string | null,
+      ]
     >(
-      `INSERT INTO parameters (part_id, key, value_json, numeric_min, numeric_max, unit, provenance_json, confidence)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO parameters (part_id, key, value_json, numeric_min, numeric_max, unit, provenance_json, confidence, conflicts_json)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     );
     for (const key of PARAMETER_KEYS) {
       const parameter = part.parameters[key];
@@ -135,6 +146,7 @@ export class PartRepository {
         bounds?.unit ?? null,
         JSON.stringify(parameter.provenance),
         parameter.confidence,
+        parameter.conflicts === undefined ? null : JSON.stringify(parameter.conflicts),
       );
     }
   }
@@ -194,13 +206,18 @@ export class PartRepository {
     const parameters: Record<string, unknown> = {};
     for (const parameter of this.db.raw
       .prepare<[number], ParameterRow>(
-        'SELECT key, value_json, provenance_json, confidence FROM parameters WHERE part_id = ?',
+        'SELECT key, value_json, provenance_json, confidence, conflicts_json FROM parameters WHERE part_id = ?',
       )
       .all(row.id)) {
       parameters[parameter.key] = {
         value: parseJson(parameter.value_json),
         provenance: parseJson(parameter.provenance_json),
         confidence: parameter.confidence,
+        // Absent rather than null: the schema's optional annotation means
+        // "nothing disagreed", and a null would be an unknown key.
+        ...(parameter.conflicts_json === null
+          ? {}
+          : { conflicts: parseJson(parameter.conflicts_json) }),
       };
     }
     const classifications = this.db.raw
