@@ -6,13 +6,14 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
 import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
-import { datasheet, part } from '../../test/helpers/core-fixtures.js';
+import { datasheet, part, verificationClaim } from '../../test/helpers/core-fixtures.js';
+import { PARAMETER_KEYS, Part, parseOrThrow } from '../core/index.js';
 import { createLogger, type Logger } from '../log/index.js';
 import { NO_SPEND_POLICY, buildRegistry } from '../tools/index.js';
 import { RunConfig } from './config.js';
 import { AgentError } from './errors.js';
-import { extractMany, readMpnList } from './batch.js';
-import type { RunnerDeps } from './runner.js';
+import { extractMany, pendingVerification, readMpnList, verifyMany } from './batch.js';
+import type { RunnerDeps } from './execute.js';
 
 const registry = buildRegistry();
 
@@ -43,6 +44,7 @@ beforeEach(async () => {
   logger = createLogger({ level: 'debug', sink: (line) => logs.push(line) });
   harness = await createHarness({
     policy: NO_SPEND_POLICY,
+    run: { promptVersion: 'verify.v1', model: 'claude-opus-5' },
     ledgerIdGenerator: () => ledgerId(++issued),
   });
 });
@@ -152,3 +154,97 @@ describe('extractMany', () => {
     expect(result.runs).toHaveLength(1);
   });
 });
+
+describe('verifyMany and pendingVerification', () => {
+  /** A run that confirms every value of whichever part it was given. */
+  function deps(): RunnerDeps {
+    const { query } = scriptedQuery([resultMessage()], async (options) => {
+      expect(options?.systemPrompt).toContain('You are checking values somebody else extracted');
+      for (const key of PARAMETER_KEYS) {
+        await registry.call(
+          'record_verification',
+          {
+            mpn: 'TPS54331DR',
+            verification: { ...verificationClaim({ parameterKey: key }), page: 4 },
+          },
+          harness.context,
+          ledgerId(issued),
+        );
+      }
+    });
+    return { context: harness.context, registry, query, logger };
+  }
+
+  beforeEach(() => {
+    harness.context.repositories.parts.upsertPart(
+      parseOrThrow(
+        Part,
+        part({ datasheet: datasheet({ pageCount: 40 }), parameters: everyValueOnPageFour() }),
+        'Part',
+      ),
+    );
+  });
+
+  it('lists the parts waiting to be checked, and leaves the others alone', () => {
+    harness.context.repositories.parts.upsertPart(
+      parseOrThrow(
+        Part,
+        part({
+          mpn: 'LM5164DDAR',
+          status: 'needs_human',
+          datasheet: datasheet({ pageCount: 40 }),
+        }),
+        'Part',
+      ),
+    );
+
+    expect(
+      pendingVerification({
+        context: harness.context,
+        registry,
+        query: scriptedQuery([]).query,
+        logger,
+      }),
+    ).toEqual(['TPS54331DR']);
+  });
+
+  it('verifies each pending part once, then skips it', async () => {
+    const runner = deps();
+
+    const first = await verifyMany(
+      ['TPS54331DR'],
+      { ...config, promptVersion: 'verify.v1' },
+      runner,
+      {
+        force: false,
+      },
+    );
+    const again = await verifyMany(
+      ['TPS54331DR'],
+      { ...config, promptVersion: 'verify.v1' },
+      runner,
+      {
+        force: false,
+      },
+    );
+
+    expect(first.runs.map((run) => run.result)).toEqual(['verified']);
+    expect(again.runs).toEqual([]);
+    expect(again.skipped).toEqual(['TPS54331DR']);
+  });
+});
+
+/** Every parameter citing one page, so a test can confirm them all at once. */
+function everyValueOnPageFour(): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(part().parameters as Record<string, Record<string, unknown>>).map(
+      ([key, value]) => [
+        key,
+        {
+          ...value,
+          provenance: { ...(value.provenance as Record<string, unknown>), page: 4 },
+        },
+      ],
+    ),
+  );
+}

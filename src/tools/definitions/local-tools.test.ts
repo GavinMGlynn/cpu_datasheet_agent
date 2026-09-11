@@ -7,6 +7,7 @@ import {
   part,
   q,
   verification,
+  verificationClaim,
 } from '../../../test/helpers/core-fixtures.js';
 import { createHarness, TEST_NOW, type TestHarness } from '../../../test/helpers/tool-context.js';
 import { ValidationError } from '../../core/index.js';
@@ -120,29 +121,52 @@ describe('search_parts', () => {
 });
 
 describe('record_verification', () => {
-  it('records a verdict against a stored part', async () => {
-    await call('upsert_part', { part: part() });
-
-    const recorded = await call('record_verification', {
-      mpn: 'TPS54331DR',
-      verification: verification(),
+  /** The run stamps itself on the record; the reader states only what it read. */
+  async function inRun(input: unknown): Promise<Record<string, unknown>> {
+    const running = await createHarness({
+      run: { promptVersion: 'verify.v1', model: 'test-model' },
     });
+    try {
+      await registry.call('upsert_part', { part: part() }, running.context);
+      return (await registry.call('record_verification', input, running.context)) as Record<
+        string,
+        unknown
+      >;
+    } finally {
+      await running.close();
+    }
+  }
 
-    expect(recorded.verification).toEqual(verification());
+  it('records a verdict against a stored part, stamped with the run', async () => {
+    const recorded = await inRun({ mpn: 'TPS54331DR', verification: verificationClaim() });
+
+    expect(recorded.verification).toEqual({
+      ...verification(),
+      checkedAt: TEST_NOW,
+      promptVersion: 'verify.v1',
+      model: 'test-model',
+    });
   });
 
   it('refuses to record against a part nobody has stored', async () => {
     await expect(
-      call('record_verification', { mpn: 'TPS54331DR', verification: verification() }),
+      call('record_verification', { mpn: 'TPS54331DR', verification: verificationClaim() }),
     ).rejects.toMatchObject({ code: 'TOOL_NOT_FOUND' });
   });
 
-  it('rejects a confirmed verdict with no quote', async () => {
+  it('refuses to record outside a run, which would leave nobody named as the reader', async () => {
     await call('upsert_part', { part: part() });
-    const { quote: _quote, ...noQuote } = verification();
+
     await expect(
-      call('record_verification', { mpn: 'TPS54331DR', verification: noQuote }),
-    ).rejects.toBeInstanceOf(ValidationError);
+      call('record_verification', { mpn: 'TPS54331DR', verification: verificationClaim() }),
+    ).rejects.toMatchObject({ code: 'TOOL_UNAVAILABLE' });
+  });
+
+  it('rejects a confirmed verdict with no quote', async () => {
+    const { quote: _quote, ...noQuote } = verificationClaim();
+    await expect(inRun({ mpn: 'TPS54331DR', verification: noQuote })).rejects.toBeInstanceOf(
+      ValidationError,
+    );
   });
 });
 

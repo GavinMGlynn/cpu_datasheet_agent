@@ -5,7 +5,7 @@ import { DEFAULT_QUOTA_POLICY, NO_SPEND_POLICY } from '../tools/index.js';
 import {
   DEFAULT_MAX_COST_USD,
   DEFAULT_MAX_TURNS,
-  DEFAULT_PROMPT_VERSION,
+  DEFAULT_EXTRACT_PROMPT_VERSION,
   RunConfig,
   defaultRunConfig,
   policyFor,
@@ -26,7 +26,7 @@ describe('defaultRunConfig', () => {
       effort: 'high',
       maxTurns: DEFAULT_MAX_TURNS,
       maxCostUsd: DEFAULT_MAX_COST_USD,
-      promptVersion: DEFAULT_PROMPT_VERSION,
+      promptVersion: DEFAULT_EXTRACT_PROMPT_VERSION,
       allowSpend: false,
       dataDir: '/tmp/chip-data',
     });

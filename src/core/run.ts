@@ -5,22 +5,22 @@ import { Iso8601, NormalisedMpn, PromptVersion } from './primitives.js';
 /**
  * What a run was for.
  *
- * Extraction is the only kind there is: the verification pass is a separate
- * run with its own prompt, and it adds its kind when it exists rather than
- * being named here first.
+ * The two share nothing but this record: a verification run starts in a
+ * fresh context that has never seen the extraction it is checking.
  */
-export const RUN_KINDS = ['extract'] as const;
+export const RUN_KINDS = ['extract', 'verify'] as const;
 export const RunKind = z.enum(RUN_KINDS);
 export type RunKind = z.output<typeof RunKind>;
 
 /**
  * How a run ended, for the part rather than for the harness.
  *
- * `extracted` means a part was stored; `needs_human` that the run handed a
- * question to a person; `rejected` that neither happened, whatever the
+ * `extracted` means a part was stored and `verified` that every stored value
+ * was found on the page it cites; `needs_human` that the run handed a
+ * question to a person; `rejected` that none of those happened, whatever the
  * reason.
  */
-export const RUN_RESULTS = ['extracted', 'needs_human', 'rejected'] as const;
+export const RUN_RESULTS = ['extracted', 'verified', 'needs_human', 'rejected'] as const;
 export const RunResult = z.enum(RUN_RESULTS);
 export type RunResult = z.output<typeof RunResult>;
 
@@ -36,8 +36,18 @@ export const RunDetails = z.strictObject({
   escalations: z.int().nonnegative(),
   /** Calls the money gate refused. */
   spendDenials: z.int().nonnegative(),
-  /** Whether a part was stored by this run. */
+  /** Whether a part was written by this run. */
   stored: z.boolean(),
+  /** What the verdicts were, for a verification run. */
+  verdicts: z
+    .strictObject({
+      confirmed: z.int().nonnegative(),
+      contradicted: z.int().nonnegative(),
+      notFound: z.int().nonnegative(),
+      /** Parameters the run reached no verdict on at all. */
+      unchecked: z.int().nonnegative(),
+    })
+    .optional(),
 });
 export type RunDetails = z.output<typeof RunDetails>;
 

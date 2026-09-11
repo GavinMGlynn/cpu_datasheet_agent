@@ -26,6 +26,12 @@ export interface ToolContext {
   readonly digikey?: DigiKeyApi | undefined;
   readonly mouser?: MouserApi | undefined;
   readonly ledger: ToolCallLedger;
+  /**
+   * The run these calls belong to, when they belong to one. A tool that
+   * records who read something takes it from here rather than from the
+   * model, which would be asking the reader to name itself.
+   */
+  readonly run?: { readonly promptVersion: string; readonly model: string } | undefined;
   readonly policy: QuotaPolicy;
   /**
    * No person is watching this run, so an escalation marks the part and the

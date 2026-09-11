@@ -110,6 +110,9 @@ that supersedes the old one, and the old row's status changes to
 | D49 | 2026-09-11 | The `PreToolUse` gate allows a spending tool through unchanged in a run that may not spend, so it answers from the cache and reports a miss as `needs_confirmation`. Only a call that asks to spend — `confirmSpend: true` — is denied. | Denying the tool outright would stop a no-spend run reading data already paid for, and rerunning a part for free is what the cache is for (D40). The gate is still absolute: the only way to spend is a run started with `--allow-spend`. | active |
 | D50 | 2026-09-11 | A run carries a cost ceiling (`maxBudgetUsd`, default $2) as well as a turn limit, enforced by the harness on the model calls themselves. | The agent cannot reach it, which neither of the other two halves of the gate can say. The first real extraction stopped at $2 with the part stored and the classification still to do; the clean rerun cost $3.41. The ceiling is the difference between a run that overspends and one that stops (Q5). | active |
 | D51 | 2026-09-11 | A `runs` row is written when a run starts and completed when it ends, and a batch skips a part whose latest run under the same prompt version finished, whatever it concluded. `--force` overrides. | A run that never came back is then visible as a row with no result rather than as nothing at all, and a batch of a hundred parts is restarted by running it again. Re-running a part that was already rejected would spend the same money to reach the same answer; that is the operator's call, not the batch's. | active |
+| D52 | 2026-09-11 | `record_verification` takes what the reader read — the parameter, the verdict, the page, the quote — and the run stamps when it was read and which prompt and model read it. A context with no run refuses the call. | A model asked to stamp its own timestamp is a model inventing one, and a model asked to name its own version is a model that can name the wrong one. The two facts the system knows are the system's to record. | active |
+| D53 | 2026-09-11 | A part written back after a verification pass carries that pass's verdicts in its aggregate. | Storing a part replaces its child rows. The first real verification run recorded thirty verdicts, wrote the part back to mark the parameters verified, and erased all thirty in the same call. The aggregate owns its verifications, so the pass has to hand them over with it. | active |
+| D54 | 2026-09-11 | A verification run's result is a statement about the part: `verified` only when every value cited a page and every one was confirmed; `needs_human` when a page contradicted a value or a safety rating could not be found; `rejected` otherwise, with the reason naming how many of how many were confirmed. | A value not found on the page it cites is a provenance error, not a wrong value, and calling it a conflict would send a person to adjudicate a question nobody is asking. Saying "confirmed 29 of 30, 1 not found on the page it cites" says exactly what happened. | active |
 
 ## 4. Status
 
@@ -134,7 +137,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M12 | Tool registry and MCP server | complete, bar 12.7 (Q3) | 2026-09-11 |
 | M13 | Golden evaluation set | complete | 2026-09-11 |
 | M14 | Agent runner (extraction) | complete | 2026-09-11 |
-| M15 | Verification pass | not started | |
+| M15 | Verification pass | complete | 2026-09-11 |
 | M16 | Evaluation harness | not started | |
 | M17 | Alternates query | not started | |
 | M18 | Release and end-to-end sign-off | not started | |
@@ -238,6 +241,66 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 19: Module 15 complete
+
+**Done**
+
+- `verifyPart` checks every stored value against the page it cites, in a run
+  that has never seen the extraction. It gets three tools — `read_pages`,
+  `render_page`, `record_verification` — and cannot store a part, fetch
+  anything, or raise a question. What happens to the part is decided
+  afterwards, deterministically, from the verdicts.
+- `prompts/verify.v1.md`: confirmed, contradicted, or not found, with a quote
+  for the first two and nothing to quote for the third. It says what a
+  confirmation is not: consistent with, implied by, or stated on another page.
+- `applyVerdicts`: confirmed becomes `verified`, contradicted becomes
+  `conflict` and raises a question, and `not_found` on a safety rating is
+  treated as a contradiction. A value a distributor disagrees with is never
+  promoted, whatever the page says.
+- `record_verification` now takes only what the reader read; the run stamps
+  when, which prompt and which model (D52).
+- `executeRun` holds everything the two kinds of run share, so the gate, the
+  run row and the ledger tree are the same for both by construction.
+- `chip-run verify <mpn>` and `chip-run verify-pending`.
+- 2170 tests, 100% coverage, zero warnings.
+
+**The pass found a real error on its first real run**
+
+TPS54331DR, 33 turns, 32 tool calls, $0.45 — a seventh of what extracting it
+cost, because a page is read once and a verdict is short.
+
+29 of 30 values confirmed. The one it could not find was `topology`, which the
+extraction cited to page 9. The golden set has it on page 1, in the opening
+sentence of the datasheet. Two independent readings, neither of which saw the
+other, agree that the citation was wrong — which is precisely what a
+verification pass is for, and it found it the first time it ran.
+
+**And it found one of my own**
+
+The first attempt reported 29 confirmed and left the database with no verdicts
+at all. Storing a part replaces its child rows, and the pass wrote the part
+back to mark the parameters verified — erasing the thirty verdicts it had just
+recorded, in the same call. The aggregate owns its verifications, so the pass
+hands them over with the part now (D53). A test asserts the rows survive.
+
+**Learned**
+
+- **Verification is cheap.** $0.45 against $3.41. The expensive part of
+  extraction is holding pages of datasheet in context while reasoning about
+  them; checking one claim against one page is a much smaller question.
+- **A wrong citation is invisible to extraction and obvious to verification.**
+  The value was right, the page was wrong, and nothing in the extraction run
+  could have noticed. This is the whole argument for the second context.
+- **"Not found" is not "contradicted".** Sending a provenance error to a
+  person as a conflict would ask them to adjudicate a question nobody is
+  asking (D54). The run says what it did: 29 of 30, one not on its page.
+
+**Next**
+
+- M16: the evaluation harness — the golden set end to end, scored per
+  parameter, with the prompt iterated against the score rather than against
+  intuition.
 
 ### 2026-09-11 — Session 18: Module 14 complete
 

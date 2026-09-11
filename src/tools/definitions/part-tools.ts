@@ -8,6 +8,7 @@ import {
   Part,
   PartStatus,
   Verification,
+  VerificationClaim,
 } from '../../core/index.js';
 import { ToolError } from '../errors.js';
 import { defineTool } from '../registry.js';
@@ -75,8 +76,8 @@ export const searchParts = defineTool({
 export const recordVerification = defineTool({
   name: 'record_verification',
   description:
-    'Record one verification verdict against a stored parameter: confirmed, contradicted, or not found on the page it cites.',
-  input: z.strictObject({ mpn: NormalisedMpn, verification: Verification }),
+    'Record one verification verdict against a stored parameter: confirmed, contradicted, or not found on the page it cites. Say what you read and where; the run records when, and which prompt and model read it.',
+  input: z.strictObject({ mpn: NormalisedMpn, verification: VerificationClaim }),
   output: z.strictObject({ verification: Verification }),
   annotations: { readOnlyHint: false, destructiveHint: false },
   handler: (input, context) => {
@@ -87,8 +88,21 @@ export const recordVerification = defineTool({
         { details: { mpn: input.mpn } },
       );
     }
+    const { run } = context;
+    if (run === undefined) {
+      throw new ToolError(
+        'TOOL_UNAVAILABLE',
+        'record_verification belongs to a verification run, and this context is not one',
+        { details: { mpn: input.mpn } },
+      );
+    }
     return Promise.resolve({
-      verification: context.repositories.verifications.record(input.mpn, input.verification),
+      verification: context.repositories.verifications.record(input.mpn, {
+        ...input.verification,
+        checkedAt: context.now(),
+        promptVersion: run.promptVersion,
+        model: run.model,
+      }),
     });
   },
 });

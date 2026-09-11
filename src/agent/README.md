@@ -1,8 +1,8 @@
 # agent
 
-The extraction runner: one part number through one headless run on the Claude
-Agent SDK, with money gated and every decision recorded (Module 14). Import
-from `src/agent/index.ts`.
+Two headless runs on the Claude Agent SDK, sharing nothing: extraction
+(Module 14) and verification (Module 15). Money is gated and every decision is
+recorded. Import from `src/agent/index.ts`.
 
 ## A run
 
@@ -10,11 +10,16 @@ from `src/agent/index.ts`.
 npx tsx bin/chip-run.ts extract TPS54331DR
 npx tsx bin/chip-run.ts extract TPS54331DR --allow-spend --effort max
 npx tsx bin/chip-run.ts extract-many parts.txt --force
+npx tsx bin/chip-run.ts verify TPS54331DR
+npx tsx bin/chip-run.ts verify-pending
 ```
 
-`extractPart(mpn, runConfig, deps)` does the work; `main(argv, deps)` is the
-command line over it. Exit codes are 0 when every run reached a conclusion, 1
-when one did not, and 2 when the command line or the configuration was wrong.
+`extractPart(mpn, runConfig, deps)` and `verifyPart(mpn, runConfig, deps)` do
+the work, both over `executeRun`, which owns everything the two share: the
+gate, the in-process server, the run row and the ledger entry. `main(argv,
+deps)` is the command line over them. Exit codes are 0 when every run reached
+a conclusion, 1 when one did not, and 2 when the command line or the
+configuration was wrong.
 
 The run is given:
 
@@ -86,11 +91,48 @@ the same way. `extractPart` throws only when the run could not be set up: an
 unknown prompt version, a part number that is not one, a policy that
 disagrees with itself.
 
+## The verification pass
+
+`verifyPart` loads the stored part, groups every value that cites a page by
+the page it cites, and starts a new run with three tools: `read_pages`,
+`render_page` and `record_verification`. It cannot store a part, fetch
+anything or raise a question; what happens to the part is decided afterwards,
+deterministically, from the verdicts.
+
+The isolation is structural rather than a matter of prompt discipline. The
+function takes a part number, not a session or a run; there is no parameter
+through which an extraction transcript could reach it; no session is resumed;
+and the request carries the claims and the pages, not the words the extraction
+found. A test asserts all of that.
+
+`applyVerdicts` turns the verdicts into the part:
+
+- **confirmed** — the parameter becomes `verified`. A value carrying a
+  distributor conflict is never promoted, whatever the page says: the
+  disagreement stands and `Part` requires it to stay in `conflict`.
+- **contradicted** — the parameter becomes `conflict`, a question is raised,
+  and the part goes to `needs_human`.
+- **not_found on a safety-relevant rating** — treated as a contradiction. A
+  rating nobody can find on the page it cites is exactly the case `CLAUDE.md`
+  sends to a person.
+- **not_found on anything else** — left as it was, checked and unconfirmed.
+  The part stays where it is.
+
+A part becomes `verified` only when every one of its parameters ends at
+`verified`, which means every value cited a page and every one was confirmed.
+
+The verdicts travel back with the part when it is written: storing a part
+replaces its child rows, so a part written without them would erase the
+verdicts the pass had just recorded. That is not a hypothetical — it is what
+the first real run of this pass did.
+
 ## Batches
 
-`extractMany(mpns, config, deps, { force })` runs the list sequentially — the
-runs share one cache, one database and one ledger, and a part whose datasheet
-another part already fetched should find it there rather than race for it.
+`extractMany(mpns, config, deps, { force })` and `verifyMany(...)` run their
+lists sequentially — the runs share one cache, one database and one ledger,
+and a part whose datasheet another part already fetched should find it there
+rather than race for it. `pendingVerification(deps)` is what `verify-pending`
+sweeps: every stored part still at `extracted`.
 
 It is resumable: a part with a finished run under this prompt version is
 skipped, so a batch that stopped halfway is restarted by running it again.
@@ -104,6 +146,7 @@ skipped, so a batch that stopped halfway is restarted by running it again.
 | `CLI_USAGE` | The command line could not be read. |
 | `BATCH_FILE_UNREADABLE`, `BATCH_FILE_EMPTY`, `BATCH_FILE_INVALID` | The list of part numbers is missing, empty, or holds a line that is not a part number. |
 | `PROMPT_NOT_FOUND`, `PROMPT_EMPTY` | No prompt file for that version, or one with nothing in it. |
+| `PART_NOT_STORED`, `NOTHING_TO_VERIFY` | Nothing to verify: no such part, or no value citing a page. |
 
 ## Testing
 

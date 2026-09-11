@@ -1,3 +1,5 @@
+import type { SDKResultMessage } from '@anthropic-ai/claude-agent-sdk';
+
 import type { RunResult } from '../core/index.js';
 import { readLedger, type MalformedLine, type ToolCallLedger } from '../log/index.js';
 
@@ -57,15 +59,43 @@ export async function summariseCalls(
   return { toolCalls, toolFailures, spendDenials, stored };
 }
 
-/** How a run ended, as the harness and the ledger together describe it. */
-export interface ResultFacts {
-  /** The harness's word for the ending: `success`, `error_max_turns`, `no_result`. */
+/** How the harness says a run ended. */
+export interface Ending {
+  /** The harness's word for it: `success`, `error_max_turns`, `no_result`. */
   readonly subtype: string;
   readonly isError: boolean;
-  readonly stored: boolean;
-  readonly escalations: number;
   /** The run's last words, or what the harness said went wrong. */
   readonly message: string;
+}
+
+/**
+ * The ending as the harness reported it, or the absence of one.
+ *
+ * A harness that threw before saying anything and one that said nothing at
+ * all are different failures, and neither is a run that ended.
+ */
+export function endingOf(
+  result: SDKResultMessage | undefined,
+  harnessError: string | undefined,
+): Ending {
+  if (result === undefined) {
+    return {
+      subtype: harnessError === undefined ? 'no_result' : 'harness_error',
+      isError: true,
+      message: harnessError ?? 'the harness produced no result message',
+    };
+  }
+  return {
+    subtype: result.subtype,
+    isError: result.is_error,
+    message: result.subtype === 'success' ? result.result : result.errors.join('; '),
+  };
+}
+
+/** How a run ended, as the harness and the ledger together describe it. */
+export interface ResultFacts extends Ending {
+  readonly stored: boolean;
+  readonly escalations: number;
 }
 
 export interface RunOutcome {

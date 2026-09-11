@@ -9,7 +9,9 @@ export const DEFAULT_MAX_TURNS = 60;
 /** What a run may cost before the harness stops it, in US dollars. */
 export const DEFAULT_MAX_COST_USD = 2;
 /** The prompt an extraction run is given unless told otherwise. */
-export const DEFAULT_PROMPT_VERSION = 'extract.v1';
+export const DEFAULT_EXTRACT_PROMPT_VERSION = 'extract.v1';
+/** The prompt a verification run is given unless told otherwise. */
+export const DEFAULT_VERIFY_PROMPT_VERSION = 'verify.v1';
 
 /**
  * Everything one run needs that is not the part number.
@@ -39,7 +41,7 @@ export function defaultRunConfig(config: Config): RunConfig {
     effort: config.agent.effort,
     maxTurns: DEFAULT_MAX_TURNS,
     maxCostUsd: DEFAULT_MAX_COST_USD,
-    promptVersion: DEFAULT_PROMPT_VERSION,
+    promptVersion: DEFAULT_EXTRACT_PROMPT_VERSION,
     allowSpend: false,
     dataDir: config.dataDir,
   });

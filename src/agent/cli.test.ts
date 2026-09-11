@@ -6,7 +6,8 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
 import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
-import { datasheet, part } from '../../test/helpers/core-fixtures.js';
+import { datasheet, part, verificationClaim } from '../../test/helpers/core-fixtures.js';
+import { PARAMETER_KEYS } from '../core/index.js';
 import { openDatabase } from '../db/index.js';
 import { NO_SPEND_POLICY, buildRegistry, type BuiltToolContext } from '../tools/index.js';
 import { AgentError } from './errors.js';
@@ -32,6 +33,7 @@ beforeEach(async () => {
   // it would have built carries the policy that matches.
   harness = await createHarness({
     policy: NO_SPEND_POLICY,
+    run: { promptVersion: 'verify.v1', model: 'claude-opus-5' },
     ledgerIdGenerator: () => ledgerId(++issued),
   });
 });
@@ -99,6 +101,19 @@ describe('parseCli', () => {
     });
   });
 
+  it('reads a verification and a pending sweep', () => {
+    expect(parseCli(['verify', 'TPS54331DR'])).toEqual({
+      command: 'verify',
+      mpn: 'TPS54331DR',
+      overrides: {},
+    });
+    expect(parseCli(['verify-pending', '--force'])).toEqual({
+      command: 'verify-pending',
+      force: true,
+      overrides: {},
+    });
+  });
+
   it('reads a batch, with and without --force', () => {
     expect(parseCli(['extract-many', 'parts.txt'])).toEqual({
       command: 'extract-many',
@@ -115,11 +130,13 @@ describe('parseCli', () => {
 
   it.each([
     ['no command', []],
-    ['a command it does not have', ['verify', 'TPS54331DR']],
+    ['a command it does not have', ['classify', 'TPS54331DR']],
     ['extract with no part number', ['extract']],
     ['extract-many with no file', ['extract-many']],
     ['an option it does not have', ['extract', 'TPS54331DR', '--turbo']],
     ['an argument too many', ['extract', 'TPS54331DR', 'LM5164DDAR']],
+    ['verify with no part number', ['verify']],
+    ['verify-pending with an argument', ['verify-pending', 'TPS54331DR']],
   ])('refuses %s', (_label, argv) => {
     expect(() => parseCli(argv)).toThrow(AgentError);
   });
@@ -204,5 +221,40 @@ describe('main', () => {
     await writeFile(file, 'TPS54331DR\n');
 
     expect(await main(['extract-many', file], deps(false))).toBe(1);
+  });
+
+  it('verifies one part, and then the ones still waiting', async () => {
+    await main(['extract', 'TPS54331DR'], deps());
+    const checking: MainDeps = {
+      ...deps(false),
+      query: scriptedQuery([resultMessage()], async () => {
+        for (const key of PARAMETER_KEYS) {
+          await registry.call(
+            'record_verification',
+            {
+              mpn: 'TPS54331DR',
+              verification: { ...verificationClaim({ parameterKey: key }), page: 4 },
+            },
+            harness.context,
+            ledgerId(issued),
+          );
+        }
+      }).query,
+    };
+    out.length = 0;
+
+    const one = await main(['verify', 'TPS54331DR'], checking);
+    const sweep = await main(['verify-pending'], checking);
+
+    expect(one).toBe(0);
+    expect(out[0]).toContain('TPS54331DR: verified');
+    // The part is verified now, so nothing is left waiting.
+    expect(sweep).toBe(0);
+    expect(out).toContain('0 run(s), 0 skipped');
+  });
+
+  it('answers 2 when there is no such part to verify', async () => {
+    expect(await main(['verify', 'LM5164DDAR'], deps(false))).toBe(2);
+    expect(out.join('\n')).toContain('no stored part LM5164DDAR');
   });
 });

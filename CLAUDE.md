@@ -98,31 +98,32 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M14 are complete: schemas, ledger, cache, SQLite, units, the
+Modules M0 to M15 are complete: schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
-server, the golden evaluation set, and the extraction runner. M9 (Nexar) is
-deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the authoritative
-status table.
+server, the golden evaluation set, the extraction runner, and the verification
+pass. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the
+authoritative status table.
 
 - An extraction runs headless: `npx tsx bin/chip-run.ts extract <mpn>`. Money
   is gated three ways (D12, D49, D50) and a run that may not spend answers
   from the cache. One real run of TPS54331DR scored 92% recall and 92%
   precision against its golden file, for $3.41.
+- A verification pass checks it in a fresh context:
+  `npx tsx bin/chip-run.ts verify <mpn>`. Its first real run confirmed 29 of
+  30 values for $0.45 and caught a wrong page citation the extraction could
+  not have noticed.
 - `chip-mcp-server.ts` was written earlier but is not in this repository (see
   `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
   are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
-- Not built yet: the verification pass, the evaluation harness, and the
-  alternates query.
+- Not built yet: the evaluation harness and the alternates query.
 
 ## Next steps
 
-1. M15: the verification pass — a separate run in a fresh context checking
-   each stored value against the page it cites.
-2. M16: the evaluation harness — the golden set end to end, scored per
+1. M16: the evaluation harness — the golden set end to end, scored per
    parameter.
-3. M17: the alternates query, with the pin-compatibility caveat stated.
-4. M18: release and end-to-end sign-off.
+2. M17: the alternates query, with the pin-compatibility caveat stated.
+3. M18: release and end-to-end sign-off.
 
 ## Deferred
 

@@ -13,10 +13,9 @@ describe('RunKind and RunResult', () => {
     expectAccepts(RunResult, value);
   });
 
-  it('rejects a kind it does not have', () => {
-    // The verification pass names its own kind when it exists (M15).
-    expectRejects(RunKind, 'verify');
-    expectRejects(RunResult, 'verified');
+  it('rejects a kind and a result it does not have', () => {
+    expectRejects(RunKind, 'classify');
+    expectRejects(RunResult, 'stored');
   });
 });
 
@@ -28,6 +27,16 @@ describe('Run', () => {
 
   it('accepts a finished run', () => {
     expectAccepts(Run, finishedRun());
+    expectAccepts(
+      Run,
+      finishedRun({
+        kind: 'verify',
+        result: 'verified',
+        details: runDetails({
+          verdicts: { confirmed: 30, contradicted: 0, notFound: 0, unchecked: 0 },
+        }),
+      }),
+    );
     expectAccepts(
       Run,
       finishedRun({
@@ -76,6 +85,10 @@ describe('Run', () => {
     ['details with an extra key', finishedRun({ details: runDetails({ notes: 'hello' }) })],
     ['details with a negative count', finishedRun({ details: runDetails({ toolCalls: -1 }) })],
     ['details with an empty reason', finishedRun({ details: runDetails({ reason: '' }) })],
+    [
+      'verdicts missing a count',
+      finishedRun({ details: runDetails({ verdicts: { confirmed: 1 } }) }),
+    ],
   ])('rejects %s', (_label, value) => {
     expectRejects(Run, value);
   });

@@ -26,7 +26,8 @@ import {
 import { RunConfig } from './config.js';
 import { AgentError } from './errors.js';
 import { TOOL_PREFIX } from './hook.js';
-import { SDK_QUERY, extractPart, queryOptions, type RunnerDeps } from './runner.js';
+import { SDK_QUERY, queryOptions, type RunnerDeps } from './execute.js';
+import { extractPart } from './runner.js';
 
 const registry: ToolRegistry = buildRegistry();
 
@@ -96,7 +97,7 @@ const MESSAGES: readonly SDKMessage[] = [
 
 describe('queryOptions', () => {
   it('gives the run the tools of this project and nothing else', () => {
-    const options = queryOptions(config(), 'system prompt', { registry });
+    const options = queryOptions(config(), 'system prompt', registry);
 
     expect(options.tools).toEqual([]);
     expect(options.settingSources).toEqual([]);
@@ -226,11 +227,11 @@ describe('extractPart', () => {
       );
     });
 
-    const { run, escalations } = await extractPart('TPS54331DR', config(), deps(query));
+    const { run, extra } = await extractPart('TPS54331DR', config(), deps(query));
 
     expect(run.result).toBe('needs_human');
     expect(run.details).toMatchObject({ escalations: 1, stored: false, toolCalls: 1 });
-    expect(escalations).toHaveLength(1);
+    expect(extra.escalations).toHaveLength(1);
   });
 
   it('ignores a question raised before this run', async () => {
@@ -239,9 +240,9 @@ describe('extractPart', () => {
     );
     const { query } = scriptedQuery(MESSAGES, storePart);
 
-    const { run, escalations } = await extractPart('TPS54331DR', config(), deps(query));
+    const { run, extra } = await extractPart('TPS54331DR', config(), deps(query));
 
-    expect(escalations).toEqual([]);
+    expect(extra.escalations).toEqual([]);
     expect(run.result).toBe('extracted');
   });
 
@@ -288,7 +289,7 @@ describe('extractPart', () => {
     expect(run.details.subtype).toBe('harness_error');
     expect(run.details.reason).toContain('claude code executable not found');
     expect(run.sessionId).toBeUndefined();
-    expect(logs.join('\n')).toContain('extraction run failed');
+    expect(logs.join('\n')).toContain('"msg":"run failed","kind":"extract"');
   });
 
   it('records something thrown that is not an error at all', async () => {

@@ -40,6 +40,8 @@ export interface HarnessOptions {
    * of a run hangs under — supplies a generator it can predict.
    */
   readonly ledgerIdGenerator?: () => string;
+  /** The run these calls belong to, for the tools that record who read something. */
+  readonly run?: { readonly promptVersion: string; readonly model: string };
 }
 
 /**
@@ -70,6 +72,7 @@ export async function createHarness(options: HarnessOptions = {}): Promise<TestH
     ...(options.digikey === undefined ? {} : { digikey: options.digikey(cache) }),
     ...(options.mouser === undefined ? {} : { mouser: options.mouser(cache) }),
     ledger,
+    ...(options.run === undefined ? {} : { run: options.run }),
     policy: options.policy ?? DEFAULT_QUOTA_POLICY,
     headless: options.headless ?? true,
     now: () => TEST_NOW,

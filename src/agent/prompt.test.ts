@@ -49,6 +49,22 @@ describe('loadPrompt', () => {
     }
   });
 
+  it('reads verify.v1, which tells the reader to decide and not to fix', async () => {
+    const prompt = await loadPrompt('verify.v1');
+    const names = new Set(buildRegistry().names());
+
+    expect(prompt.version).toBe('verify.v1');
+    expect(prompt.text).toContain('confirmed');
+    expect(prompt.text).toContain('contradicted');
+    expect(prompt.text).toContain('not_found');
+    expect(prompt.text).toContain('You do not correct anything');
+    for (const tool of ['read_pages', 'render_page', 'record_verification']) {
+      expect(names.has(tool)).toBe(true);
+      expect(prompt.text).toContain(tool);
+    }
+    expect(prompt.text).toMatchSnapshot();
+  });
+
   it('states the rules that are not negotiable', async () => {
     const { text } = await loadPrompt('extract.v1');
 

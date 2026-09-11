@@ -774,25 +774,26 @@ Goal: a second run, in a fresh context that has never seen the extraction
 transcript, checks every stored datasheet-sourced value against its cited
 page.
 
-- [ ] 15.1 `prompts/verify.v1.md`: for each parameter, given only the cited
+- [x] 15.1 `prompts/verify.v1.md`: for each parameter, given only the cited
       page text (and image when requested), answer `confirmed`,
       `contradicted`, or `not_found` with a quote. Snapshot test.
-- [ ] 15.2 `verifyPart(mpn, config)`: loads the stored part, groups
+- [x] 15.2 `verifyPart(mpn, config)`: loads the stored part, groups
       parameters by cited page, starts a new `query()` per part with no
       `resume` and no shared session, exposes only `read_pages`,
       `render_page`, and `record_verification`, and stores every verdict.
-- [ ] 15.3 Status transitions: all `confirmed` sets the part `verified`; any
+- [x] 15.3 Status transitions: all `confirmed` sets the part `verified`; any
       `contradicted` raises an `Escalation` of kind `conflict` and sets
       `needs_human`; `not_found` on a safety-relevant parameter is treated as
-      `contradicted`.
-- [ ] 15.4 Isolation is enforced by construction: the verification runner
+      `contradicted`. A value carrying a distributor conflict is never
+      promoted, and the verdicts travel back with the part (D53).
+- [x] 15.4 Isolation is enforced by construction: the verification runner
       takes a `PartId`, not a run or session, and a test asserts the fake
       `query` receives no `resume`, no prior messages, and a different
       session id from the extraction run.
-- [ ] 15.5 CLI `chip-run verify <mpn>` and `verify-pending`.
-- [ ] 15.6 Tests: verdict handling, every status transition, safety
+- [x] 15.5 CLI `chip-run verify <mpn>` and `verify-pending`.
+- [x] 15.6 Tests: verdict handling, every status transition, safety
       escalation, isolation assertion, CLI.
-- [ ] 15.7 One real verification run on the part from 14.9, cost and outcome
+- [x] 15.7 One real verification run on the part from 14.9, cost and outcome
       recorded.
 
 ---

@@ -373,7 +373,7 @@ policy deciding this is a separate object, so the agent runner sets it per run
 and the tools never know why. Nothing predicts what is cached: the free path
 is the same code as the spending path, so the two cannot disagree.
 
-### Agent runner (`src/agent/`) — extraction built
+### Agent runner (`src/agent/`) — built
 
 Two runs on the Claude Agent SDK, sharing nothing.
 
@@ -409,7 +409,21 @@ over a real connection in the tests, not through its handlers.
 The **verification run** takes a part identifier, not a session, and starts
 fresh. Its isolation is structural rather than a matter of prompt discipline:
 there is no parameter through which the extraction transcript could reach it,
-and a test asserts the fake harness receives no resumed session.
+and a test asserts the fake harness receives no resumed session. It gets three
+tools — read a page, render a page, record a verdict — and no way to change
+anything. What happens to the part is decided from the verdicts afterwards, by
+a pure function: confirmed becomes verified, contradicted becomes a conflict
+and a question, and a safety rating nobody can find on its page is treated as
+a contradiction.
+
+The verdicts travel back with the part when it is written, because storing a
+part replaces its child rows and a pass that wrote the part back without them
+would erase its own work (D53).
+
+The first real pass confirmed 29 of 30 values and found that the extraction
+had cited the wrong page for the thirtieth — a value that was right, with
+provenance that was not. Nothing in the extraction run could have noticed, and
+that is the whole argument for the second context.
 
 ### Golden set and evaluation (`eval/`, `src/eval/`)
 

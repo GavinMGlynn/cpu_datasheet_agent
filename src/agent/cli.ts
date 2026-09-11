@@ -5,21 +5,25 @@ import { loadConfig, type Config, type EnvSource } from '../config.js';
 import { createLogger } from '../log/index.js';
 import { buildRegistry, type BuiltToolContext, type ToolContextOptions } from '../tools/index.js';
 import { elementAt } from '../util/array.js';
-import { extractMany, readMpnList } from './batch.js';
-import { RunConfig, defaultRunConfig, policyFor } from './config.js';
+import { extractMany, pendingVerification, readMpnList, verifyMany } from './batch.js';
+import { DEFAULT_VERIFY_PROMPT_VERSION, RunConfig, defaultRunConfig, policyFor } from './config.js';
 import { AgentError } from './errors.js';
-import { extractPart, type QueryFn } from './runner.js';
+import type { QueryFn } from './execute.js';
+import { extractPart } from './runner.js';
+import { verifyPart } from './verify.js';
 
 export const USAGE = `usage:
   chip-run extract <mpn> [options]
   chip-run extract-many <file> [options] [--force]
+  chip-run verify <mpn> [options]
+  chip-run verify-pending [options] [--force]
 
 options:
   --model <id>        model to run, default from AGENT_MODEL
   --effort <level>    low | medium | high | xhigh | max
   --max-turns <n>     turns before the harness stops the run
   --max-cost <usd>    what the run may cost before the harness stops it
-  --prompt <version>  prompt version, such as extract.v1
+  --prompt <version>  prompt version, such as extract.v1 or verify.v1
   --allow-spend       permit calls that spend API quota at a distributor
   --force             run parts a previous batch already finished
   --help              print this
@@ -40,12 +44,21 @@ export interface RunOverrides {
 export type CliCommand =
   | { readonly command: 'help' }
   | { readonly command: 'extract'; readonly mpn: string; readonly overrides: RunOverrides }
+  | { readonly command: 'verify'; readonly mpn: string; readonly overrides: RunOverrides }
   | {
       readonly command: 'extract-many';
       readonly file: string;
       readonly force: boolean;
       readonly overrides: RunOverrides;
+    }
+  | {
+      readonly command: 'verify-pending';
+      readonly force: boolean;
+      readonly overrides: RunOverrides;
     };
+
+/** The commands that check a part rather than extract one. */
+const VERIFYING: readonly string[] = ['verify', 'verify-pending'];
 
 const OPTIONS = {
   model: { type: 'string' },
@@ -93,17 +106,23 @@ export function parseCli(argv: readonly string[]): CliCommand {
   if (rest.length > 0) {
     throw new AgentError('CLI_USAGE', `unexpected argument ${elementAt(rest, 0)}`);
   }
-  if (command === 'extract') {
+  if (command === 'extract' || command === 'verify') {
     if (subject === undefined) {
-      throw new AgentError('CLI_USAGE', 'extract needs a part number');
+      throw new AgentError('CLI_USAGE', `${command} needs a part number`);
     }
-    return { command: 'extract', mpn: subject, overrides };
+    return { command, mpn: subject, overrides };
   }
   if (command === 'extract-many') {
     if (subject === undefined) {
       throw new AgentError('CLI_USAGE', 'extract-many needs a file of part numbers');
     }
     return { command: 'extract-many', file: subject, force: values.force === true, overrides };
+  }
+  if (command === 'verify-pending') {
+    if (subject !== undefined) {
+      throw new AgentError('CLI_USAGE', `verify-pending takes no argument, and got ${subject}`);
+    }
+    return { command: 'verify-pending', force: values.force === true, overrides };
   }
   throw new AgentError('CLI_USAGE', `unknown command ${command ?? '(none)'}`);
 }
@@ -146,7 +165,15 @@ export function planRun(
       return { kind: 'exit', code: 0 };
     }
     const config = loadConfig(env);
-    const runConfig = RunConfig.parse({ ...defaultRunConfig(config), ...command.overrides });
+    // A verification run reads a different prompt, so the default follows the
+    // command; `--prompt` still wins over both.
+    const runConfig = RunConfig.parse({
+      ...defaultRunConfig(config),
+      ...(VERIFYING.includes(command.command)
+        ? { promptVersion: DEFAULT_VERIFY_PROMPT_VERSION }
+        : {}),
+      ...command.overrides,
+    });
     return { kind: 'run', command, config, runConfig };
   } catch (error) {
     out(reason(error));
@@ -180,20 +207,27 @@ export async function main(argv: readonly string[], deps: MainDeps): Promise<num
   });
   try {
     const runnerDeps = { context, registry: buildRegistry(), query: deps.query, logger };
-    if (command.command === 'extract') {
-      const { run } = await extractPart(command.mpn, runConfig, runnerDeps);
-      deps.out(summarise(run));
-      return run.result === 'rejected' ? 1 : 0;
+    if (command.command === 'extract' || command.command === 'verify') {
+      const one =
+        command.command === 'extract'
+          ? await extractPart(command.mpn, runConfig, runnerDeps)
+          : await verifyPart(command.mpn, runConfig, runnerDeps);
+      deps.out(summarise(one.run));
+      return one.run.result === 'rejected' ? 1 : 0;
     }
-    const mpns = await readMpnList(command.file);
-    const { runs, skipped } = await extractMany(mpns, runConfig, runnerDeps, {
-      force: command.force,
-    });
-    for (const run of runs) {
+    const batch =
+      command.command === 'extract-many'
+        ? await extractMany(await readMpnList(command.file), runConfig, runnerDeps, {
+            force: command.force,
+          })
+        : await verifyMany(pendingVerification(runnerDeps), runConfig, runnerDeps, {
+            force: command.force,
+          });
+    for (const run of batch.runs) {
       deps.out(summarise(run));
     }
-    deps.out(`${String(runs.length)} run(s), ${String(skipped.length)} skipped`);
-    return runs.some((run) => run.result === 'rejected') ? 1 : 0;
+    deps.out(`${String(batch.runs.length)} run(s), ${String(batch.skipped.length)} skipped`);
+    return batch.runs.some((run) => run.result === 'rejected') ? 1 : 0;
   } catch (error) {
     deps.out(reason(error));
     return 2;

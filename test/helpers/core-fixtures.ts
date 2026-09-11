@@ -165,6 +165,12 @@ export function verification(overrides: Loose = {}): Loose {
   };
 }
 
+/** A verdict as a verification run states it, before the run names itself. */
+export function verificationClaim(overrides: Loose = {}): Loose {
+  const { checkedAt: _checkedAt, promptVersion: _prompt, model: _model, ...claim } = verification();
+  return { ...claim, ...overrides };
+}
+
 export function runDetails(overrides: Loose = {}): Loose {
   return {
     subtype: 'success',
