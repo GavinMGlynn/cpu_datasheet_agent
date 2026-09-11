@@ -26,8 +26,16 @@ export type SdkTool = ReturnType<typeof tool>;
  * handlers. The server they go into cannot be driven by an MCP client of a
  * different major line, and the thing worth proving is that each tool is
  * present and behaves, not that the SDK can assemble a server.
+ *
+ * `parentId` is the ledger entry every call made through these tools hangs
+ * under. The agent runner passes its run's entry, which is what makes the
+ * calls of one run countable among the calls of a batch.
  */
-export function sdkTools(registry: ToolRegistry, context: ToolContext): SdkTool[] {
+export function sdkTools(
+  registry: ToolRegistry,
+  context: ToolContext,
+  parentId?: string,
+): SdkTool[] {
   return registry.list().map((definition) =>
     tool(
       definition.name,
@@ -35,7 +43,10 @@ export function sdkTools(registry: ToolRegistry, context: ToolContext): SdkTool[
       objectInput(definition.name, definition.input).shape,
       async (args: unknown) => {
         try {
-          return toCallResult(definition, await registry.call(definition.name, args, context));
+          return toCallResult(
+            definition,
+            await registry.call(definition.name, args, context, parentId),
+          );
         } catch (error) {
           return toErrorResult(error);
         }
@@ -48,10 +59,11 @@ export function sdkTools(registry: ToolRegistry, context: ToolContext): SdkTool[
 export function createInProcessServer(
   registry: ToolRegistry,
   context: ToolContext,
+  parentId?: string,
 ): McpSdkServerConfigWithInstance {
   return createSdkMcpServer({
     name: SERVER_NAME,
     version: SERVER_VERSION,
-    tools: sdkTools(registry, context),
+    tools: sdkTools(registry, context, parentId),
   });
 }

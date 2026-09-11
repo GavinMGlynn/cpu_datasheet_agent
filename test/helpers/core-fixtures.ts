@@ -165,6 +165,43 @@ export function verification(overrides: Loose = {}): Loose {
   };
 }
 
+export function runDetails(overrides: Loose = {}): Loose {
+  return {
+    subtype: 'success',
+    toolCalls: 9,
+    toolFailures: [],
+    escalations: 0,
+    spendDenials: 0,
+    stored: true,
+    ...overrides,
+  };
+}
+
+/** A run that has started and not yet finished. */
+export function run(overrides: Loose = {}): Loose {
+  return {
+    id: UUID,
+    mpn: 'TPS54331DR',
+    kind: 'extract',
+    promptVersion: 'extract.v1',
+    model: 'claude-opus-5',
+    startedAt: NOW,
+    ...overrides,
+  };
+}
+
+/** The same run, ended. */
+export function finishedRun(overrides: Loose = {}): Loose {
+  return run({
+    endedAt: LATER,
+    turns: 12,
+    costUsd: 0.42,
+    result: 'extracted',
+    details: runDetails(),
+    ...overrides,
+  });
+}
+
 export function toolCallRecord(overrides: Loose = {}): Loose {
   return {
     id: UUID,

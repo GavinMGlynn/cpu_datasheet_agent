@@ -108,6 +108,18 @@ export class ToolCallLedger {
     return this.options.sessionId;
   }
 
+  /**
+   * Where the day files and blobs are written.
+   *
+   * A caller that holds the ledger can read back what it recorded — the
+   * agent runner decides how a run ended from its own records — without
+   * being handed the directory a second time and having to keep the two in
+   * step.
+   */
+  get dir(): string {
+    return this.options.dir;
+  }
+
   /** Number of calls begun but not yet ended. */
   get pendingCount(): number {
     return this.pending.size;

@@ -102,6 +102,7 @@ describe('ToolCallLedger', () => {
 
     expect(ledger.pendingCount).toBe(0);
     expect(ledger.sessionId).toBe('session-1');
+    expect(ledger.dir).toBe(dir);
     expect(record).toEqual({
       id: uuid(1),
       sessionId: 'session-1',

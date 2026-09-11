@@ -34,6 +34,12 @@ export interface HarnessOptions {
   readonly mouser?: (cache: Cache) => MouserApi;
   readonly policy?: QuotaPolicy;
   readonly headless?: boolean;
+  /**
+   * Ids the ledger hands to its own records. A test that needs to know the
+   * id a call will be recorded under — the agent runner's, which every call
+   * of a run hangs under — supplies a generator it can predict.
+   */
+  readonly ledgerIdGenerator?: () => string;
 }
 
 /**
@@ -48,7 +54,11 @@ export async function createHarness(options: HarnessOptions = {}): Promise<TestH
   const store = new FileCacheStore(path.join(root, 'cache'));
   const cache = new Cache({ store });
   const db = openDatabase(':memory:');
-  const ledger = new ToolCallLedger({ dir: path.join(root, 'ledger'), sessionId: 'test-session' });
+  const ledger = new ToolCallLedger({
+    dir: path.join(root, 'ledger'),
+    sessionId: 'test-session',
+    ...(options.ledgerIdGenerator === undefined ? {} : { idGenerator: options.ledgerIdGenerator }),
+  });
   const toolkit = new PdfToolkit({ cache, store, tools: await popplerPreflight() });
   const ids: string[] = [];
   let counter = 0;

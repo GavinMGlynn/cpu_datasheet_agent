@@ -101,11 +101,15 @@ that supersedes the old one, and the old row's status changes to
 | D40 | 2026-09-11 | A tool asks whether an answer is free by running the real call under `cacheOnly`, which raises `CACHE_MISS` instead of fetching. Nothing predicts what is cached. | A prediction is a second implementation of the cache key, and two implementations of a key drift. Running the same path means the answer to "would this spend?" is produced by the code that would spend. It also keeps the question in one place: `withSpend` turns the miss into `needs_confirmation`, and every spending tool inherits that. | active |
 | D41 | 2026-09-11 | `fetch_datasheet` is not gated by the quota policy; the distributor APIs are. | The gate exists for money and quota (D12). A manufacturer's PDF costs neither, and it is what every extraction reads; gating it would mean asking permission to do the main work. The fetcher's own retry, redirect and size limits are what keep it polite. | active |
 | D42 | 2026-09-11 | The MCP server advertises the strict input schema it enforces (`additionalProperties: false`), which takes one cast because the SDK's registration type names a stripping object. | Advertised loose, the transport silently drops an argument the tool never agreed to ignore — the coercion this project refuses everywhere else. Strict at runtime is accepted by the SDK and refuses an unrecognised argument with the key in the message, which is a better answer than a silently different call. | active |
-| D43 | 2026-09-11 | The MCP surface uses the v2 SDK (`@modelcontextprotocol/server`), and the in-process server is tested through the tool definitions rather than through a client. | The Agent SDK peer-depends on and bundles the 1.x line, so the server object it builds cannot be driven by a v2 client: an in-memory transport between them fails inside the SDK. Exposing `sdkTools()` and calling the handlers tests what actually matters — that every tool is present and behaves — without pinning the project to whichever line the Agent SDK bundles next. | active |
+| D43 | 2026-09-11 | The MCP surface uses the v2 SDK (`@modelcontextprotocol/server`), and the in-process server is tested through the tool definitions rather than through a client. | The Agent SDK peer-depends on and bundles the 1.x line, so the server object it builds cannot be driven by a v2 client: an in-memory transport between them fails inside the SDK. Exposing `sdkTools()` and calling the handlers tests what actually matters — that every tool is present and behaves — without pinning the project to whichever line the Agent SDK bundles next. | superseded by D48 |
 | D44 | 2026-09-11 | A parameter is nullable wherever a real datasheet may state something other than a number: `voutMax`, `ioutMax`, `quiescentCurrent`, `switchingFrequency`. A switching frequency may also be a one-sided bound (`QuantityBound`), a shape distinct from both a value and a range. | Reading twenty-one datasheets found all four. TI's TPS54331 gives the output limit as an equation in Vin, duty cycle and load; a controller such as LM5116 has no output current of its own; Infineon's IR3899 states no device quiescent current; LM5164's frequency is programmable and stated only as "up to 1 MHz". Recording a bound as a range would invent the end nobody stated, and as a value would assert a frequency the part does not run at (D24, on the datasheet side). | active |
 | D45 | 2026-09-11 | `datasheetUrlOf` unwraps a distributor link that only points at the document: a `gotoUrl` parameter is followed, decoding repeatedly, and anything else is returned unchanged. | Digi-Key gives every Texas Instruments part an interstitial `suppproductinfo.tsp` page that serves HTML, so fetching it fails on content type; six of the thirteen recorded products are affected, and TPS62130's is encoded twice. The knowledge is Digi-Key's, so it belongs in the Digi-Key adapter rather than in the PDF fetcher. | active |
 | D46 | 2026-09-11 | The golden set holds only parts whose datasheets can be fetched without scraping or defeating a bot wall. Texas Instruments, Diodes, Microchip and Infineon qualify; Monolithic Power Systems, ST, onsemi and Analog Devices do not. | `CLAUDE.md` forbids scraping and bot-wall evasion, and that rule does not stop at distributors. MPS returns an HTML viewer for every document URL, ST and Analog Devices refuse the request, onsemi redirects to a landing page, and Rohm blocks the referral link Digi-Key publishes while serving its own CDN fine. The plan asked for six manufacturers; four is what the rules allow, and the set says so rather than quietly meeting the number. | active |
 | D47 | 2026-09-11 | The golden readings were made by this model, not by a person, and every file records that in `readBy`. The set is a baseline and a regression net, not an independent reference, until a person reviews it (Q6). | Measuring an automated extraction against a careful reading by the same model family cannot catch a misreading that comes from how the model reads. Saying so in the set itself is what stops a later eval score being read as more than it is. | active |
+| D48 | 2026-09-11 | The Agent SDK's in-process server cannot carry a Zod record in a tool's input schema: the MCP 1.x SDK it bundles fails to convert one to JSON Schema, and one such tool empties the server's whole tool list rather than its own entry. `ask_human` takes labelled `{key, value}` pairs, which it stores as the record the escalation keeps, and a test lists the tools over a real connection. This supersedes D43: a v2 client drives the in-process server perfectly well — the schema was always what broke. | The model was given no tools at all and answered by writing its tool calls as prose. Nothing in the unit tests could see it, because calling a handler directly never converts a schema. One surface in two adapters means the surface must be expressible in both, and a test must exercise the conversion, or the next unconvertible schema silently costs a run everything again. | active |
+| D49 | 2026-09-11 | The `PreToolUse` gate allows a spending tool through unchanged in a run that may not spend, so it answers from the cache and reports a miss as `needs_confirmation`. Only a call that asks to spend — `confirmSpend: true` — is denied. | Denying the tool outright would stop a no-spend run reading data already paid for, and rerunning a part for free is what the cache is for (D40). The gate is still absolute: the only way to spend is a run started with `--allow-spend`. | active |
+| D50 | 2026-09-11 | A run carries a cost ceiling (`maxBudgetUsd`, default $2) as well as a turn limit, enforced by the harness on the model calls themselves. | The agent cannot reach it, which neither of the other two halves of the gate can say. The first real extraction stopped at $2 with the part stored and the classification still to do; the clean rerun cost $3.41. The ceiling is the difference between a run that overspends and one that stops (Q5). | active |
+| D51 | 2026-09-11 | A `runs` row is written when a run starts and completed when it ends, and a batch skips a part whose latest run under the same prompt version finished, whatever it concluded. `--force` overrides. | A run that never came back is then visible as a row with no result rather than as nothing at all, and a batch of a hundred parts is restarted by running it again. Re-running a part that was already rejected would spend the same money to reach the same answer; that is the operator's call, not the batch's. | active |
 
 ## 4. Status
 
@@ -129,7 +133,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M11 | Reconciliation and classification | complete | 2026-09-11 |
 | M12 | Tool registry and MCP server | complete, bar 12.7 (Q3) | 2026-09-11 |
 | M13 | Golden evaluation set | complete | 2026-09-11 |
-| M14 | Agent runner (extraction) | not started | |
+| M14 | Agent runner (extraction) | complete | 2026-09-11 |
 | M15 | Verification pass | not started | |
 | M16 | Evaluation harness | not started | |
 | M17 | Alternates query | not started | |
@@ -234,6 +238,79 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-11 — Session 18: Module 14 complete
+
+**Done**
+
+- `src/agent/`: `extractPart` takes one part number through a headless run on
+  the Agent SDK — the tool surface as an in-process MCP server, no built-in
+  tools, no settings files, a turn limit, a cost ceiling and the `PreToolUse`
+  money gate — and records what happened.
+- `prompts/extract.v1.md`: the system prompt, snapshotted, with a test that
+  every tool it names exists.
+- The money gate (D12) is three parts now: the `spendsQuota` flag the registry
+  enforces, the hook that denies a spend the run was not given a budget for,
+  and `maxBudgetUsd` on the harness itself (D50). The hook's decisions are
+  recorded in the ledger with the harness's tool-use id.
+- `runs` rows (M1 and M4 reopened for the `Run` schema and its repository):
+  written at the start, completed at the end, with the turns, the cost, the
+  result and what the run did. `extract-many` is resumable off them (D51).
+- `bin/chip-run.ts`: `extract <mpn>` and `extract-many <file>`, with
+  `--model`, `--effort`, `--max-turns`, `--max-cost`, `--prompt`,
+  `--allow-spend` and `--force`.
+- 2135 tests, 100% coverage, zero warnings.
+
+**The first real run found the module's own bug**
+
+The run cost three cents and called nothing. The model had written its tool
+call as prose, which is what a model does when it has no tools — and the
+in-process server reported itself connected. `tools/list` was throwing
+`Cannot read properties of undefined (reading 'push')` inside the MCP 1.x SDK
+the Agent SDK bundles, because `ask_human` took a Zod record and that
+converter cannot express one. One unconvertible tool costs the run every tool
+on the server, not just that one (D48).
+
+Two things follow. The tool takes labelled pairs now, and stores them as the
+record the escalation keeps. And the test that would have caught it exists:
+the in-process server is listed and called over a real connection, which also
+disproves D43 — a v2 client drives the bundled v1 server perfectly well, and
+the schema was always what broke. Every unit test passed throughout; none of
+them ever converted a schema.
+
+**Then it worked**
+
+`TPS54331DR`, no spending allowed, everything from the cache: resolved the
+part number, read the offers Digi-Key had already given us, fetched the
+datasheet, found its sections, read twelve pages, reconciled against the
+distributor facts, classified, and stored the part. 18 turns, 17 tool calls,
+$3.41.
+
+Scored against the golden file by the M13 scorer: **recall 92%, precision
+92%, citations exact 63%**. The two disagreements are not misreadings —
+both are min/typ/max columns where the golden reading and the run chose
+differently (Q7). The citations are the weaker number: values right, page
+often one section away from the page the golden set names.
+
+**Learned**
+
+- **A connected server is not a server with tools.** The status said
+  connected, the tool count in the CLI's own init message was zero, and the
+  model filled the gap by inventing tool-call syntax in prose. Nothing short
+  of listing the tools over the wire would have shown it.
+- **The gate does what it is for.** The run asked `resolve_mpn` to spend,
+  was refused, said "Resolution would spend quota, which this run may not do.
+  Let me check what's cached", and carried on from the cache. That sentence is
+  the whole design working.
+- **Budget is a real constraint, not a formality.** The first clean attempt
+  hit the $2 ceiling on its last step, after storing the part — the model
+  even said it was going straight to storing because the budget was nearly
+  gone. Datasheet pages are expensive to hold in context.
+
+**Next**
+
+- M15: the verification pass, in a fresh context, checking each stored value
+  against the page it cites.
 
 ### 2026-09-11 — Session 17: Module 13 complete
 
@@ -882,5 +959,6 @@ resolved here.
 | Q2 | Confirm buck regulators as the first (and for now only) component category. | M1 | open (assumed yes) |
 | Q3 | `CLAUDE.md` references an existing `chip-mcp-server.ts`. It is not in the repo. Is there a copy to add? | M12 | open |
 | Q4 | Digi-Key locale defaults AU / en / AUD acceptable? (D14) | M7 | open (assumed yes) |
-| Q5 | Default model `claude-opus-5` at effort `high` for extraction and verification (D11). Acceptable cost-wise? | M14 | open (assumed yes) |
+| Q5 | Default model `claude-opus-5` at effort `high` for extraction and verification (D11). Acceptable cost-wise? One real extraction of TPS54331DR cost **$3.41** over 18 turns and 17 tool calls; most of that is datasheet page text re-sent each turn. A cheaper model is one flag away (`--model`), and M16 can measure what it costs in accuracy. | M14, M16 | open (assumed yes) |
 | Q6 | The twenty-one golden parts were read by the model, not by a person (D47). Will you review them — or a sample — so the set becomes an independent reference rather than a baseline? `eval/golden/README.md` says what each file holds. | M16 | open |
+| Q7 | Where an electrical table gives MIN / TYP / MAX for one parameter, which column is the value? The golden reading took TYP for switching frequency (570 kHz) and the guaranteed MIN for maximum duty cycle (90%); the first real run took the whole range for the frequency (456–684 kHz, typ 570) and TYP for the duty cycle (93%). Neither misread the page. The convention wants deciding once, for the golden set and the prompt together. | M16 | open |

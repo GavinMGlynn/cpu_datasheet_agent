@@ -151,7 +151,10 @@ describe('ask_human and list_escalations', () => {
     mpn: 'TPS54331DR',
     kind: 'conflict',
     question: 'Datasheet says 28 V, Digi-Key says 36 V. Which is right?',
-    context: { datasheet: 28, distributor: 36 },
+    context: [
+      { key: 'datasheet', value: '28 V on page 5' },
+      { key: 'distributor', value: '36 V from Digi-Key' },
+    ],
     options: ['datasheet: 28 V', 'digikey: 36 V'],
   };
 
@@ -165,6 +168,30 @@ describe('ask_human and list_escalations', () => {
     });
     const listed = (await call('list_escalations', {})).escalations as { id: string }[];
     expect(listed.map((escalation) => escalation.id)).toEqual([harness.ids[0]]);
+  });
+
+  it('stores the labelled facts as the escalation keeps them', async () => {
+    await call('ask_human', question);
+
+    const listed = (await call('list_escalations', {})).escalations as {
+      context: Record<string, unknown>;
+    }[];
+    expect(listed[0]?.context).toEqual({
+      datasheet: '28 V on page 5',
+      distributor: '36 V from Digi-Key',
+    });
+  });
+
+  it('refuses the same fact twice under one key', async () => {
+    await expect(
+      call('ask_human', {
+        ...question,
+        context: [
+          { key: 'datasheet', value: '28 V' },
+          { key: 'datasheet', value: '30 V' },
+        ],
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
   });
 
   it('records a question with no options and no context to go with it', async () => {

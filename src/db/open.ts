@@ -6,6 +6,7 @@ import { MIGRATIONS } from './migrations/index.js';
 import { NexarBudgetRepository } from './nexar-budget-repository.js';
 import { OfferRepository } from './offer-repository.js';
 import { PartRepository } from './part-repository.js';
+import { RunRepository } from './run-repository.js';
 import { VerificationRepository } from './verification-repository.js';
 
 /** Opens a connection and brings the schema up to date. */
@@ -21,6 +22,7 @@ export interface Repositories {
   readonly datasheets: DatasheetRepository;
   readonly verifications: VerificationRepository;
   readonly escalations: EscalationRepository;
+  readonly runs: RunRepository;
   readonly nexarBudget: NexarBudgetRepository;
 }
 
@@ -31,6 +33,7 @@ export function createRepositories(db: Db): Repositories {
     datasheets: new DatasheetRepository(db),
     verifications: new VerificationRepository(db),
     escalations: new EscalationRepository(db),
+    runs: new RunRepository(db),
     nexarBudget: new NexarBudgetRepository(db),
   };
 }

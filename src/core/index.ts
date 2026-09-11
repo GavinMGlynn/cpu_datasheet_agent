@@ -10,6 +10,7 @@ export * from './part.js';
 export * from './primitives.js';
 export * from './provenance.js';
 export * from './quantity.js';
+export * from './run.js';
 export * from './tool-call-record.js';
 export * from './validation-error.js';
 export * from './value-shapes.js';

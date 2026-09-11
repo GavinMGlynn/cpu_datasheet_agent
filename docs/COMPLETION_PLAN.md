@@ -730,36 +730,39 @@ Goal: a headless run that takes an MPN through resolve, offers, datasheet,
 extraction, reconciliation, classification, and persistence, with money gated
 and every decision logged. [R-10] [R-11] [R-12]
 
-- [ ] 14.1 `prompts/extract.v1.md`: system prompt encoding the
+- [x] 14.1 `prompts/extract.v1.md`: system prompt encoding the
       non-negotiables (provenance with page numbers, reject-never-coerce,
       escalate on conflict or ambiguity, render the page when text metrics
       look mangled, one datasheet covers a family), the tool usage order, and
       the required final action (`upsert_part`). Snapshot test.
-- [ ] 14.2 `RunConfig`: model, effort, `maxTurns`, budget policy (allowed
-      quota spend, Nexar allowed or not), prompt version, `DATA_DIR`.
-- [ ] 14.3 `PreToolUse` hook: matches `mcp__chip__*`; for tools flagged
+- [x] 14.2 `RunConfig`: model, effort, `maxTurns`, `maxCostUsd` (D50), budget
+      policy (allowed quota spend), prompt version, `DATA_DIR`. Nexar has no
+      tool to allow or refuse while M9 is deferred (D29), so the flag that
+      would gate nothing is not there.
+- [x] 14.3 `PreToolUse` hook: matches `mcp__chip__*`; for tools flagged
       `spendsQuota` returns `permissionDecision: "deny"` with a reason unless
       the run's budget policy allows the spend, in which case it rewrites the
       input with `confirmSpend: true`; every decision is logged to the ledger
-      with the tool-use id.
-- [ ] 14.4 `extractPart(mpn, config)`: builds the in-process MCP server
+      with the tool-use id. A call that has not asked to spend is allowed
+      through unchanged so it answers from the cache (D49).
+- [x] 14.4 `extractPart(mpn, config)`: builds the in-process MCP server
       (M12), calls `query()` with `allowedTools: ["mcp__chip__*"]`, every
       built-in tool disallowed, `maxTurns` set, and a `RunRecorder` that
       persists the `runs` row (session id, prompt version, model, turns,
       `total_cost_usd`, result subtype, escalations raised).
-- [ ] 14.5 Outcome mapping: `success` with an `upsert_part` in the ledger
+- [x] 14.5 Outcome mapping: `success` with an `upsert_part` in the ledger
       is `extracted`; `ask_human` raised is `needs_human`; anything else is
       `rejected` with the reason, and the ledger holds the transcript.
-- [ ] 14.6 `bin/chip-run.ts extract <mpn> [--model] [--effort]
+- [x] 14.6 `bin/chip-run.ts extract <mpn> [--model] [--effort]
       [--allow-spend] [--allow-nexar]`: CLI over `extractPart`.
-- [ ] 14.7 Batch mode: `extract-many <file>` processes MPNs sequentially,
+- [x] 14.7 Batch mode: `extract-many <file>` processes MPNs sequentially,
       resumable (skips MPNs with a completed run for the same prompt version
       unless `--force`).
-- [ ] 14.8 Tests: `query` injected as a dependency and replaced with a
+- [x] 14.8 Tests: `query` injected as a dependency and replaced with a
       scripted fake that emits realistic SDK messages; hook decisions for
       every policy combination; run record persistence; outcome mapping;
       batch resume; CLI argument parsing. No test calls the real API.
-- [ ] 14.9 One real extraction run on one golden part, cost recorded in the
+- [x] 14.9 One real extraction run on one golden part, cost recorded in the
       log, output compared with the golden file by the M13 scorer, result
       recorded in `PROJECT_PLAN.md`.
 

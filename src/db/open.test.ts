@@ -8,6 +8,7 @@ import { NexarBudgetRepository } from './nexar-budget-repository.js';
 import { OfferRepository } from './offer-repository.js';
 import { createRepositories, openDatabase } from './open.js';
 import { PartRepository } from './part-repository.js';
+import { RunRepository } from './run-repository.js';
 import { VerificationRepository } from './verification-repository.js';
 
 describe('openDatabase', () => {
@@ -29,6 +30,7 @@ describe('createRepositories', () => {
     expect(repos.datasheets).toBeInstanceOf(DatasheetRepository);
     expect(repos.verifications).toBeInstanceOf(VerificationRepository);
     expect(repos.escalations).toBeInstanceOf(EscalationRepository);
+    expect(repos.runs).toBeInstanceOf(RunRepository);
     expect(repos.nexarBudget).toBeInstanceOf(NexarBudgetRepository);
     expect(repos.nexarBudget.limit()).toBe(90);
     db.close();

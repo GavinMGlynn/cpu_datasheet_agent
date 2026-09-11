@@ -24,6 +24,37 @@ function markNeedsHuman(context: ToolContext, mpn: string): boolean {
   return true;
 }
 
+/**
+ * One labelled fact for a person reading the question.
+ *
+ * A record would say this better, and the MCP server would advertise one
+ * happily. The Agent SDK's schema conversion cannot express a record at all
+ * (D48), and one tool surface means the surface has to be expressible in
+ * both adapters, so the facts arrive as pairs and are stored as the record
+ * the escalation keeps.
+ */
+const ContextEntry = z.strictObject({
+  key: z.string().trim().min(1).max(64),
+  value: z.string().trim().min(1).max(500),
+});
+
+const ContextEntries = z
+  .array(ContextEntry)
+  .max(20)
+  .superRefine((entries, ctx) => {
+    const seen = new Set<string>();
+    entries.forEach((entry, index) => {
+      if (seen.has(entry.key)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `duplicate context key ${entry.key}`,
+          path: [index, 'key'],
+        });
+      }
+      seen.add(entry.key);
+    });
+  });
+
 export const askHuman = defineTool({
   name: 'ask_human',
   description:
@@ -32,8 +63,8 @@ export const askHuman = defineTool({
     mpn: NormalisedMpn,
     kind: EscalationKind,
     question: z.string().trim().min(1).max(2000),
-    /** Anything a person needs to answer it: both values, the page, the candidates. */
-    context: z.record(z.string(), z.json()).optional(),
+    /** Anything a person needs to answer it: both values, the page, the reading. */
+    context: ContextEntries.optional(),
     options: z.array(z.string().trim().min(1).max(500)).min(2).optional(),
   }),
   output: z.strictObject({
@@ -49,7 +80,7 @@ export const askHuman = defineTool({
       mpn: input.mpn,
       kind: input.kind,
       question: input.question,
-      context: input.context ?? {},
+      context: Object.fromEntries((input.context ?? []).map((entry) => [entry.key, entry.value])),
       ...(input.options === undefined ? {} : { options: input.options }),
       createdAt: context.now(),
     });

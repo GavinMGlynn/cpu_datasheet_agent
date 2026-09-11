@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { ParameterKey } from './parameter-keys.js';
-import { Iso8601, PageNumber } from './primitives.js';
+import { Iso8601, PageNumber, PromptVersion } from './primitives.js';
 
 export const VERDICTS = ['confirmed', 'contradicted', 'not_found'] as const;
 export const Verdict = z.enum(VERDICTS);
@@ -19,9 +19,7 @@ export const Verification = z
     quote: z.string().trim().min(1).max(500).optional(),
     page: PageNumber,
     checkedAt: Iso8601,
-    promptVersion: z.string().regex(/^[a-z][a-z0-9-]*\.v\d+$/, {
-      error: 'expected a prompt version such as verify.v1',
-    }),
+    promptVersion: PromptVersion,
     model: z.string().trim().min(1).max(64),
   })
   .superRefine((verification, ctx) => {

@@ -356,7 +356,9 @@ a caller's bad input.
 The same registry is exposed twice. As a **stdio MCP server** for external
 clients such as Claude Code or the MCP Inspector, and as an **in-process SDK
 server** for the agent runner. One implementation, two thin adapters, and a
-test asserts both expose identical tool lists.
+test asserts both expose identical tool lists — each by connecting a client
+and asking, because a tool list that cannot be serialised is a surface that
+does not exist (D48).
 
 What the server advertises is what it enforces: strict input schemas, so an
 argument the tool does not take is refused with the key in the message rather
@@ -371,17 +373,38 @@ policy deciding this is a separate object, so the agent runner sets it per run
 and the tools never know why. Nothing predicts what is cached: the free path
 is the same code as the spending path, so the two cannot disagree.
 
-### Agent runner (`src/agent/`) — planned
+### Agent runner (`src/agent/`) — extraction built
 
 Two runs on the Claude Agent SDK, sharing nothing.
 
 The **extraction run** gets the in-process tool server, every built-in tool
-disabled, a turn limit, and a `PreToolUse` hook. The hook is the second half of
-the money gate: it inspects each tool call and denies anything quota-spending
-unless the run's budget policy allows it, rewriting the input to add
-confirmation when it does. The server-side flag protects against every client;
-the hook protects against this particular agent. Both, because one is not
-enough.
+disabled, no settings files, a turn limit, a cost ceiling, and a `PreToolUse`
+hook. The hook is the second of three parts of the money gate: it inspects
+each tool call and denies a spend the run has no budget for, rewrites the
+input to confirm one it does, and lets an unconfirmed call through to answer
+from the cache (D49). The server-side flag protects against every client; the
+hook protects against this particular agent; `maxBudgetUsd` protects against
+both, because the agent cannot reach it. Three, because one is not enough.
+
+Every run writes a `runs` row before its first message and completes it after
+its last, so a run that never came back is a row with no result rather than
+nothing at all. The result is the run's achievement for the part —
+`extracted`, `needs_human`, `rejected` — and the details beside it say what
+it did: how many tool calls, which failed, how many spends were refused,
+whether a part was stored. The ledger holds the condensed transcript, with
+every tool call and gate decision recorded as a child of the run's own entry.
+That parent id is how one run's calls are counted among a batch's.
+
+A failed run is not an exception. A harness that crashed, a model that ran out
+of turns and a part stored cleanly are all endings, recorded the same way.
+`extractPart` throws only when the run could not be set up at all.
+
+A tool schema has to survive two conversions, not one: the MCP server's and
+the Agent SDK's. The SDK bundles an older MCP SDK whose JSON Schema
+conversion cannot express a Zod record, and one tool it cannot convert empties
+the whole tool list — the model then has no tools and says so by writing tool
+calls as prose (D48). The in-process server is therefore listed and called
+over a real connection in the tests, not through its handlers.
 
 The **verification run** takes a part identifier, not a session, and starts
 fresh. Its isolation is structural rather than a matter of prompt discipline:

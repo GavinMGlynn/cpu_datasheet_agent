@@ -28,6 +28,17 @@ export const Url = z.url({
 });
 export type Url = z.output<typeof Url>;
 
+/**
+ * A prompt file version, such as `extract.v1`.
+ *
+ * Prompt text is versioned rather than edited, so the version in a stored
+ * record names the exact words a run was given.
+ */
+export const PromptVersion = z.string().regex(/^[a-z][a-z0-9-]*\.v\d+$/, {
+  error: 'expected a prompt version such as extract.v1',
+});
+export type PromptVersion = z.output<typeof PromptVersion>;
+
 /** 1-based page number in a PDF. */
 export const PageNumber = z.number().int().positive();
 export type PageNumber = z.output<typeof PageNumber>;

@@ -10,15 +10,19 @@ Import from `src/mcp/index.ts`.
 MCP Inspector, anything that speaks the protocol. `serveMcpStdio()` runs it
 over stdio and is what `bin/chip-mcp.ts` calls.
 
-`createInProcessServer(registry, context)` builds the same tools into an Agent
-SDK in-process server for the runner (M14). `sdkTools(registry, context)`
-exposes the definitions on their own, which is how the tests hold them: the
-Agent SDK bundles its own major line of the MCP SDK, so its server cannot be
-driven by a v2 client, and what is worth proving is that every tool is there
-and behaves.
+`createInProcessServer(registry, context, parentId?)` builds the same tools
+into an Agent SDK in-process server for the runner (M14). `sdkTools(registry,
+context)` exposes the definitions on their own, so a test can call a handler
+directly. `parentId` is the ledger entry every call through that server hangs
+under, which is how one run's calls are told from another's.
 
 A test asserts the two adapters expose identical tool lists, in the same
-order. That is the whole claim of building them from one registry.
+order, and each adapter is also listed over a real connection — the Agent SDK's server
+answers a v2 client perfectly well — because a list is where a schema is
+serialised, and a schema the bundled SDK cannot convert empties the whole
+list rather than its own entry. That is how `ask_human`'s Zod record cost a
+real run every tool it had (D48): the server reported itself connected, the
+model was given nothing, and it wrote its tool calls as prose.
 
 ## What crosses the wire
 

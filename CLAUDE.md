@@ -98,28 +98,31 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M10 are complete: schemas, ledger, cache, SQLite, units, the
-PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, and
-MPN resolution. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md`
-section 4 is the authoritative status table.
+Modules M0 to M14 are complete: schemas, ledger, cache, SQLite, units, the
+PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
+resolution, reconciliation and classification, the tool registry and MCP
+server, the golden evaluation set, and the extraction runner. M9 (Nexar) is
+deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the authoritative
+status table.
 
+- An extraction runs headless: `npx tsx bin/chip-run.ts extract <mpn>`. Money
+  is gated three ways (D12, D49, D50) and a run that may not spend answers
+  from the cache. One real run of TPS54331DR scored 92% recall and 92%
+  precision against its golden file, for $3.41.
 - `chip-mcp-server.ts` was written earlier but is not in this repository (see
   `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
   are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
-- Not built yet: reconciliation and classification, the tool registry and MCP
-  server, the golden eval set, the agent runner, the verification pass, the
-  eval harness, and the alternates query.
+- Not built yet: the verification pass, the evaluation harness, and the
+  alternates query.
 
 ## Next steps
 
-1. M11: reconcile datasheet values against distributor parametrics, and
-   derive the classification axes.
-2. M12: the tool registry and the MCP server, exposed both over stdio and
-   in process.
-3. M13: hand-characterise 20 parts as a golden eval set before trusting any
-   extraction output.
-4. M14: build the agent runner on the Agent SDK; add a PreToolUse hook gating
-   anything that spends money.
+1. M15: the verification pass — a separate run in a fresh context checking
+   each stored value against the page it cites.
+2. M16: the evaluation harness — the golden set end to end, scored per
+   parameter.
+3. M17: the alternates query, with the pin-compatibility caveat stated.
+4. M18: release and end-to-end sign-off.
 
 ## Deferred
 
