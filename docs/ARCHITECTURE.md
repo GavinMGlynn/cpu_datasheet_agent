@@ -453,14 +453,27 @@ drifted. `replay` rebuilds a run from the ledger. `health` checks the
 measurement rather than the extraction: no part counted twice, no parameter
 with fewer than three parts stating it (D56).
 
-### Alternates query (`src/query/`) — planned
+### Alternates query (`src/query/`) — built
 
-The end goal. Filter by constraints, rank by unit price at the requested
-quantity, and return a per-parameter comparison against the reference part.
+The question the project was built to answer, over stored parts only: no
+model, no network, no spend.
 
-Every result carries a mandatory statement that pin compatibility has not been
-assessed, because parametric similarity does not imply a drop-in replacement,
-and a table of numbers invites exactly that assumption.
+Every constraint filters and price only ranks. The input range must be covered
+end to end — a part that manages most of it manages none of it — the output
+current must be at least what was asked for, and the classification axes must
+match exactly. A part with no price in the currency asked about is still
+offered, last, because it met the constraints and "cheaper" is not something
+we know about it. Prices are never converted between currencies: this project
+holds no exchange rate.
+
+An alternate comes only from parts a verification pass has confirmed unless
+the caller asks otherwise, and never from a part that needs a person. What was
+left out is listed with the reason, so the answer says what it did not say.
+
+Every candidate carries `pinCompatibility: 'not_assessed'` and every answer
+ends with the disclaimer. Nothing here reads a pinout, a footprint or a
+reference design, so nothing here can say a part drops in — the gotcha
+`CLAUDE.md` names, stated in the answer rather than in the documentation.
 
 ## 5. How the pieces interact
 

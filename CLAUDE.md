@@ -98,11 +98,11 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M16 are complete: schemas, ledger, cache, SQLite, units, the
+Modules M0 to M17 are complete: schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
 server, the golden evaluation set, the extraction runner, the verification pass, and
-the evaluation harness. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the
+the evaluation harness, and the alternates query. M9 (Nexar) is deferred, see D29. `docs/PROJECT_PLAN.md` section 4 is the
 authoritative status table.
 
 - An extraction runs headless: `npx tsx bin/chip-run.ts extract <mpn>`. Money
@@ -120,12 +120,13 @@ authoritative status table.
   except for the model calls, and writes a report under `eval/results/`. The
   first baseline — `extract.v1` on `claude-opus-5`, all 22 parts — scored 90.6%
   recall, 90.6% precision and 59.3% exact citations for $87.24.
-- Not built yet: the alternates query.
+- `npx tsx bin/chip-run.ts alternates <mpn> --vin 8-28 --iout 2 --qty 100`
+  answers from stored parts, with every difference listed and the
+  pin-compatibility disclaimer in the answer.
 
 ## Next steps
 
-1. M17: the alternates query, with the pin-compatibility caveat stated.
-2. M18: release and end-to-end sign-off.
+1. M18: release and end-to-end sign-off.
 
 ## Deferred
 

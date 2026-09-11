@@ -3,7 +3,14 @@ import { parseArgs } from 'node:util';
 import type { FinishedRun } from '../core/index.js';
 import { loadConfig, type Config, type EnvSource } from '../config.js';
 import { createLogger } from '../log/index.js';
-import { buildRegistry, type BuiltToolContext, type ToolContextOptions } from '../tools/index.js';
+import {
+  NO_SPEND_POLICY,
+  buildRegistry,
+  type BuiltToolContext,
+  type ToolContextOptions,
+} from '../tools/index.js';
+import { normaliseMpn } from '../mpn/index.js';
+import { AlternateQuery, findAlternates, renderAlternates } from '../query/index.js';
 import { elementAt } from '../util/array.js';
 import { extractMany, pendingVerification, readMpnList, verifyMany } from './batch.js';
 import { DEFAULT_VERIFY_PROMPT_VERSION, RunConfig, defaultRunConfig, policyFor } from './config.js';
@@ -17,6 +24,9 @@ export const USAGE = `usage:
   chip-run extract-many <file> [options] [--force]
   chip-run verify <mpn> [options]
   chip-run verify-pending [options] [--force]
+  chip-run alternates <mpn> [--vin 8-36] [--iout 2] [--qty 100] [--currency AUD]
+                            [--output fixed|adjustable] [--limit 5]
+                            [--include-unverified]
 
 options:
   --model <id>        model to run, default from AGENT_MODEL
@@ -26,6 +36,14 @@ options:
   --prompt <version>  prompt version, such as extract.v1 or verify.v1
   --allow-spend       permit calls that spend API quota at a distributor
   --force             run parts a previous batch already finished
+  --vin <min-max>     input range the alternate must cover, in volts
+  --iout <amps>       output current the alternate must deliver
+  --qty <n>           quantity the unit price is read at, default 1
+  --currency <code>   currency prices are compared in, default from the locale
+  --output <type>     fixed or adjustable; a fixed 5 V part is not an
+                      alternate for an adjustable one
+  --limit <n>         how many alternates to return, default 5
+  --include-unverified  offer parts no verification pass has confirmed
   --help              print this
 
 Without --allow-spend a run answers from the cache and reports anything it
@@ -41,8 +59,24 @@ export interface RunOverrides {
   readonly allowSpend?: boolean;
 }
 
+/** What `alternates` was asked for, before the environment fills in the rest. */
+export interface AlternateOptions {
+  readonly vin?: string;
+  readonly iout?: string;
+  readonly quantity?: number;
+  readonly currency?: string;
+  readonly outputType?: string;
+  readonly limit?: number;
+  readonly includeUnverified: boolean;
+}
+
 export type CliCommand =
   | { readonly command: 'help' }
+  | {
+      readonly command: 'alternates';
+      readonly mpn: string;
+      readonly options: AlternateOptions;
+    }
   | { readonly command: 'extract'; readonly mpn: string; readonly overrides: RunOverrides }
   | { readonly command: 'verify'; readonly mpn: string; readonly overrides: RunOverrides }
   | {
@@ -62,6 +96,13 @@ const VERIFYING: readonly string[] = ['verify', 'verify-pending'];
 
 const OPTIONS = {
   model: { type: 'string' },
+  vin: { type: 'string' },
+  iout: { type: 'string' },
+  qty: { type: 'string' },
+  currency: { type: 'string' },
+  output: { type: 'string' },
+  limit: { type: 'string' },
+  'include-unverified': { type: 'boolean' },
   effort: { type: 'string' },
   'max-turns': { type: 'string' },
   'max-cost': { type: 'string' },
@@ -106,6 +147,24 @@ export function parseCli(argv: readonly string[]): CliCommand {
   if (rest.length > 0) {
     throw new AgentError('CLI_USAGE', `unexpected argument ${elementAt(rest, 0)}`);
   }
+  if (command === 'alternates') {
+    if (subject === undefined) {
+      throw new AgentError('CLI_USAGE', 'alternates needs a part number');
+    }
+    return {
+      command: 'alternates',
+      mpn: subject,
+      options: {
+        ...(values.vin === undefined ? {} : { vin: values.vin }),
+        ...(values.iout === undefined ? {} : { iout: values.iout }),
+        ...(values.qty === undefined ? {} : { quantity: Number(values.qty) }),
+        ...(values.currency === undefined ? {} : { currency: values.currency }),
+        ...(values.output === undefined ? {} : { outputType: values.output }),
+        ...(values.limit === undefined ? {} : { limit: Number(values.limit) }),
+        includeUnverified: values['include-unverified'] === true,
+      },
+    };
+  }
   if (command === 'extract' || command === 'verify') {
     if (subject === undefined) {
       throw new AgentError('CLI_USAGE', `${command} needs a part number`);
@@ -135,11 +194,17 @@ export interface MainDeps {
   readonly createContext: (options: ToolContextOptions) => Promise<BuiltToolContext>;
 }
 
-/** A command line that has been read and a configuration built from it. */
+/** The commands that start an agent run. */
+export type RunCommand = Extract<
+  CliCommand,
+  { command: 'extract' | 'verify' | 'extract-many' | 'verify-pending' }
+>;
+
+/** A command that has been read and a configuration built from it. */
 export type Planned =
   | {
       readonly kind: 'run';
-      readonly command: Exclude<CliCommand, { command: 'help' }>;
+      readonly command: RunCommand;
       readonly config: Config;
       readonly runConfig: RunConfig;
     }
@@ -153,17 +218,8 @@ export type Planned =
  * turn limit, its budget — before a tool context exists, so a mistyped
  * option costs a message rather than a database connection.
  */
-export function planRun(
-  argv: readonly string[],
-  env: EnvSource,
-  out: (line: string) => void,
-): Planned {
+export function planRun(command: RunCommand, env: EnvSource, out: (line: string) => void): Planned {
   try {
-    const command = parseCli(argv);
-    if (command.command === 'help') {
-      out(USAGE);
-      return { kind: 'exit', code: 0 };
-    }
     const config = loadConfig(env);
     // A verification run reads a different prompt, so the default follows the
     // command; `--prompt` still wins over both.
@@ -182,8 +238,62 @@ export function planRun(
   }
 }
 
+/** `8-36` as the range a part has to cover. */
+export function parseVinRange(text: string): { unit: 'V'; min: number; max: number } {
+  const match = /^(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)$/.exec(text);
+  if (match === null) {
+    throw new AgentError('CLI_USAGE', `--vin takes a range such as 8-36, and got ${text}`);
+  }
+  return {
+    unit: 'V',
+    min: Number(elementAt(match, 1)),
+    max: Number(elementAt(match, 2)),
+  };
+}
+
 function summarise(run: FinishedRun): string {
   return `${run.mpn}: ${run.result} in ${String(run.turns)} turns, $${run.costUsd.toFixed(2)}, ${String(run.details.toolCalls)} tool calls`;
+}
+
+/**
+ * Cheaper parts that still meet the constraints, read out of what is stored.
+ *
+ * Nothing here spends anything or asks a model: it is a query over parts that
+ * have already been extracted, and the disclaimer at the end of the answer is
+ * part of the answer.
+ */
+async function alternates(
+  command: Extract<CliCommand, { command: 'alternates' }>,
+  deps: MainDeps,
+): Promise<number> {
+  const config = loadConfig(deps.env);
+  const { context, db } = await deps.createContext({
+    config,
+    policy: NO_SPEND_POLICY,
+    headless: true,
+  });
+  try {
+    const { options } = command;
+    const query = AlternateQuery.parse({
+      mpn: normaliseMpn(command.mpn).mpn,
+      ...(options.vin === undefined ? {} : { vinRange: parseVinRange(options.vin) }),
+      ...(options.iout === undefined
+        ? {}
+        : { ioutMin: { value: Number(options.iout), unit: 'A' } }),
+      quantity: options.quantity ?? 1,
+      currency: options.currency ?? config.digikey.locale.currency,
+      ...(options.outputType === undefined ? {} : { outputType: options.outputType }),
+      includeUnverified: options.includeUnverified,
+      ...(options.limit === undefined ? {} : { limit: options.limit }),
+    });
+    deps.out(renderAlternates(findAlternates(context.repositories, query)));
+    return 0;
+  } catch (error) {
+    deps.out(reason(error));
+    return 2;
+  } finally {
+    db.close();
+  }
 }
 
 /**
@@ -194,7 +304,22 @@ function summarise(run: FinishedRun): string {
  * command line or the configuration was wrong.
  */
 export async function main(argv: readonly string[], deps: MainDeps): Promise<number> {
-  const planned = planRun(argv, deps.env, deps.out);
+  let parsed: CliCommand;
+  try {
+    parsed = parseCli(argv);
+  } catch (error) {
+    deps.out(reason(error));
+    deps.out(USAGE);
+    return 2;
+  }
+  if (parsed.command === 'help') {
+    deps.out(USAGE);
+    return 0;
+  }
+  if (parsed.command === 'alternates') {
+    return alternates(parsed, deps);
+  }
+  const planned = planRun(parsed, deps.env, deps.out);
   if (planned.kind === 'exit') {
     return planned.code;
   }

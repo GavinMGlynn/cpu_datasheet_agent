@@ -833,18 +833,19 @@ models.
 Goal: answer "find a cheaper alternate that still meets these constraints"
 from verified data, with the pin-compatibility caveat stated every time.
 
-- [ ] 17.1 `AlternateQuery` schema: reference MPN, constraints (`vinRange`
-      must be covered, `ioutMin`, `topology?`, `integration?`,
-      `packageFamily?`, `temperatureGrade?`, `features?`), quantity for
-      pricing, `includeUnverified` (default false).
-- [ ] 17.2 `findAlternates(query)`: filters parts by constraints using M4
+- [x] 17.1 `AlternateQuery` schema: reference MPN, constraints (`vinRange`
+      must be covered, `ioutMin`, `topology?`, `integration?`, `outputType?`,
+      `packageFamily?`, `temperatureGrade?`, `features?`), quantity and
+      currency for pricing, `includeUnverified` (default false). `outputType`
+      was added on the first real answer (D59).
+- [x] 17.2 `findAlternates(query)`: filters parts by constraints using M4
       queries, ranks by unit price at the requested quantity, returns
       candidates with a per-parameter comparison table against the reference
       and a mandatory `pinCompatibility: "not_assessed"` field plus the
       explicit disclaimer text.
-- [ ] 17.3 MCP tool `find_alternates` in the registry and CLI
+- [x] 17.3 MCP tool `find_alternates` in the registry and CLI
       `chip-run alternates <mpn> --vin 8-36 --iout 2 --qty 100`.
-- [ ] 17.4 Tests: constraint filtering at boundaries, ranking, currency
+- [x] 17.4 Tests: constraint filtering at boundaries, ranking, currency
       consistency, unverified exclusion, disclaimer always present, empty
       result.
 

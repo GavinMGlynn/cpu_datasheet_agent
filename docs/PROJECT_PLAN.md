@@ -117,6 +117,8 @@ that supersedes the old one, and the old row's status changes to
 | D56 | 2026-09-11 | A parameter fewer than three golden parts state is a health failure, not a score. Adding `LM2596S-3.3/NOPB` gave `voutFixed` its third example. | A parameter two parts state is measured on a sample of two: one lucky reading looks like a capability and one unlucky one like a defect. The check found it on the day it was written, and the answer was to read another datasheet rather than to lower the bar. | active |
 | D57 | 2026-09-12 | The scorer compares a package by family and pin count, as reconciliation does, rather than by the words. A text naming no family, or one outside the vocabulary, falls back to exact equality. | The first baseline scored `package` correct on 1 part of 22: the golden set writes `6-TSOT26` where the datasheet writes `TSOT26`, and `20-HTSSOP (PWP)` where it writes `HTSSOP-20`. That measured spelling. A package has one canonical form in this project, and the scorer now says "correct" about the same things reconciliation says it about. | active |
 | D58 | 2026-09-12 | An evaluation is resumable: `--resume <id>` reuses that evaluation's database and scores parts it already ran, except a run that made no tool call, which is re-run. | Two sweeps died to the harness's memory supervisor and a third to a subscription session limit, each after real money had been spent. A recorded run that called nothing never reached the part — a rate limit, a session limit, a crash at startup — so reusing it would score the harness rather than the prompt. | active |
+| D59 | 2026-09-12 | The alternates query constrains output type as well as the axes the plan listed, and prices are compared in one currency, never converted. A part with no price in that currency is still offered, last. | The first real answer offered a fixed 5 V part as the cheapest alternate to an adjustable one: it covered the input range and the current, and it was not an alternate. Converting currencies would need an exchange rate this project does not hold, and a ranking built on a guessed rate ranks the guess. | active |
+| D60 | 2026-09-12 | An alternate is offered only from parts a verification pass has confirmed, unless the caller passes `includeUnverified`. A part that needs a person, or was rejected, is never offered. | Recommending a replacement on the strength of an unchecked reading is how a wrong absolute maximum reaches a board. A part with a known conflict is not a recommendation at any price. | active |
 
 ## 4. Status
 
@@ -143,7 +145,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M14 | Agent runner (extraction) | complete | 2026-09-11 |
 | M15 | Verification pass | complete | 2026-09-11 |
 | M16 | Evaluation harness | complete | 2026-09-12 |
-| M17 | Alternates query | not started | |
+| M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | not started | |
 
 ## 5. Conventions
@@ -245,6 +247,52 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 21: Module 17 complete
+
+**Done**
+
+- `findAlternates` answers the question the project was built for, over stored
+  parts only: no model, no network, nothing spent. Constraints filter, price
+  ranks, and anything left out is listed with the reason.
+- `find_alternates` on the tool surface and `chip-run alternates <mpn>` on the
+  command line, with `--vin`, `--iout`, `--qty`, `--currency`, `--output`,
+  `--limit` and `--include-unverified`.
+- Every candidate carries `pinCompatibility: 'not_assessed'`, and every
+  rendered answer ends with the disclaimer — including the ones with nothing
+  to offer.
+- 2262 tests, 100% coverage, zero warnings.
+
+**The first real answer changed the schema**
+
+Run against the twenty-two parts the baseline extracted:
+
+```
+TPS54331DR — AUD 1.40 each at 100+ (digikey 296-26991-1-ND)
+1. AP63205WU-7 — AUD 0.73 each at 100+  48% cheaper
+   ...
+   voutFixed: null → {"value":5,"unit":"V"}
+```
+
+It covered 8–28 V at 2 A and cost half as much, and it is a fixed 5 V part
+where the reference is adjustable. Nobody swapping a TPS54331 for it would
+get a working board. The constraint list gained `outputType` (D59); with
+`--output adjustable` the answer becomes AP63357DV-7 at 42% cheaper, which is
+a real suggestion.
+
+**Learned**
+
+- **A filter list is only as good as the first real question.** Five
+  constraints from the plan and the answer was still wrong, because the one
+  that mattered for this part was not among them. The comparison table showed
+  it — which is why the answer lists every difference rather than summarising.
+- **Ranking is where a guess would hide.** Converting currencies would need an
+  exchange rate this project does not hold, so a part with no price in the
+  currency asked about is offered unranked rather than converted or dropped.
+
+**Next**
+
+- M18: release and end-to-end sign-off.
 
 ### 2026-09-12 — Session 20: Module 16 complete, and the first baseline
 

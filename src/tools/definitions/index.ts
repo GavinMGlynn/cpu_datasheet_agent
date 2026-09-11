@@ -6,6 +6,7 @@ import { MPN_TOOLS } from './mpn-tools.js';
 import { OPS_TOOLS } from './ops-tools.js';
 import { PART_TOOLS } from './part-tools.js';
 import { PDF_TOOLS } from './pdf-tools.js';
+import { QUERY_TOOLS } from './query-tools.js';
 import { VALUE_TOOLS } from './value-tools.js';
 
 export * from './distributor-tools.js';
@@ -14,6 +15,7 @@ export * from './mpn-tools.js';
 export * from './ops-tools.js';
 export * from './part-tools.js';
 export * from './pdf-tools.js';
+export * from './query-tools.js';
 export * from './value-tools.js';
 
 /** Every tool, in the order the pipeline uses them. */
@@ -23,6 +25,7 @@ export const ALL_TOOLS: readonly ToolDefinition[] = Object.freeze([
   ...PDF_TOOLS,
   ...VALUE_TOOLS,
   ...PART_TOOLS,
+  ...QUERY_TOOLS,
   ...HUMAN_TOOLS,
   ...OPS_TOOLS,
 ]);

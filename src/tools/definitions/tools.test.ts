@@ -24,6 +24,7 @@ describe('the tool surface', () => {
       'classify_part',
       'fetch_datasheet',
       'fetch_offers',
+      'find_alternates',
       'find_pages',
       'get_part',
       'list_escalations',

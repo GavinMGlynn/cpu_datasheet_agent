@@ -3,12 +3,15 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   buckParameters,
   distributorProvenance,
+  offer,
   param,
   part,
   q,
   verification,
   verificationClaim,
+  withConfidence,
 } from '../../../test/helpers/core-fixtures.js';
+import { tryClassify } from '../../classify/index.js';
 import { createHarness, TEST_NOW, type TestHarness } from '../../../test/helpers/tool-context.js';
 import { ValidationError } from '../../core/index.js';
 import { NO_SPEND_POLICY } from '../policy.js';
@@ -167,6 +170,49 @@ describe('record_verification', () => {
     await expect(inRun({ mpn: 'TPS54331DR', verification: noQuote })).rejects.toBeInstanceOf(
       ValidationError,
     );
+  });
+});
+
+describe('find_alternates', () => {
+  it('answers from stored parts, with the disclaimer and the comparison', async () => {
+    const parameters = buckParameters();
+    const classifications = [...tryClassify(parameters).classifications];
+    const priced: { mpn: string; unitPrice: number }[] = [
+      { mpn: 'TPS54331DR', unitPrice: 1.42 },
+      { mpn: 'LM5164DDAR', unitPrice: 0.71 },
+    ];
+    for (const { mpn, unitPrice } of priced) {
+      await call('upsert_part', {
+        part: part({
+          mpn,
+          parameters: withConfidence(parameters, 'verified'),
+          classifications,
+          status: 'verified',
+          offers: [offer({ priceBreaks: [{ quantity: 1, unitPrice }] })],
+        }),
+      });
+    }
+
+    const answer = (await call('find_alternates', {
+      mpn: 'TPS54331DR',
+      quantity: 1,
+      currency: 'AUD',
+      vinRange: { unit: 'V', min: 4, max: 28 },
+    })) as {
+      alternates: { part: { mpn: string }; saving: number; comparison: unknown[] }[];
+      disclaimer: string;
+    };
+
+    expect(answer.alternates.map((one) => one.part.mpn)).toEqual(['LM5164DDAR']);
+    expect(answer.alternates[0]?.saving).toBeCloseTo(0.5, 5);
+    expect(answer.alternates[0]?.comparison).toHaveLength(30);
+    expect(answer.disclaimer).toContain('not pin compatibility');
+  });
+
+  it('refuses a reference part nobody has stored', async () => {
+    await expect(
+      call('find_alternates', { mpn: 'LM5164DDAR', quantity: 1, currency: 'AUD' }),
+    ).rejects.toMatchObject({ code: 'QUERY_PART_NOT_STORED' });
   });
 });
 

@@ -6,12 +6,29 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
 import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
-import { datasheet, part, verificationClaim } from '../../test/helpers/core-fixtures.js';
-import { PARAMETER_KEYS } from '../core/index.js';
+import {
+  buckParameters,
+  datasheet,
+  offer,
+  part,
+  verificationClaim,
+  withConfidence,
+} from '../../test/helpers/core-fixtures.js';
+import { tryClassify } from '../classify/index.js';
+import { PARAMETER_KEYS, Part, parseOrThrow } from '../core/index.js';
 import { openDatabase } from '../db/index.js';
 import { NO_SPEND_POLICY, buildRegistry, type BuiltToolContext } from '../tools/index.js';
 import { AgentError } from './errors.js';
-import { USAGE, main, parseCli, planRun, reason, type MainDeps } from './cli.js';
+import {
+  USAGE,
+  main,
+  parseCli,
+  parseVinRange,
+  planRun,
+  reason,
+  type MainDeps,
+  type RunCommand,
+} from './cli.js';
 
 const registry = buildRegistry();
 const ENV = { DATA_DIR: '/tmp/chip-data', AGENT_MODEL: 'claude-opus-5', LOG_LEVEL: 'error' };
@@ -101,6 +118,45 @@ describe('parseCli', () => {
     });
   });
 
+  it('reads an alternates query', () => {
+    expect(
+      parseCli([
+        'alternates',
+        'TPS54331DR',
+        '--vin',
+        '8-36',
+        '--iout',
+        '2',
+        '--qty',
+        '100',
+        '--currency',
+        'USD',
+        '--output',
+        'adjustable',
+        '--limit',
+        '3',
+        '--include-unverified',
+      ]),
+    ).toEqual({
+      command: 'alternates',
+      mpn: 'TPS54331DR',
+      options: {
+        vin: '8-36',
+        iout: '2',
+        quantity: 100,
+        currency: 'USD',
+        outputType: 'adjustable',
+        limit: 3,
+        includeUnverified: true,
+      },
+    });
+    expect(parseCli(['alternates', 'TPS54331DR'])).toEqual({
+      command: 'alternates',
+      mpn: 'TPS54331DR',
+      options: { includeUnverified: false },
+    });
+  });
+
   it('reads a verification and a pending sweep', () => {
     expect(parseCli(['verify', 'TPS54331DR'])).toEqual({
       command: 'verify',
@@ -136,9 +192,22 @@ describe('parseCli', () => {
     ['an option it does not have', ['extract', 'TPS54331DR', '--turbo']],
     ['an argument too many', ['extract', 'TPS54331DR', 'LM5164DDAR']],
     ['verify with no part number', ['verify']],
+    ['alternates with no part number', ['alternates']],
     ['verify-pending with an argument', ['verify-pending', 'TPS54331DR']],
   ])('refuses %s', (_label, argv) => {
     expect(() => parseCli(argv)).toThrow(AgentError);
+  });
+});
+
+describe('parseVinRange', () => {
+  it('reads a range the way a person writes one', () => {
+    expect(parseVinRange('8-36')).toEqual({ unit: 'V', min: 8, max: 36 });
+    expect(parseVinRange('4.5 - 60')).toEqual({ unit: 'V', min: 4.5, max: 60 });
+  });
+
+  it('refuses anything that is not a range', () => {
+    expect(() => parseVinRange('36')).toThrow(AgentError);
+    expect(() => parseVinRange('8 to 36')).toThrow(AgentError);
   });
 });
 
@@ -149,9 +218,18 @@ describe('reason', () => {
   });
 });
 
+/** The parsed form of a command that starts a run, for `planRun`. */
+function parseRun(argv: readonly string[]): RunCommand {
+  const command = parseCli(argv);
+  if (command.command === 'help' || command.command === 'alternates') {
+    throw new Error(`${command.command} does not start a run`);
+  }
+  return command;
+}
+
 describe('planRun', () => {
   it('builds the run configuration from the environment and the command line', () => {
-    const planned = planRun(['extract', 'TPS54331DR', '--max-turns', '5'], ENV, (line) =>
+    const planned = planRun(parseRun(['extract', 'TPS54331DR', '--max-turns', '5']), ENV, (line) =>
       out.push(line),
     );
 
@@ -161,23 +239,17 @@ describe('planRun', () => {
     });
   });
 
-  it('prints the usage for a command line it cannot read', () => {
-    expect(planRun(['extract'], ENV, (line) => out.push(line))).toEqual({ kind: 'exit', code: 2 });
+  it('refuses a run configuration that is out of bounds, with the usage', () => {
+    expect(
+      planRun(parseRun(['extract', 'X', '--max-turns', 'lots']), ENV, (line) => out.push(line)),
+    ).toEqual({ kind: 'exit', code: 2 });
     expect(out.join('\n')).toContain(USAGE);
   });
 
-  it('refuses a run configuration that is out of bounds', () => {
-    expect(planRun(['extract', 'X', '--max-turns', 'lots'], ENV, (line) => out.push(line))).toEqual(
-      {
-        kind: 'exit',
-        code: 2,
-      },
-    );
-  });
-
-  it('prints the usage for --help and stops', () => {
-    expect(planRun(['--help'], ENV, (line) => out.push(line))).toEqual({ kind: 'exit', code: 0 });
-    expect(out[0]).toBe(USAGE);
+  it('gives a verification run the verification prompt', () => {
+    expect(planRun(parseRun(['verify', 'TPS54331DR']), ENV, () => undefined)).toMatchObject({
+      runConfig: { promptVersion: 'verify.v1' },
+    });
   });
 });
 
@@ -194,8 +266,15 @@ describe('main', () => {
     expect(out[0]).toContain('rejected');
   });
 
-  it('answers 2 for a command line it cannot read', async () => {
+  it('answers 2 for a command line it cannot read, and 0 for --help', async () => {
     expect(await main(['extract'], deps())).toBe(2);
+    out = [];
+    expect(await main(['--help'], deps())).toBe(0);
+    expect(out[0]).toBe(USAGE);
+  });
+
+  it('answers 2 for a run configuration that is out of bounds', async () => {
+    expect(await main(['extract', 'TPS54331DR', '--max-turns', 'lots'], deps())).toBe(2);
   });
 
   it('runs a batch from a file and counts what it skipped', async () => {
@@ -256,5 +335,63 @@ describe('main', () => {
   it('answers 2 when there is no such part to verify', async () => {
     expect(await main(['verify', 'LM5164DDAR'], deps(false))).toBe(2);
     expect(out.join('\n')).toContain('no stored part LM5164DDAR');
+  });
+
+  it('answers an alternates query from what is stored, disclaimer and all', async () => {
+    const parameters = buckParameters();
+    const classifications = [...tryClassify(parameters).classifications];
+    const priced: { mpn: string; unitPrice: number }[] = [
+      { mpn: 'TPS54331DR', unitPrice: 1.42 },
+      { mpn: 'LM5164DDAR', unitPrice: 0.71 },
+    ];
+    for (const { mpn, unitPrice } of priced) {
+      harness.context.repositories.parts.upsertPart(
+        parseOrThrow(
+          Part,
+          part({
+            mpn,
+            parameters: withConfidence(parameters, 'verified'),
+            classifications,
+            status: 'verified',
+            offers: [offer({ priceBreaks: [{ quantity: 1, unitPrice }] })],
+            datasheet: datasheet({ pageCount: 40 }),
+          }),
+          `part ${mpn}`,
+        ),
+      );
+    }
+
+    const code = await main(
+      [
+        'alternates',
+        'tps54331dr',
+        '--vin',
+        '4-28',
+        '--iout',
+        '2',
+        '--qty',
+        '1',
+        '--currency',
+        'AUD',
+        '--output',
+        'adjustable',
+        '--limit',
+        '3',
+      ],
+      deps(),
+    );
+
+    expect(code).toBe(0);
+    expect(out.join('\n')).toContain('LM5164DDAR');
+    expect(out.join('\n')).toContain('50% cheaper');
+    expect(out.join('\n')).toContain('not pin compatibility');
+  });
+
+  it('answers 2 for an alternates query it cannot run', async () => {
+    expect(await main(['alternates', 'TPS54331DR'], deps())).toBe(2);
+    expect(out.join('\n')).toContain('no stored part TPS54331DR');
+    out = [];
+    expect(await main(['alternates', 'TPS54331DR', '--vin', 'wide'], deps())).toBe(2);
+    expect(out.join('\n')).toContain('--vin takes a range');
   });
 });
