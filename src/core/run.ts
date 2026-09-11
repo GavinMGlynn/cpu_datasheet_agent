@@ -36,6 +36,12 @@ export const RunDetails = z.strictObject({
   escalations: z.int().nonnegative(),
   /** Calls the money gate refused. */
   spendDenials: z.int().nonnegative(),
+  /**
+   * Calls that wanted something the cache did not have, in a run with no
+   * budget to fetch it. Recorded because an evaluation reads it back: a
+   * score for a part whose datasheet was not on disk measures the cache.
+   */
+  cacheMisses: z.int().nonnegative(),
   /** Whether a part was written by this run. */
   stored: z.boolean(),
   /** What the verdicts were, for a verification run. */

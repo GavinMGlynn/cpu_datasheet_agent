@@ -140,6 +140,10 @@ describe('parseEvalCli', () => {
     });
   });
 
+  it('reads a run that carries an earlier one on', () => {
+    expect(parseEvalCli(['run', '--resume', 'eval-1'])).toMatchObject({ resume: 'eval-1' });
+  });
+
   it('reads compare, replay, health and help', () => {
     expect(parseEvalCli(['compare', 'a', 'b'])).toEqual({ command: 'compare', from: 'a', to: 'b' });
     expect(parseEvalCli(['replay', 'run-1'])).toEqual({ command: 'replay', id: 'run-1' });
@@ -270,6 +274,21 @@ describe('main', () => {
     expect(code).toBe(0);
     const report = await readReport(out[out.length - 1] ?? '');
     expect(report.parts).toHaveLength(golden.length);
+  });
+
+  it('carries an earlier evaluation on, into the same database', async () => {
+    await main(['run', '--parts', first.part.mpn, '--out', path.join(dir, 'a')], deps());
+    out = [];
+
+    const code = await main(
+      ['run', '--parts', first.part.mpn, '--resume', 'eval-1', '--out', path.join(dir, 'b')],
+      deps(),
+    );
+
+    expect(code).toBe(0);
+    expect(asked[1]?.databasePath).toBe(asked[0]?.databasePath);
+    const report = await readReport(out[out.length - 1] ?? '');
+    expect(report.parts).toHaveLength(1);
   });
 
   it('answers 1 when a run wanted something the cache did not have', async () => {

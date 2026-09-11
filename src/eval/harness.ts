@@ -39,6 +39,13 @@ export interface EvalOptions {
   readonly only?: readonly string[];
   /** The golden set, so a test can hand over one of its own. */
   readonly golden?: readonly LoadedGolden[];
+  /**
+   * Score a part that a previous evaluation on this database already ran,
+   * rather than running it again. An evaluation of twenty-two parts that dies
+   * halfway is not a reason to pay for the first eleven twice. A recorded run
+   * that made no tool call is re-run: it never reached the part.
+   */
+  readonly resume?: boolean;
   /** Called before each part, for a command line that wants to say where it is. */
   readonly onPart?: (mpn: string, index: number, total: number) => void;
 }
@@ -64,14 +71,26 @@ export async function runEval(options: EvalOptions): Promise<EvalResult> {
   const parts: PartResult[] = [];
   for (const [index, entry] of golden.entries()) {
     options.onPart?.(entry.part.mpn, index, golden.length);
-    const { run, summary } = await extractPart(entry.part.mpn, config, deps);
+    const done =
+      options.resume === true
+        ? deps.context.repositories.runs.latestFinished(
+            entry.part.mpn,
+            'extract',
+            config.promptVersion,
+          )
+        : undefined;
+    // A run that called nothing measured nothing: the harness refused before
+    // the model ever saw the part — a rate limit, a session limit, a crash at
+    // startup. Resuming re-runs those, and keeps every run that did work.
+    const usable = done !== undefined && done.details.toolCalls > 0 ? done : undefined;
+    const run = usable ?? (await extractPart(entry.part.mpn, config, deps)).run;
     const stored = deps.context.repositories.parts.getPart(entry.part.mpn);
     const extracted: ParameterSet = stored === undefined ? {} : stored.parameters;
     parts.push({
       mpn: entry.part.mpn,
       run,
       score: scorePart(entry.part, extracted),
-      cacheMisses: summary.needsConfirmation,
+      cacheMisses: run.details.cacheMisses,
     });
   }
   return {

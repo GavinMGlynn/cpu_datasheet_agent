@@ -110,6 +110,62 @@ describe('applyMigrations', () => {
 });
 
 describe('MIGRATIONS', () => {
+  it('counts a run recorded before cache misses were counted as having none', () => {
+    // Migrations 1 and 2 are the schema as it was when this row was written.
+    applyMigrations(db, MIGRATIONS.slice(0, 2), clock);
+    const details = {
+      subtype: 'success',
+      toolCalls: 3,
+      toolFailures: [],
+      escalations: 0,
+      spendDenials: 0,
+      stored: true,
+    };
+    db.raw
+      .prepare<[string]>(
+        `INSERT INTO runs (id, mpn, kind, prompt_version, model, started_at, ended_at, turns, cost_usd, result, details_json)
+         VALUES ('r1', 'TPS54331DR', 'extract', 'extract.v1', 'claude-opus-5',
+                 '2026-09-11T00:00:00Z', '2026-09-11T00:10:00Z', 4, 1.5, 'extracted', ?)`,
+      )
+      .run(JSON.stringify(details));
+
+    applyMigrations(db, MIGRATIONS, clock);
+
+    const row = db.raw
+      .prepare<[string], { details_json: string }>('SELECT details_json FROM runs WHERE id = ?')
+      .get('r1');
+    expect(JSON.parse(row?.details_json ?? '{}')).toEqual({ ...details, cacheMisses: 0 });
+  });
+
+  it('leaves a run that has a count alone, and a run with no details at all', () => {
+    applyMigrations(db, MIGRATIONS.slice(0, 2), clock);
+    db.raw
+      .prepare(
+        `INSERT INTO runs (id, mpn, kind, prompt_version, model, started_at)
+         VALUES ('open', 'LM5164DDAR', 'extract', 'extract.v1', 'claude-opus-5', '2026-09-11T00:00:00Z')`,
+      )
+      .run();
+    db.raw
+      .prepare<[string]>(
+        `INSERT INTO runs (id, mpn, kind, prompt_version, model, started_at, ended_at, turns, cost_usd, result, details_json)
+         VALUES ('counted', 'LM5164DDAR', 'extract', 'extract.v1', 'claude-opus-5',
+                 '2026-09-11T00:00:00Z', '2026-09-11T00:10:00Z', 4, 1.5, 'extracted', ?)`,
+      )
+      .run(JSON.stringify({ cacheMisses: 2 }));
+
+    applyMigrations(db, MIGRATIONS, clock);
+
+    const rows = db.raw
+      .prepare<[], { id: string; details_json: string | null }>(
+        'SELECT id, details_json FROM runs ORDER BY id',
+      )
+      .all();
+    expect(rows).toEqual([
+      { id: 'counted', details_json: JSON.stringify({ cacheMisses: 2 }) },
+      { id: 'open', details_json: null },
+    ]);
+  });
+
   it('creates the full schema with its indices and the budget row', () => {
     applyMigrations(db, MIGRATIONS, clock);
     expect(tables(db)).toEqual([

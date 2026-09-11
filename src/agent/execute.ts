@@ -222,6 +222,7 @@ export async function executeRun<T>(spec: RunSpec<T>): Promise<AgentRun<T>> {
           toolFailures: [...summary.toolFailures],
           escalations: conclusion.escalations,
           spendDenials: summary.spendDenials,
+          cacheMisses: summary.needsConfirmation,
           stored: conclusion.stored,
           ...(conclusion.verdicts === undefined ? {} : { verdicts: conclusion.verdicts }),
         },

@@ -24,14 +24,18 @@ export class EvalCliError extends ChipAgentError {}
 
 export const USAGE = `usage:
   chip-eval run [--parts A,B] [--model <id>] [--effort <level>] [--prompt <version>]
-                [--max-turns <n>] [--max-cost <usd>] [--out <dir>]
+                [--max-turns <n>] [--max-cost <usd>] [--out <dir>] [--resume <id>]
   chip-eval compare <result-dir> <result-dir>
   chip-eval replay <run id>
   chip-eval health [--dir eval/golden]
 
 Every evaluation run is a no-spend run: distributors and datasheets come from
 the cache, so an evaluation costs model calls and nothing else. A part whose
-run wanted something uncached is reported rather than scored quietly.`;
+run wanted something uncached is reported rather than scored quietly.
+
+--resume takes the id printed in an earlier run's database path and carries
+that evaluation on: parts it already finished are scored from what they
+stored rather than run again.`;
 
 const OPTIONS = {
   parts: { type: 'string' },
@@ -42,6 +46,7 @@ const OPTIONS = {
   'max-turns': { type: 'string' },
   'max-cost': { type: 'string' },
   out: { type: 'string' },
+  resume: { type: 'string' },
   help: { type: 'boolean' },
 } as const;
 
@@ -51,6 +56,8 @@ export type EvalCommand =
       readonly command: 'run';
       readonly only?: readonly string[];
       readonly out: string;
+      /** The id of an evaluation to carry on: its database, its finished parts. */
+      readonly resume?: string;
       readonly overrides: Record<string, unknown>;
     }
   | { readonly command: 'compare'; readonly from: string; readonly to: string }
@@ -75,6 +82,7 @@ export function parseEvalCli(argv: readonly string[]): EvalCommand {
     return {
       command: 'run',
       ...(only === undefined ? {} : { only }),
+      ...(values.resume === undefined ? {} : { resume: values.resume }),
       out: values.out ?? RESULTS_DIR,
       overrides: {
         ...(values.model === undefined ? {} : { model: values.model }),
@@ -179,7 +187,7 @@ export async function main(argv: readonly string[], deps: EvalDeps): Promise<num
     deps.out(reason(error));
     return 2;
   }
-  const id = deps.newId();
+  const id = command.resume ?? deps.newId();
   const logger = createLogger({ level: config.logLevel, fields: { name: 'chip-eval' } });
   const { context, db } = await deps.createContext({
     config,
@@ -192,6 +200,7 @@ export async function main(argv: readonly string[], deps: EvalDeps): Promise<num
       config: runConfig,
       deps: { context, registry: buildRegistry(), query: deps.query, logger },
       ...(command.only === undefined ? {} : { only: command.only }),
+      ...(command.resume === undefined ? {} : { resume: true }),
       onPart: (mpn, index, total) => {
         deps.out(`[${String(index + 1)}/${String(total)}] ${mpn}`);
       },

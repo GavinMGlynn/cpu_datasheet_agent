@@ -822,7 +822,7 @@ models.
       rule sent M13 back for a third fixed-output part (D56).
 - [x] 16.6 Tests: harness with a fake runner and fake cache, report
       rendering, comparison logic, replay.
-- [ ] 16.7 Baseline: full eval over the twenty-two golden parts with
+- [x] 16.7 Baseline: full eval over the twenty-two golden parts with
       `extract.v1` and `claude-opus-5`, results committed under
       `eval/results/`, summary in `PROJECT_PLAN.md`.
 

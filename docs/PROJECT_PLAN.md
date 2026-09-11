@@ -115,6 +115,8 @@ that supersedes the old one, and the old row's status changes to
 | D54 | 2026-09-11 | A verification run's result is a statement about the part: `verified` only when every value cited a page and every one was confirmed; `needs_human` when a page contradicted a value or a safety rating could not be found; `rejected` otherwise, with the reason naming how many of how many were confirmed. | A value not found on the page it cites is a provenance error, not a wrong value, and calling it a conflict would send a person to adjudicate a question nobody is asking. Saying "confirmed 29 of 30, 1 not found on the page it cites" says exactly what happened. | active |
 | D55 | 2026-09-11 | An evaluation run gets a database of its own and a cache warmed beforehand by `scripts/warm-eval-cache.ts`. A part whose run asked for something uncached is reported as starved rather than scored. | The tool surface includes `get_part`: a run reading the answer out of an earlier run's work would score perfectly and measure nothing. And a score for a part whose datasheet was not on disk is a measurement of the cache, not of the prompt — so it is named rather than averaged in. | active |
 | D56 | 2026-09-11 | A parameter fewer than three golden parts state is a health failure, not a score. Adding `LM2596S-3.3/NOPB` gave `voutFixed` its third example. | A parameter two parts state is measured on a sample of two: one lucky reading looks like a capability and one unlucky one like a defect. The check found it on the day it was written, and the answer was to read another datasheet rather than to lower the bar. | active |
+| D57 | 2026-09-12 | The scorer compares a package by family and pin count, as reconciliation does, rather than by the words. A text naming no family, or one outside the vocabulary, falls back to exact equality. | The first baseline scored `package` correct on 1 part of 22: the golden set writes `6-TSOT26` where the datasheet writes `TSOT26`, and `20-HTSSOP (PWP)` where it writes `HTSSOP-20`. That measured spelling. A package has one canonical form in this project, and the scorer now says "correct" about the same things reconciliation says it about. | active |
+| D58 | 2026-09-12 | An evaluation is resumable: `--resume <id>` reuses that evaluation's database and scores parts it already ran, except a run that made no tool call, which is re-run. | Two sweeps died to the harness's memory supervisor and a third to a subscription session limit, each after real money had been spent. A recorded run that called nothing never reached the part — a rate limit, a session limit, a crash at startup — so reusing it would score the harness rather than the prompt. | active |
 
 ## 4. Status
 
@@ -140,7 +142,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M13 | Golden evaluation set | complete | 2026-09-11 |
 | M14 | Agent runner (extraction) | complete | 2026-09-11 |
 | M15 | Verification pass | complete | 2026-09-11 |
-| M16 | Evaluation harness | in progress (16.7 running) | |
+| M16 | Evaluation harness | complete | 2026-09-12 |
 | M17 | Alternates query | not started | |
 | M18 | Release and end-to-end sign-off | not started | |
 
@@ -243,6 +245,70 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 20: Module 16 complete, and the first baseline
+
+**Done**
+
+- `runEval` takes every golden part through a real extraction and scores what
+  it stored, with a report in JSON to compare against and Markdown to read.
+  Every run is a no-spend run and every run gets a database of its own (D55).
+- `compare` flags anything that scored worse between two runs, including a
+  value that stayed right while its citation drifted. `replay` rebuilds a run
+  from the ledger. `health` checks the measurement rather than the extraction.
+- `scripts/warm-eval-cache.ts` fills the cache through the same tools the
+  agent uses, so an evaluation is offline except for the model calls.
+- M13 reopened: the health check refused the set as it stood, so the set now
+  holds a twenty-second part (D56).
+- 2226 tests, 100% coverage, zero warnings.
+
+**The baseline**
+
+`extract.v1` on `claude-opus-5` at effort high, all twenty-two parts:
+
+| Measure | Value |
+| --- | --- |
+| Parts extracted | 22 of 22 |
+| Recall | 90.6% |
+| Precision | 90.6% |
+| Citations exact | 59.3% |
+| Citations one page out | 13.2% |
+| Cost | $87.24 over 355 turns |
+
+Committed under `eval/results/2026-09-11T16-00-31-043Z-extract.v1-claude-opus-5/`.
+
+Where it is weak, in order: `maxDutyCycle` 5 of 14, `switchingFrequency` 14 of
+22, `voutMax` 12 of 17, `minOnTime` 12 of 17, `feedbackAccuracy` 16 of 22.
+Nearly all of those are one disagreement wearing five hats — which column of a
+MIN/TYP/MAX row is the value (Q7). Citations are the weakest number by far:
+the value is right and the page is a section away.
+
+**Learned**
+
+- **The first score was the scorer's.** `package` came back correct on one
+  part in twenty-two, because the golden set writes `6-TSOT26` and the
+  datasheet writes `TSOT26`. Reconciliation had compared packages by family
+  and pins all along; the scorer was comparing spelling (D57). Re-scoring cost
+  nothing — the runs were already recorded — and recall went from 87.0% to
+  90.6%.
+- **A long eval needs to survive its own environment.** Two sweeps were killed
+  by the machine's memory supervisor and a third hit a subscription session
+  limit three parts from the end. Resume (D58) turned each of those from "pay
+  again" into "carry on", and the rule that a run which called nothing did not
+  happen is what made the session-limit failures re-runnable.
+- **A schema change needs a migration even for a field nobody has read.**
+  Adding `cacheMisses` to the run details made every run recorded before it
+  unreadable, in the middle of a sweep. Migration 0003 backfills them with the
+  zero they would have counted.
+- **The evaluation is the cheap part of iterating, and it is not cheap.**
+  $87 for twenty-two parts, $4 each, dominated by holding datasheet pages in
+  context and writing the parameter set out twice. That is the number to
+  improve before the next sweep, not after.
+
+**Next**
+
+- M17: the alternates query — "find a cheaper part that still meets my Vin
+  range", with the pin-compatibility caveat stated every time.
 
 ### 2026-09-11 — Session 19: Module 15 complete
 
@@ -1026,4 +1092,4 @@ resolved here.
 | Q4 | Digi-Key locale defaults AU / en / AUD acceptable? (D14) | M7 | open (assumed yes) |
 | Q5 | Default model `claude-opus-5` at effort `high` for extraction and verification (D11). Acceptable cost-wise? One real extraction of TPS54331DR cost **$3.41** over 18 turns and 17 tool calls; most of that is datasheet page text re-sent each turn. A cheaper model is one flag away (`--model`), and M16 can measure what it costs in accuracy. | M14, M16 | open (assumed yes) |
 | Q6 | The twenty-one golden parts were read by the model, not by a person (D47). Will you review them — or a sample — so the set becomes an independent reference rather than a baseline? `eval/golden/README.md` says what each file holds. | M16 | open |
-| Q7 | Where an electrical table gives MIN / TYP / MAX for one parameter, which column is the value? The golden reading took TYP for switching frequency (570 kHz) and the guaranteed MIN for maximum duty cycle (90%); the first real run took the whole range for the frequency (456–684 kHz, typ 570) and TYP for the duty cycle (93%). Neither misread the page. The convention wants deciding once, for the golden set and the prompt together. | M16 | open |
+| Q7 | Where an electrical table gives MIN / TYP / MAX for one parameter, which column is the value? The baseline puts a number on it: `maxDutyCycle` scored 5 of 14 and `switchingFrequency` 14 of 22, almost all of them the same disagreement. The golden reading took TYP for switching frequency (570 kHz) and the guaranteed MIN for maximum duty cycle (90%); the first real run took the whole range for the frequency (456–684 kHz, typ 570) and TYP for the duty cycle (93%). Neither misread the page. The convention wants deciding once, for the golden set and the prompt together. | M16 | open |

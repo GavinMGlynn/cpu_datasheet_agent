@@ -98,7 +98,7 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M15 are complete, and M16 bar its baseline run: schemas, ledger, cache, SQLite, units, the
+Modules M0 to M16 are complete: schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
 server, the golden evaluation set, the extraction runner, the verification pass, and
@@ -117,7 +117,9 @@ authoritative status table.
   `docs/PROJECT_PLAN.md` open question Q3). Its schema and tool definitions
   are to be reconciled against Module 12 of `docs/COMPLETION_PLAN.md`.
 - `npx tsx bin/chip-eval.ts run` scores the golden set end to end, offline
-  except for the model calls, and writes a report under `eval/results/`.
+  except for the model calls, and writes a report under `eval/results/`. The
+  first baseline — `extract.v1` on `claude-opus-5`, all 22 parts — scored 90.6%
+  recall, 90.6% precision and 59.3% exact citations for $87.24.
 - Not built yet: the alternates query.
 
 ## Next steps

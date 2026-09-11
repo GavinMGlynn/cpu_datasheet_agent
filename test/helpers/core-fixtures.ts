@@ -178,6 +178,7 @@ export function runDetails(overrides: Loose = {}): Loose {
     toolFailures: [],
     escalations: 0,
     spendDenials: 0,
+    cacheMisses: 0,
     stored: true,
     ...overrides,
   };

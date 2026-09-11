@@ -166,6 +166,53 @@ describe('runEval', () => {
     expect(seen).toEqual([`${two[0]?.part.mpn ?? ''} 0/2`, `${two[1]?.part.mpn ?? ''} 1/2`]);
   });
 
+  it('carries on an evaluation rather than paying for its first half twice', async () => {
+    const runner = deps(storing((entry) => partFromGolden(entry)));
+    await runEval({ config, deps: runner, golden: [first] });
+    const calls: string[] = [];
+
+    const again = await runEval({
+      config,
+      deps: {
+        ...runner,
+        query: (params) => {
+          calls.push(typeof params.prompt === 'string' ? params.prompt : '(a stream)');
+          return runner.query(params);
+        },
+      },
+      golden: two,
+      resume: true,
+    });
+
+    // The first part was scored from what it stored; only the second ran.
+    expect(calls).toHaveLength(1);
+    expect(calls[0]).toContain(two[1]?.part.mpn ?? '');
+    expect(again.parts.map((part) => part.mpn)).toEqual(two.map((entry) => entry.part.mpn));
+    expect(again.parts[0]?.score.recall).toBe(1);
+  });
+
+  it('runs a part again when the recorded run never called anything', async () => {
+    const runner = deps(storing(() => undefined));
+    await runEval({ config, deps: runner, golden: [first] });
+    const recorded = harness.context.repositories.runs.latestFinished(
+      first.part.mpn,
+      'extract',
+      config.promptVersion,
+    );
+    expect(recorded?.details.toolCalls).toBe(0);
+
+    const again = await runEval({
+      config,
+      deps: deps(storing((entry) => partFromGolden(entry))),
+      golden: [first],
+      resume: true,
+    });
+
+    // The recorded run measured nothing, so resuming ran the part rather than
+    // scoring a failure that was never about the part.
+    expect(again.parts[0]?.score.recall).toBe(1);
+  });
+
   it('reports a part whose run wanted something the cache did not have', async () => {
     const starving = await createHarness({
       policy: NO_SPEND_POLICY,

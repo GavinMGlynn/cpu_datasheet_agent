@@ -1,4 +1,5 @@
 import { parseOrThrow } from '../core/validation-error.js';
+import { required } from '../util/present.js';
 import { Run, RunDetails, type FinishedRun, type RunKind, type RunResult } from '../core/run.js';
 import { DbError, type Db } from './database.js';
 import { parseJson } from './json.js';
@@ -210,7 +211,21 @@ export class RunRepository {
    * This is what a resumable batch asks: a part that has been run to a
    * conclusion is not run again unless the caller insists.
    */
-  latestFinished(mpn: string, kind: RunKind, promptVersion: string): Run | undefined {
-    return this.list({ mpn, kind, promptVersion, finished: true, limit: 1 })[0];
+  latestFinished(mpn: string, kind: RunKind, promptVersion: string): FinishedRun | undefined {
+    const run = this.list({ mpn, kind, promptVersion, finished: true, limit: 1 })[0];
+    if (run === undefined) {
+      return undefined;
+    }
+    // The query asked for runs that have a result; saying so in the type
+    // saves every reader a fallback for a row this cannot return.
+    const what = `the ending of run ${run.id}`;
+    return {
+      ...run,
+      endedAt: required(run.endedAt, what),
+      turns: required(run.turns, what),
+      costUsd: required(run.costUsd, what),
+      result: required(run.result, what),
+      details: required(run.details, what),
+    };
   }
 }

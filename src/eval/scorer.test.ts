@@ -37,7 +37,20 @@ describe('sameValue', () => {
     expect(sameValue('topology', 'synchronous', 'synchronous')).toBe(true);
     expect(sameValue('topology', 'synchronous', 'non_synchronous')).toBe(false);
     expect(sameValue('enablePin', true, true)).toBe(true);
-    expect(sameValue('package', '8-SOIC (D)', '8-SOIC')).toBe(false);
+    expect(sameValue('package', '8-SOIC (D)', '8-SOIC')).toBe(true);
+  });
+
+  it('compares a package by what it is, not by how it is written', () => {
+    // The same package, named the way a datasheet names it and the way an
+    // ordering table does.
+    expect(sameValue('package', '6-TSOT26', 'TSOT26')).toBe(true);
+    expect(sameValue('package', '20-HTSSOP (PWP)', 'HTSSOP-20')).toBe(true);
+    // A different family, or a stated pin count that disagrees.
+    expect(sameValue('package', '8-SOIC (D)', '8-VSSOP')).toBe(false);
+    expect(sameValue('package', '8-SOIC', '14-SOIC')).toBe(false);
+    // Nothing canonical to compare: the words are all there is.
+    expect(sameValue('package', 'MLF-16', 'MLF-16')).toBe(true);
+    expect(sameValue('package', 'MLF-16', 'TMLF-16')).toBe(false);
   });
 
   it('treats null as a value in its own right', () => {

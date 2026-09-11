@@ -6,6 +6,7 @@ import {
   isSoftStart,
   type ParameterKey,
 } from '../core/index.js';
+import { parsePackage } from '../classify/index.js';
 import { PARAMETER_POLICIES } from '../reconcile/index.js';
 import type { ParameterSet, ParameterValue } from '../reconcile/types.js';
 import { compareQuantities, type Tolerance } from '../units/index.js';
@@ -77,12 +78,42 @@ function sameEnds(expected: Ends, actual: Ends, tolerance: Tolerance): boolean {
 }
 
 /**
+ * Whether two packages are the same package.
+ *
+ * A package has one canonical form in this project — a family and a pin
+ * count — and the text around it is prose: a datasheet writes `TSOT26` where
+ * an ordering table writes `6-TSOT26`, and marking the extraction wrong for
+ * that measures spelling. Reconciliation already compares packages this way,
+ * and the scorer says "correct" about the same things reconciliation does.
+ *
+ * A text naming no family, or one outside the vocabulary, has no canonical
+ * form to compare, so those fall back to the words themselves.
+ */
+function samePackage(expected: string, actual: string): boolean {
+  const mine = parsePackage(expected);
+  const theirs = parsePackage(actual);
+  if (
+    mine.family === null ||
+    theirs.family === null ||
+    mine.family === 'other' ||
+    theirs.family === 'other'
+  ) {
+    return expected === actual;
+  }
+  if (mine.family !== theirs.family) {
+    return false;
+  }
+  return mine.pins === null || theirs.pins === null || mine.pins === theirs.pins;
+}
+
+/**
  * Whether two parameter values say the same thing.
  *
  * Numbers are compared with the parameter's own tolerance, the same one
- * reconciliation uses, so "correct" means the same thing in both places.
- * Everything else is exact: an enum, a boolean or a package string is either
- * what the datasheet says or it is not.
+ * reconciliation uses, so "correct" means the same thing in both places, and
+ * a package is compared by what it is rather than by how it is written.
+ * Everything else is exact: an enum or a boolean is either what the datasheet
+ * says or it is not.
  */
 export function sameValue(
   key: ParameterKey,
@@ -104,6 +135,9 @@ export function sameValue(
   }
   if (isQuantity(expected) || isQuantity(actual)) {
     return sameQuantity(expected, actual, tolerance);
+  }
+  if (key === 'package' && typeof expected === 'string' && typeof actual === 'string') {
+    return samePackage(expected, actual);
   }
   if (isRange(expected) && isRange(actual)) {
     return sameEnds(expected, actual, tolerance);
