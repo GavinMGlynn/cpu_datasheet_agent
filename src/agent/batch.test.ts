@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
 import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
-import { datasheet, part, verificationClaim } from '../../test/helpers/core-fixtures.js';
+import { datasheet, part, partDraft, verificationClaim } from '../../test/helpers/core-fixtures.js';
 import { PARAMETER_KEYS, Part, parseOrThrow } from '../core/index.js';
 import { createLogger, type Logger } from '../log/index.js';
 import { NO_SPEND_POLICY, buildRegistry } from '../tools/index.js';
@@ -89,7 +89,7 @@ describe('extractMany', () => {
       const mpn = stored.shift() ?? 'TPS54331DR';
       await registry.call(
         'upsert_part',
-        { part: part({ mpn, datasheet: datasheet({ pageCount: 40 }) }) },
+        { part: partDraft({ mpn, datasheet: datasheet({ pageCount: 40 }) }) },
         harness.context,
         ledgerId(issued),
       );
@@ -134,6 +134,17 @@ describe('extractMany', () => {
 
     expect(other.skipped).toEqual([]);
     expect(other.runs).toHaveLength(1);
+  });
+
+  it('records a part it could not run and carries on with the rest', async () => {
+    const runner = deps(['TPS54331DR']);
+
+    const result = await extractMany(['TPS54331DR', '???'], config, runner, { force: false });
+
+    expect(result.runs.map((run) => run.mpn)).toEqual(['TPS54331DR']);
+    expect(result.failed).toHaveLength(1);
+    expect(result.failed[0]?.mpn).toBe('???');
+    expect(logs.join('\n')).toContain('"msg":"part failed"');
   });
 
   it('does not skip a run that never finished', async () => {

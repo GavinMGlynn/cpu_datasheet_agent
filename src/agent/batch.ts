@@ -4,7 +4,7 @@ import type { FinishedRun, RunKind } from '../core/index.js';
 import { normaliseMpn } from '../mpn/index.js';
 import { elementAt } from '../util/array.js';
 import type { RunConfig } from './config.js';
-import { AgentError } from './errors.js';
+import { AgentError, reason } from './errors.js';
 import type { AgentRun, RunnerDeps } from './execute.js';
 import { extractPart } from './runner.js';
 import { verifyPart } from './verify.js';
@@ -59,6 +59,8 @@ export interface BatchResult {
   readonly runs: readonly FinishedRun[];
   /** Parts left alone because a run under this prompt version already finished them. */
   readonly skipped: readonly string[];
+  /** Parts whose run could not be made at all, and why. */
+  readonly failed: readonly { readonly mpn: string; readonly reason: string }[];
 }
 
 /**
@@ -119,22 +121,32 @@ async function runEach(
 ): Promise<BatchResult> {
   const runs: FinishedRun[] = [];
   const skipped: string[] = [];
+  const failed: { mpn: string; reason: string }[] = [];
   for (const mpn of mpns) {
-    const normalised = normaliseMpn(mpn).mpn;
-    const done = options.force
-      ? undefined
-      : deps.context.repositories.runs.latestFinished(normalised, kind, config.promptVersion);
-    if (done !== undefined) {
-      deps.logger.info('skipping a part already run', {
-        kind,
-        mpn: normalised,
-        result: done.result,
-        promptVersion: config.promptVersion,
-      });
-      skipped.push(normalised);
-      continue;
+    try {
+      const normalised = normaliseMpn(mpn).mpn;
+      const done = options.force
+        ? undefined
+        : deps.context.repositories.runs.latestFinished(normalised, kind, config.promptVersion);
+      if (done !== undefined) {
+        deps.logger.info('skipping a part already run', {
+          kind,
+          mpn: normalised,
+          result: done.result,
+          promptVersion: config.promptVersion,
+        });
+        skipped.push(normalised);
+        continue;
+      }
+      runs.push((await run(normalised)).run);
+    } catch (error) {
+      // One part that cannot be run is not a reason to abandon the other
+      // ninety-nine. It is recorded and the batch carries on; the part has no
+      // finished run, so resuming picks it up again.
+      const message = reason(error);
+      deps.logger.error('part failed', { kind, mpn, error: message });
+      failed.push({ mpn, reason: message });
     }
-    runs.push((await run(normalised)).run);
   }
-  return { runs, skipped };
+  return { runs, skipped, failed };
 }

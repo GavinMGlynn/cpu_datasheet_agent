@@ -11,6 +11,7 @@ import {
   datasheet,
   offer,
   part,
+  partDraft,
   verificationClaim,
   withConfidence,
 } from '../../test/helpers/core-fixtures.js';
@@ -18,14 +19,13 @@ import { tryClassify } from '../classify/index.js';
 import { PARAMETER_KEYS, Part, parseOrThrow } from '../core/index.js';
 import { openDatabase } from '../db/index.js';
 import { NO_SPEND_POLICY, buildRegistry, type BuiltToolContext } from '../tools/index.js';
-import { AgentError } from './errors.js';
+import { AgentError, reason } from './errors.js';
 import {
   USAGE,
   main,
   parseCli,
   parseVinRange,
   planRun,
-  reason,
   type MainDeps,
   type RunCommand,
 } from './cli.js';
@@ -69,7 +69,10 @@ function deps(storing = true, mpns: string[] = ['TPS54331DR']): MainDeps {
     await registry.call(
       'upsert_part',
       {
-        part: part({ mpn: mpns.shift() ?? 'TPS54331DR', datasheet: datasheet({ pageCount: 40 }) }),
+        part: partDraft({
+          mpn: mpns.shift() ?? 'TPS54331DR',
+          datasheet: datasheet({ pageCount: 40 }),
+        }),
       },
       harness.context,
       ledgerId(issued),
@@ -285,9 +288,22 @@ describe('main', () => {
     const second = await main(['extract-many', file], deps(true, ['LM5164DDAR']));
 
     expect(first).toBe(0);
-    expect(out).toContain('2 run(s), 0 skipped');
-    expect(out).toContain('0 run(s), 2 skipped');
+    expect(out).toContain('2 run(s), 0 skipped, 0 failed');
+    expect(out).toContain('0 run(s), 2 skipped, 0 failed');
     expect(second).toBe(0);
+  });
+
+  it('names a part it could not run, and answers 1', async () => {
+    const file = path.join(dir, 'parts.txt');
+    await writeFile(file, 'TPS54331DR\n');
+
+    // A prompt version with no file: the part cannot be run at all, which the
+    // batch records against that part rather than stopping on.
+    const code = await main(['extract-many', file, '--prompt', 'extract.v9'], deps());
+
+    expect(code).toBe(1);
+    expect(out.join('\n')).toContain('TPS54331DR: could not run —');
+    expect(out.join('\n')).toContain('0 run(s), 0 skipped, 1 failed');
   });
 
   it('answers 2 when the list of parts cannot be read', async () => {
@@ -329,7 +345,7 @@ describe('main', () => {
     expect(out[0]).toContain('TPS54331DR: verified');
     // The part is verified now, so nothing is left waiting.
     expect(sweep).toBe(0);
-    expect(out).toContain('0 run(s), 0 skipped');
+    expect(out).toContain('0 run(s), 0 skipped, 0 failed');
   });
 
   it('answers 2 when there is no such part to verify', async () => {

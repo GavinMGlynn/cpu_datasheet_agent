@@ -93,7 +93,15 @@ on values that have already been validated.
   `options` (at least two), and an optional `resolution` not earlier than
   `createdAt`.
 - `Verification` — a verdict on one parameter against one page. `confirmed`
-  and `contradicted` must quote; `not_found` must not.
+  and `contradicted` must quote; `not_found` must not. `VerificationClaim` is
+  the same verdict before the run stamps itself on it: a reader states what it
+  read and where, and when it read it and which prompt and model did the
+  reading are facts about the run (D52).
+- `Run` — one agent run over one part: kind, prompt version, model, and, once
+  it has ended, the turns, the cost, the result and the details. Everything an
+  ending brings arrives together or not at all, so a run that never came back
+  is a row with no result rather than a half-filled one. `FinishedRun` is the
+  same record with those fields no longer optional.
 - `ToolCallRecord` — one ledger line with exactly one of `output` or `error`
   (`ErrorJson` matches `ChipAgentError.toJSON()`).
 

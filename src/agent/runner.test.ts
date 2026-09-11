@@ -14,7 +14,7 @@ import {
   toolResult,
 } from '../../test/helpers/agent-sdk.js';
 import { TEST_NOW, createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
-import { datasheet, escalation, part } from '../../test/helpers/core-fixtures.js';
+import { datasheet, escalation, partDraft } from '../../test/helpers/core-fixtures.js';
 import type { Options, SDKMessage } from '@anthropic-ai/claude-agent-sdk';
 import { createLogger, ledgerFileName, type Logger } from '../log/index.js';
 import {
@@ -82,7 +82,7 @@ const RUN_CALL = ledgerId(1);
 async function storePart(): Promise<void> {
   await registry.call(
     'upsert_part',
-    { part: part({ datasheet: datasheet({ pageCount: 40 }) }) },
+    { part: partDraft({ datasheet: datasheet({ pageCount: 40 }) }) },
     harness.context,
     RUN_CALL,
   );

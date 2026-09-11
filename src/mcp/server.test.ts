@@ -3,7 +3,7 @@ import { InMemoryTransport } from '@modelcontextprotocol/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
 
-import { part } from '../../test/helpers/core-fixtures.js';
+import { partDraft } from '../../test/helpers/core-fixtures.js';
 import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
 import { ToolError, ToolRegistry, buildRegistry, defineTool } from '../tools/index.js';
 import { createMcpServer, objectInput, SERVER_NAME } from './server.js';
@@ -155,7 +155,7 @@ describe('the stdio-ready server', () => {
   it('records every call in the ledger, whatever the transport', async () => {
     await connect();
 
-    await callTool('upsert_part', { part: part() });
+    await callTool('upsert_part', { part: partDraft() });
     await callTool('get_part', { mpn: 'TPS54331DR' });
 
     const records = await harness.ledgerRecords();

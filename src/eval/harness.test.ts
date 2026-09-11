@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
-import { TEST_NOW, createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
+import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
 import { DigiKeyApi, DigiKeyClient, MemoryTokenStore } from '../adapters/digikey/index.js';
 import type { Cache } from '../cache/index.js';
 import { RunConfig, type RunnerDeps } from '../agent/index.js';
-import { Part, parseOrThrow } from '../core/index.js';
+import { PartDraft, parseOrThrow } from '../core/index.js';
 import { createLogger, type Logger } from '../log/index.js';
 import { NO_SPEND_POLICY, buildRegistry, type ToolRegistry } from '../tools/index.js';
 import { runEval } from './harness.js';
@@ -43,10 +43,10 @@ const config: RunConfig = RunConfig.parse({
 });
 
 /** The golden reading, stored as a part: a perfect extraction. */
-function partFromGolden(entry: LoadedGolden, overrides: Record<string, unknown> = {}): Part {
+function partFromGolden(entry: LoadedGolden, overrides: Record<string, unknown> = {}): PartDraft {
   const { part } = entry;
   return parseOrThrow(
-    Part,
+    PartDraft,
     {
       mpn: part.mpn,
       manufacturer: part.manufacturer,
@@ -57,8 +57,6 @@ function partFromGolden(entry: LoadedGolden, overrides: Record<string, unknown> 
       classifications: part.classifications,
       verifications: [],
       status: 'extracted',
-      createdAt: TEST_NOW,
-      updatedAt: TEST_NOW,
       ...overrides,
     },
     `part from golden ${part.mpn}`,
@@ -95,7 +93,7 @@ function deps(query: RunnerDeps['query']): RunnerDeps {
 }
 
 /** A run that stores whatever this function decides for each part. */
-function storing(partFor: (entry: LoadedGolden) => Part | undefined): RunnerDeps['query'] {
+function storing(partFor: (entry: LoadedGolden) => PartDraft | undefined): RunnerDeps['query'] {
   const queue = [...two];
   return scriptedQuery([resultMessage({ numTurns: 5, costUsd: 0.4 })], async () => {
     const entry = queue.shift();

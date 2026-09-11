@@ -119,6 +119,8 @@ that supersedes the old one, and the old row's status changes to
 | D58 | 2026-09-12 | An evaluation is resumable: `--resume <id>` reuses that evaluation's database and scores parts it already ran, except a run that made no tool call, which is re-run. | Two sweeps died to the harness's memory supervisor and a third to a subscription session limit, each after real money had been spent. A recorded run that called nothing never reached the part — a rate limit, a session limit, a crash at startup — so reusing it would score the harness rather than the prompt. | active |
 | D59 | 2026-09-12 | The alternates query constrains output type as well as the axes the plan listed, and prices are compared in one currency, never converted. A part with no price in that currency is still offered, last. | The first real answer offered a fixed 5 V part as the cheapest alternate to an adjustable one: it covered the input range and the current, and it was not an alternate. Converting currencies would need an exchange rate this project does not hold, and a ranking built on a guessed rate ranks the guess. | active |
 | D60 | 2026-09-12 | An alternate is offered only from parts a verification pass has confirmed, unless the caller passes `includeUnverified`. A part that needs a person, or was rejected, is never offered. | Recommending a replacement on the strength of an unchecked reading is how a wrong absolute maximum reaches a board. A part with a known conflict is not a recommendation at any price. | active |
+| D61 | 2026-09-12 | `createdAt` and `updatedAt` belong to the store, not to the part: `upsert_part` takes a `PartDraft` without them and stamps both, keeping the original creation time when a part is stored again. | Three parts extracted after midnight Brisbane were stored with a `createdAt` of `2026-09-12T00:00:00Z`, which was five hours in the future in UTC. The verification pass then could not write them back at all — `updatedAt` cannot be earlier than `createdAt` — and the sweep died on the seventeenth part. A model asked for a timestamp writes the date it believes it is (D52, same rule for `checkedAt`). | active |
+| D62 | 2026-09-12 | A batch records a part it could not run and carries on, rather than stopping. The part has no finished run, so a later resume picks it up. | The same crash cost sixteen good runs their sweep. One part that cannot be started is not a reason to abandon the other ninety-nine, and the resume rule already makes an unfinished part safe to retry. | active |
 
 ## 4. Status
 
@@ -146,7 +148,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M15 | Verification pass | complete | 2026-09-11 |
 | M16 | Evaluation harness | complete | 2026-09-12 |
 | M17 | Alternates query | complete | 2026-09-12 |
-| M18 | Release and end-to-end sign-off | not started | |
+| M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
 
 ## 5. Conventions
 
@@ -247,6 +249,65 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 22: Module 18, and the plan is finished
+
+**The end-to-end run**
+
+One live-API extraction with spending allowed, on a part nothing had cached:
+`TPS62740DSSR`. The gate confirmed `resolve_mpn` and `fetch_offers` on the
+run's behalf, Digi-Key answered live, the datasheet came down fresh, and the
+part was stored — then the $6 ceiling stopped the run on its last step, so it
+is recorded as rejected with the part in the database. $6.16. That is the
+money gate, all three parts of it, working on real traffic.
+
+Then the verification pass over the twenty-two parts the baseline extracted:
+
+| Measure | Value |
+| --- | --- |
+| Parts checked | 19 (three were already `needs_human`) |
+| Values confirmed | 537 of 570 |
+| Contradicted | 2 |
+| Not found on the cited page | 4 |
+| Unchecked | 27 (22 of them one part that hit its cost ceiling) |
+| Parts now `verified` | 8 |
+| Cost | $22.09 |
+
+Scoring afterwards is unchanged at 90.6% recall: verification confirms values,
+it does not correct them.
+
+**Two defects, both found by running it**
+
+The sweep died on its seventeenth part. Three parts extracted after midnight
+Brisbane carried a `createdAt` five hours in the future, because the model
+wrote the timestamp, and nothing can be updated before it was created. The
+store owns those timestamps now (D61) — the same rule as `checkedAt` (D52) —
+and `upsert_part` keeps the original creation time when a part is stored
+again. The three stored parts were repaired in place, recorded here because
+that is data changed by hand.
+
+The second defect was the first one's blast radius: one part's failure ended
+the sweep and cost sixteen good runs their batch. A batch records the part it
+could not run and carries on (D62).
+
+**What the sweep says about the pipeline**
+
+Three of the four "not found" verdicts are the same thing: `feedbackAccuracy`
+is arithmetic on two stated limits, so no page states it and no reader can
+confirm it. That is L1 in the new known-limitations table, and the fix is to
+call the provenance `derived` rather than `datasheet`. The two contradictions
+are both "the page states it, but not for this orderable". Seven limitations
+are recorded with the evidence that found them (section 9).
+
+**Done, and what is left**
+
+Every task in `COMPLETION_PLAN.md` is checked except Module 9 (Nexar,
+deferred by D29) and task 12.7, which waits on a file only the user has (Q3).
+Every reference row is verified or carries the reason it is not. 2266 tests,
+100% coverage, zero warnings, tagged `v1.0.0`.
+
+Total spent on real runs across the project: about $135, nearly all of it the
+M16 baseline and this sweep.
 
 ### 2026-09-12 — Session 21: Module 17 complete
 
@@ -1139,5 +1200,20 @@ resolved here.
 | Q3 | `CLAUDE.md` references an existing `chip-mcp-server.ts`. It is not in the repo. Is there a copy to add? | M12 | open |
 | Q4 | Digi-Key locale defaults AU / en / AUD acceptable? (D14) | M7 | open (assumed yes) |
 | Q5 | Default model `claude-opus-5` at effort `high` for extraction and verification (D11). Acceptable cost-wise? One real extraction of TPS54331DR cost **$3.41** over 18 turns and 17 tool calls; most of that is datasheet page text re-sent each turn. A cheaper model is one flag away (`--model`), and M16 can measure what it costs in accuracy. | M14, M16 | open (assumed yes) |
-| Q6 | The twenty-one golden parts were read by the model, not by a person (D47). Will you review them — or a sample — so the set becomes an independent reference rather than a baseline? `eval/golden/README.md` says what each file holds. | M16 | open |
+| Q6 | The twenty-two golden parts were read by the model, not by a person (D47). Will you review them — or a sample — so the set becomes an independent reference rather than a baseline? `eval/golden/README.md` says what each file holds. | M16 | open |
 | Q7 | Where an electrical table gives MIN / TYP / MAX for one parameter, which column is the value? The baseline puts a number on it: `maxDutyCycle` scored 5 of 14 and `switchingFrequency` 14 of 22, almost all of them the same disagreement. The golden reading took TYP for switching frequency (570 kHz) and the guaranteed MIN for maximum duty cycle (90%); the first real run took the whole range for the frequency (456–684 kHz, typ 570) and TYP for the duty cycle (93%). Neither misread the page. The convention wants deciding once, for the golden set and the prompt together. | M16 | open |
+
+## 9. Known limitations
+
+What the system does not do, found by running it rather than by thinking
+about it. Each row names the evidence.
+
+| # | Limitation | Evidence |
+| - | ---------- | -------- |
+| L1 | A derived value cannot be verified against a page. `feedbackAccuracy` is arithmetic on the stated reference limits — 0.792 V and 0.808 V about 0.8 V is ±1% — so the verification pass reads the cited page, finds no percentage, and returns `not_found`. Three parts in the sign-off sweep failed this way and none of them is wrong. The parameter's provenance should arguably be `derived` (the schema has the kind) rather than `datasheet`. | `AP63205WU-7`, `LMR33630ADDAR`, `MCP16331T-E/CH`, verification sweep 2026-09-12 |
+| L2 | Reconciliation compares an operating-temperature maximum without comparing its reference. The datasheet states 125 °C junction and Digi-Key lists 85 °C ambient; they are both right and the comparison calls it a conflict. | Escalations on `AP62200WU-7` and `AP62201WU-7`, baseline 2026-09-11 |
+| L3 | "What the page states" and "what applies to this orderable" are not the same claim, and the verification pass checks the first. The LM2596 datasheet states a 1.23 V feedback voltage for its adjustable version; the 3.3 V version stored `null` with a note, and the pass called it contradicted. The AP63357 case is the same shape the other way round: page 1 claims "up to 86% efficiency at 5 mA light load", the extraction stored no peak efficiency, and the pass called that contradicted too. Both are open escalations. | `LM2596S-3.3/NOPB` `feedbackReference` and `AP63357DV-7` `efficiencyPeak`, verification sweep 2026-09-12 |
+| L4 | A datasheet can contradict itself, and nothing here decides which half wins. The LM5164-Q1 gives the low-side on-resistance as 0.34 Ω in a features bullet and 0.33 Ω in the electrical characteristics table; the run escalated rather than choosing, which is right, and the escalation is still open. | `LM5164QDDARQ1`, baseline 2026-09-11 |
+| L5 | An AEC-Q100 claim on page 1 and an ordering table that does not repeat it are not reconciled. The MCP16331 datasheet claims automotive qualification device-wide; the extraction read the ordering table and stored `false`, which the golden reading says is wrong. | `MCP16331T-E/CH`, baseline 2026-09-11; golden note on `aecQ100` |
+| L6 | The evaluation measures extraction against a reading by the same model family (D47). It catches regressions, gross errors and anything the pipeline fails to find; it cannot catch a misreading that comes from how the model reads. A human pass over the golden set is what would change that (Q6). | `eval/golden/README.md` |
+| L7 | One datasheet page of text costs about a dollar to hold in context across a run, and the parameter set is written out twice — once for reconciliation, once to store. An extraction costs about $4 and a verification about $1. Both are prompt and tool-surface problems, not model problems. | Baseline 2026-09-11, $87.24 for 22 parts |

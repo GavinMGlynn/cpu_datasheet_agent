@@ -5,8 +5,8 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
-import { createHarness, TEST_NOW, type TestHarness } from '../../test/helpers/tool-context.js';
-import { Part, parseOrThrow } from '../core/index.js';
+import { createHarness, type TestHarness } from '../../test/helpers/tool-context.js';
+import { PartDraft, parseOrThrow } from '../core/index.js';
 import { ledgerFileName } from '../log/index.js';
 import {
   NO_SPEND_POLICY,
@@ -72,9 +72,9 @@ afterEach(async () => {
   await rm(dir, { recursive: true, force: true });
 });
 
-function partFromGolden(entry: LoadedGolden): Part {
+function partFromGolden(entry: LoadedGolden): PartDraft {
   return parseOrThrow(
-    Part,
+    PartDraft,
     {
       mpn: entry.part.mpn,
       manufacturer: entry.part.manufacturer,
@@ -85,8 +85,6 @@ function partFromGolden(entry: LoadedGolden): Part {
       classifications: entry.part.classifications,
       verifications: [],
       status: 'extracted',
-      createdAt: TEST_NOW,
-      updatedAt: TEST_NOW,
     },
     'part',
   );

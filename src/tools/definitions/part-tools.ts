@@ -6,6 +6,7 @@ import {
   NormalisedMpn,
   ParameterKey,
   Part,
+  PartDraft,
   PartStatus,
   Verification,
   VerificationClaim,
@@ -17,19 +18,33 @@ import type { ToolDefinition } from '../types.js';
 /**
  * Stores a whole part, or rejects it.
  *
- * The input schema is the `Part` schema itself, so what the tool advertises
- * and what the database enforces are one thing. Nothing is coerced: a value
- * of the wrong shape is a rejection, not a repair.
+ * The input schema is the `PartDraft` schema, which is the stored `Part`
+ * without its timestamps, so what the tool advertises and what the database
+ * enforces are one thing. Nothing is coerced: a value of the wrong shape is a
+ * rejection, not a repair.
+ *
+ * When the part was first stored, and when it last changed, are facts about
+ * this database rather than about the part, so the tool stamps them (D61).
+ * Re-storing a part keeps the time it was first stored.
  */
 export const upsertPart = defineTool({
   name: 'upsert_part',
   description:
-    'Store a part: parameters with provenance, offers, classifications, verifications. Validates the whole aggregate and rejects it on any violation; it never coerces a value into fitting.',
-  input: z.strictObject({ part: Part }),
+    'Store a part: parameters with provenance, offers, classifications, verifications. Validates the whole aggregate and rejects it on any violation; it never coerces a value into fitting. The store records when the part was stored; do not send timestamps.',
+  input: z.strictObject({ part: PartDraft }),
   output: z.strictObject({ part: Part }),
   annotations: { readOnlyHint: false, destructiveHint: true },
-  handler: (input, context) =>
-    Promise.resolve({ part: context.repositories.parts.upsertPart(input.part) }),
+  handler: (input, context) => {
+    const now = context.now();
+    const stored = context.repositories.parts.getPart(input.part.mpn);
+    return Promise.resolve({
+      part: context.repositories.parts.upsertPart({
+        ...input.part,
+        createdAt: stored?.createdAt ?? now,
+        updatedAt: now,
+      }),
+    });
+  },
 });
 
 export const getPart = defineTool({

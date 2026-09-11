@@ -42,6 +42,8 @@ export interface HarnessOptions {
   readonly ledgerIdGenerator?: () => string;
   /** The run these calls belong to, for the tools that record who read something. */
   readonly run?: { readonly promptVersion: string; readonly model: string };
+  /** The clock the tools see. Defaults to a fixed instant. */
+  readonly now?: () => string;
 }
 
 /**
@@ -75,7 +77,7 @@ export async function createHarness(options: HarnessOptions = {}): Promise<TestH
     ...(options.run === undefined ? {} : { run: options.run }),
     policy: options.policy ?? DEFAULT_QUOTA_POLICY,
     headless: options.headless ?? true,
-    now: () => TEST_NOW,
+    now: options.now ?? ((): string => TEST_NOW),
     newId: () => {
       counter += 1;
       const id = `00000000-0000-4000-8000-${String(counter).padStart(12, '0')}`;

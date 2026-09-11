@@ -98,7 +98,8 @@ nothing from a schema you can't validate.
 
 ## Current state
 
-Modules M0 to M17 are complete: schemas, ledger, cache, SQLite, units, the
+Every module in `docs/COMPLETION_PLAN.md` is complete except M9 (Nexar,
+deferred by D29) and task 12.7 (waits on Q3). Tagged `v1.0.0`: schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
 server, the golden evaluation set, the extraction runner, the verification pass, and
@@ -126,7 +127,18 @@ authoritative status table.
 
 ## Next steps
 
-1. M18: release and end-to-end sign-off.
+The plan is finished. What is worth doing next, in the order the evidence
+suggests:
+
+1. Answer Q7 — which column of a MIN/TYP/MAX row is the value — and iterate
+   `extract.v2` against the eval. It is the single largest source of wrong
+   values in the baseline.
+2. Cut the cost of a run: the parameter set is written out twice, once for
+   reconciliation and once to store (L7).
+3. Give `feedbackAccuracy` derived provenance so the verification pass stops
+   reporting it as unfound (L1).
+4. A human pass over the golden set (Q6), which is what would make the eval a
+   reference rather than a baseline.
 
 ## Deferred
 

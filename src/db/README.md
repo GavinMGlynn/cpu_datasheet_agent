@@ -27,7 +27,11 @@ coerced. Every read re-validates, so a corrupted row surfaces as a
 with the value as JSON plus `numeric_min`, `numeric_max`, and `unit` for
 filtering), `offers`, `price_breaks`, `classifications`, `verifications`,
 `escalations`, `nexar_budget` (single row, seeded with limit 90), and `runs`
-(for the agent runner). Child rows cascade on part deletion.
+(one row per agent run, extraction or verification). Child rows cascade on
+part deletion.
+
+Migration 0003 backfills `runs.details_json` with `cacheMisses: 0` for runs
+recorded before the field existed, which is what they counted.
 
 Migration 0002 adds `parameters.conflicts_json`, holding the distributor
 values that disagree with the stored one (Module 11). It is null when nothing

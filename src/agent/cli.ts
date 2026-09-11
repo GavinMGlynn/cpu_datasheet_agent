@@ -14,7 +14,7 @@ import { AlternateQuery, findAlternates, renderAlternates } from '../query/index
 import { elementAt } from '../util/array.js';
 import { extractMany, pendingVerification, readMpnList, verifyMany } from './batch.js';
 import { DEFAULT_VERIFY_PROMPT_VERSION, RunConfig, defaultRunConfig, policyFor } from './config.js';
-import { AgentError } from './errors.js';
+import { AgentError, reason } from './errors.js';
 import type { QueryFn } from './execute.js';
 import { extractPart } from './runner.js';
 import { verifyPart } from './verify.js';
@@ -111,11 +111,6 @@ const OPTIONS = {
   force: { type: 'boolean' },
   help: { type: 'boolean' },
 } as const;
-
-/** The message a person should see for a thrown value. */
-export function reason(error: unknown): string {
-  return error instanceof Error ? error.message : String(error);
-}
 
 /**
  * Reads a command line.
@@ -351,8 +346,13 @@ export async function main(argv: readonly string[], deps: MainDeps): Promise<num
     for (const run of batch.runs) {
       deps.out(summarise(run));
     }
-    deps.out(`${String(batch.runs.length)} run(s), ${String(batch.skipped.length)} skipped`);
-    return batch.runs.some((run) => run.result === 'rejected') ? 1 : 0;
+    for (const failure of batch.failed) {
+      deps.out(`${failure.mpn}: could not run — ${failure.reason}`);
+    }
+    deps.out(
+      `${String(batch.runs.length)} run(s), ${String(batch.skipped.length)} skipped, ${String(batch.failed.length)} failed`,
+    );
+    return batch.runs.some((run) => run.result === 'rejected') || batch.failed.length > 0 ? 1 : 0;
   } catch (error) {
     deps.out(reason(error));
     return 2;

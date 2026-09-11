@@ -27,20 +27,20 @@ module README, or a code comment must have a row here.
 | R-01 | Digi-Key Product Information v4 (overview) | https://developer.digikey.com/products/product-information-v4 | Primary distributor source: parametrics, pricing, datasheet URLs. Lists the `ProductSearch` and `ProductChangeNotifications` APIs. | verified 2026-09-10 |
 | R-02 | Digi-Key Product Information v4, ProductSearch endpoints | https://developer.digikey.com/products/product-information-v4/productsearch | Endpoint index: `KeywordSearch` (POST), `ProductDetails`, `ProductPricing`, `PricingOptionsByQuantity`, `Media`, `Substitutions`, `AlternatePackaging`, `RecommendedProducts`, `Associations`, `Manufacturers`, `Categories`, `CategoriesById`, `DigiReelPricing` (GET), `PackageTypeByQuantity` (deprecated). Exact paths, base URLs, headers, and rate limits are on the per-endpoint pages and must be recorded in M7 task 7.3. | verified 2026-09-10; every path below exercised live against a production app, see `src/adapters/digikey/README.md` |
 | R-60 | Digi-Key OAuth 2.0 2-legged flow | https://developer.digikey.com/tutorials-and-resources/oauth-20-2-legged-flow | Client-credentials token flow for Module 7 task 7.1. Token endpoints: production `https://api.digikey.com/v1/oauth2/token`, sandbox `https://sandbox-api.digikey.com/v1/oauth2/token`. POST `application/x-www-form-urlencoded` with `client_id`, `client_secret`, `grant_type=client_credentials`. Response carries `access_token`, `expires_in` (600 seconds), `token_type` `Bearer`. Calls send `Authorization: Bearer <token>` plus `X-DIGIKEY-Client-Id` and the locale headers. | verified 2026-09-10 |
-| R-03 | Mouser API hub | https://www.mouser.com/api-hub/ | Mouser Search API: part-number and keyword search, pricing, availability, datasheet URL. API key obtained here. | unverified (request timed out 2026-09-10; re-check in M8 task 8.1) |
-| R-04 | Mouser API documentation (Swagger UI) | https://api.mouser.com/api/docs/ui/index | Endpoint paths and request/response shapes for the Search API. | unverified (page content not rendered 2026-09-10) |
+| R-03 | Mouser API hub | https://www.mouser.com/api-hub/ | Mouser Search API: part-number and keyword search, pricing, availability, datasheet URL. API key obtained here. | unverified: the page timed out from this machine on 2026-09-10 and again on 2026-09-12. The API behind it is verified by use — a live key, recorded fixtures, and the contract tests in `test/live/` |
+| R-04 | Mouser API documentation (Swagger UI) | https://api.mouser.com/api/docs/ui/index | Endpoint paths and request/response shapes for the Search API. | unverified: the page renders its content in a browser and returns nothing to a plain client, on 2026-09-10 and again on 2026-09-12. The two endpoints this project calls are recorded in `src/adapters/mouser/README.md` and exercised live |
 | R-61 | element14 / Farnell / Newark Product Search API | https://partner.element14.com/Search_API | Free key, 2 calls per second and 1000 per day. REST, `GET https://api.element14.com/catalog/products` with `term=manuPartNum:<mpn>`, `storeInfo.id`, `resultsSettings.responseGroup=large`, `callInfo.apiKey`. Returns electrical attributes (32 for TPS54331DR) but **no datasheet field** and no AUD pricing for parts the Australian store does not list. Checked live 2026-09-10. | verified 2026-09-10 |
-| R-05b | Nexar API commentary | https://zenode.ai/posts/the-nexar-api-what-engineers-need-to-know-in-2026 | Third-party article reporting the Standard tier at about US$500 per month for 2,000 parts. Not an official price; treat as an order of magnitude only. | unverified |
-| R-05 | Nexar API support and documentation | https://support.nexar.com/ | Nexar (Octopart) supply data: cross-distributor offers and datasheet URLs. `https://docs.nexar.com/` redirects here. Articles "Introduction to the Nexar API" and "Make Your First Octopart Supply Data Query" hold the endpoint and query details needed for M9 task 9.1. | verified 2026-09-10 (landing page only) |
-| R-06 | Nexar plan comparison | https://nexar.com/compare-plans | Tiers and what each includes. Evaluation is free, up to 100 matched parts, and is the **only non-Enterprise tier that includes datasheets and tech specs**. Standard (2,000 matched parts) and Pro (15,000) include only search, pricing, availability, images and descriptions; they exclude datasheets, tech specs, lifecycle status and lead time. Prices are not published on the page. Source of the hard budget in D13. | verified 2026-09-10 |
+| R-05b | Nexar API commentary | https://zenode.ai/posts/the-nexar-api-what-engineers-need-to-know-in-2026 | Third-party article reporting the Standard tier at about US$500 per month for 2,000 parts. | unverified, and nothing depends on it: the tier limits this project acts on come from R-06, and Nexar is deferred (D29) |
+| R-05 | Nexar API support and documentation | https://support.nexar.com/ | Nexar (Octopart) supply data: cross-distributor offers and datasheet URLs. `https://docs.nexar.com/` redirects here. Articles "Introduction to the Nexar API" and "Make Your First Octopart Supply Data Query" hold the endpoint and query details needed for M9 task 9.1. | verified 2026-09-10 (landing page only); M9 is deferred (D29), so the endpoint details were never needed |
+| R-06 | Nexar plan comparison | https://nexar.com/compare-plans | Tiers and what each includes. Evaluation is free, up to 100 matched parts, and is the **only non-Enterprise tier that includes datasheets and tech specs**. Standard (2,000 matched parts) and Pro (15,000) include only search, pricing, availability, images and descriptions; they exclude datasheets, tech specs, lifecycle status and lead time. Prices are not published on the page. Source of the hard budget in D13. | verified 2026-09-10, re-checked 2026-09-12: the tiers and what each includes are unchanged |
 
 ## Model Context Protocol
 
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
 | R-07 | MCP TypeScript SDK repository | https://github.com/modelcontextprotocol/typescript-sdk | v2 stable line, packages `@modelcontextprotocol/server` (2.0.0) and `@modelcontextprotocol/client` (2.0.0), `McpServer` class. Targets the 2026-07-28 MCP spec. The 1.x line is `@modelcontextprotocol/sdk`, which the Agent SDK still peer-depends on and bundles. | verified 2026-09-11; both packages installed and pinned in M12, `registerTool`, `serveStdio`, `InMemoryTransport` and the client's `listTools`/`callTool` all exercised in tests |
-| R-08 | Model Context Protocol specification and docs | https://modelcontextprotocol.io/ | Protocol semantics: tools, resources, stdio transport, error results. | unverified |
-| R-09 | MCP Inspector | https://github.com/modelcontextprotocol/inspector | Manual check of the stdio server in M12 task 12.9. Needs a browser, so the equivalent check was done by driving `bin/chip-mcp.ts` over real pipes instead (see the session 16 log). | unverified |
+| R-08 | Model Context Protocol specification and docs | https://modelcontextprotocol.io/ | Protocol semantics: tools, resources, transports, error results. Current specification 2026-07-28, which is the one the v2 SDK targets (R-07). | verified 2026-09-12 |
+| R-09 | MCP Inspector | https://github.com/modelcontextprotocol/inspector | Manual check of the stdio server in M12 task 12.9. Needs a browser, so the equivalent check was done by driving `bin/chip-mcp.ts` over real pipes instead (see the session 16 log). | verified 2026-09-12; the tool exists and runs with `npx @modelcontextprotocol/inspector` |
 
 ## Claude and the Agent SDK
 
@@ -65,34 +65,34 @@ module README, or a code comment must have a row here.
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
 | R-20 | Poppler | https://poppler.freedesktop.org/ | `pdftotext`, `pdftoppm`, `pdfinfo` (D08). Installed as `poppler-utils` 24.02.0 and exercised for real by the Module 6 tests. | verified 2026-09-10 |
-| R-21 | TypeScript | https://www.typescriptlang.org/ | Language. Pinned to 6.0.3 (D17); 7.0.2 is outside the linter peer range. | unverified |
-| R-22 | Vitest | https://vitest.dev/ | Test runner, version 5.0.0 (D03). | unverified |
-| R-23 | Vitest coverage | https://vitest.dev/guide/coverage | `@vitest/coverage-v8`, per-file thresholds. | unverified |
-| R-24 | typescript-eslint | https://typescript-eslint.io/ | Lint rules `strictTypeChecked` and `stylisticTypeChecked`, version 8.70.0. | unverified |
-| R-25 | Prettier | https://prettier.io/ | Formatting, version 3.9.6. | unverified |
-| R-26 | GitHub Actions | https://docs.github.com/en/actions | CI (M0 task 0.11). | unverified |
+| R-21 | TypeScript | https://www.typescriptlang.org/ | Language. Pinned to 6.0.3 (D17). | verified 2026-09-12; the site now advertises TypeScript 7.0 as current, and `typescript-eslint` 8.70.0 still declares a peer range of `>=4.8.4 <6.1.0`, so D17's pin stands until the linter moves |
+| R-22 | Vitest | https://vitest.dev/ | Test runner, version 5.0.0 (D03). | verified 2026-09-12; the site documents the 5.x line |
+| R-23 | Vitest coverage | https://vitest.dev/guide/coverage | Coverage providers: native `v8` and instrumented `istanbul`. The `thresholds.perFile` option this project depends on is in the config reference rather than this guide, and is exercised on every run of `npm run check`. | verified 2026-09-12; the guide covers the providers, not the thresholds |
+| R-24 | typescript-eslint | https://typescript-eslint.io/users/configs | Shared configurations, version 8.70.0. The site names them `strict-type-checked` and `stylistic-type-checked`; the flat-config exports this project uses are `strictTypeChecked` and `stylisticTypeChecked`. | verified 2026-09-12 |
+| R-25 | Prettier | https://prettier.io/ | Formatting, version 3.9.6. | verified 2026-09-12 |
+| R-26 | GitHub Actions | https://docs.github.com/en/actions | CI (M0 task 0.11), on the user's self-hosted runner (D21). | verified by use 2026-09-12; every push since M0 has run the workflow, and the runs are visible in the repository |
 | R-27 | better-sqlite3 | https://github.com/WiseLibs/better-sqlite3 | SQLite driver, version 13.0.3, prebuilt binaries for major platforms (D05). | verified 2026-09-10 |
-| R-28 | fast-check | https://fast-check.dev/ | Property-based tests for parsers (M5), version 4.9.0. | unverified |
+| R-28 | fast-check | https://fast-check.dev/ | Property-based tests for parsers (M5), version 4.9.0. | verified 2026-09-12 |
 | R-29 | pdf-lib | https://pdf-lib.js.org/ | Generating PDF test fixtures (M6), version 1.17.1. In use in `test/helpers/pdf-fixtures.ts`. | verified 2026-09-10 |
 | R-30 | Mock Service Worker | https://mswjs.io/ | HTTP interception in tests (D07), version 2.15.0. Its handler types do not resolve under type-aware linting, so all usage goes through one boundary module (D22). | verified 2026-09-10 |
-| R-34 | Zod | https://zod.dev/ | Schemas and validation (D06), version 4.6.1. | unverified |
-| R-35 | Node.js 22 documentation | https://nodejs.org/docs/latest-v22.x/api/ | Runtime APIs (`node:fs`, `node:child_process`, `fetch`). | unverified |
-| R-36 | simple-git-hooks | https://github.com/toplenboren/simple-git-hooks | Pre-push hook (M0 task 0.12), version 2.14.0. | unverified |
-| R-37 | tsx | https://tsx.is/ | Running TypeScript scripts under `scripts/` and `bin/`, version 4.23.13. | unverified |
+| R-34 | Zod | https://zod.dev/ | Schemas and validation (D06), version 4.6.1. | verified 2026-09-12; the site documents the stable 4.x line |
+| R-35 | Node.js 22 documentation | https://nodejs.org/docs/latest-v22.x/api/ | Runtime APIs (`node:fs`, `node:crypto`, `node:child_process`, `fetch`). | verified 2026-09-12; the index covers all of them, currently at 22.23.2 |
+| R-36 | simple-git-hooks | https://github.com/toplenboren/simple-git-hooks | Pre-push hook (M0 task 0.12), version 2.14.0. The hook is declared in the `simple-git-hooks` object in `package.json`, as the README describes. | verified 2026-09-12 |
+| R-37 | tsx | https://github.com/privatenumber/tsx | Running TypeScript scripts under `scripts/` and `bin/`, version 4.23.13. | verified 2026-09-12 at the repository; `https://tsx.is/` fails certificate validation from this machine |
 
 ## Domain references
 
 | ID   | Title | URL | Used for | Status |
 | ---- | ----- | --- | -------- | ------ |
-| R-40 | AEC-Q100 | http://www.aecouncil.com/AECDocuments.html | Automotive qualification flag `aecQ100` and temperature grade rule (M11). | unverified |
-| R-41 | Texas Instruments product pages | https://www.ti.com/ | Datasheets and ordering guides for TI parts in the golden set. | unverified |
-| R-42 | Monolithic Power Systems | https://www.monolithicpower.com/ | Datasheets for MPS parts in the golden set. | unverified |
-| R-43 | Diodes Incorporated | https://www.diodes.com/ | Datasheets for AP-series parts in the golden set. | unverified |
-| R-44 | Analog Devices | https://www.analog.com/ | Datasheets for LT and MAX parts in the golden set. | unverified |
-| R-45 | Richtek | https://www.richtek.com/ | Datasheets for RT parts in the golden set. | unverified |
-| R-46 | onsemi | https://www.onsemi.com/ | Datasheets for NCP parts in the golden set. | unverified |
-| R-47 | Microchip | https://www.microchip.com/ | Datasheets for MCP parts in the golden set. | unverified |
-| R-48 | STMicroelectronics | https://www.st.com/ | Datasheets for ST parts in the golden set. | unverified |
+| R-40 | AEC-Q100 | http://www.aecouncil.com/AECDocuments.html | Automotive qualification flag `aecQ100` and temperature grade rule (M11). | unverified (TLS handshake fails from this machine, 2026-09-12). The flag is never read from here: it is taken from each datasheet's own qualification statement and orderable list, and two golden parts carry it |
+| R-41 | Texas Instruments product pages | https://www.ti.com/ | Datasheets and ordering guides for TI parts in the golden set. | verified by use 2026-09-12; serves PDFs to a plain client at `ti.com/lit/ds/symlink/<part>.pdf` and `ti.com/lit/gpn/<part>`, and thirteen golden parts were read from them |
+| R-42 | Monolithic Power Systems | https://www.monolithicpower.com/ | Datasheets for MPS parts. | verified by use 2026-09-11 and found unusable: every document URL returns an HTML viewer rather than a PDF, so no MPS part is in the golden set (D46). The MPN decoder for MPS suffixes stands on R-65 instead |
+| R-43 | Diodes Incorporated | https://www.diodes.com/ | Datasheets for AP-series parts in the golden set. | verified by use 2026-09-12; serves PDFs at `diodes.com/assets/Datasheets/...`, and five golden parts were read from them |
+| R-44 | Analog Devices | https://www.analog.com/ | Datasheets for LT and MAX parts. | verified by use 2026-09-11 and found unusable: the request is refused, and Digi-Key's own link for `LT8610AEMSE-PBF` points at the LTpowerCAD help file rather than the datasheet. No ADI part is in the golden set (D46) |
+| R-45 | Richtek | https://www.richtek.com/ | Datasheets for RT parts. | unverified, and unused: no Richtek part is in the golden set. The row is kept because `src/mpn/decoders/richtek.ts` decodes RT part numbers, and that stands on the recorded corpus rather than on this page |
+| R-46 | onsemi | https://www.onsemi.com/ | Datasheets for NCP parts. | verified by use 2026-09-11 and found unusable: document URLs redirect to a landing page rather than serving a PDF, so no onsemi part is in the golden set (D46) |
+| R-47 | Microchip | https://www.microchip.com/ | Datasheets for MCP parts in the golden set. | verified by use 2026-09-11; serves PDFs to a plain client, and `MCP16331T-E/CH` was read from one |
+| R-48 | STMicroelectronics | https://www.st.com/ | Datasheets for ST parts. | verified by use 2026-09-11 and found unusable: the request is refused, so no ST part is in the golden set (D46). The MPN decoder for ST suffixes stands on the recorded corpus |
 
 ## Part-number nomenclature (Module 10)
 

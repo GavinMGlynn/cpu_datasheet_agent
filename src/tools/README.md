@@ -38,7 +38,8 @@ wrong one running.
 | `reconcile_parameters` | no | Datasheet against distributor; stores any safety escalation. |
 | `classify_part` | no | The categorisation axes, naming what it could not decide. |
 | `upsert_part`, `get_part`, `search_parts` | no | Store and query parts. `upsert_part` validates the whole aggregate and rejects it. |
-| `record_verification` | no | One verification verdict against a stored parameter. |
+| `record_verification` | no | One verification verdict against a stored parameter. The run stamps the time, the prompt version and the model; the reader states only what it read (D52). |
+| `find_alternates` | no | Cheaper stored parts that still meet the constraints, with the pin-compatibility disclaimer in the answer. |
 | `ask_human`, `list_escalations` | no | Hand a question to a person; read what is waiting. The facts that go with a question are labelled `{key, value}` pairs rather than a record, because the Agent SDK cannot carry a record in a tool schema (D48). |
 | `nexar_budget_status`, `cache_stats` | no | What has been spent, and what the cache has done. |
 

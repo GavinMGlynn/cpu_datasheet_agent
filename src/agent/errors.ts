@@ -8,3 +8,8 @@ import { ChipAgentError } from '../errors.js';
  * the mistakes that stop a run from starting at all.
  */
 export class AgentError extends ChipAgentError {}
+
+/** The message a person should see for a thrown value. */
+export function reason(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}

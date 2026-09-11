@@ -856,13 +856,16 @@ from verified data, with the pin-compatibility caveat stated every time.
 Goal: the whole pipeline runs on real data, the documents describe what
 exists, and the repository is tagged.
 
-- [ ] 18.1 End-to-end run: `extract-many` then `verify-pending` over the
-      twenty golden parts with live APIs (one approved spend event), followed
-      by `runEval` against the resulting cache. Cost and results recorded.
-- [ ] 18.2 Every open escalation from 18.1 resolved by the user or recorded
-      as a known limitation in `PROJECT_PLAN.md`.
-- [ ] 18.3 `README.md`, `CLAUDE.md` "Current state" and "Next steps", and
+- [x] 18.1 End-to-end run: one live-API extraction with `--allow-spend` (the
+      approved spend event, `TPS62740DSSR`, $6.16), `verify-pending` over the
+      twenty-two parts the M16 baseline extracted ($22.09), and `runEval`
+      against the result. The extraction sweep is the baseline's rather than a
+      repeat of it, by the user's decision; cost and results are in the
+      session log.
+- [x] 18.2 Every open escalation from 18.1 resolved by the user or recorded
+      as a known limitation in `PROJECT_PLAN.md` section 9 (L1 to L7).
+- [x] 18.3 `README.md`, `CLAUDE.md` "Current state" and "Next steps", and
       every `src/*/README.md` reviewed for accuracy against the code.
-- [ ] 18.4 `docs/REFERENCES.md`: every row re-checked, dates updated,
+- [x] 18.4 `docs/REFERENCES.md`: every row re-checked, dates updated,
       unverified rows resolved or removed.
-- [ ] 18.5 Tag `v1.0.0`, push the tag, log entry closing the plan.
+- [x] 18.5 Tag `v1.0.0`, push the tag, log entry closing the plan.

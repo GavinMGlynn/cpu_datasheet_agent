@@ -240,6 +240,15 @@ export function part(overrides: Loose = {}): Loose {
   };
 }
 
+/**
+ * A part as `upsert_part` takes one: no timestamps, because the store writes
+ * them (D61).
+ */
+export function partDraft(overrides: Loose = {}): Loose {
+  const { createdAt: _createdAt, updatedAt: _updatedAt, ...draft } = part(overrides);
+  return draft;
+}
+
 /** Every parameter re-wrapped with the given confidence. */
 export function withConfidence(parameters: Loose, confidence: string): Loose {
   const out: Loose = {};

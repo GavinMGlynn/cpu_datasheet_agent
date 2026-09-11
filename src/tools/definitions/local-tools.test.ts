@@ -6,6 +6,7 @@ import {
   offer,
   param,
   part,
+  partDraft,
   q,
   verification,
   verificationClaim,
@@ -56,9 +57,32 @@ describe('nexar_budget_status and cache_stats', () => {
 
 describe('upsert_part and get_part', () => {
   it('stores a part and reads it back unchanged', async () => {
-    const stored = await call('upsert_part', { part: part() });
-    expect(stored.part).toEqual(part());
-    expect((await call('get_part', { mpn: 'TPS54331DR' })).part).toEqual(part());
+    const stored = await call('upsert_part', { part: partDraft() });
+    // The store writes the times, not the caller (D61).
+    expect(stored.part).toEqual({ ...partDraft(), createdAt: TEST_NOW, updatedAt: TEST_NOW });
+    expect((await call('get_part', { mpn: 'TPS54331DR' })).part).toEqual(stored.part);
+  });
+
+  it('keeps the time a part was first stored when it is stored again', async () => {
+    const running = await createHarness({ now: () => '2026-09-11T00:00:00.000Z' });
+    try {
+      await registry.call('upsert_part', { part: partDraft() }, running.context);
+      const later = await createHarness();
+      try {
+        // A second store, a day later, against the same database.
+        const again = (await registry.call(
+          'upsert_part',
+          { part: partDraft({ status: 'needs_human' }) },
+          { ...later.context, repositories: running.context.repositories },
+        )) as { part: { createdAt: string; updatedAt: string } };
+        expect(again.part.createdAt).toBe('2026-09-11T00:00:00.000Z');
+        expect(again.part.updatedAt).toBe(TEST_NOW);
+      } finally {
+        await later.close();
+      }
+    } finally {
+      await running.close();
+    }
   });
 
   it('returns null for a part nobody has stored', async () => {
@@ -67,13 +91,13 @@ describe('upsert_part and get_part', () => {
 
   it('rejects the CLAUDE.md case rather than coercing it', async () => {
     // A string where a min/max pair belongs must fail loudly.
-    const broken = part({ parameters: buckParameters({ vinMax: param('3 V to 32 V') }) });
+    const broken = partDraft({ parameters: buckParameters({ vinMax: param('3 V to 32 V') }) });
     await expect(call('upsert_part', { part: broken })).rejects.toBeInstanceOf(ValidationError);
     expect((await call('get_part', { mpn: 'TPS54331DR' })).part).toBeNull();
   });
 
   it('rejects a datasheet-cited parameter with no datasheet attached', async () => {
-    const { datasheet: _datasheet, ...withoutDatasheet } = part();
+    const { datasheet: _datasheet, ...withoutDatasheet } = partDraft();
     await expect(call('upsert_part', { part: withoutDatasheet })).rejects.toBeInstanceOf(
       ValidationError,
     );
@@ -82,7 +106,7 @@ describe('upsert_part and get_part', () => {
 
 describe('search_parts', () => {
   beforeEach(async () => {
-    await call('upsert_part', { part: part() });
+    await call('upsert_part', { part: partDraft() });
   });
 
   it('finds a part by classification axis and value', async () => {
@@ -130,7 +154,7 @@ describe('record_verification', () => {
       run: { promptVersion: 'verify.v1', model: 'test-model' },
     });
     try {
-      await registry.call('upsert_part', { part: part() }, running.context);
+      await registry.call('upsert_part', { part: partDraft() }, running.context);
       return (await registry.call('record_verification', input, running.context)) as Record<
         string,
         unknown
@@ -158,7 +182,7 @@ describe('record_verification', () => {
   });
 
   it('refuses to record outside a run, which would leave nobody named as the reader', async () => {
-    await call('upsert_part', { part: part() });
+    await call('upsert_part', { part: partDraft() });
 
     await expect(
       call('record_verification', { mpn: 'TPS54331DR', verification: verificationClaim() }),
@@ -183,7 +207,7 @@ describe('find_alternates', () => {
     ];
     for (const { mpn, unitPrice } of priced) {
       await call('upsert_part', {
-        part: part({
+        part: partDraft({
           mpn,
           parameters: withConfidence(parameters, 'verified'),
           classifications,
@@ -275,7 +299,7 @@ describe('ask_human and list_escalations', () => {
   });
 
   it('marks a stored part as needing a person, headless', async () => {
-    await call('upsert_part', { part: part() });
+    await call('upsert_part', { part: partDraft() });
 
     expect((await call('ask_human', question)).markedNeedsHuman).toBe(true);
 
@@ -298,7 +322,7 @@ describe('ask_human and list_escalations', () => {
   });
 
   it('marks a part already needing a person only once', async () => {
-    await call('upsert_part', { part: part({ status: 'needs_human' }) });
+    await call('upsert_part', { part: partDraft({ status: 'needs_human' }) });
     expect((await call('ask_human', question)).markedNeedsHuman).toBe(false);
   });
 
