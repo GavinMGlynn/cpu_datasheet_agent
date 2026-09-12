@@ -87,14 +87,14 @@ describe('one evaluation', () => {
     expect(screen.getByText('59.3%')).toBeInTheDocument();
     expect(screen.getByText('$87.24')).toBeInTheDocument();
     expect(
-      screen.getByText(/2 parts wanted something the cache did not have/u),
+      screen.getByText(/2 parts wanted something the cache did not have/iu),
     ).toBeInTheDocument();
   });
 
   it('puts the least reliable parameter first, and names the parts', async () => {
     renderApp(`/evals/${encodeURIComponent(id)}`, stubs());
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /accuracy by parameter/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /accuracy by parameter/iu })).toBeInTheDocument();
     });
     expect(screen.getByRole('cell', { name: '5/14' })).toBeInTheDocument();
     // Once as the part maxDutyCycle was wrong for, once in the failures table.
@@ -105,7 +105,7 @@ describe('one evaluation', () => {
   it('lists every value that did not match, with both sides', async () => {
     renderApp(`/evals/${encodeURIComponent(id)}`, stubs());
     await waitFor(() => {
-      expect(screen.getByText('every value that did not match')).toBeInTheDocument();
+      expect(screen.getByText('Every value that did not match')).toBeInTheDocument();
     });
     expect(screen.getByRole('cell', { name: '90 %' })).toBeInTheDocument();
     expect(screen.getByRole('cell', { name: '93 %' })).toBeInTheDocument();
@@ -114,10 +114,10 @@ describe('one evaluation', () => {
   it('sorts the parameter table', async () => {
     renderApp(`/evals/${encodeURIComponent(id)}`, stubs());
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by right' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by right' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'sort by right' }));
-    await userEvent.click(screen.getByRole('button', { name: 'sort by cited exactly' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by right' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by cited exactly' }));
     expect(screen.getAllByRole('table').length).toBeGreaterThan(1);
   });
 
@@ -128,9 +128,9 @@ describe('one evaluation', () => {
       evalFailures: () => Promise.resolve({ failures: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByText('every value matched the golden reading')).toBeInTheDocument();
+      expect(screen.getByText('Every value matched the golden reading.')).toBeInTheDocument();
     });
-    expect(screen.queryByText(/wanted something the cache did not have/u)).toBeNull();
+    expect(screen.queryByText(/wanted something the cache did not have/iu)).toBeNull();
   });
 
   it('goes back to the evaluations', async () => {
@@ -138,7 +138,7 @@ describe('one evaluation', () => {
       ...stubs(),
       evals: () => Promise.resolve({ results: [] }),
     });
-    await userEvent.click(await screen.findByRole('button', { name: 'back to the evaluations' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Back to evaluations' }));
     await waitFor(() => {
       expect(globalThis.location.pathname).toBe('/evals');
     });

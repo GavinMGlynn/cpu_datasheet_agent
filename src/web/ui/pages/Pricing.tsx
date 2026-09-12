@@ -43,10 +43,10 @@ export function Pricing(): ReactNode {
   );
 
   return (
-    <Page title="pricing" subtitle="what the stored parts cost, and for what">
+    <Page title="Pricing" subtitle="What the stored parts cost, and for what">
       <div className="filters">
         <TextField
-          label="price at quantity"
+          label="Price at quantity"
           type="number"
           value={typed}
           onChange={(value) => {
@@ -73,8 +73,8 @@ export function Pricing(): ReactNode {
           return (
             <>
               <Scatter
-                title={`unit price at ${String(quantity)} against output current`}
-                caption="parts with no price in this currency are left out rather than ranked"
+                title={`Unit price at ${String(quantity)} against output current`}
+                caption="Parts with no price in this currency are left out rather than ranked"
                 points={points}
                 xLabel="output current"
                 yLabel="each"
@@ -85,11 +85,11 @@ export function Pricing(): ReactNode {
                 <table>
                   <thead>
                     <tr>
-                      <th>part</th>
-                      <th>each</th>
-                      <th>break</th>
-                      <th>distributor</th>
-                      <th className="numeric">stock</th>
+                      <th>Part</th>
+                      <th>Each</th>
+                      <th>Break</th>
+                      <th>Distributor</th>
+                      <th className="numeric">Stock</th>
                     </tr>
                   </thead>
                   <tbody>

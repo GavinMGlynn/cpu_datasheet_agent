@@ -16,12 +16,12 @@ describe('Histogram', () => {
   it('draws a bucket per band and labels the axis', () => {
     const { container } = renderAt(
       <Histogram
-        title="vinMax across the set"
+        title="VinMax across the set"
         buckets={buckets}
         format={(value) => `${String(value)} V`}
       />,
     );
-    expect(screen.getByRole('heading', { name: 'vinMax across the set' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'VinMax across the set' })).toBeInTheDocument();
     expect(container.querySelectorAll('rect').length).toBeGreaterThan(0);
   });
 
@@ -42,8 +42,8 @@ describe('Histogram', () => {
   });
 
   it('says when there is nothing to plot', () => {
-    renderAt(<Histogram title="vinMax" buckets={[]} format={String} empty="no numbers here" />);
-    expect(screen.getByText('no numbers here')).toBeInTheDocument();
+    renderAt(<Histogram title="vinMax" buckets={[]} format={String} empty="No numbers here" />);
+    expect(screen.getByText('No numbers here')).toBeInTheDocument();
   });
 
   it('copes with buckets that are all empty', () => {

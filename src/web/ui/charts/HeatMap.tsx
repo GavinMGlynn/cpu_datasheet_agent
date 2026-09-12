@@ -51,7 +51,7 @@ export function HeatMap(props: HeatMapProps): ReactNode {
         <figcaption className="chart-head">
           <h3>{props.title}</h3>
         </figcaption>
-        <p className="empty">nothing stored yet</p>
+        <p className="empty">Nothing stored yet</p>
       </figure>
     );
   }

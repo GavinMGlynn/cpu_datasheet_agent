@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import { STATUS } from '../charts/palette.js';
+import { label } from '../lib/labels.js';
 
 /**
  * State, as a word with a colour beside it.
@@ -67,7 +68,7 @@ export function Badge(props: BadgeProps): ReactNode {
       {colour === undefined ? null : (
         <span className="dot" style={{ background: colour }} aria-hidden="true" />
       )}
-      {value.replace(/_/gu, ' ')}
+      {label(value)}
     </span>
   );
 }

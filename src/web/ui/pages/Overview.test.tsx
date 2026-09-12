@@ -39,23 +39,74 @@ describe('the overview', () => {
       spend: () => Promise.resolve(spend),
     });
     await waitFor(() => {
-      expect(screen.getByText('22')).toBeInTheDocument();
+      expect(screen.getByText('585')).toBeInTheDocument();
     });
     expect(screen.getByText('$109.33')).toBeInTheDocument();
     expect(screen.getByText('$4.97')).toBeInTheDocument();
     expect(screen.getByText('2,505')).toBeInTheDocument();
-    expect(screen.getByText(/22 extracted/u)).toBeInTheDocument();
-    expect(screen.getByText(/refused 0.0%/u)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'How the runs ended' })).toBeInTheDocument();
+    expect(screen.getByText('Extracted')).toBeInTheDocument();
+    expect(screen.getByText(/refused 0.0%/iu)).toBeInTheDocument();
   });
 
-  it('plots what it has cost', async () => {
+  it('plots what it has cost, day by day', async () => {
     renderApp('/', {
       overview: () => Promise.resolve(overview),
       spend: () => Promise.resolve(spend),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /what it has cost/u })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: 'What it has cost, day by day' }),
+      ).toBeInTheDocument();
     });
+  });
+
+  it('falls back to the hour when everything was spent inside one day', async () => {
+    const asked: string[] = [];
+    renderApp('/', {
+      overview: () => Promise.resolve(overview),
+      spend: (_source: string, granularity: string) => {
+        asked.push(granularity);
+        return Promise.resolve(
+          granularity === 'day'
+            ? {
+                points: [
+                  {
+                    key: '2026-09-11',
+                    costUsd: 109.33,
+                    cumulativeUsd: 109.33,
+                    runs: 47,
+                    turns: 981,
+                  },
+                ],
+              }
+            : {
+                points: [
+                  {
+                    key: '2026-09-11T11',
+                    costUsd: 45.23,
+                    cumulativeUsd: 45.23,
+                    runs: 20,
+                    turns: 400,
+                  },
+                  {
+                    key: '2026-09-11T12',
+                    costUsd: 64.1,
+                    cumulativeUsd: 109.33,
+                    runs: 27,
+                    turns: 581,
+                  },
+                ],
+              },
+        );
+      },
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: 'What it has cost, hour by hour' }),
+      ).toBeInTheDocument();
+    });
+    expect(asked).toStrictEqual(['day', 'hour']);
   });
 
   it('says plainly when nothing has run', async () => {
@@ -69,18 +120,18 @@ describe('the overview', () => {
       spend: () => Promise.resolve({ points: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByText(/nothing has run yet/u)).toBeInTheDocument();
+      expect(screen.getByText(/nothing has run against this database yet/iu)).toBeInTheDocument();
     });
-    expect(screen.getByText('no runs in this window')).toBeInTheDocument();
+    expect(screen.getByText('No runs in this window.')).toBeInTheDocument();
   });
 
   it('shows the refusal rather than a blank page', async () => {
     renderApp('/', {
-      overview: () => Promise.reject(new Error('the database went away')),
+      overview: () => Promise.reject(new Error('The database went away')),
       spend: () => Promise.resolve(spend),
     });
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent('the database went away');
+      expect(screen.getByRole('alert')).toHaveTextContent('The database went away');
     });
   });
 });

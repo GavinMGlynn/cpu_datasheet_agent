@@ -44,7 +44,7 @@ const errors = {
       count: 7,
       tools: ['digikey_keyword_search', 'digikey_product_details'],
       latestAt: '2026-09-11T11:00:00Z',
-      message: 'no cached entry, and this call may not fetch',
+      message: 'No cached entry, and this call may not fetch',
     },
   ],
 };
@@ -56,7 +56,7 @@ describe('tools', () => {
       errors: () => Promise.resolve(errors),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'calls by tool' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Calls by tool' })).toBeInTheDocument();
     });
     expect(screen.getByRole('cell', { name: '1,101' })).toBeInTheDocument();
     expect(screen.getByText('9 (10%)')).toBeInTheDocument();
@@ -81,12 +81,12 @@ describe('tools', () => {
       errors: () => Promise.resolve(errors),
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by median' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by median' })).toBeInTheDocument();
     });
     for (const column of ['tool', 'calls', 'failed', 'may spend', 'median', '90th', 'total time']) {
-      await userEvent.click(screen.getByRole('button', { name: `sort by ${column}` }));
+      await userEvent.click(screen.getByRole('button', { name: `Sort by ${column}` }));
     }
-    await userEvent.click(screen.getByRole('button', { name: 'sort by times' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by times' }));
     expect(screen.getAllByRole('table').length).toBe(2);
   });
 
@@ -96,7 +96,7 @@ describe('tools', () => {
       errors: () => Promise.resolve({ errors: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByText('nothing has failed in this ledger')).toBeInTheDocument();
+      expect(screen.getByText('Nothing has failed in this ledger.')).toBeInTheDocument();
     });
   });
 });

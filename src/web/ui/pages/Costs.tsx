@@ -18,40 +18,50 @@ import { useAsync } from '../lib/state.js';
  */
 
 const DIMENSIONS = [
-  { value: 'model', label: 'by model' },
-  { value: 'promptVersion', label: 'by prompt version' },
-  { value: 'kind', label: 'by kind of run' },
-  { value: 'result', label: 'by how it ended' },
-  { value: 'mpn', label: 'by part' },
+  { value: 'model', label: 'By model' },
+  { value: 'promptVersion', label: 'By prompt version' },
+  { value: 'kind', label: 'By kind of run' },
+  { value: 'result', label: 'By how it ended' },
+  { value: 'mpn', label: 'By part' },
 ];
 
 export function Costs(): ReactNode {
   const { api, source, route } = useApp();
-  const granularity = route.query.get('granularity') ?? 'day';
+  const asked = route.query.get('granularity');
+  const granularity = asked ?? 'day';
   const dimension = route.query.get('dimension') ?? 'model';
-  const spend = useAsync(`spend:${source}:${granularity}`, () => api.spend(source, granularity));
+  // Nobody chose this bucket, and everything landed inside one of them: the
+  // chart would be a single point, so it drops to the hour. A bucket the
+  // reader picked is left exactly as they picked it.
+  const spend = useAsync(`spend:${source}:${granularity}`, async () => {
+    const chosen = await api.spend(source, granularity);
+    if (asked !== null || chosen.points.length > 1) {
+      return chosen;
+    }
+    return api.spend(source, 'hour');
+  });
   const breakdown = useAsync(`spendBy:${source}:${dimension}`, () =>
     api.spendBy(dimension, source),
   );
 
   return (
-    <Page title="cost" subtitle="what the agent work has cost, and what it bought">
+    <Page title="Cost" subtitle="What the agent work has cost, and what it bought">
       <div className="filters">
         <Select
-          label="over"
+          label="Over"
           value={granularity}
           options={[
-            { value: 'hour', label: 'hours' },
-            { value: 'day', label: 'days' },
-            { value: 'week', label: 'weeks' },
-            { value: 'month', label: 'months' },
+            { value: 'hour', label: 'Hours' },
+            { value: 'day', label: 'Days' },
+            { value: 'week', label: 'Weeks' },
+            { value: 'month', label: 'Months' },
           ]}
           onChange={(value) => {
             navigate(withQuery(route, { granularity: value }));
           }}
         />
         <Select
-          label="broken down"
+          label="Broken down"
           value={dimension}
           options={DIMENSIONS}
           onChange={(value) => {
@@ -62,24 +72,24 @@ export function Costs(): ReactNode {
       <Async state={spend.state} label="spending over time">
         {(value) => (
           <TimeSeries
-            title="spent, and spent in total"
-            caption="both lines are dollars, so they share one axis"
+            title="Spent, and spent in total"
+            caption="Both lines are dollars, so they share one axis"
             rows={value.points}
           />
         )}
       </Async>
-      <Async state={breakdown.state} label="the breakdown">
+      <Async state={breakdown.state} label="The breakdown">
         {(value) => (
           <Bars
-            title={`spend ${DIMENSIONS.find((one) => one.value === dimension)?.label ?? ''}`}
-            caption="darker is dearer; the number beside each bar is the total"
+            title={`Spend ${(DIMENSIONS.find((one) => one.value === dimension)?.label ?? '').toLowerCase()}`}
+            caption="Darker is dearer; the number beside each bar is the total"
             rows={value.breakdown.map((row) => ({
               label: row.key,
               value: row.costUsd,
               note: `${count(row.runs)} runs, ${usd(row.meanCostUsd)} each, ${count(row.unsuccessful)} without a part`,
             }))}
             format={(number) => usd(number)}
-            empty="nothing has been spent in this database"
+            empty="Nothing has been spent in this database."
           />
         )}
       </Async>

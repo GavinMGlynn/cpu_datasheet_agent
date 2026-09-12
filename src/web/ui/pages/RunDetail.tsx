@@ -7,7 +7,8 @@ import { Badge } from '../components/Badge.js';
 import { Json } from '../components/Json.js';
 import { Page } from '../components/Page.js';
 import { Stat, Stats } from '../components/Stat.js';
-import { duration, shortId, usd, when } from '../lib/format.js';
+import { duration, relative, shortId, usd } from '../lib/format.js';
+import { label, labelOr } from '../lib/labels.js';
 import { navigate } from '../lib/router.js';
 import { useAsync } from '../lib/state.js';
 import type { CallNode, ToolCall } from '../lib/types.js';
@@ -68,8 +69,8 @@ export function RunDetail(props: RunDetailProps): ReactNode {
 
   return (
     <Page
-      title={`run ${shortId(props.id)}`}
-      subtitle="what this run did, call by call"
+      title={`Run ${shortId(props.id)}`}
+      subtitle="What this run did, call by call"
       actions={
         <button
           type="button"
@@ -78,7 +79,7 @@ export function RunDetail(props: RunDetailProps): ReactNode {
             navigate('/runs');
           }}
         >
-          back to the runs
+          Back to runs
         </button>
       }
     >
@@ -86,30 +87,30 @@ export function RunDetail(props: RunDetailProps): ReactNode {
         {(value) => (
           <>
             <Stats>
-              <Stat label="part" value={value.run.mpn} note={value.run.kind} />
+              <Stat label="Part" value={value.run.mpn} note={label(value.run.kind)} />
               <Stat
-                label="cost"
+                label="Cost"
                 value={usd(value.run.costUsd)}
                 note={`${String(value.run.turns ?? 0)} turns`}
               />
               <Stat
-                label="ended"
-                value={value.run.result ?? 'unfinished'}
+                label="Ended"
+                value={labelOr(value.run.result, 'Unfinished')}
                 note={value.run.details?.reason ?? value.run.details?.subtype ?? ''}
               />
               <Stat
-                label="tool calls"
+                label="Tool calls"
                 value={String(value.calls.length)}
                 note={`${String(value.run.details?.toolFailures.length ?? 0)} failed`}
               />
               <Stat
-                label="took"
+                label="Took"
                 value={
                   value.run.endedAt === undefined
                     ? '—'
                     : duration(Date.parse(value.run.endedAt) - Date.parse(value.run.startedAt))
                 }
-                note={when(value.run.startedAt)}
+                note={relative(value.run.startedAt)}
               />
             </Stats>
             <div className="row" style={{ marginBottom: 12 }}>
@@ -131,7 +132,7 @@ export function RunDetail(props: RunDetailProps): ReactNode {
             </div>
             <div className="split">
               <div className="panel">
-                <h3>what it called</h3>
+                <h3>What it called</h3>
                 {value.calls.length === 0 ? (
                   <p className="empty">
                     this run left no trace in the ledger — it may predate it, or the ledger may have
@@ -146,18 +147,18 @@ export function RunDetail(props: RunDetailProps): ReactNode {
                 )}
               </div>
               <div className="panel">
-                <h3>{selected === undefined ? 'pick a call' : selected.tool}</h3>
+                <h3>{selected === undefined ? 'Pick a call' : selected.tool}</h3>
                 {selected === undefined ? (
                   <p className="caption">
                     every call it made, with what went in and what came back.
                   </p>
                 ) : (
                   <>
-                    <Json value={selected.input} label="what went in" />
+                    <Json value={selected.input} label="What went in" />
                     <p className="caption" style={{ marginTop: 8 }}>
-                      {selected.error === undefined ? 'what came back' : 'what went wrong'}
+                      {selected.error === undefined ? 'What came back' : 'What went wrong'}
                     </p>
-                    <Json value={selected.error ?? selected.output} label="what came back" />
+                    <Json value={selected.error ?? selected.output} label="What came back" />
                   </>
                 )}
               </div>

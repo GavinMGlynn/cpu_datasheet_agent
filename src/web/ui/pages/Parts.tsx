@@ -5,9 +5,10 @@ import { useApp } from '../app.js';
 import { Async } from '../components/Async.js';
 import { Badge } from '../components/Badge.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Select, TextField } from '../components/Fields.js';
 import { Table } from '../components/Table.js';
-import { count, money, parameterValue, when } from '../lib/format.js';
+import { count, money, parameterValue } from '../lib/format.js';
 import { navigate, withQuery } from '../lib/router.js';
 import { useAsync } from '../lib/state.js';
 import type { PartSummary } from '../lib/types.js';
@@ -20,22 +21,22 @@ import type { PartSummary } from '../lib/types.js';
  */
 
 const SORTS = [
-  { value: 'mpn', label: 'part number' },
-  { value: 'manufacturer', label: 'manufacturer' },
-  { value: 'status', label: 'status' },
-  { value: 'updatedAt', label: 'last written' },
-  { value: 'price', label: 'unit price' },
-  { value: 'stock', label: 'stock' },
-  { value: 'stated', label: 'parameters found' },
-  { value: 'verified', label: 'parameters confirmed' },
+  { value: 'mpn', label: 'Part number' },
+  { value: 'manufacturer', label: 'Manufacturer' },
+  { value: 'status', label: 'Status' },
+  { value: 'updatedAt', label: 'Last written' },
+  { value: 'price', label: 'Unit price' },
+  { value: 'stock', label: 'Stock' },
+  { value: 'stated', label: 'Parameters found' },
+  { value: 'verified', label: 'Parameters confirmed' },
 ];
 
 const STATUSES = [
-  { value: '', label: 'any status' },
-  { value: 'extracted', label: 'extracted' },
-  { value: 'verified', label: 'verified' },
-  { value: 'needs_human', label: 'needs a person' },
-  { value: 'rejected', label: 'rejected' },
+  { value: '', label: 'Any status' },
+  { value: 'extracted', label: 'Extracted' },
+  { value: 'verified', label: 'Verified' },
+  { value: 'needs_human', label: 'Needs a person' },
+  { value: 'rejected', label: 'Rejected' },
 ];
 
 export function Parts(): ReactNode {
@@ -69,18 +70,18 @@ export function Parts(): ReactNode {
   );
 
   return (
-    <Page title="catalogue" subtitle="every part stored in this database">
+    <Page title="Catalogue" subtitle="Every part stored in this database">
       <div className="filters">
         <TextField
-          label="search"
+          label="Search"
           value={text}
-          placeholder="part number or manufacturer"
+          placeholder="Part number or manufacturer"
           onChange={(value) => {
             set({ text: value });
           }}
         />
         <Select
-          label="status"
+          label="Status"
           value={status}
           options={STATUSES}
           onChange={(value) => {
@@ -88,7 +89,7 @@ export function Parts(): ReactNode {
           }}
         />
         <Select
-          label="sort by"
+          label="Sort by"
           value={sort}
           options={SORTS}
           onChange={(value) => {
@@ -96,18 +97,18 @@ export function Parts(): ReactNode {
           }}
         />
         <Select
-          label="direction"
+          label="Direction"
           value={direction}
           options={[
-            { value: 'asc', label: 'ascending' },
-            { value: 'desc', label: 'descending' },
+            { value: 'asc', label: 'Ascending' },
+            { value: 'desc', label: 'Descending' },
           ]}
           onChange={(value) => {
             set({ direction: value });
           }}
         />
         <TextField
-          label="price at quantity"
+          label="Price at quantity"
           type="number"
           value={typedQuantity}
           onChange={(value) => {
@@ -127,11 +128,11 @@ export function Parts(): ReactNode {
               <Table<PartSummary>
                 rows={page.items}
                 rowKey={(part) => part.mpn}
-                empty="nothing matches those filters"
+                empty="Nothing matches those filters."
                 columns={[
                   {
                     key: 'mpn',
-                    label: 'part',
+                    label: 'Part',
                     render: (part) => (
                       <a
                         href={`/parts/${encodeURIComponent(part.mpn)}`}
@@ -146,40 +147,46 @@ export function Parts(): ReactNode {
                   },
                   {
                     key: 'manufacturer',
-                    label: 'manufacturer',
+                    label: 'Manufacturer',
                     render: (part) => part.manufacturer,
                   },
                   {
                     key: 'status',
-                    label: 'status',
+                    label: 'Status',
                     render: (part) => <Badge kind="partStatus" value={part.status} />,
                   },
                   {
                     key: 'vin',
-                    label: 'vin',
-                    render: (part) =>
-                      `${parameterValue(part.headline.vinMin)} – ${parameterValue(part.headline.vinMax)}`,
+                    label: 'Vin',
+                    render: (part) => (
+                      <span className="nowrap">
+                        {parameterValue(part.headline.vinMin)} –{' '}
+                        {parameterValue(part.headline.vinMax)}
+                      </span>
+                    ),
                   },
                   {
                     key: 'iout',
-                    label: 'iout',
-                    render: (part) => parameterValue(part.headline.ioutMax),
+                    label: 'Iout',
+                    render: (part) => (
+                      <span className="nowrap">{parameterValue(part.headline.ioutMax)}</span>
+                    ),
                   },
                   {
                     key: 'package',
-                    label: 'package',
+                    label: 'Package',
                     render: (part) => parameterValue(part.headline.package),
                   },
                   {
                     key: 'found',
-                    label: 'found',
+                    label: 'Found',
                     numeric: true,
                     render: (part) =>
                       `${String(part.parameters.stated)}/${String(part.parameters.total)}`,
                   },
                   {
                     key: 'price',
-                    label: 'each',
+                    label: 'Each',
                     numeric: true,
                     render: (part) =>
                       part.bestPrice === null
@@ -188,11 +195,15 @@ export function Parts(): ReactNode {
                   },
                   {
                     key: 'stock',
-                    label: 'stock',
+                    label: 'Stock',
                     numeric: true,
                     render: (part) => count(part.stock),
                   },
-                  { key: 'updated', label: 'written', render: (part) => when(part.updatedAt) },
+                  {
+                    key: 'updated',
+                    label: 'Updated',
+                    render: (part) => <Time value={part.updatedAt} />,
+                  },
                 ]}
               />
             </div>
@@ -205,7 +216,7 @@ export function Parts(): ReactNode {
                   navigate(withQuery(route, { offset: Math.max(0, page.offset - page.limit) }));
                 }}
               >
-                previous
+                Previous
               </button>
               <button
                 type="button"
@@ -215,7 +226,7 @@ export function Parts(): ReactNode {
                   navigate(withQuery(route, { offset: page.offset + page.limit }));
                 }}
               >
-                next
+                Next
               </button>
             </div>
           </>

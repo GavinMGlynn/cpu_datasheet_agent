@@ -65,9 +65,9 @@ export function Histogram(props: HistogramProps): ReactNode {
       height={height}
       {...(props.empty === undefined ? {} : { empty: props.empty })}
       columns={[
-        { label: 'from', value: (row) => props.format(row.from) },
-        { label: 'to', value: (row) => props.format(row.to) },
-        { label: 'parts', value: (row) => String(row.count) },
+        { label: 'From', value: (row) => props.format(row.from) },
+        { label: 'To', value: (row) => props.format(row.to) },
+        { label: 'Parts', value: (row) => String(row.count) },
       ]}
     >
       {(width) => (
@@ -83,8 +83,8 @@ export function Histogram(props: HistogramProps): ReactNode {
           <YAxis allowDecimals={false} tickLine={false} axisLine={false} fontSize={11} width={32} />
           <Tooltip formatter={bucketTooltip} labelFormatter={bucketLabel} />
           <Bar
-            dataKey="count"
             isAnimationActive={false}
+            dataKey="count"
             shape={bucketShape((count) => rampColor(largest === 0 ? 0 : count / largest))}
           />
         </BarChart>

@@ -18,32 +18,32 @@ const rows: Row[] = [
 
 const columns = [
   { label: 'what', value: (row: Row) => row.label },
-  { label: 'how much', value: (row: Row) => String(row.value) },
+  { label: 'How much', value: (row: Row) => String(row.value) },
 ];
 
 describe('Chart', () => {
   it('draws the plot, and says how wide it may be', () => {
     renderAt(
-      <Chart title="calls by tool" rows={rows} columns={columns}>
+      <Chart title="Calls by tool" rows={rows} columns={columns}>
         {(width) => <p>plot at {width}</p>}
       </Chart>,
     );
-    expect(screen.getByRole('heading', { name: 'calls by tool' })).toBeInTheDocument();
-    expect(screen.getByText(/plot at \d+/u)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Calls by tool' })).toBeInTheDocument();
+    expect(screen.getByText(/plot at \d+/iu)).toBeInTheDocument();
   });
 
   it('offers the numbers behind it, and goes back again', async () => {
     renderAt(
-      <Chart title="calls by tool" caption="busiest first" rows={rows} columns={columns}>
-        {() => <p>the plot</p>}
+      <Chart title="Calls by tool" caption="Busiest first" rows={rows} columns={columns}>
+        {() => <p>The plot</p>}
       </Chart>,
     );
-    expect(screen.getByText('busiest first')).toBeInTheDocument();
+    expect(screen.getByText('Busiest first')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'show the numbers' }));
-    expect(screen.getByRole('columnheader', { name: 'how much' })).toBeInTheDocument();
-    expect(screen.queryByText('the plot')).toBeNull();
+    expect(screen.getByRole('columnheader', { name: 'How much' })).toBeInTheDocument();
+    expect(screen.queryByText('The plot')).toBeNull();
     await userEvent.click(screen.getByRole('button', { name: 'show the chart' }));
-    expect(screen.getByText('the plot')).toBeInTheDocument();
+    expect(screen.getByText('The plot')).toBeInTheDocument();
   });
 
   it('shows a legend once there is more than one series', () => {
@@ -52,36 +52,36 @@ describe('Chart', () => {
         title="spend"
         rows={rows}
         columns={columns}
-        legend={[{ label: 'spent', color: '#2a78d6' }]}
+        legend={[{ label: 'Spent', color: '#2a78d6' }]}
       >
         {() => <p>plot</p>}
       </Chart>,
     );
-    expect(screen.queryByText('spent')).toBeNull();
+    expect(screen.queryByText('Spent')).toBeNull();
     rerender(
       <Chart
         title="spend"
         rows={rows}
         columns={columns}
         legend={[
-          { label: 'spent', color: '#2a78d6' },
-          { label: 'in total', color: '#eb6834' },
+          { label: 'Spent', color: '#2a78d6' },
+          { label: 'In total', color: '#eb6834' },
         ]}
       >
         {() => <p>plot</p>}
       </Chart>,
     );
-    expect(screen.getByText('spent')).toBeInTheDocument();
-    expect(screen.getByText('in total')).toBeInTheDocument();
+    expect(screen.getByText('Spent')).toBeInTheDocument();
+    expect(screen.getByText('In total')).toBeInTheDocument();
   });
 
   it('says when there is nothing to draw, in its own words', () => {
     renderAt(
-      <Chart title="spend" rows={[]} columns={columns} empty="no runs in this window">
+      <Chart title="spend" rows={[]} columns={columns} empty="No runs in this window.">
         {() => <p>plot</p>}
       </Chart>,
     );
-    expect(screen.getByText('no runs in this window')).toBeInTheDocument();
+    expect(screen.getByText('No runs in this window.')).toBeInTheDocument();
     expect(screen.queryByText('plot')).toBeNull();
   });
 

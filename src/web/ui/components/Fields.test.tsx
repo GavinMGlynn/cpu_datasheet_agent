@@ -11,38 +11,38 @@ describe('Select', () => {
     const onChange = vi.fn();
     renderAt(
       <Select
-        label="status"
-        value="extracted"
+        label="Status"
+        value="Extracted"
         options={[
-          { value: 'extracted', label: 'extracted' },
-          { value: 'verified', label: 'verified' },
+          { value: 'Extracted', label: 'Extracted' },
+          { value: 'Verified', label: 'Verified' },
         ]}
         onChange={onChange}
       />,
     );
-    await userEvent.selectOptions(screen.getByLabelText('status'), 'verified');
-    expect(onChange).toHaveBeenCalledWith('verified');
+    await userEvent.selectOptions(screen.getByLabelText('Status'), 'Verified');
+    expect(onChange).toHaveBeenCalledWith('Verified');
   });
 
   it('takes an id of its own where two share a label', () => {
     renderAt(
       <Select
-        label="source"
+        label="Source"
         id="source-two"
         value="a"
         options={[{ value: 'a', label: 'a' }]}
         onChange={() => undefined}
       />,
     );
-    expect(screen.getByLabelText('source')).toHaveAttribute('id', 'source-two');
+    expect(screen.getByLabelText('Source')).toHaveAttribute('id', 'source-two');
   });
 });
 
 describe('TextField', () => {
   it('reports what was typed', async () => {
     const onChange = vi.fn();
-    renderAt(<TextField label="search" value="" onChange={onChange} placeholder="part number" />);
-    await userEvent.type(screen.getByPlaceholderText('part number'), 'TP');
+    renderAt(<TextField label="Search" value="" onChange={onChange} placeholder="Part number" />);
+    await userEvent.type(screen.getByPlaceholderText('Part number'), 'TP');
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
@@ -50,12 +50,12 @@ describe('TextField', () => {
     const onChange = vi.fn();
     renderAt(
       <>
-        <TextField label="quantity" type="number" value="100" onChange={onChange} />
-        <TextField label="why" value="" multiline onChange={onChange} id="why" />
+        <TextField label="Quantity" type="number" value="100" onChange={onChange} />
+        <TextField label="Why" value="" multiline onChange={onChange} id="why" />
       </>,
     );
-    expect(screen.getByLabelText('quantity')).toHaveAttribute('type', 'number');
-    await userEvent.type(screen.getByLabelText('why'), 'x');
+    expect(screen.getByLabelText('Quantity')).toHaveAttribute('type', 'number');
+    await userEvent.type(screen.getByLabelText('Why'), 'x');
     expect(onChange).toHaveBeenCalledWith('x');
   });
 });
@@ -64,12 +64,12 @@ describe('Checkbox', () => {
   it('reports being ticked and unticked', async () => {
     const onChange = vi.fn();
     const { rerender } = renderAt(
-      <Checkbox label="only failures" checked={false} onChange={onChange} />,
+      <Checkbox label="Only failures" checked={false} onChange={onChange} />,
     );
-    await userEvent.click(screen.getByLabelText('only failures'));
+    await userEvent.click(screen.getByLabelText('Only failures'));
     expect(onChange).toHaveBeenCalledWith(true);
-    rerender(<Checkbox label="only failures" checked id="own" onChange={onChange} />);
-    await userEvent.click(screen.getByLabelText('only failures'));
+    rerender(<Checkbox label="Only failures" checked id="own" onChange={onChange} />);
+    await userEvent.click(screen.getByLabelText('Only failures'));
     expect(onChange).toHaveBeenCalledWith(false);
   });
 });

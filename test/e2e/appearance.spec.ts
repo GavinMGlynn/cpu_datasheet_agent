@@ -12,16 +12,16 @@ import { E2E_TOKEN } from './seed.js';
  */
 
 const PAGES: readonly { readonly path: string; readonly name: string }[] = [
-  { path: '/', name: 'overview' },
-  { path: '/parts', name: 'catalogue' },
+  { path: '/', name: 'Overview' },
+  { path: '/parts', name: 'Catalogue' },
   { path: '/parts/TPS54331DR', name: 'part' },
-  { path: '/parameters', name: 'parameters' },
-  { path: '/runs', name: 'runs' },
-  { path: '/costs', name: 'cost' },
-  { path: '/tools', name: 'tools' },
-  { path: '/ledger', name: 'ledger' },
+  { path: '/parameters', name: 'Parameters' },
+  { path: '/runs', name: 'Runs' },
+  { path: '/costs', name: 'Cost' },
+  { path: '/tools', name: 'Tools' },
+  { path: '/ledger', name: 'Ledger' },
   { path: '/control', name: 'control' },
-  { path: '/health', name: 'health' },
+  { path: '/health', name: 'Health' },
 ];
 
 test.beforeEach(async ({ page }) => {

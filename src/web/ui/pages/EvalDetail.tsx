@@ -62,7 +62,7 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
 
   return (
     <Page
-      title="evaluation"
+      title="Evaluation"
       subtitle={props.id}
       actions={
         <button
@@ -72,7 +72,7 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
             navigate('/evals');
           }}
         >
-          back to the evaluations
+          Back to evaluations
         </button>
       }
     >
@@ -80,24 +80,24 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
         {(value) => (
           <>
             <Stats>
-              <Stat label="prompt" value={value.promptVersion} note={value.model} />
+              <Stat label="Prompt" value={value.promptVersion} note={value.model} />
               <Stat
-                label="recall"
+                label="Recall"
                 value={percent(value.set.recall)}
                 note="of what the golden set states"
               />
               <Stat
-                label="precision"
+                label="Precision"
                 value={percent(value.set.precision)}
                 note="of what it claimed"
               />
               <Stat
-                label="citations exact"
+                label="Citations exact"
                 value={percent(value.set.provenanceAccuracy)}
                 note={`${percent(value.set.withinOnePage)} within a page`}
               />
               <Stat
-                label="cost"
+                label="Cost"
                 value={usd(value.costUsd)}
                 note={`${count(value.turns)} turns over ${count(value.parts.length)} parts`}
               />
@@ -114,12 +114,12 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
         )}
       </Async>
 
-      <Async state={parameters.state} label="the parameter scores">
+      <Async state={parameters.state} label="The parameter scores">
         {(value) => (
           <>
             <Bars
-              title="accuracy by parameter, worst first"
-              caption="how often each parameter was right, of the times either side stated it"
+              title="Accuracy by parameter, worst first"
+              caption="How often each parameter was right, of the times either side stated it"
               rows={value.parameters
                 .filter((row) => row.stated > 0)
                 .map((row) => ({
@@ -134,30 +134,30 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
                 rows={value.parameters}
                 rowKey={(row) => row.key}
                 columns={[
-                  { key: 'key', label: 'parameter', render: (row) => row.key },
+                  { key: 'key', label: 'Parameter', render: (row) => row.key },
                   {
                     key: 'accuracy',
-                    label: 'right',
+                    label: 'Right',
                     numeric: true,
                     sort: (row) => row.accuracy,
                     render: (row) => `${String(row.correct)}/${String(row.stated)}`,
                   },
                   {
                     key: 'citation',
-                    label: 'cited exactly',
+                    label: 'Cited exactly',
                     numeric: true,
                     sort: (row) => row.citationExact,
                     render: (row) => count(row.citationExact),
                   },
                   {
                     key: 'wrong',
-                    label: 'wrong for',
+                    label: 'Wrong for',
                     render: (row) =>
                       row.wrongParts.length === 0 ? '—' : row.wrongParts.join(', '),
                   },
                   {
                     key: 'missing',
-                    label: 'missed for',
+                    label: 'Missed for',
                     render: (row) =>
                       row.missingParts.length === 0 ? '—' : row.missingParts.join(', '),
                   },
@@ -168,25 +168,25 @@ export function EvalDetail(props: EvalDetailProps): ReactNode {
         )}
       </Async>
 
-      <Async state={failures.state} label="the failures">
+      <Async state={failures.state} label="The failures">
         {(value) => (
           <div className="panel" style={{ marginTop: 16 }}>
-            <h3>every value that did not match</h3>
+            <h3>Every value that did not match</h3>
             <Table<FailureRow>
               rows={value}
               rowKey={(row) => `${row.mpn}:${row.key}`}
-              empty="every value matched the golden reading"
+              empty="Every value matched the golden reading."
               columns={[
-                { key: 'mpn', label: 'part', render: (row) => row.mpn },
-                { key: 'key', label: 'parameter', render: (row) => row.key },
-                { key: 'score', label: 'what happened', render: (row) => row.score },
-                { key: 'expected', label: 'golden', render: (row) => parameterValue(row.expected) },
+                { key: 'mpn', label: 'Part', render: (row) => row.mpn },
+                { key: 'key', label: 'Parameter', render: (row) => row.key },
+                { key: 'score', label: 'What happened', render: (row) => row.score },
+                { key: 'expected', label: 'Golden', render: (row) => parameterValue(row.expected) },
                 {
                   key: 'actual',
-                  label: 'extracted',
+                  label: 'Extracted',
                   render: (row) => parameterValue(row.actual),
                 },
-                { key: 'page', label: 'citation', render: (row) => row.page },
+                { key: 'page', label: 'Citation', render: (row) => row.page },
               ]}
             />
           </div>

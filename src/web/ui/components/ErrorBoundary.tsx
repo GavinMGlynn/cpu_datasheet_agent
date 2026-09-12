@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
     return (
       <div className="failed" role="alert">
-        <strong>this page could not be rendered.</strong> {error.message}
+        <strong>This page could not be rendered.</strong> {error.message}
         <p className="caption">
           the data behind it is not the shape this page expects. the server's own answer is in the
           browser console.

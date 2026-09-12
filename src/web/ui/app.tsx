@@ -57,24 +57,24 @@ export interface NavEntry {
 }
 
 export const NAVIGATION: readonly NavEntry[] = Object.freeze([
-  { path: '/', label: 'overview', group: 'the parts' },
-  { path: '/parts', label: 'catalogue', group: 'the parts' },
-  { path: '/parameters', label: 'parameters', group: 'the parts' },
-  { path: '/compare', label: 'compare', group: 'the parts' },
-  { path: '/alternates', label: 'alternates', group: 'the parts' },
-  { path: '/pricing', label: 'pricing', group: 'the parts' },
-  { path: '/datasheets', label: 'datasheets', group: 'the parts' },
-  { path: '/escalations', label: 'questions', group: 'the parts' },
-  { path: '/runs', label: 'runs', group: 'the agent' },
-  { path: '/costs', label: 'cost', group: 'the agent' },
-  { path: '/tools', label: 'tools', group: 'the agent' },
-  { path: '/ledger', label: 'ledger', group: 'the agent' },
-  { path: '/evals', label: 'evaluations', group: 'the agent' },
-  { path: '/verification', label: 'verification', group: 'the agent' },
-  { path: '/golden', label: 'golden set', group: 'the agent' },
-  { path: '/control', label: 'run control', group: 'this machine' },
-  { path: '/audit', label: 'audit trail', group: 'this machine' },
-  { path: '/health', label: 'health', group: 'this machine' },
+  { path: '/', label: 'Overview', group: 'Parts' },
+  { path: '/parts', label: 'Catalogue', group: 'Parts' },
+  { path: '/parameters', label: 'Parameters', group: 'Parts' },
+  { path: '/compare', label: 'Compare', group: 'Parts' },
+  { path: '/alternates', label: 'Alternates', group: 'Parts' },
+  { path: '/pricing', label: 'Pricing', group: 'Parts' },
+  { path: '/datasheets', label: 'Datasheets', group: 'Parts' },
+  { path: '/escalations', label: 'Questions', group: 'Parts' },
+  { path: '/runs', label: 'Runs', group: 'Agent' },
+  { path: '/costs', label: 'Cost', group: 'Agent' },
+  { path: '/tools', label: 'Tools', group: 'Agent' },
+  { path: '/ledger', label: 'Ledger', group: 'Agent' },
+  { path: '/evals', label: 'Evaluations', group: 'Agent' },
+  { path: '/verification', label: 'Verification', group: 'Agent' },
+  { path: '/golden', label: 'Golden set', group: 'Agent' },
+  { path: '/control', label: 'Run control', group: 'This machine' },
+  { path: '/audit', label: 'Audit trail', group: 'This machine' },
+  { path: '/health', label: 'Health', group: 'This machine' },
 ]);
 
 function render(route: Route): ReactNode {
@@ -120,7 +120,7 @@ function render(route: Route): ReactNode {
     default:
       return (
         <div className="failed" role="alert">
-          there is no page at <code>{route.path}</code>.
+          There is no page at <code>{route.path}</code>.
         </div>
       );
   }
@@ -157,15 +157,17 @@ export function App(props: AppProps): ReactNode {
     <AppContext.Provider value={context}>
       <div className="app">
         <aside className="sidebar">
-          <h1>chip datasheet agent</h1>
-          <p className="version">
-            <Async state={meta.state} label="version">
-              {(value) => <>version {value.version}</>}
+          <h1>Chip Datasheet Agent</h1>
+          {/* A div, not a paragraph: what is inside is a loading notice, and
+              a paragraph inside a paragraph is not valid HTML. */}
+          <div className="version">
+            <Async state={meta.state} label="the version">
+              {(value) => <>Version {value.version}</>}
             </Async>
-          </p>
+          </div>
           <div className="field">
-            <label htmlFor="source">database</label>
-            <Async state={sources.state} label="databases">
+            <label htmlFor="source">Database</label>
+            <Async state={sources.state} label="the databases">
               {(value) => (
                 <select
                   id="source"

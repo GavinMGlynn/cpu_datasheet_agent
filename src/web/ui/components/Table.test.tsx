@@ -19,15 +19,15 @@ const rows: Row[] = [
 
 function columns() {
   return [
-    { key: 'mpn', label: 'part', render: (row: Row) => row.mpn, sort: (row: Row) => row.mpn },
+    { key: 'mpn', label: 'Part', render: (row: Row) => row.mpn, sort: (row: Row) => row.mpn },
     {
-      key: 'cost',
-      label: 'cost',
+      key: 'Cost',
+      label: 'Cost',
       numeric: true,
       render: (row: Row) => row.cost ?? '—',
       sort: (row: Row) => row.cost,
     },
-    { key: 'note', label: 'note', render: () => 'fixed' },
+    { key: 'note', label: 'note', render: () => 'Fixed' },
   ];
 }
 
@@ -43,32 +43,32 @@ describe('Table', () => {
   it('renders the rows it is given', () => {
     renderAt(<Table columns={columns()} rows={rows} rowKey={(row) => row.mpn} />);
     expect(screen.getAllByRole('row')).toHaveLength(4);
-    expect(screen.getAllByText('fixed')).toHaveLength(3);
+    expect(screen.getAllByText('Fixed')).toHaveLength(3);
   });
 
   it('sorts when a heading is clicked, and again the other way', async () => {
     renderAt(<Table columns={columns()} rows={rows} rowKey={(row) => row.mpn} />);
-    await userEvent.click(screen.getByRole('button', { name: 'sort by part' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by part' }));
     expect(order()[0]).toBe('AP62200WU-7');
-    await userEvent.click(screen.getByRole('button', { name: 'sort by part' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by part' }));
     expect(order()[0]).toBe('TPS54331DR');
-    await userEvent.click(screen.getByRole('button', { name: 'sort by part' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by part' }));
     expect(order()[0]).toBe('AP62200WU-7');
   });
 
   it('sorts numbers as numbers, and puts what it does not know last', async () => {
     renderAt(<Table columns={columns()} rows={rows} rowKey={(row) => row.mpn} />);
-    await userEvent.click(screen.getByRole('button', { name: 'sort by cost' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by cost' }));
     expect(order()[0]).toBe('TPS54331DR');
     expect(order()[2]).toBe('LM5164DDAR');
   });
 
   it('switches the column it sorts on', async () => {
     renderAt(
-      <Table columns={columns()} rows={rows} rowKey={(row) => row.mpn} initialSort="cost" />,
+      <Table columns={columns()} rows={rows} rowKey={(row) => row.mpn} initialSort="Cost" />,
     );
     expect(order()[0]).toBe('TPS54331DR');
-    await userEvent.click(screen.getByRole('button', { name: 'sort by part' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by part' }));
     expect(order()[0]).toBe('AP62200WU-7');
   });
 
@@ -78,7 +78,7 @@ describe('Table', () => {
         columns={columns()}
         rows={rows}
         rowKey={(row) => row.mpn}
-        initialSort="cost"
+        initialSort="Cost"
         initialDirection="desc"
       />,
     );
@@ -94,14 +94,14 @@ describe('Table', () => {
 
   it('says when there is nothing to show', () => {
     renderAt(
-      <Table columns={columns()} rows={[]} rowKey={(row: Row) => row.mpn} empty="no runs yet" />,
+      <Table columns={columns()} rows={[]} rowKey={(row: Row) => row.mpn} empty="No runs yet" />,
     );
-    expect(screen.getByText('no runs yet')).toBeInTheDocument();
+    expect(screen.getByText('No runs yet')).toBeInTheDocument();
   });
 
   it('has a default for nothing to show', () => {
     renderAt(<Table columns={columns()} rows={[]} rowKey={(row: Row) => row.mpn} />);
-    expect(screen.getByText('nothing here')).toBeInTheDocument();
+    expect(screen.getByText('Nothing here.')).toBeInTheDocument();
   });
 
   it('keeps two rows with equal values in the order they arrived', async () => {
@@ -110,7 +110,7 @@ describe('Table', () => {
       { mpn: 'B', cost: 1 },
     ];
     renderAt(<Table columns={columns()} rows={tied} rowKey={(row) => row.mpn} />);
-    await userEvent.click(screen.getByRole('button', { name: 'sort by cost' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by cost' }));
     expect(order()[0]).toBe('A');
   });
 
@@ -121,7 +121,7 @@ describe('Table', () => {
       { mpn: 'AP62200WU-7', cost: 4.27 },
     ];
     renderAt(<Table columns={columns()} rows={unknownFirst} rowKey={(row) => row.mpn} />);
-    await userEvent.click(screen.getByRole('button', { name: 'sort by cost' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by cost' }));
     expect(order()).toStrictEqual(['TPS54331DR', 'AP62200WU-7', 'LM5164DDAR']);
   });
 
@@ -132,7 +132,7 @@ describe('Table', () => {
       { mpn: 'B', cost: undefined },
     ];
     renderAt(<Table columns={columns()} rows={unknowns} rowKey={(row) => row.mpn} />);
-    await userEvent.click(screen.getByRole('button', { name: 'sort by cost' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by cost' }));
     expect(order()).toStrictEqual(['C', 'A', 'B']);
   });
 });

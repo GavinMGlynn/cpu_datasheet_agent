@@ -23,7 +23,7 @@ describe('verification', () => {
     await waitFor(() => {
       expect(screen.getByText('58')).toBeInTheDocument();
     });
-    expect(screen.getByRole('img', { name: 'verdicts by part' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Verdicts by part' })).toBeInTheDocument();
     expect(screen.getAllByText('1').length).toBeGreaterThan(0);
   });
 
@@ -32,10 +32,10 @@ describe('verification', () => {
       parts: () => Promise.resolve({ source: 'live', total: 2, offset: 0, limit: 500, items }),
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by confirmed' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by confirmed' })).toBeInTheDocument();
     });
     for (const column of ['confirmed', 'contradicted', 'not found', 'unchecked']) {
-      await userEvent.click(screen.getByRole('button', { name: `sort by ${column}` }));
+      await userEvent.click(screen.getByRole('button', { name: `Sort by ${column}` }));
     }
     expect(screen.getAllByRole('link').length).toBeGreaterThan(0);
   });
@@ -67,7 +67,7 @@ describe('verification', () => {
       parts: () => Promise.resolve({ source: 'live', total: 0, offset: 0, limit: 500, items: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByText('nothing stored yet')).toBeInTheDocument();
+      expect(screen.getByText('Nothing stored yet')).toBeInTheDocument();
     });
   });
 });

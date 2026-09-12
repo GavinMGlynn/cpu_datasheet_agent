@@ -31,7 +31,7 @@ describe('the catalogue', () => {
     await waitFor(() => {
       expect(parts).toHaveBeenCalledTimes(1);
     });
-    await userEvent.type(screen.getByLabelText('search'), 'AP');
+    await userEvent.type(screen.getByLabelText('Search'), 'AP');
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ text: 'AP' });
     });
@@ -54,13 +54,13 @@ describe('the catalogue', () => {
     const parts = vi.fn((_query: PartQuery) => Promise.resolve(page()));
     renderApp('/parts', { parts });
     await waitFor(() => {
-      expect(screen.getByLabelText('status')).toBeInTheDocument();
+      expect(screen.getByLabelText('Status')).toBeInTheDocument();
     });
-    await userEvent.selectOptions(screen.getByLabelText('status'), 'verified');
-    await userEvent.selectOptions(screen.getByLabelText('sort by'), 'price');
-    await userEvent.selectOptions(screen.getByLabelText('direction'), 'desc');
-    await userEvent.clear(screen.getByLabelText('price at quantity'));
-    await userEvent.type(screen.getByLabelText('price at quantity'), '250');
+    await userEvent.selectOptions(screen.getByLabelText('Status'), 'Verified');
+    await userEvent.selectOptions(screen.getByLabelText('Sort by'), 'price');
+    await userEvent.selectOptions(screen.getByLabelText('Direction'), 'desc');
+    await userEvent.clear(screen.getByLabelText('Price at quantity'));
+    await userEvent.type(screen.getByLabelText('Price at quantity'), '250');
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ direction: 'desc', quantity: 250 });
     });
@@ -72,10 +72,10 @@ describe('the catalogue', () => {
     );
     renderApp('/parts', { parts });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'next' })).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Next' })).toBeEnabled();
     });
-    expect(screen.getByRole('button', { name: 'previous' })).toBeDisabled();
-    await userEvent.click(screen.getByRole('button', { name: 'next' }));
+    expect(screen.getByRole('button', { name: 'Previous' })).toBeDisabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Next' }));
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ offset: 50 });
     });
@@ -87,9 +87,9 @@ describe('the catalogue', () => {
     );
     renderApp('/parts?offset=50', { parts });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'previous' })).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Previous' })).toBeEnabled();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'previous' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Previous' }));
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ offset: 0 });
     });
@@ -129,7 +129,7 @@ describe('the catalogue', () => {
   it('says when nothing matches', async () => {
     renderApp('/parts', { parts: () => Promise.resolve(page([])) });
     await waitFor(() => {
-      expect(screen.getByText('nothing matches those filters')).toBeInTheDocument();
+      expect(screen.getByText('Nothing matches those filters.')).toBeInTheDocument();
     });
   });
 });

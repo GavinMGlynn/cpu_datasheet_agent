@@ -20,7 +20,7 @@ export function Async<T>(props: AsyncProps<T>): ReactNode {
   if (props.state.status === 'loading') {
     return (
       <p className="caption" role="status">
-        loading {props.label ?? ''}…
+        Loading {props.label ?? ''}…
       </p>
     );
   }
@@ -28,7 +28,7 @@ export function Async<T>(props: AsyncProps<T>): ReactNode {
     const error = props.state.error;
     return (
       <div className="failed" role="alert">
-        <strong>that did not work.</strong>{' '}
+        <strong>That didn’t work.</strong>{' '}
         {error instanceof ApiError ? (
           <>
             <code>{error.code}</code> — {error.message}

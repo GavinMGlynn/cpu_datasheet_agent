@@ -22,13 +22,13 @@ export function Tools(): ReactNode {
   const errors = useAsync('errors', () => api.errors());
 
   return (
-    <Page title="tools" subtitle="every tool call the ledger holds, counted and timed">
+    <Page title="Tools" subtitle="Every tool call the ledger holds, counted and timed">
       <Async state={tools.state} label="the tools">
         {(value) => (
           <>
             <Bars
-              title="calls by tool"
-              caption="the busiest tools are the ones worth making faster or cheaper"
+              title="Calls by tool"
+              caption="The busiest tools are the ones worth making faster or cheaper"
               rows={value.tools.map((tool) => ({
                 label: tool.tool,
                 value: tool.calls,
@@ -45,20 +45,20 @@ export function Tools(): ReactNode {
                 columns={[
                   {
                     key: 'tool',
-                    label: 'tool',
+                    label: 'Tool',
                     sort: (tool) => tool.tool,
                     render: (tool) => tool.tool,
                   },
                   {
                     key: 'calls',
-                    label: 'calls',
+                    label: 'Calls',
                     numeric: true,
                     sort: (tool) => tool.calls,
                     render: (tool) => count(tool.calls),
                   },
                   {
                     key: 'failures',
-                    label: 'failed',
+                    label: 'Failed',
                     numeric: true,
                     sort: (tool) => tool.failures,
                     render: (tool) =>
@@ -68,14 +68,14 @@ export function Tools(): ReactNode {
                   },
                   {
                     key: 'spending',
-                    label: 'may spend',
+                    label: 'May spend',
                     numeric: true,
                     sort: (tool) => tool.spending,
                     render: (tool) => count(tool.spending),
                   },
                   {
                     key: 'p50',
-                    label: 'median',
+                    label: 'Median',
                     numeric: true,
                     sort: (tool) => tool.duration.p50,
                     render: (tool) => duration(tool.duration.p50),
@@ -89,7 +89,7 @@ export function Tools(): ReactNode {
                   },
                   {
                     key: 'total',
-                    label: 'total time',
+                    label: 'Total time',
                     numeric: true,
                     sort: (tool) => tool.totalMs,
                     render: (tool) => duration(tool.totalMs),
@@ -100,25 +100,25 @@ export function Tools(): ReactNode {
           </>
         )}
       </Async>
-      <Async state={errors.state} label="the failures">
+      <Async state={errors.state} label="The failures">
         {(value) => (
           <div className="panel" style={{ marginTop: 16 }}>
-            <h3>what has failed</h3>
+            <h3>What has failed</h3>
             <Table<ErrorStat>
               rows={value.errors}
               rowKey={(error) => error.code}
-              empty="nothing has failed in this ledger"
+              empty="Nothing has failed in this ledger."
               columns={[
-                { key: 'code', label: 'code', render: (error) => <code>{error.code}</code> },
+                { key: 'code', label: 'Code', render: (error) => <code>{error.code}</code> },
                 {
                   key: 'count',
-                  label: 'times',
+                  label: 'Times',
                   numeric: true,
                   sort: (error) => error.count,
                   render: (error) => count(error.count),
                 },
-                { key: 'tools', label: 'from', render: (error) => error.tools.join(', ') },
-                { key: 'message', label: 'most recently', render: (error) => error.message },
+                { key: 'tools', label: 'From', render: (error) => error.tools.join(', ') },
+                { key: 'message', label: 'Most recently', render: (error) => error.message },
               ]}
             />
           </div>

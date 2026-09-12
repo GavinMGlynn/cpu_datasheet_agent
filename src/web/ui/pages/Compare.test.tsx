@@ -28,7 +28,7 @@ describe('comparing parts', () => {
     const compare = vi.fn(() => Promise.resolve(comparison));
     renderApp('/compare', { compare });
     await waitFor(() => {
-      expect(screen.getByText(/name some parts above/u)).toBeInTheDocument();
+      expect(screen.getByText(/name some parts above/iu)).toBeInTheDocument();
     });
     expect(compare).not.toHaveBeenCalled();
   });
@@ -53,7 +53,7 @@ describe('comparing parts', () => {
     await waitFor(() => {
       expect(compare).toHaveBeenCalledTimes(1);
     });
-    await userEvent.type(screen.getByLabelText('part numbers, comma separated'), ',AP62200WU-7');
+    await userEvent.type(screen.getByLabelText('Part numbers, comma separated'), ',AP62200WU-7');
     await waitFor(() => {
       expect(compare.mock.calls.at(-1)?.[0]).toStrictEqual(['TPS54331DR', 'AP62200WU-7']);
     });

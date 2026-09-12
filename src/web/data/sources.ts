@@ -104,7 +104,7 @@ export function createSources(options: SourcesOptions = {}): Sources {
   };
 
   const sources_ = async (): Promise<readonly DataSource[]> => {
-    const live = await describe(databaseFile, LIVE_SOURCE, 'live', 'live store');
+    const live = await describe(databaseFile, LIVE_SOURCE, 'live', 'Live store');
     let names: string[];
     try {
       names = await readdir(evalRunsDir);
@@ -117,7 +117,7 @@ export function createSources(options: SourcesOptions = {}): Sources {
         .sort()
         .map((name) => {
           const id = name.slice(0, -SQLITE_SUFFIX.length);
-          return describe(path.join(evalRunsDir, name), id, 'eval-run', `evaluation run ${id}`);
+          return describe(path.join(evalRunsDir, name), id, 'eval-run', `Evaluation run ${id}`);
         }),
     );
     return [live, ...runs];

@@ -81,17 +81,21 @@ export interface CheckboxProps {
 
 export function Checkbox(props: CheckboxProps): ReactNode {
   const id = props.id ?? `check-${props.label.replace(/\s+/gu, '-')}`;
+  // The box and its words sit on one line: a label above a lonely checkbox
+  // reads as a heading for something else.
   return (
-    <div className="field">
-      <label htmlFor={id}>{props.label}</label>
-      <input
-        id={id}
-        type="checkbox"
-        checked={props.checked}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          props.onChange(event.target.checked);
-        }}
-      />
+    <div className="field check">
+      <label htmlFor={id}>
+        <input
+          id={id}
+          type="checkbox"
+          checked={props.checked}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            props.onChange(event.target.checked);
+          }}
+        />
+        {props.label}
+      </label>
     </div>
   );
 }

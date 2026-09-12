@@ -73,9 +73,9 @@ export function Bars(props: BarsProps): ReactNode {
       height={height}
       {...(props.empty === undefined ? {} : { empty: props.empty })}
       columns={[
-        { label: 'what', value: (row) => row.label },
-        { label: 'how much', value: (row) => props.format(row.value) },
-        { label: 'note', value: (row) => row.note ?? '' },
+        { label: 'What', value: (row) => row.label },
+        { label: 'How much', value: (row) => props.format(row.value) },
+        { label: 'Note', value: (row) => row.note ?? '' },
       ]}
     >
       {(width) => (
@@ -99,8 +99,8 @@ export function Bars(props: BarsProps): ReactNode {
           />
           <Tooltip formatter={tooltipWith(props.format)} />
           <Bar
-            dataKey="value"
             isAnimationActive={false}
+            dataKey="value"
             shape={barShape((value) =>
               props.highlight === undefined
                 ? rampColor(largest === 0 ? 0 : value / largest)

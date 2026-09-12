@@ -60,10 +60,10 @@ export function Scatter(props: ScatterProps): ReactNode {
       {...(props.caption === undefined ? {} : { caption: props.caption })}
       rows={props.points}
       height={height}
-      empty="nothing to plot yet"
+      empty="Nothing to plot yet."
       legend={series.map((group, index) => ({ label: group, color: seriesColor(index) }))}
       columns={[
-        { label: 'part', value: (point) => point.label },
+        { label: 'Part', value: (point) => point.label },
         { label: props.xLabel, value: (point) => props.formatX(point.x) },
         { label: props.yLabel, value: (point) => props.formatY(point.y) },
       ]}

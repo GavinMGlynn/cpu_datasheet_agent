@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Provenance as ProvenanceValue } from '../lib/types.js';
+import { labelOr } from '../lib/labels.js';
 
 /**
  * Where a value came from.
@@ -20,9 +21,9 @@ export function Provenance(props: ProvenanceProps): ReactNode {
   if (provenance.source === 'datasheet' && provenance.page !== undefined) {
     const page = provenance.page;
     return (
-      <span className="badge" title={provenance.quote ?? 'read from the datasheet'}>
+      <span className="badge" title={provenance.quote ?? 'Read from the datasheet'}>
         {props.onOpenPage === undefined ? (
-          `page ${String(page)}`
+          `Page ${String(page)}`
         ) : (
           <button
             type="button"
@@ -31,25 +32,25 @@ export function Provenance(props: ProvenanceProps): ReactNode {
               props.onOpenPage?.(page);
             }}
           >
-            page {page}
+            Page {page}
           </button>
         )}
       </span>
     );
   }
   if (provenance.source === 'distributor') {
-    return <span className="badge">{provenance.distributor ?? 'distributor'}</span>;
+    return <span className="badge">{labelOr(provenance.distributor, 'Distributor')}</span>;
   }
   if (provenance.source === 'human') {
     return (
-      <span className="badge" title={provenance.note ?? 'entered by a person'}>
-        by hand
+      <span className="badge" title={provenance.note ?? 'Entered by a person'}>
+        By hand
       </span>
     );
   }
   return (
-    <span className="badge" title={provenance.rule ?? 'derived'}>
-      derived
+    <span className="badge" title={provenance.rule ?? 'Derived by a rule'}>
+      Derived
     </span>
   );
 }

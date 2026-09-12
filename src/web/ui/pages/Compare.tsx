@@ -28,10 +28,10 @@ export function Compare(): ReactNode {
   );
 
   return (
-    <Page title="compare" subtitle="two or more parts, parameter by parameter">
+    <Page title="Compare" subtitle="Two or more parts, parameter by parameter">
       <div className="filters">
         <TextField
-          label="part numbers, comma separated"
+          label="Part numbers, comma separated"
           value={raw}
           placeholder="TPS54331DR, AP62200WU-7"
           onChange={(value) => {
@@ -42,13 +42,13 @@ export function Compare(): ReactNode {
       <Async state={compare.state} label="the comparison">
         {(value) =>
           value.parts.length === 0 ? (
-            <p className="empty">name some parts above and they will appear here side by side.</p>
+            <p className="empty">Name some parts above and they will appear here side by side.</p>
           ) : (
             <div className="panel" style={{ overflowX: 'auto' }}>
               <table>
                 <thead>
                   <tr>
-                    <th>parameter</th>
+                    <th>Parameter</th>
                     {value.parts.map((part) => (
                       <th key={part.summary.mpn}>{part.summary.mpn}</th>
                     ))}

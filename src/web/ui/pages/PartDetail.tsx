@@ -7,12 +7,14 @@ import { Badge } from '../components/Badge.js';
 import { Dialog } from '../components/Dialog.js';
 import { Json } from '../components/Json.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Provenance } from '../components/Provenance.js';
 import { Stat, Stats } from '../components/Stat.js';
 import { Table } from '../components/Table.js';
 import { TextField } from '../components/Fields.js';
-import { count, errorMessage, money, parameterValue, usd, when } from '../lib/format.js';
+import { count, errorMessage, money, parameterValue, usd } from '../lib/format.js';
 import { navigate } from '../lib/router.js';
+import { label } from '../lib/labels.js';
 import { useAsync } from '../lib/state.js';
 import type { ParameterRow, Run } from '../lib/types.js';
 
@@ -48,7 +50,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
       parsed = JSON.parse(form.value);
     } catch {
       setBusy(false);
-      setFailure('that is not JSON. A quantity looks like {"value": 28, "unit": "V"}.');
+      setFailure('That is not JSON. A quantity looks like {"value": 28, "unit": "V"}.');
       return;
     }
     api
@@ -72,7 +74,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
   return (
     <Page
       title={props.mpn}
-      subtitle="what is stored about this part, and where each value came from"
+      subtitle="What is stored about this part, and where each value came from"
       actions={
         <button
           type="button"
@@ -81,7 +83,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
             navigate('/parts');
           }}
         >
-          back to the catalogue
+          Back to catalogue
         </button>
       }
     >
@@ -89,19 +91,19 @@ export function PartDetail(props: PartDetailProps): ReactNode {
         {(value) => (
           <>
             <Stats>
-              <Stat label="manufacturer" value={value.summary.manufacturer} />
+              <Stat label="Manufacturer" value={value.summary.manufacturer} />
               <Stat
-                label="status"
-                value={value.summary.status.replace(/_/gu, ' ')}
+                label="Status"
+                value={label(value.summary.status)}
                 note={`${String(value.summary.parameters.verified)} parameters confirmed`}
               />
               <Stat
-                label="parameters found"
+                label="Parameters found"
                 value={`${String(value.summary.parameters.stated)}/${String(value.summary.parameters.total)}`}
                 note={`${String(value.summary.parameters.cited)} cite a datasheet page`}
               />
               <Stat
-                label="each at 100"
+                label="Each at 100"
                 value={
                   value.summary.bestPrice === null
                     ? '—'
@@ -110,7 +112,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
                 note={`${count(value.summary.stock)} in stock`}
               />
               <Stat
-                label="checked"
+                label="Checked"
                 value={`${String(value.summary.verdicts.confirmed)} confirmed`}
                 note={`${String(value.summary.verdicts.contradicted)} contradicted, ${String(value.summary.verdicts.unchecked)} unchecked`}
               />
@@ -118,7 +120,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
 
             {value.escalations.length === 0 ? null : (
               <div className="panel" style={{ marginBottom: 16 }}>
-                <h3>questions raised about this part</h3>
+                <h3>Questions raised about this part</h3>
                 {value.escalations.map((escalation) => (
                   <p key={escalation.id} className="caption">
                     <Badge
@@ -132,21 +134,21 @@ export function PartDetail(props: PartDetailProps): ReactNode {
             )}
 
             <div className="panel" style={{ marginBottom: 16 }}>
-              <h3>parameters</h3>
+              <h3>Parameters</h3>
               <Table<ParameterRow>
                 rows={value.parameters}
                 rowKey={(row) => row.key}
                 columns={[
-                  { key: 'key', label: 'parameter', render: (row) => row.key },
-                  { key: 'value', label: 'value', render: (row) => parameterValue(row.value) },
+                  { key: 'key', label: 'Parameter', render: (row) => row.key },
+                  { key: 'value', label: 'Value', render: (row) => parameterValue(row.value) },
                   {
                     key: 'confidence',
-                    label: 'confidence',
+                    label: 'Confidence',
                     render: (row) => <Badge kind="confidence" value={row.confidence} />,
                   },
                   {
                     key: 'provenance',
-                    label: 'from',
+                    label: 'From',
                     render: (row) => (
                       <Provenance
                         provenance={row.provenance}
@@ -158,10 +160,10 @@ export function PartDetail(props: PartDetailProps): ReactNode {
                   },
                   {
                     key: 'verdict',
-                    label: 'checked',
+                    label: 'Checked',
                     render: (row) =>
                       row.verdict === undefined ? (
-                        <span className="badge">not checked</span>
+                        <span className="badge">Not checked</span>
                       ) : (
                         <Badge kind="verdict" value={row.verdict.verdict} />
                       ),
@@ -183,7 +185,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
                           });
                         }}
                       >
-                        correct
+                        Correct
                       </button>
                     ),
                   },
@@ -206,44 +208,44 @@ export function PartDetail(props: PartDetailProps): ReactNode {
 
             <div className="split">
               <div className="panel">
-                <h3>offers</h3>
-                <Json value={value.summary.distributors} label="distributors" />
+                <h3>Offers</h3>
+                <Json value={value.summary.distributors} label="Distributors" />
                 <p className="caption">
                   {count(value.summary.offerCount)} offers, {count(value.summary.stock)} in stock
                 </p>
               </div>
               <div className="panel">
-                <h3>runs</h3>
+                <h3>Runs</h3>
                 <Table<Run>
                   rows={value.runs}
                   rowKey={(run) => run.id}
-                  empty="no run has touched this part in this database"
+                  empty="No run has touched this part in this database."
                   columns={[
-                    { key: 'kind', label: 'kind', render: (run) => run.kind },
+                    { key: 'kind', label: 'Kind', render: (run) => run.kind },
                     {
                       key: 'result',
-                      label: 'result',
+                      label: 'Result',
                       render: (run) => (
                         <Badge kind="runResult" value={run.result ?? 'unfinished'} />
                       ),
                     },
                     {
                       key: 'cost',
-                      label: 'cost',
+                      label: 'Cost',
                       numeric: true,
                       render: (run) => usd(run.costUsd),
                     },
-                    { key: 'when', label: 'when', render: (run) => when(run.startedAt) },
+                    { key: 'when', label: 'When', render: (run) => <Time value={run.startedAt} /> },
                   ]}
                 />
               </div>
             </div>
 
             <div className="panel" style={{ marginTop: 16 }}>
-              <h3>this datasheet also covers</h3>
+              <h3>This datasheet also covers</h3>
               <p className="caption">
                 {value.datasheetMpns.length === 0
-                  ? 'nothing else is recorded against it'
+                  ? 'Nothing else is recorded against it'
                   : value.datasheetMpns.join(', ')}
               </p>
             </div>
@@ -253,8 +255,8 @@ export function PartDetail(props: PartDetailProps): ReactNode {
 
       {correcting === undefined ? null : (
         <Dialog
-          title={`correct ${correcting.key}`}
-          confirmLabel="store the correction"
+          title={`Correct ${correcting.key}`}
+          confirmLabel="Save correction"
           busy={busy}
           confirmDisabled={form.reason.trim().length < 3 || form.note.trim().length < 3}
           onCancel={() => {
@@ -270,22 +272,22 @@ export function PartDetail(props: PartDetailProps): ReactNode {
             your name on it.
           </p>
           <TextField
-            label="value, as JSON"
+            label="Value, as JSON"
             value={form.value}
             onChange={(next) => {
               setForm({ ...form, value: next });
             }}
           />
           <TextField
-            label="what you read, and where"
+            label="What you read, and where"
             value={form.note}
-            placeholder="page 2, ordering information"
+            placeholder="Page 2, ordering information"
             onChange={(next) => {
               setForm({ ...form, note: next });
             }}
           />
           <TextField
-            label="why you are changing it"
+            label="Why you are changing it"
             value={form.reason}
             multiline
             onChange={(next) => {
@@ -293,7 +295,7 @@ export function PartDetail(props: PartDetailProps): ReactNode {
             }}
           />
           <TextField
-            label="your name"
+            label="Your name"
             value={form.actor}
             onChange={(next) => {
               setForm({ ...form, actor: next });

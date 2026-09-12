@@ -1,4 +1,5 @@
 import { elementAt } from '../../../util/array.js';
+import { label } from './labels.js';
 
 /**
  * Turning stored values into what a page shows.
@@ -92,10 +93,11 @@ export function parameterValue(value: unknown): string {
     return '—';
   }
   if (typeof value === 'boolean') {
-    return value ? 'yes' : 'no';
+    return value ? 'Yes' : 'No';
   }
   if (typeof value === 'string') {
-    return value;
+    // Stored vocabulary is snake_case; a page shows words.
+    return label(value);
   }
   if (typeof value === 'number') {
     return String(value);
@@ -119,8 +121,8 @@ export function parameterValue(value: unknown): string {
     const soft = value as { present: boolean; time?: QuantityLike | null };
     const time = soft.time;
     return soft.present
-      ? `yes${time === null || time === undefined ? '' : ` (${engineering(time.value, time.unit)})`}`
-      : 'no';
+      ? `Yes${time === null || time === undefined ? '' : ` (${engineering(time.value, time.unit)})`}`
+      : 'No';
   }
   return JSON.stringify(value);
 }
@@ -171,6 +173,63 @@ export function when(iso: string | null | undefined): string {
     return iso;
   }
   return date.toISOString().replace('T', ' ').slice(0, 16);
+}
+
+const RELATIVE = new Intl.RelativeTimeFormat('en-AU', { numeric: 'auto' });
+
+const STEPS: readonly { readonly ms: number; readonly unit: Intl.RelativeTimeFormatUnit }[] =
+  Object.freeze([
+    { ms: 31_536_000_000, unit: 'year' },
+    { ms: 2_592_000_000, unit: 'month' },
+    { ms: 604_800_000, unit: 'week' },
+    { ms: 86_400_000, unit: 'day' },
+    { ms: 3_600_000, unit: 'hour' },
+    { ms: 60_000, unit: 'minute' },
+  ]);
+
+/**
+ * How long ago, in words: "3 hours ago", "yesterday", "2 months ago".
+ *
+ * A table of timestamps is a table nobody reads — the question a person
+ * actually has is "recently, or not?". The exact instant is a hover away
+ * ({@link exactly}), so nothing is lost by leading with the answer.
+ */
+export function relative(iso: string | null | undefined, now: Date = new Date()): string {
+  if (iso === null || iso === undefined || iso === '') {
+    return '—';
+  }
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  const difference = date.getTime() - now.getTime();
+  const magnitude = Math.abs(difference);
+  if (magnitude < 45_000) {
+    return 'just now';
+  }
+  const step = STEPS.find((one) => magnitude >= one.ms) ?? elementAt(STEPS, STEPS.length - 1);
+  return RELATIVE.format(Math.round(difference / step.ms), step.unit);
+}
+
+/**
+ * The same instant in full, in whatever time zone the browser is in.
+ *
+ * This is what the relative form hangs on: the ledger is written in UTC, the
+ * person reading it is not, and a run that started "at 11:03" means nothing
+ * until it says 11:03 where.
+ */
+export function exactly(iso: string | null | undefined): string {
+  if (iso === null || iso === undefined || iso === '') {
+    return '';
+  }
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  return date.toLocaleString('en-AU', {
+    dateStyle: 'full',
+    timeStyle: 'long',
+  });
 }
 
 export function bytes(value: number | null | undefined): string {

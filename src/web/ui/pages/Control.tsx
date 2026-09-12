@@ -7,8 +7,9 @@ import { Badge } from '../components/Badge.js';
 import { Checkbox, Select, TextField } from '../components/Fields.js';
 import { Dialog } from '../components/Dialog.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Table } from '../components/Table.js';
-import { count, errorMessage, usd, when } from '../lib/format.js';
+import { count, errorMessage, usd } from '../lib/format.js';
 import { useAsync } from '../lib/state.js';
 import type { Launch } from '../lib/types.js';
 
@@ -84,23 +85,23 @@ export function Control(): ReactNode {
 
   return (
     <Page
-      title="run control"
-      subtitle="start an extraction or a verification, and watch what it costs"
+      title="Run control"
+      subtitle="Start an extraction or a verification, and watch what it costs"
     >
       <div className="filters">
         <Select
-          label="what to run"
+          label="What to run"
           value={form.kind}
           options={[
-            { value: 'extract', label: 'extraction' },
-            { value: 'verify', label: 'verification' },
+            { value: 'extract', label: 'Extraction' },
+            { value: 'verify', label: 'Verification' },
           ]}
           onChange={(value) => {
             setForm({ ...form, kind: value });
           }}
         />
         <TextField
-          label="parts, comma separated"
+          label="Parts, separated by commas"
           value={form.mpns}
           placeholder="TPS54331DR, AP62200WU-7"
           onChange={(value) => {
@@ -108,7 +109,7 @@ export function Control(): ReactNode {
           }}
         />
         <TextField
-          label="ceiling for the whole launch, dollars"
+          label="Ceiling for the launch (USD)"
           type="number"
           value={form.ceilingUsd}
           onChange={(value) => {
@@ -116,7 +117,7 @@ export function Control(): ReactNode {
           }}
         />
         <TextField
-          label="ceiling for one run, dollars"
+          label="Ceiling for one run (USD)"
           type="number"
           value={form.maxCostUsd}
           onChange={(value) => {
@@ -124,21 +125,21 @@ export function Control(): ReactNode {
           }}
         />
         <Checkbox
-          label="let it spend at the distributors"
+          label="Allow distributor spending"
           checked={form.allowSpend}
           onChange={(checked) => {
             setForm({ ...form, allowSpend: checked });
           }}
         />
         <TextField
-          label="why"
+          label="Why you are running this"
           value={form.reason}
           onChange={(value) => {
             setForm({ ...form, reason: value });
           }}
         />
         <TextField
-          label="your name"
+          label="Your name"
           value={form.actor}
           onChange={(value) => {
             setForm({ ...form, actor: value });
@@ -152,7 +153,7 @@ export function Control(): ReactNode {
             setConfirming(true);
           }}
         >
-          start it
+          Start run
         </button>
       </div>
 
@@ -161,7 +162,7 @@ export function Control(): ReactNode {
           <div className="panel" style={{ marginBottom: 16 }}>
             <p className="caption">
               {parts.length === 0
-                ? 'name some parts and this will say what they would cost.'
+                ? 'Name some parts and this will say what they would cost.'
                 : `${String(parts.length)} parts would cost about ${usd(value.estimateUsd)} — ${value.basisDescription}. allow ${usd(value.worstCaseUsd)} for a bad run.`}
             </p>
           </div>
@@ -171,37 +172,41 @@ export function Control(): ReactNode {
       <Async state={launches.state} label="what is running">
         {(value) => (
           <div className="panel">
-            <h3>launches</h3>
+            <h3>Launches</h3>
             <Table<Launch>
               rows={value.launches}
               rowKey={(launch) => launch.id}
-              empty="nothing has been started from this browser"
+              empty="Nothing has been started from this browser."
               columns={[
-                { key: 'kind', label: 'kind', render: (launch) => launch.kind },
+                { key: 'kind', label: 'Kind', render: (launch) => launch.kind },
                 {
                   key: 'parts',
-                  label: 'parts',
+                  label: 'Parts',
                   render: (launch) => launch.mpns.join(', '),
                 },
                 {
                   key: 'state',
-                  label: 'state',
+                  label: 'State',
                   render: (launch) => <Badge kind="launchState" value={launch.state} />,
                 },
                 {
                   key: 'spent',
-                  label: 'spent',
+                  label: 'Spent',
                   numeric: true,
                   render: (launch) =>
                     usd(launch.runs.reduce((sum, one) => sum + (one.costUsd ?? 0), 0)),
                 },
                 {
                   key: 'done',
-                  label: 'done',
+                  label: 'Done',
                   numeric: true,
                   render: (launch) => `${count(launch.runs.length)}/${count(launch.mpns.length)}`,
                 },
-                { key: 'started', label: 'started', render: (launch) => when(launch.startedAt) },
+                {
+                  key: 'started',
+                  label: 'Started',
+                  render: (launch) => <Time value={launch.startedAt} />,
+                },
                 {
                   key: 'cancel',
                   label: '',
@@ -221,7 +226,7 @@ export function Control(): ReactNode {
                             });
                         }}
                       >
-                        stop after this part
+                        Stop after this part
                       </button>
                     ) : null,
                 },
@@ -233,8 +238,8 @@ export function Control(): ReactNode {
 
       {!confirming ? null : (
         <Dialog
-          title="this will spend money"
-          confirmLabel="start the run"
+          title="This will spend money"
+          confirmLabel="Start the run"
           busy={busy}
           onCancel={() => {
             setConfirming(false);
@@ -242,13 +247,13 @@ export function Control(): ReactNode {
           onConfirm={start}
         >
           <p>
-            {form.kind === 'extract' ? 'extracting' : 'verifying'} {parts.length} part
+            {form.kind === 'extract' ? 'Extracting' : 'Verifying'} {parts.length} part
             {parts.length === 1 ? '' : 's'}: <span className="mono">{parts.join(', ')}</span>
           </p>
           <Async state={estimate.state} label="the estimate">
             {(value) => (
               <p>
-                about <strong>{usd(value.estimateUsd)}</strong>, {value.basisDescription}. it stops
+                About <strong>{usd(value.estimateUsd)}</strong>, {value.basisDescription}. It stops
                 at <strong>{usd(Number(form.ceilingUsd))}</strong> for the launch and{' '}
                 <strong>{usd(Number(form.maxCostUsd))}</strong> for any one run.
               </p>
@@ -256,8 +261,8 @@ export function Control(): ReactNode {
           </Async>
           <p className="caption">
             {form.allowSpend
-              ? 'it may fetch from the distributors, which uses quota.'
-              : 'it may not spend at the distributors: anything not cached will come back as a refusal.'}
+              ? 'It may fetch from the distributors, which uses quota.'
+              : 'It may not spend at the distributors: anything not cached comes back as a refusal.'}
           </p>
           {failure === undefined ? null : (
             <p className="danger" role="alert">

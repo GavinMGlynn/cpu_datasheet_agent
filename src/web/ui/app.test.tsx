@@ -20,30 +20,30 @@ describe('routing', () => {
   it('shows the overview at the root', async () => {
     renderApp('/');
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'overview' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Overview' })).toBeInTheDocument();
     });
   });
 
   it('has a page behind every link in the sidebar', async () => {
     const headings: Readonly<Record<string, string>> = {
-      '/': 'overview',
-      '/parts': 'catalogue',
-      '/parameters': 'parameters',
-      '/compare': 'compare',
-      '/alternates': 'alternates',
-      '/pricing': 'pricing',
-      '/datasheets': 'datasheets',
-      '/escalations': 'questions',
-      '/runs': 'runs',
-      '/costs': 'cost',
-      '/tools': 'tools',
-      '/ledger': 'ledger',
-      '/evals': 'evaluations',
-      '/verification': 'verification',
-      '/golden': 'golden set',
-      '/control': 'run control',
-      '/audit': 'audit trail',
-      '/health': 'health',
+      '/': 'Overview',
+      '/parts': 'Catalogue',
+      '/parameters': 'Parameters',
+      '/compare': 'Compare',
+      '/alternates': 'Alternates',
+      '/pricing': 'Pricing',
+      '/datasheets': 'Datasheets',
+      '/escalations': 'Questions',
+      '/runs': 'Runs',
+      '/costs': 'Cost',
+      '/tools': 'Tools',
+      '/ledger': 'Ledger',
+      '/evals': 'Evaluations',
+      '/verification': 'Verification',
+      '/golden': 'Golden set',
+      '/control': 'Run control',
+      '/audit': 'Audit trail',
+      '/health': 'Health',
     };
     for (const entry of NAVIGATION) {
       const { unmount } = renderApp(entry.path);
@@ -64,35 +64,35 @@ describe('routing', () => {
     unmount();
     const run = renderApp('/runs/00000000-0000-4000-8000-000000000001');
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /^run /u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /^run /iu })).toBeInTheDocument();
     });
     run.unmount();
     renderApp('/evals/some-result');
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'evaluation' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Evaluation' })).toBeInTheDocument();
     });
   });
 
   it('says there is no page rather than showing an empty one', async () => {
     renderApp('/nonsense');
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent('there is no page at');
+      expect(screen.getByRole('alert')).toHaveTextContent('There is no page at');
     });
   });
 
   it('follows a link in the sidebar', async () => {
     renderApp('/');
-    await userEvent.click(await screen.findByRole('link', { name: 'ledger' }));
+    await userEvent.click(await screen.findByRole('link', { name: 'Ledger' }));
     await waitFor(() => {
       expect(globalThis.location.pathname).toBe('/ledger');
     });
-    expect(screen.getByRole('heading', { name: 'ledger' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Ledger' })).toBeInTheDocument();
   });
 
   it('marks the page you are on', async () => {
     renderApp('/tools');
     await waitFor(() => {
-      expect(screen.getByRole('link', { name: 'tools' })).toHaveAttribute('aria-current', 'page');
+      expect(screen.getByRole('link', { name: 'Tools' })).toHaveAttribute('aria-current', 'page');
     });
   });
 });
@@ -105,7 +105,7 @@ describe('useApp', () => {
     }
     // React logs the thrown error; the test is that it throws at all.
     const quiet = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    expect(() => render(<Stray />)).toThrow(/outside the application/u);
+    expect(() => render(<Stray />)).toThrow(/outside the application/iu);
     quiet.mockRestore();
   });
 
@@ -137,7 +137,7 @@ describe('the database selector', () => {
             {
               id: 'live',
               kind: 'live',
-              label: 'live store',
+              label: 'Live store',
               exists: true,
               writable: true,
               bytes: 1,
@@ -146,7 +146,7 @@ describe('the database selector', () => {
             {
               id: 'dd212de6',
               kind: 'eval-run',
-              label: 'evaluation run dd212de6',
+              label: 'Evaluation run dd212de6',
               exists: true,
               writable: false,
               bytes: 2,
@@ -156,9 +156,9 @@ describe('the database selector', () => {
         }),
     });
     await waitFor(() => {
-      expect(screen.getByLabelText('database')).toBeInTheDocument();
+      expect(screen.getByLabelText('Database')).toBeInTheDocument();
     });
-    await userEvent.selectOptions(screen.getByLabelText('database'), 'dd212de6');
+    await userEvent.selectOptions(screen.getByLabelText('Database'), 'dd212de6');
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ source: 'dd212de6' });
     });
@@ -191,9 +191,9 @@ describe('the database selector', () => {
   });
 
   it('says so when it cannot even list the databases', async () => {
-    renderApp('/', { sources: () => Promise.reject(new Error('the data directory is gone')) });
+    renderApp('/', { sources: () => Promise.reject(new Error('The data directory is gone')) });
     await waitFor(() => {
-      expect(screen.getAllByRole('alert')[0]).toHaveTextContent('the data directory is gone');
+      expect(screen.getAllByRole('alert')[0]).toHaveTextContent('The data directory is gone');
     });
   });
 });

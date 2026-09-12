@@ -3,8 +3,9 @@ import type { ReactNode } from 'react';
 import { useApp } from '../app.js';
 import { Async } from '../components/Async.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Table } from '../components/Table.js';
-import { count, percent, usd, when } from '../lib/format.js';
+import { count, percent, usd } from '../lib/format.js';
 import { navigate } from '../lib/router.js';
 import { useAsync } from '../lib/state.js';
 import type { EvalListing } from '../lib/types.js';
@@ -16,8 +17,8 @@ export function Evals(): ReactNode {
 
   return (
     <Page
-      title="evaluations"
-      subtitle="what each prompt scored against the golden set, and what it cost to find out"
+      title="Evaluations"
+      subtitle="What each prompt scored against the golden set, and what it cost to find out"
     >
       <Async state={evals.state} label="the evaluations">
         {(value) => (
@@ -25,11 +26,11 @@ export function Evals(): ReactNode {
             <Table<EvalListing>
               rows={value.results}
               rowKey={(one) => one.id}
-              empty="no evaluation has been run yet"
+              empty="No evaluation has been run yet."
               columns={[
                 {
                   key: 'prompt',
-                  label: 'prompt',
+                  label: 'Prompt',
                   render: (one) => (
                     <a
                       href={`/evals/${encodeURIComponent(one.id)}`}
@@ -42,43 +43,43 @@ export function Evals(): ReactNode {
                     </a>
                   ),
                 },
-                { key: 'model', label: 'model', render: (one) => one.model },
-                { key: 'parts', label: 'parts', numeric: true, render: (one) => count(one.parts) },
+                { key: 'model', label: 'Model', render: (one) => one.model },
+                { key: 'parts', label: 'Parts', numeric: true, render: (one) => count(one.parts) },
                 {
                   key: 'recall',
-                  label: 'recall',
+                  label: 'Recall',
                   numeric: true,
                   sort: (one) => one.recall,
                   render: (one) => percent(one.recall),
                 },
                 {
                   key: 'precision',
-                  label: 'precision',
+                  label: 'Precision',
                   numeric: true,
                   sort: (one) => one.precision,
                   render: (one) => percent(one.precision),
                 },
                 {
                   key: 'citations',
-                  label: 'citations exact',
+                  label: 'Citations exact',
                   numeric: true,
                   sort: (one) => one.provenanceAccuracy,
                   render: (one) => percent(one.provenanceAccuracy),
                 },
                 {
                   key: 'cost',
-                  label: 'cost',
+                  label: 'Cost',
                   numeric: true,
                   sort: (one) => one.costUsd,
                   render: (one) => usd(one.costUsd),
                 },
                 {
                   key: 'starved',
-                  label: 'starved',
+                  label: 'Starved',
                   numeric: true,
                   render: (one) => (one.starved === 0 ? '—' : count(one.starved)),
                 },
-                { key: 'when', label: 'run', render: (one) => when(one.startedAt) },
+                { key: 'when', label: 'Run', render: (one) => <Time value={one.startedAt} /> },
               ]}
             />
             <p className="caption" style={{ marginTop: 8 }}>

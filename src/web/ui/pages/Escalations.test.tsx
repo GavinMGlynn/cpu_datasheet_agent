@@ -9,7 +9,7 @@ import { renderApp } from '../../../../test/ui/render.js';
 const open: Escalation = {
   id: '3f5a1c2e-8b7d-4e6f-9a0b-1c2d3e4f5a6b',
   mpn: 'TPS54331DR',
-  kind: 'conflict',
+  kind: 'In conflict',
   question: 'Datasheet says 28 V, Digi-Key says 30 V. Which is right?',
   context: { datasheet: 28, distributor: 30 },
   options: ['28 V, the datasheet', '30 V, the distributor'],
@@ -30,7 +30,7 @@ describe('questions', () => {
     await waitFor(() => {
       expect(screen.getByText(open.question)).toBeInTheDocument();
     });
-    expect(screen.getByLabelText('what the run was looking at')).toHaveTextContent(
+    expect(screen.getByLabelText('What the run was looking at')).toHaveTextContent(
       '"datasheet": 28',
     );
   });
@@ -40,7 +40,7 @@ describe('questions', () => {
       escalations: () => Promise.resolve({ escalations: [answered] }),
     });
     await waitFor(() => {
-      expect(screen.getByText(/answered by gavin/u)).toBeInTheDocument();
+      expect(screen.getByText(/answered by gavin/iu)).toBeInTheDocument();
     });
   });
 
@@ -52,11 +52,11 @@ describe('questions', () => {
     await waitFor(() => {
       expect(escalations.mock.calls[0]?.[0]).toMatchObject({ resolved: false });
     });
-    await userEvent.selectOptions(screen.getByLabelText('show'), 'resolved');
+    await userEvent.selectOptions(screen.getByLabelText('Show'), 'resolved');
     await waitFor(() => {
       expect(escalations.mock.calls.at(-1)?.[0]).toMatchObject({ resolved: true });
     });
-    await userEvent.selectOptions(screen.getByLabelText('show'), 'all');
+    await userEvent.selectOptions(screen.getByLabelText('Show'), 'all');
     await waitFor(() => {
       expect(escalations.mock.calls.at(-1)?.[0]).not.toHaveProperty('resolved');
     });
@@ -67,20 +67,20 @@ describe('questions', () => {
     const escalations = vi.fn(() => Promise.resolve({ escalations: [open] }));
     renderApp('/escalations', { escalations, resolveEscalation });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'answer it' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Answer' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'answer it' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Answer' }));
     await userEvent.click(screen.getByRole('button', { name: '28 V, the datasheet' }));
-    await userEvent.type(screen.getByLabelText('why'), 'read page 2 myself');
-    await userEvent.clear(screen.getByLabelText('your name'));
-    await userEvent.type(screen.getByLabelText('your name'), 'someone else');
-    await userEvent.click(screen.getByRole('button', { name: 'record the answer' }));
+    await userEvent.type(screen.getByLabelText('Why you are answering it'), 'Read page 2 myself');
+    await userEvent.clear(screen.getByLabelText('Your name'));
+    await userEvent.type(screen.getByLabelText('Your name'), 'Someone else');
+    await userEvent.click(screen.getByRole('button', { name: 'Record answer' }));
     await waitFor(() => {
       expect(resolveEscalation).toHaveBeenCalledWith(
         open.id,
         expect.objectContaining({
           answer: '28 V, the datasheet',
-          reason: 'read page 2 myself',
+          reason: 'Read page 2 myself',
         }) as unknown,
       );
     });
@@ -92,19 +92,19 @@ describe('questions', () => {
   it('shows what the server said when it refuses the answer', async () => {
     renderApp('/escalations', {
       escalations: () => Promise.resolve({ escalations: [open] }),
-      resolveEscalation: () => Promise.reject(new Error('already resolved')),
+      resolveEscalation: () => Promise.reject(new Error('Already resolved')),
     });
-    await userEvent.click(await screen.findByRole('button', { name: 'answer it' }));
-    await userEvent.type(screen.getByLabelText('your answer'), '28 V');
-    await userEvent.type(screen.getByLabelText('why'), 'checked it');
-    await userEvent.click(screen.getByRole('button', { name: 'record the answer' }));
-    expect(await screen.findByRole('alert')).toHaveTextContent('already resolved');
+    await userEvent.click(await screen.findByRole('button', { name: 'Answer' }));
+    await userEvent.type(screen.getByLabelText('Your answer'), '28 V');
+    await userEvent.type(screen.getByLabelText('Why you are answering it'), 'Checked it');
+    await userEvent.click(screen.getByRole('button', { name: 'Record answer' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Already resolved');
   });
 
   it('closes the answer without recording anything', async () => {
     renderApp('/escalations', { escalations: () => Promise.resolve({ escalations: [open] }) });
-    await userEvent.click(await screen.findByRole('button', { name: 'answer it' }));
-    await userEvent.click(screen.getByRole('button', { name: 'cancel' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Answer' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
@@ -112,15 +112,15 @@ describe('questions', () => {
     renderApp('/escalations', {
       escalations: () => Promise.resolve({ escalations: [withoutOptions] }),
     });
-    await userEvent.click(await screen.findByRole('button', { name: 'answer it' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Answer' }));
     expect(screen.queryByRole('button', { name: '28 V, the datasheet' })).toBeNull();
-    expect(screen.getByLabelText('your answer')).toBeInTheDocument();
+    expect(screen.getByLabelText('Your answer')).toBeInTheDocument();
   });
 
   it('says when nothing is waiting', async () => {
     renderApp('/escalations', { escalations: () => Promise.resolve({ escalations: [] }) });
     await waitFor(() => {
-      expect(screen.getByText('nothing is waiting on a person.')).toBeInTheDocument();
+      expect(screen.getByText('Nothing is waiting on a person.')).toBeInTheDocument();
     });
   });
 });

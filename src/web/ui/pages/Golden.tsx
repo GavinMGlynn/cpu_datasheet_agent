@@ -3,9 +3,10 @@ import type { ReactNode } from 'react';
 import { useApp } from '../app.js';
 import { Async } from '../components/Async.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Stat, Stats } from '../components/Stat.js';
 import { Table } from '../components/Table.js';
-import { count, when } from '../lib/format.js';
+import { count } from '../lib/format.js';
 import { useAsync } from '../lib/state.js';
 
 /**
@@ -43,22 +44,22 @@ export function Golden(): ReactNode {
   );
 
   return (
-    <Page title="golden set" subtitle="the hand reading every extraction is scored against">
+    <Page title="Golden set" subtitle="The hand reading every extraction is scored against">
       <Async state={health.state} label="the health checks">
         {(value) => (
           <>
             <Stats>
-              <Stat label="parts" value={count(value.parts)} note="in the set" />
+              <Stat label="Parts" value={count(value.parts)} note="in the set" />
               <Stat
-                label="health"
+                label="Health"
                 value={
-                  value.issues.length === 0 ? 'clean' : `${String(value.issues.length)} issues`
+                  value.issues.length === 0 ? 'Clean' : `${String(value.issues.length)} issues`
                 }
                 note="duplicate parts, thin coverage, missing citations"
               />
               <Stat
-                label="thinly covered"
-                value={value.thin.length === 0 ? 'none' : String(value.thin.length)}
+                label="Thinly covered"
+                value={value.thin.length === 0 ? 'None' : String(value.thin.length)}
                 note="parameters with fewer than three examples"
               />
             </Stats>
@@ -74,23 +75,23 @@ export function Golden(): ReactNode {
           </>
         )}
       </Async>
-      <Async state={golden.state} label="the golden parts">
+      <Async state={golden.state} label="The golden parts">
         {(value) => (
           <div className="panel">
             <Table<GoldenRow>
               rows={value}
               rowKey={(row) => row.mpn}
               columns={[
-                { key: 'mpn', label: 'part', render: (row) => row.mpn },
-                { key: 'manufacturer', label: 'manufacturer', render: (row) => row.manufacturer },
-                { key: 'reason', label: 'why it is in the set', render: (row) => row.reason },
-                { key: 'pages', label: 'pages', numeric: true, render: (row) => row.pageCount },
-                { key: 'readBy', label: 'read by', render: (row) => row.readBy },
+                { key: 'mpn', label: 'Part', render: (row) => row.mpn },
+                { key: 'manufacturer', label: 'Manufacturer', render: (row) => row.manufacturer },
+                { key: 'reason', label: 'Why it is in the set', render: (row) => row.reason },
+                { key: 'pages', label: 'Pages', numeric: true, render: (row) => row.pageCount },
+                { key: 'readBy', label: 'Read by', render: (row) => row.readBy },
                 {
                   key: 'readAt',
-                  label: 'read',
+                  label: 'Read',
                   sort: (row) => row.readAt,
-                  render: (row) => when(row.readAt),
+                  render: (row) => <Time value={row.readAt} />,
                 },
               ]}
             />

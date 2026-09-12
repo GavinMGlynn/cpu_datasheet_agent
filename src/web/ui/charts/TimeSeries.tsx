@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { usd } from '../lib/format.js';
-import { moneyTick, moneyTooltip } from './formatters.js';
+import { moneyTick, moneyTooltip, timeTick } from './formatters.js';
 import { Chart } from './Chart.js';
 import { seriesColor } from './palette.js';
 
@@ -38,16 +38,16 @@ export function TimeSeries(props: TimeSeriesProps): ReactNode {
       {...(props.caption === undefined ? {} : { caption: props.caption })}
       rows={props.rows}
       height={props.height ?? 260}
-      empty="no runs in this window"
+      empty="No runs in this window."
       legend={[
-        { label: 'spent', color: perBucket },
-        { label: 'spent in total', color: cumulative },
+        { label: 'Spent', color: perBucket },
+        { label: 'Spent in total', color: cumulative },
       ]}
       columns={[
-        { label: 'when', value: (row) => row.key },
-        { label: 'runs', value: (row) => String(row.runs) },
-        { label: 'spent', value: (row) => usd(row.costUsd) },
-        { label: 'in total', value: (row) => usd(row.cumulativeUsd) },
+        { label: 'When', value: (row) => row.key },
+        { label: 'Runs', value: (row) => String(row.runs) },
+        { label: 'Spent', value: (row) => usd(row.costUsd) },
+        { label: 'In total', value: (row) => usd(row.cumulativeUsd) },
       ]}
     >
       {(width) => (
@@ -55,10 +55,17 @@ export function TimeSeries(props: TimeSeriesProps): ReactNode {
           width={width}
           height={props.height ?? 260}
           data={[...props.rows]}
-          margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
+          margin={{ top: 8, right: 32, bottom: 8, left: 8 }}
         >
           <CartesianGrid strokeDasharray="2 4" className="grid" />
-          <XAxis dataKey="key" tickLine={false} axisLine={false} fontSize={12} />
+          <XAxis
+            dataKey="key"
+            tickFormatter={timeTick}
+            tickLine={false}
+            axisLine={false}
+            fontSize={12}
+            minTickGap={24}
+          />
           <YAxis
             tickFormatter={moneyTick}
             tickLine={false}
@@ -68,6 +75,7 @@ export function TimeSeries(props: TimeSeriesProps): ReactNode {
           />
           <Tooltip formatter={moneyTooltip} />
           <Line
+            isAnimationActive={false}
             type="monotone"
             dataKey="costUsd"
             name="spent"
@@ -76,6 +84,7 @@ export function TimeSeries(props: TimeSeriesProps): ReactNode {
             dot={{ r: 4 }}
           />
           <Line
+            isAnimationActive={false}
             type="monotone"
             dataKey="cumulativeUsd"
             name="spent in total"

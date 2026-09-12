@@ -26,8 +26,8 @@ export function Verification(): ReactNode {
 
   return (
     <Page
-      title="verification"
-      subtitle="what a second pass, in a fresh context, made of each stored value"
+      title="Verification"
+      subtitle="What a second pass, in a fresh context, made of each stored value"
     >
       <Async state={parts.state} label="the verdicts">
         {(page) => {
@@ -44,25 +44,25 @@ export function Verification(): ReactNode {
             <>
               <Stats>
                 <Stat
-                  label="confirmed"
+                  label="Confirmed"
                   value={count(totals.confirmed)}
                   note="found on the cited page"
                 />
                 <Stat
-                  label="contradicted"
+                  label="Contradicted"
                   value={count(totals.contradicted)}
                   note="the page says something else"
                 />
                 <Stat
-                  label="not found"
+                  label="Not found"
                   value={count(totals.notFound)}
                   note="the cited page does not state it"
                 />
-                <Stat label="unchecked" value={count(totals.unchecked)} note="nothing has looked" />
+                <Stat label="Unchecked" value={count(totals.unchecked)} note="nothing has looked" />
               </Stats>
               <HeatMap
-                title="verdicts by part"
-                caption="a contradiction is worth reading; a value nothing has checked is worth running"
+                title="Verdicts by part"
+                caption="A contradiction is worth reading; a value nothing has checked is worth running"
                 rows={page.items.map((part) => part.mpn)}
                 columns={['confirmed', 'contradicted', 'not found', 'unchecked']}
                 cells={page.items.flatMap((part) => [
@@ -99,7 +99,7 @@ export function Verification(): ReactNode {
                   columns={[
                     {
                       key: 'mpn',
-                      label: 'part',
+                      label: 'Part',
                       render: (part) => (
                         <a
                           href={`/parts/${encodeURIComponent(part.mpn)}`}
@@ -114,33 +114,33 @@ export function Verification(): ReactNode {
                     },
                     {
                       key: 'status',
-                      label: 'status',
+                      label: 'Status',
                       render: (part) => part.status.replace(/_/gu, ' '),
                     },
                     {
                       key: 'confirmed',
-                      label: 'confirmed',
+                      label: 'Confirmed',
                       numeric: true,
                       sort: (part) => part.verdicts.confirmed,
                       render: (part) => count(part.verdicts.confirmed),
                     },
                     {
                       key: 'contradicted',
-                      label: 'contradicted',
+                      label: 'Contradicted',
                       numeric: true,
                       sort: (part) => part.verdicts.contradicted,
                       render: (part) => count(part.verdicts.contradicted),
                     },
                     {
                       key: 'notFound',
-                      label: 'not found',
+                      label: 'Not found',
                       numeric: true,
                       sort: (part) => part.verdicts.notFound,
                       render: (part) => count(part.verdicts.notFound),
                     },
                     {
                       key: 'unchecked',
-                      label: 'unchecked',
+                      label: 'Unchecked',
                       numeric: true,
                       sort: (part) => part.verdicts.unchecked,
                       render: (part) => count(part.verdicts.unchecked),

@@ -5,9 +5,10 @@ import { useApp } from '../app.js';
 import { Async } from '../components/Async.js';
 import { Json } from '../components/Json.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Checkbox, TextField } from '../components/Fields.js';
 import { Table } from '../components/Table.js';
-import { count, duration, shortId, when } from '../lib/format.js';
+import { count, duration, shortId } from '../lib/format.js';
 import { navigate, withQuery } from '../lib/router.js';
 import { useAsync } from '../lib/state.js';
 import type { ToolCall } from '../lib/types.js';
@@ -38,17 +39,17 @@ export function Ledger(): ReactNode {
   );
 
   return (
-    <Page title="ledger" subtitle="every tool call this project has made, with what it did">
+    <Page title="Ledger" subtitle="Every tool call this project has made, with what it did">
       <div className="filters">
         <TextField
-          label="search the tool and its input"
+          label="Search the tool and its input"
           value={text}
           onChange={(value) => {
             navigate(withQuery(route, { text: value, offset: undefined }));
           }}
         />
         <TextField
-          label="one tool"
+          label="One tool"
           value={tool}
           placeholder="read_pages"
           onChange={(value) => {
@@ -56,7 +57,7 @@ export function Ledger(): ReactNode {
           }}
         />
         <Checkbox
-          label="only the ones that failed"
+          label="Only the ones that failed"
           checked={failed}
           onChange={(checked) => {
             navigate(withQuery(route, { failed: checked ? 'true' : undefined, offset: undefined }));
@@ -74,11 +75,11 @@ export function Ledger(): ReactNode {
                 <Table<ToolCall>
                   rows={page.items}
                   rowKey={(call) => call.id}
-                  empty="nothing matches"
+                  empty="Nothing matches."
                   columns={[
                     {
                       key: 'tool',
-                      label: 'tool',
+                      label: 'Tool',
                       render: (call) => (
                         <button
                           type="button"
@@ -91,22 +92,26 @@ export function Ledger(): ReactNode {
                         </button>
                       ),
                     },
-                    { key: 'when', label: 'when', render: (call) => when(call.startedAt) },
+                    {
+                      key: 'when',
+                      label: 'When',
+                      render: (call) => <Time value={call.startedAt} />,
+                    },
                     {
                       key: 'took',
-                      label: 'took',
+                      label: 'Took',
                       numeric: true,
                       render: (call) => duration(call.durationMs),
                     },
                     {
                       key: 'outcome',
-                      label: 'outcome',
+                      label: 'Outcome',
                       render: (call) =>
                         call.error === undefined ? 'ok' : <code>{call.error.code}</code>,
                     },
                     {
                       key: 'session',
-                      label: 'session',
+                      label: 'Session',
                       render: (call) => <span className="mono">{shortId(call.sessionId)}</span>,
                     },
                   ]}
@@ -120,7 +125,7 @@ export function Ledger(): ReactNode {
                       navigate(withQuery(route, { offset: Math.max(0, page.offset - page.limit) }));
                     }}
                   >
-                    previous
+                    Previous
                   </button>
                   <button
                     type="button"
@@ -130,21 +135,21 @@ export function Ledger(): ReactNode {
                       navigate(withQuery(route, { offset: page.offset + page.limit }));
                     }}
                   >
-                    next
+                    Next
                   </button>
                 </div>
               </div>
               <div className="panel">
-                <h3>{selected === undefined ? 'pick a call' : selected.tool}</h3>
+                <h3>{selected === undefined ? 'Pick a call' : selected.tool}</h3>
                 {selected === undefined ? (
-                  <p className="caption">the input and the output, as they were recorded.</p>
+                  <p className="caption">The input and the output, as they were recorded.</p>
                 ) : (
                   <>
-                    <Json value={selected.input} label="what went in" />
+                    <Json value={selected.input} label="What went in" />
                     <p className="caption" style={{ marginTop: 8 }}>
-                      {selected.error === undefined ? 'what came back' : 'what went wrong'}
+                      {selected.error === undefined ? 'What came back' : 'What went wrong'}
                     </p>
-                    <Json value={selected.error ?? selected.output} label="what came back" />
+                    <Json value={selected.error ?? selected.output} label="What came back" />
                   </>
                 )}
               </div>

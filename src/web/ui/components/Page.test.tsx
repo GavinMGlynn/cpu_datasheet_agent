@@ -9,25 +9,25 @@ describe('Page', () => {
   it('says what you are looking at', () => {
     renderAt(
       <Page
-        title="runs"
-        subtitle="what the agent has done"
+        title="Runs"
+        subtitle="What the agent has done"
         actions={<button type="button">refresh</button>}
       >
-        <p>the body</p>
+        <p>The body</p>
       </Page>,
     );
-    expect(screen.getByRole('heading', { name: 'runs' })).toBeInTheDocument();
-    expect(screen.getByText('what the agent has done')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Runs' })).toBeInTheDocument();
+    expect(screen.getByText('What the agent has done')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'refresh' })).toBeInTheDocument();
-    expect(screen.getByText('the body')).toBeInTheDocument();
+    expect(screen.getByText('The body')).toBeInTheDocument();
   });
 
   it('works with nothing but a title', () => {
     renderAt(
-      <Page title="health">
+      <Page title="Health">
         <p>body</p>
       </Page>,
     );
-    expect(screen.getByRole('heading', { name: 'health' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Health' })).toBeInTheDocument();
   });
 });

@@ -126,6 +126,29 @@ images, which are the manufacturers' copyright; and tool inputs and outputs,
 which hold distributors' data. Part numbers and prices are included; nothing
 else from a distributor is.
 
+## How it reads
+
+One standard, because a page that mixes them looks unfinished (D74):
+
+- **Sentence case for everything a person reads** — page titles, navigation,
+  buttons, column headings, empty states. Not lowercase, which reads as a
+  draft, and not Title Case On Every Word, which reads as a brochure.
+- **Stored vocabulary is translated on the way out.** `needs_human` is "Needs
+  a person" and `integrated_fet` is "Integrated FET"; `src/web/ui/lib/labels.ts`
+  holds the table and humanises anything it has not met. Identifiers a person
+  types or greps — tool names, parameter keys, MPNs, migration names — are
+  printed exactly as they are stored.
+- **Times say how long ago and mean it exactly.** `<Time>` renders "3 hours
+  ago" with the full local instant in the tooltip and the ISO value in
+  `datetime`, because the ledger is UTC and the reader is not.
+- **Buttons say what happens**: View, Save correction, Start run, Close.
+
+The look is a bench instrument rather than a dashboard: flat surfaces,
+hairline rules, tabular figures, one accent for what can be acted on, and the
+status palette reserved for state. Type is the system UI stack on purpose —
+this server binds to loopback and fetches nothing, and a web font would be the
+one request the site makes to somewhere else.
+
 ## Invariants
 
 - The browser never reaches the network, the database or the model. It reaches

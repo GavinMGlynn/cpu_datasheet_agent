@@ -8,9 +8,9 @@ import { ErrorBoundary } from './ErrorBoundary.js';
 
 function Boom(props: { readonly explode: boolean }): ReactNode {
   if (props.explode) {
-    throw new Error('cannot read properties of undefined');
+    throw new Error('Cannot read properties of undefined');
   }
-  return <p>the page</p>;
+  return <p>The page</p>;
 }
 
 afterEach(() => {
@@ -24,7 +24,7 @@ describe('ErrorBoundary', () => {
         <Boom explode={false} />
       </ErrorBoundary>,
     );
-    expect(screen.getByText('the page')).toBeInTheDocument();
+    expect(screen.getByText('The page')).toBeInTheDocument();
   });
 
   it('says what went wrong instead of blanking the screen', () => {
@@ -34,8 +34,8 @@ describe('ErrorBoundary', () => {
         <Boom explode />
       </ErrorBoundary>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('this page could not be rendered');
-    expect(screen.getByRole('alert')).toHaveTextContent('cannot read properties of undefined');
+    expect(screen.getByRole('alert')).toHaveTextContent('This page could not be rendered.');
+    expect(screen.getByRole('alert')).toHaveTextContent('Cannot read properties of undefined');
     expect(quiet).toHaveBeenCalled();
   });
 
@@ -52,7 +52,7 @@ describe('ErrorBoundary', () => {
         <Boom explode={false} />
       </ErrorBoundary>,
     );
-    expect(screen.getByText('the page')).toBeInTheDocument();
+    expect(screen.getByText('The page')).toBeInTheDocument();
   });
 
   it('stays broken while the address is the same', () => {

@@ -33,9 +33,9 @@ const child: ToolCall = {
 const failed: ToolCall = {
   id: '00000000-0000-4000-8000-000000000012',
   sessionId: 'session-a',
-  tool: 'read_pages',
+  tool: 'Read_pages',
   input: { pages: [4] },
-  error: { name: 'CacheMissError', code: 'CACHE_MISS', message: 'not cached' },
+  error: { name: 'CacheMissError', code: 'CACHE_MISS', message: 'Not cached' },
   startedAt: '2026-09-11T09:00:07Z',
   durationMs: 4,
   spendsQuota: false,
@@ -46,7 +46,7 @@ function detail(overrides: Record<string, unknown> = {}) {
     run: run({
       details: {
         toolCalls: 3,
-        toolFailures: ['read_pages'],
+        toolFailures: ['Read_pages'],
         escalations: 1,
         spendDenials: 2,
         cacheMisses: 3,
@@ -69,7 +69,7 @@ describe('one run', () => {
       run: () => Promise.resolve(detail()),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /run 00000000/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /run 00000000/iu })).toBeInTheDocument();
     });
     expect(screen.getByText('$3.41')).toBeInTheDocument();
     expect(screen.getByText('4m 0s')).toBeInTheDocument();
@@ -86,8 +86,8 @@ describe('one run', () => {
       expect(screen.getByRole('button', { name: 'fetch_offers' })).toBeInTheDocument();
     });
     expect(screen.getByRole('button', { name: 'spend_gate' })).toBeInTheDocument();
-    expect(screen.getByText(/may spend/u)).toBeInTheDocument();
-    expect(screen.getByText(/CACHE_MISS/u)).toBeInTheDocument();
+    expect(screen.getByText(/may spend/iu)).toBeInTheDocument();
+    expect(screen.getByText(/CACHE_MISS/iu)).toBeInTheDocument();
   });
 
   it('shows what a call sent and what came back', async () => {
@@ -95,11 +95,11 @@ describe('one run', () => {
       run: () => Promise.resolve(detail()),
     });
     await waitFor(() => {
-      expect(screen.getByText('pick a call')).toBeInTheDocument();
+      expect(screen.getByText('Pick a call')).toBeInTheDocument();
     });
     await userEvent.click(screen.getByRole('button', { name: 'fetch_offers' }));
-    expect(screen.getByLabelText('what went in')).toHaveTextContent('TPS54331DR');
-    expect(screen.getByText('what came back')).toBeInTheDocument();
+    expect(screen.getByLabelText('What went in')).toHaveTextContent('TPS54331DR');
+    expect(screen.getByText('What came back')).toBeInTheDocument();
   });
 
   it('shows why a call failed', async () => {
@@ -107,11 +107,11 @@ describe('one run', () => {
       run: () => Promise.resolve(detail()),
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'read_pages' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Read_pages' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'read_pages' }));
-    expect(screen.getByText('what went wrong')).toBeInTheDocument();
-    expect(screen.getByLabelText('what came back')).toHaveTextContent('CACHE_MISS');
+    await userEvent.click(screen.getByRole('button', { name: 'Read_pages' }));
+    expect(screen.getByText('What went wrong')).toBeInTheDocument();
+    expect(screen.getByLabelText('What came back')).toHaveTextContent('CACHE_MISS');
   });
 
   it('says when a run left no trace in the ledger', async () => {
@@ -119,7 +119,7 @@ describe('one run', () => {
       run: () => Promise.resolve(detail({ calls: [], tree: [] })),
     });
     await waitFor(() => {
-      expect(screen.getByText(/this run left no trace in the ledger/u)).toBeInTheDocument();
+      expect(screen.getByText(/this run left no trace in the ledger/iu)).toBeInTheDocument();
     });
   });
 
@@ -141,7 +141,7 @@ describe('one run', () => {
     });
     await waitFor(() => {
       // Once as the headline, once as the badge beside the model.
-      expect(screen.getAllByText('unfinished')).toHaveLength(2);
+      expect(screen.getAllByText('Unfinished')).toHaveLength(2);
     });
     expect(screen.getAllByText('—').length).toBeGreaterThan(0);
   });
@@ -151,7 +151,7 @@ describe('one run', () => {
       run: () => Promise.resolve(detail()),
       runs: () => Promise.resolve({ total: 0, offset: 0, limit: 500, items: [] }),
     });
-    await userEvent.click(await screen.findByRole('button', { name: 'back to the runs' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Back to runs' }));
     await waitFor(() => {
       expect(globalThis.location.pathname).toBe('/runs');
     });

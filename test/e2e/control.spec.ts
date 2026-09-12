@@ -15,31 +15,31 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('will not start until it has parts and a reason', async ({ page }) => {
-  await expect(page.getByRole('button', { name: 'start it' })).toBeDisabled();
-  await page.getByLabel('parts, comma separated').fill('TPS54331DR');
-  await expect(page.getByRole('button', { name: 'start it' })).toBeDisabled();
-  await page.getByLabel('why').fill('checking the gate');
-  await expect(page.getByRole('button', { name: 'start it' })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Start run' })).toBeDisabled();
+  await page.getByLabel('Parts, separated by commas').fill('TPS54331DR');
+  await expect(page.getByRole('button', { name: 'Start run' })).toBeDisabled();
+  await page.getByLabel('Why you are running this').fill('checking the gate');
+  await expect(page.getByRole('button', { name: 'Start run' })).toBeEnabled();
 });
 
 test('says what it would cost, and what that rests on', async ({ page }) => {
-  await page.getByLabel('parts, comma separated').fill('TPS54331DR');
-  await expect(page.getByText(/1 parts would cost about/u)).toBeVisible();
-  await expect(page.getByText(/from 1 extract run\(s\) already recorded/u)).toBeVisible();
+  await page.getByLabel('Parts, separated by commas').fill('TPS54331DR');
+  await expect(page.getByText(/1 parts would cost about/iu)).toBeVisible();
+  await expect(page.getByText(/from 1 extract run\(s\) already recorded/iu)).toBeVisible();
 });
 
 test('asks before it spends, and takes no for an answer', async ({ page }) => {
-  await page.getByLabel('parts, comma separated').fill('TPS54331DR');
-  await page.getByLabel('why').fill('checking the gate');
-  await page.getByRole('button', { name: 'start it' }).click();
+  await page.getByLabel('Parts, separated by commas').fill('TPS54331DR');
+  await page.getByLabel('Why you are running this').fill('checking the gate');
+  await page.getByRole('button', { name: 'Start run' }).click();
 
-  const dialog = page.getByRole('dialog', { name: 'this will spend money' });
+  const dialog = page.getByRole('dialog', { name: 'This will spend money' });
   await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText('extracting 1 part');
-  await expect(dialog).toContainText('it stops at');
-  await expect(dialog).toContainText('it may not spend at the distributors');
+  await expect(dialog).toContainText('Extracting 1 part');
+  await expect(dialog).toContainText('It stops at');
+  await expect(dialog).toContainText('It may not spend at the distributors');
 
-  await page.getByRole('button', { name: 'cancel' }).click();
+  await page.getByRole('button', { name: 'Cancel' }).click();
   await expect(dialog).toBeHidden();
   await expect(page.getByText('nothing has been started from this browser')).toBeVisible();
 });

@@ -7,14 +7,14 @@ import { Stat, Stats } from './Stat.js';
 
 describe('Stat', () => {
   it('leads with the number and explains it underneath', () => {
-    renderAt(<Stat label="spent" value="$87.24" note="22 parts" />);
-    expect(screen.getByText('spent')).toBeInTheDocument();
+    renderAt(<Stat label="Spent" value="$87.24" note="22 parts" />);
+    expect(screen.getByText('Spent')).toBeInTheDocument();
     expect(screen.getByText('$87.24')).toBeInTheDocument();
     expect(screen.getByText('22 parts')).toBeInTheDocument();
   });
 
   it('works with nothing to add', () => {
-    renderAt(<Stat label="parts" value="22" />);
+    renderAt(<Stat label="Parts" value="22" />);
     expect(screen.getByText('22')).toBeInTheDocument();
   });
 

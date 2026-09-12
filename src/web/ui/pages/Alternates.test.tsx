@@ -32,8 +32,8 @@ const answer = {
         pinCompatibility: 'not_assessed',
       },
     ],
-    excluded: [{ mpn: 'TPS62130RGTR', reason: 'not verified' }],
-    disclaimer: 'pin compatibility has not been assessed.',
+    excluded: [{ mpn: 'TPS62130RGTR', reason: 'Not verified' }],
+    disclaimer: 'Pin compatibility has not been assessed.',
   },
 };
 
@@ -42,9 +42,9 @@ describe('finding an alternate', () => {
     const alternates = vi.fn(() => Promise.resolve(answer));
     renderApp('/alternates', { alternates });
     await waitFor(() => {
-      expect(screen.getByText(/name a part and the constraints/u)).toBeInTheDocument();
+      expect(screen.getByText(/name a part and the constraints/iu)).toBeInTheDocument();
     });
-    expect(screen.getByRole('button', { name: 'find alternates' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Find alternates' })).toBeDisabled();
     expect(alternates).not.toHaveBeenCalled();
   });
 
@@ -52,16 +52,16 @@ describe('finding an alternate', () => {
     const alternates = vi.fn((_body: Record<string, unknown>) => Promise.resolve(answer));
     renderApp('/alternates', { alternates });
     await waitFor(() => {
-      expect(screen.getByLabelText('part to replace')).toBeInTheDocument();
+      expect(screen.getByLabelText('Part to replace')).toBeInTheDocument();
     });
-    await userEvent.type(screen.getByLabelText('part to replace'), 'TPS54331DR');
-    await userEvent.type(screen.getByLabelText('input range it must cover'), '8-28');
-    await userEvent.type(screen.getByLabelText('output current, amps'), '2');
-    await userEvent.selectOptions(screen.getByLabelText('output'), 'adjustable');
-    await userEvent.clear(screen.getByLabelText('quantity'));
-    await userEvent.type(screen.getByLabelText('quantity'), '100');
-    await userEvent.click(screen.getByLabelText('include parts nothing has verified'));
-    await userEvent.click(screen.getByRole('button', { name: 'find alternates' }));
+    await userEvent.type(screen.getByLabelText('Part to replace'), 'TPS54331DR');
+    await userEvent.type(screen.getByLabelText('Input range it must cover'), '8-28');
+    await userEvent.type(screen.getByLabelText('Output current, amps'), '2');
+    await userEvent.selectOptions(screen.getByLabelText('Output'), 'Adjustable');
+    await userEvent.clear(screen.getByLabelText('Quantity'));
+    await userEvent.type(screen.getByLabelText('Quantity'), '100');
+    await userEvent.click(screen.getByLabelText('Include parts nothing has verified'));
+    await userEvent.click(screen.getByRole('button', { name: 'Find alternates' }));
     await waitFor(() => {
       expect(alternates).toHaveBeenCalledTimes(1);
     });
@@ -77,8 +77,8 @@ describe('finding an alternate', () => {
 
   it('shows what differs, what it saves, and the disclaimer', async () => {
     renderApp('/alternates', { alternates: () => Promise.resolve(answer) });
-    await userEvent.type(await screen.findByLabelText('part to replace'), 'TPS54331DR');
-    await userEvent.click(screen.getByRole('button', { name: 'find alternates' }));
+    await userEvent.type(await screen.findByLabelText('Part to replace'), 'TPS54331DR');
+    await userEvent.click(screen.getByRole('button', { name: 'Find alternates' }));
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'AP63203WU-7' })).toBeInTheDocument();
     });
@@ -88,9 +88,9 @@ describe('finding an alternate', () => {
     expect(screen.getByText('34%', { exact: false })).toBeInTheDocument();
     expect(screen.getByText('32 V')).toBeInTheDocument();
     expect(screen.queryByText('SOIC-8')).toBeNull();
-    expect(screen.getByText('no price in this currency')).toBeInTheDocument();
-    expect(screen.getByText('pin compatibility has not been assessed.')).toBeInTheDocument();
-    expect(screen.getByText(/TPS62130RGTR \(not verified\)/u)).toBeInTheDocument();
+    expect(screen.getByText('No price in this currency')).toBeInTheDocument();
+    expect(screen.getByText('Pin compatibility has not been assessed.')).toBeInTheDocument();
+    expect(screen.getByText(/TPS62130RGTR \(not verified\)/iu)).toBeInTheDocument();
   });
 
   it('says plainly when nothing meets the constraints', async () => {
@@ -100,21 +100,21 @@ describe('finding an alternate', () => {
           result: { ...answer.result, alternates: [], excluded: [] },
         }),
     });
-    await userEvent.type(await screen.findByLabelText('part to replace'), 'TPS54331DR');
-    await userEvent.click(screen.getByRole('button', { name: 'find alternates' }));
+    await userEvent.type(await screen.findByLabelText('Part to replace'), 'TPS54331DR');
+    await userEvent.click(screen.getByRole('button', { name: 'Find alternates' }));
     await waitFor(() => {
-      expect(screen.getByText(/nothing stored meets those constraints/u)).toBeInTheDocument();
+      expect(screen.getByText(/nothing stored meets those constraints/iu)).toBeInTheDocument();
     });
   });
 
   it('shows what the server said when the query is refused', async () => {
     renderApp('/alternates', {
-      alternates: () => Promise.reject(new Error('no stored part NOTHING-1')),
+      alternates: () => Promise.reject(new Error('No stored part NOTHING-1')),
     });
-    await userEvent.type(await screen.findByLabelText('part to replace'), 'NOTHING-1');
-    await userEvent.click(screen.getByRole('button', { name: 'find alternates' }));
+    await userEvent.type(await screen.findByLabelText('Part to replace'), 'NOTHING-1');
+    await userEvent.click(screen.getByRole('button', { name: 'Find alternates' }));
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent('no stored part NOTHING-1');
+      expect(screen.getByRole('alert')).toHaveTextContent('No stored part NOTHING-1');
     });
   });
 });

@@ -50,16 +50,16 @@ describe('evaluations', () => {
     expect(screen.getByText('$87.24')).toBeInTheDocument();
     expect(screen.getByText('5')).toBeInTheDocument();
     expect(screen.getByText('—')).toBeInTheDocument();
-    expect(screen.getByText(/measures the cache rather than the prompt/u)).toBeInTheDocument();
+    expect(screen.getByText(/measures the cache rather than the prompt/iu)).toBeInTheDocument();
   });
 
   it('sorts by every score it shows', async () => {
     renderApp('/evals', { evals: () => Promise.resolve(listing) });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by recall' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by recall' })).toBeInTheDocument();
     });
     for (const column of ['recall', 'precision', 'citations exact', 'cost']) {
-      await userEvent.click(screen.getByRole('button', { name: `sort by ${column}` }));
+      await userEvent.click(screen.getByRole('button', { name: `Sort by ${column}` }));
     }
     expect(screen.getAllByRole('row')).toHaveLength(3);
   });
@@ -99,7 +99,7 @@ describe('evaluations', () => {
   it('says when nothing has been evaluated', async () => {
     renderApp('/evals', { evals: () => Promise.resolve({ results: [] }) });
     await waitFor(() => {
-      expect(screen.getByText('no evaluation has been run yet')).toBeInTheDocument();
+      expect(screen.getByText('No evaluation has been run yet.')).toBeInTheDocument();
     });
   });
 });

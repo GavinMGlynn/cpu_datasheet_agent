@@ -55,49 +55,53 @@ export function Table<T>(props: TableProps<T>): ReactNode {
         });
 
   if (props.rows.length === 0) {
-    return <p className="empty">{props.empty ?? 'nothing here'}</p>;
+    return <p className="empty">{props.empty ?? 'Nothing here.'}</p>;
   }
 
+  // Every table scrolls sideways in its own box rather than pushing the page
+  // wider or clipping its last column.
   return (
-    <table>
-      <thead>
-        <tr>
-          {props.columns.map((one) => (
-            <th key={one.key} className={one.numeric === true ? 'numeric' : undefined}>
-              {one.sort === undefined ? (
-                one.label
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (sortKey === one.key) {
-                      setDirection(direction === 'asc' ? 'desc' : 'asc');
-                      return;
-                    }
-                    setSortKey(one.key);
-                    setDirection('asc');
-                  }}
-                  aria-label={`sort by ${one.label}`}
-                >
-                  {one.label}
-                  {sortKey === one.key ? (direction === 'asc' ? ' ↑' : ' ↓') : ''}
-                </button>
-              )}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={props.rowKey(row)}>
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>
             {props.columns.map((one) => (
-              <td key={one.key} className={one.numeric === true ? 'numeric' : undefined}>
-                {one.render(row)}
-              </td>
+              <th key={one.key} className={one.numeric === true ? 'numeric' : undefined}>
+                {one.sort === undefined ? (
+                  one.label
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (sortKey === one.key) {
+                        setDirection(direction === 'asc' ? 'desc' : 'asc');
+                        return;
+                      }
+                      setSortKey(one.key);
+                      setDirection('asc');
+                    }}
+                    aria-label={`Sort by ${one.label.toLowerCase()}`}
+                  >
+                    {one.label}
+                    {sortKey === one.key ? (direction === 'asc' ? ' ↑' : ' ↓') : ''}
+                  </button>
+                )}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={props.rowKey(row)}>
+              {props.columns.map((one) => (
+                <td key={one.key} className={one.numeric === true ? 'numeric' : undefined}>
+                  {one.render(row)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

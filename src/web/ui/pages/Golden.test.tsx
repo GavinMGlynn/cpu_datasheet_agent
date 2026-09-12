@@ -11,7 +11,7 @@ const parts = {
       file: 'TPS54331DR.json',
       mpn: 'TPS54331DR',
       manufacturer: 'Texas Instruments',
-      reason: 'the reference part: non-synchronous, integrated FET, adjustable',
+      reason: 'The reference part: non-synchronous, integrated FET, adjustable',
       readBy: 'claude-opus-5',
       readAt: '2026-09-11T00:00:00Z',
       pageCount: 40,
@@ -20,7 +20,7 @@ const parts = {
       file: 'AP62200WU-7.json',
       mpn: 'AP62200WU-7',
       manufacturer: 'Diodes Incorporated',
-      reason: 'a synchronous part with a fixed output',
+      reason: 'A synchronous part with a fixed output',
       readBy: 'claude-opus-5',
       readAt: '2026-09-10T00:00:00Z',
       pageCount: 22,
@@ -40,8 +40,8 @@ describe('the golden set', () => {
       expect(screen.getByRole('cell', { name: 'TPS54331DR' })).toBeInTheDocument();
     });
     expect(screen.getAllByText('claude-opus-5')).toHaveLength(2);
-    expect(screen.getByText('clean')).toBeInTheDocument();
-    expect(screen.getByText('none')).toBeInTheDocument();
+    expect(screen.getByText('Clean')).toBeInTheDocument();
+    expect(screen.getByText('None')).toBeInTheDocument();
   });
 
   it('reports the health checks when the set has problems', async () => {
@@ -50,13 +50,13 @@ describe('the golden set', () => {
       goldenHealth: () =>
         Promise.resolve({
           parts: 1,
-          issues: [{ kind: 'thin-coverage', detail: 'vinMax has one example' }],
+          issues: [{ kind: 'thin-coverage', detail: 'VinMax has one example' }],
           coverage: { vinMax: 1 },
           thin: ['vinMax', 'ioutMax'],
         }),
     });
     await waitFor(() => {
-      expect(screen.getByText('vinMax has one example')).toBeInTheDocument();
+      expect(screen.getByText('VinMax has one example')).toBeInTheDocument();
     });
     expect(screen.getByText('1 issues')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
@@ -68,9 +68,9 @@ describe('the golden set', () => {
       goldenHealth: () => Promise.resolve(healthy),
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by read' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by read' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'sort by read' }));
-    expect(screen.getByRole('cell', { name: '2026-09-11 00:00' })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Sort by read' }));
+    expect(screen.getAllByRole('cell').some((cell) => cell.textContent.includes('ago'))).toBe(true);
   });
 });

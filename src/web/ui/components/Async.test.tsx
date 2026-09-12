@@ -13,7 +13,7 @@ describe('Async', () => {
         {() => <p>never</p>}
       </Async>,
     );
-    expect(screen.getByRole('status')).toHaveTextContent('loading the parts');
+    expect(screen.getByRole('status')).toHaveTextContent('Loading the parts');
   });
 
   it('loads without a label', () => {
@@ -24,22 +24,22 @@ describe('Async', () => {
   it('shows the code the server sent', () => {
     renderAt(
       <Async
-        state={{ status: 'failed', error: new ApiError(404, 'WEB_PART_NOT_FOUND', 'no such part') }}
+        state={{ status: 'failed', error: new ApiError(404, 'WEB_PART_NOT_FOUND', 'No such part') }}
       >
         {() => <p>never</p>}
       </Async>,
     );
     expect(screen.getByRole('alert')).toHaveTextContent('WEB_PART_NOT_FOUND');
-    expect(screen.getByRole('alert')).toHaveTextContent('no such part');
+    expect(screen.getByRole('alert')).toHaveTextContent('No such part');
   });
 
   it('shows an ordinary error plainly', () => {
     renderAt(
-      <Async state={{ status: 'failed', error: new Error('the network went away') }}>
+      <Async state={{ status: 'failed', error: new Error('The network went away') }}>
         {() => <p>never</p>}
       </Async>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('the network went away');
+    expect(screen.getByRole('alert')).toHaveTextContent('The network went away');
   });
 
   it('renders what it loaded', () => {

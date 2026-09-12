@@ -7,9 +7,11 @@ import {
   duration,
   engineering,
   errorMessage,
+  exactly,
   money,
   parameterValue,
   percent,
+  relative,
   shortId,
   unitLabel,
   usd,
@@ -51,8 +53,8 @@ describe('parameterValue', () => {
   it('renders every shape a stored value can take', () => {
     expect(parameterValue(null)).toBe('—');
     expect(parameterValue(undefined)).toBe('—');
-    expect(parameterValue(true)).toBe('yes');
-    expect(parameterValue(false)).toBe('no');
+    expect(parameterValue(true)).toBe('Yes');
+    expect(parameterValue(false)).toBe('No');
     expect(parameterValue('SOIC-8')).toBe('SOIC-8');
     expect(parameterValue(7)).toBe('7');
     expect(parameterValue({ value: 28, unit: 'V' })).toBe('28 V');
@@ -71,9 +73,9 @@ describe('parameterValue', () => {
   });
 
   it('renders a soft start, with and without a time', () => {
-    expect(parameterValue({ present: true, time: { value: 0.001, unit: 's' } })).toBe('yes (1 ms)');
-    expect(parameterValue({ present: true, time: null })).toBe('yes');
-    expect(parameterValue({ present: false, time: null })).toBe('no');
+    expect(parameterValue({ present: true, time: { value: 0.001, unit: 's' } })).toBe('Yes (1 ms)');
+    expect(parameterValue({ present: true, time: null })).toBe('Yes');
+    expect(parameterValue({ present: false, time: null })).toBe('No');
   });
 
   it('falls back to JSON for anything it has never seen', () => {
@@ -120,5 +122,55 @@ describe('the small formatters', () => {
     expect(shortId('abcdef0123456789')).toBe('abcdef01');
     expect(shortId(undefined)).toBe('—');
     expect(shortId('')).toBe('—');
+  });
+});
+
+describe('relative', () => {
+  const now = new Date('2026-09-12T12:00:00Z');
+
+  it('reads a recent instant as the words a person would use', () => {
+    expect(relative('2026-09-12T11:59:30Z', now)).toBe('just now');
+    expect(relative('2026-09-12T11:30:00Z', now)).toBe('30 minutes ago');
+    expect(relative('2026-09-12T09:00:00Z', now)).toBe('3 hours ago');
+    expect(relative('2026-09-11T12:00:00Z', now)).toBe('yesterday');
+    expect(relative('2026-09-05T12:00:00Z', now)).toBe('last week');
+    expect(relative('2026-07-12T12:00:00Z', now)).toBe('2 months ago');
+    expect(relative('2024-09-12T12:00:00Z', now)).toBe('2 years ago');
+  });
+
+  it('rounds the gap between "just now" and a minute to the minute', () => {
+    // Fifty seconds is past "just now" and short of the smallest step there
+    // is, which is the one case where nothing in the table matches.
+    expect(relative('2026-09-12T11:59:10Z', now)).toMatch(/minute/u);
+  });
+
+  it('reads an instant still to come as one', () => {
+    expect(relative('2026-09-12T13:00:00Z', now)).toBe('in 1 hour');
+  });
+
+  it('has an answer for no time and for a time it cannot read', () => {
+    expect(relative(undefined, now)).toBe('—');
+    expect(relative(null, now)).toBe('—');
+    expect(relative('', now)).toBe('—');
+    expect(relative('the day before the flood', now)).toBe('the day before the flood');
+  });
+
+  it('reads the clock when nothing fixes it', () => {
+    expect(relative(new Date().toISOString())).toBe('just now');
+  });
+});
+
+describe('exactly', () => {
+  it('states the instant in full, where the reader is', () => {
+    const text = exactly('2026-09-11T09:00:00Z');
+    expect(text).toMatch(/2026/u);
+    expect(text).toMatch(/September/u);
+  });
+
+  it('has nothing to say about no time, and repeats what it cannot read', () => {
+    expect(exactly(undefined)).toBe('');
+    expect(exactly(null)).toBe('');
+    expect(exactly('')).toBe('');
+    expect(exactly('half past tuesday')).toBe('half past tuesday');
   });
 });

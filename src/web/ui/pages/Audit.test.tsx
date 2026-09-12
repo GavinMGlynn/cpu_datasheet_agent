@@ -11,9 +11,9 @@ const correction: AuditEvent = {
   at: '2026-09-12T00:00:00Z',
   actor: 'gavin',
   action: 'parameter.correct',
-  targetKind: 'parameter',
+  targetKind: 'Parameter',
   targetId: 'TPS54331DR:vinMax',
-  reason: 'the ordering table on page 2 says 28 V',
+  reason: 'The ordering table on page 2 says 28 V',
   before: { value: 30, unit: 'V' },
   after: { value: 28, unit: 'V' },
 };
@@ -38,9 +38,9 @@ describe('the audit trail', () => {
     });
     expect(screen.getByText('parameter.correct')).toBeInTheDocument();
     // Both fixtures carry the same reason.
-    expect(screen.getAllByText('the ordering table on page 2 says 28 V')).toHaveLength(2);
-    expect(screen.getByLabelText('before')).toHaveTextContent('30');
-    expect(screen.getByLabelText('after')).toHaveTextContent('28');
+    expect(screen.getAllByText('The ordering table on page 2 says 28 V')).toHaveLength(2);
+    expect(screen.getByLabelText('Before')).toHaveTextContent('30');
+    expect(screen.getByLabelText('After')).toHaveTextContent('28');
     // The purge replaced nothing and left nothing.
     expect(screen.getAllByText('—')).toHaveLength(2);
   });
@@ -53,7 +53,7 @@ describe('the audit trail', () => {
     await waitFor(() => {
       expect(audit.mock.calls[0]?.[0]).not.toHaveProperty('targetKind');
     });
-    await userEvent.selectOptions(screen.getByLabelText('what was changed'), 'cache');
+    await userEvent.selectOptions(screen.getByLabelText('What was changed'), 'cache');
     await waitFor(() => {
       expect(audit.mock.calls.at(-1)?.[0]).toMatchObject({ targetKind: 'cache' });
     });
@@ -65,7 +65,7 @@ describe('the audit trail', () => {
     });
     await waitFor(() => {
       expect(
-        screen.getByText('nothing has been changed by hand in this database'),
+        screen.getByText('Nothing has been changed by hand in this database.'),
       ).toBeInTheDocument();
     });
   });

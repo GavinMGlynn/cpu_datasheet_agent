@@ -27,13 +27,13 @@ export function Parameters(): ReactNode {
   );
 
   return (
-    <Page title="parameters" subtitle="how much of the schema the extraction actually fills in">
+    <Page title="Parameters" subtitle="How much of the schema the extraction actually fills in">
       <Async state={coverage.state} label="the coverage grid">
         {(value) => (
           <>
             <HeatMap
-              title="parameters by parts"
-              caption="how many parts state each parameter, cite a page for it, and have had it confirmed"
+              title="Parameters by parts"
+              caption="How many parts state each parameter, cite a page for it, and have had it confirmed"
               rows={value.coverage.map((cell) => cell.key)}
               columns={['found', 'cited', 'confirmed', 'disputed']}
               max={value.coverage[0]?.parts ?? 1}
@@ -66,7 +66,7 @@ export function Parameters(): ReactNode {
             />
             <div className="filters">
               <Select
-                label="distribution of"
+                label="Distribution of"
                 value={key}
                 options={value.coverage.map((cell) => ({ value: cell.key, label: cell.key }))}
                 onChange={(next) => {
@@ -85,21 +85,21 @@ export function Parameters(): ReactNode {
           </>
         )}
       </Async>
-      <Async state={distribution.state} label="the distribution">
+      <Async state={distribution.state} label="The distribution">
         {(value) => (
           <>
             {/* Outside the chart: where there is nothing to plot, this
                 sentence is the whole answer. */}
             <p className="caption">
               {value.summary === undefined
-                ? 'no part states a number for this parameter'
+                ? 'No part states a number for this parameter'
                 : `${String(value.summary.count)} parts state a number; ${String(value.nonNumeric)} do not`}
             </p>
             <Histogram
               title={`${key} across the set`}
               buckets={value.buckets}
               format={(number) => engineering(number, value.unit ?? 'count')}
-              empty="no numeric values to plot"
+              empty="No numeric values to plot."
             />
           </>
         )}

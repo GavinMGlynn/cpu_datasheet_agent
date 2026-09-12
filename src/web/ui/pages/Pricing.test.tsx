@@ -17,7 +17,7 @@ describe('pricing', () => {
   it('plots price against current and lists the prices', async () => {
     renderApp('/pricing', { parts: () => Promise.resolve(page()) });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /unit price at 100/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /unit price at 100/iu })).toBeInTheDocument();
     });
     expect(screen.getAllByText('AUD 1.42').length).toBeGreaterThan(0);
     expect(screen.getByText('Texas Instruments')).toBeInTheDocument();
@@ -30,11 +30,11 @@ describe('pricing', () => {
       expect(parts.mock.calls[0]?.[0]).toMatchObject({ quantity: 100 });
     });
     // Clearing the field asks for the default rather than for nothing.
-    await userEvent.clear(screen.getByLabelText('price at quantity'));
+    await userEvent.clear(screen.getByLabelText('Price at quantity'));
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ quantity: 100 });
     });
-    await userEvent.type(screen.getByLabelText('price at quantity'), '1000');
+    await userEvent.type(screen.getByLabelText('Price at quantity'), '1000');
     await waitFor(() => {
       expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ quantity: 1000 });
     });
@@ -53,7 +53,7 @@ describe('pricing', () => {
         ),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /unit price/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /unit price/iu })).toBeInTheDocument();
     });
     // Only the part with both a price and a current is plotted; the table
     // still lists everything that has a price.
@@ -64,7 +64,7 @@ describe('pricing', () => {
   it('says when there is nothing to plot at all', async () => {
     renderApp('/pricing', { parts: () => Promise.resolve(page([])) });
     await waitFor(() => {
-      expect(screen.getByText('nothing to plot yet')).toBeInTheDocument();
+      expect(screen.getByText('Nothing to plot yet.')).toBeInTheDocument();
     });
   });
 });

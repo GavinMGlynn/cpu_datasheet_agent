@@ -33,16 +33,16 @@ describe('cost', () => {
     });
     await waitFor(() => {
       expect(
-        screen.getByRole('heading', { name: 'spent, and spent in total' }),
+        screen.getByRole('heading', { name: 'Spent, and spent in total' }),
       ).toBeInTheDocument();
     });
-    expect(screen.getByRole('heading', { name: /spend by model/u })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /spend by model/iu })).toBeInTheDocument();
     expect(screen.getAllByText('$109.33').length).toBeGreaterThan(0);
     // The runs behind a total are in the table under the chart.
     await userEvent.click(
       screen.getAllByRole('button', { name: 'show the numbers' })[1] ?? new HTMLElement(),
     );
-    expect(screen.getByText(/41 runs, \$2.67 each, 14 without a part/u)).toBeInTheDocument();
+    expect(screen.getByText(/41 runs, \$2.67 each, 14 without a part/iu)).toBeInTheDocument();
   });
 
   it('changes the granularity and the dimension', async () => {
@@ -52,11 +52,11 @@ describe('cost', () => {
     await waitFor(() => {
       expect(spendOver.mock.calls[0]?.[1]).toBe('day');
     });
-    await userEvent.selectOptions(screen.getByLabelText('over'), 'month');
+    await userEvent.selectOptions(screen.getByLabelText('Over'), 'month');
     await waitFor(() => {
       expect(spendOver.mock.calls.at(-1)?.[1]).toBe('month');
     });
-    await userEvent.selectOptions(screen.getByLabelText('broken down'), 'promptVersion');
+    await userEvent.selectOptions(screen.getByLabelText('Broken down'), 'promptVersion');
     await waitFor(() => {
       expect(spendBy.mock.calls.at(-1)?.[0]).toBe('promptVersion');
     });
@@ -68,7 +68,7 @@ describe('cost', () => {
       spendBy: () => Promise.resolve({ breakdown: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByText('nothing has been spent in this database')).toBeInTheDocument();
+      expect(screen.getByText('Nothing has been spent in this database.')).toBeInTheDocument();
     });
   });
 
@@ -78,7 +78,7 @@ describe('cost', () => {
       spendBy: () => Promise.resolve(breakdown),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'spend' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Spend' })).toBeInTheDocument();
     });
   });
 });

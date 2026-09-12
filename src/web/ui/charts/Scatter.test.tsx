@@ -62,7 +62,7 @@ describe('Scatter', () => {
 
   it('says when there is nothing to plot', () => {
     scatter([]);
-    expect(screen.getByText('nothing to plot yet')).toBeInTheDocument();
+    expect(screen.getByText('Nothing to plot yet.')).toBeInTheDocument();
   });
 
   it('takes a height of its own', () => {

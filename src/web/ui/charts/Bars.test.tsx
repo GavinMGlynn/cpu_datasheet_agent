@@ -7,7 +7,7 @@ import { renderAt } from '../../../../test/ui/render.js';
 import { Bars, barShape } from './Bars.js';
 
 const rows = [
-  { label: 'read_pages', value: 134, note: '0 failed' },
+  { label: 'Read_pages', value: 134, note: '0 failed' },
   { label: 'spend_gate', value: 1101 },
   { label: 'fetch_datasheet', value: 55 },
 ];
@@ -15,35 +15,35 @@ const rows = [
 describe('Bars', () => {
   it('draws a bar per row, dearest first', () => {
     const { container } = renderAt(
-      <Bars title="calls by tool" rows={rows} format={(value) => String(value)} />,
+      <Bars title="Calls by tool" rows={rows} format={(value) => String(value)} />,
     );
-    expect(screen.getByRole('heading', { name: 'calls by tool' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Calls by tool' })).toBeInTheDocument();
     expect(container.querySelectorAll('.recharts-bar-rectangle, rect')).not.toHaveLength(0);
   });
 
   it('gives the same numbers as a table, in the same order', async () => {
     renderAt(
-      <Bars title="calls by tool" rows={rows} format={(value) => `${String(value)} calls`} />,
+      <Bars title="Calls by tool" rows={rows} format={(value) => `${String(value)} calls`} />,
     );
     await userEvent.click(screen.getByRole('button', { name: 'show the numbers' }));
     const cells = screen.getAllByRole('cell').map((cell) => cell.textContent);
     expect(cells[0]).toBe('spend_gate');
     expect(cells[1]).toBe('1101 calls');
     expect(cells[2]).toBe('');
-    expect(cells[3]).toBe('read_pages');
+    expect(cells[3]).toBe('Read_pages');
     expect(cells[5]).toBe('0 failed');
   });
 
   it('says when there is nothing to draw', () => {
-    renderAt(<Bars title="calls" rows={[]} format={String} empty="nothing has been called" />);
-    expect(screen.getByText('nothing has been called')).toBeInTheDocument();
+    renderAt(<Bars title="calls" rows={[]} format={String} empty="Nothing has been called" />);
+    expect(screen.getByText('Nothing has been called')).toBeInTheDocument();
   });
 
   it('takes a caption and a height of its own', () => {
     const { container } = renderAt(
-      <Bars title="calls" caption="busiest first" rows={rows} format={String} height={300} />,
+      <Bars title="calls" caption="Busiest first" rows={rows} format={String} height={300} />,
     );
-    expect(screen.getByText('busiest first')).toBeInTheDocument();
+    expect(screen.getByText('Busiest first')).toBeInTheDocument();
     expect(container.querySelector('.chart-plot')).toHaveStyle({ height: '300px' });
   });
 });
@@ -51,7 +51,7 @@ describe('Bars', () => {
 describe('emphasis', () => {
   it('highlights one row and greys the rest', () => {
     const { container } = renderAt(
-      <Bars title="calls" rows={rows} format={String} highlight="read_pages" />,
+      <Bars title="calls" rows={rows} format={String} highlight="Read_pages" />,
     );
     const fills = [...container.querySelectorAll('rect')].map((rect) => rect.getAttribute('fill'));
     expect(fills).toContain('#2a78d6');
@@ -60,7 +60,7 @@ describe('emphasis', () => {
 
   it('draws a bar of zero where every row is zero', () => {
     const { container } = renderAt(
-      <Bars title="calls" rows={[{ label: 'none', value: 0 }]} format={String} />,
+      <Bars title="calls" rows={[{ label: 'None', value: 0 }]} format={String} />,
     );
     expect(container.querySelector('rect')).not.toBeNull();
   });

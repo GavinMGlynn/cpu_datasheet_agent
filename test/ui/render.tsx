@@ -12,7 +12,7 @@ import type { Api } from '../../src/web/ui/lib/api.js';
  * Rendering a piece of the application under jsdom.
  *
  * The API is a stub the test writes: every page is a function of what the
- * server said, so a page test is "given this answer, show this".
+ * server said, so a page test is "Given this answer, show this".
  */
 
 afterEach(() => {
@@ -36,24 +36,24 @@ export function stubApi(overrides: Partial<Api> = {}): Api {
   };
   const base = {
     sources: refuse('sources'),
-    health: refuse('health'),
+    health: refuse('Health'),
     meta: refuse('meta'),
-    parts: refuse('parts'),
-    part: refuse('part'),
+    parts: refuse('Parts'),
+    part: refuse('Part'),
     coverage: refuse('coverage'),
-    datasheets: refuse('datasheets'),
+    datasheets: refuse('Datasheets'),
     verifications: refuse('verifications'),
     distribution: refuse('distribution'),
-    compare: refuse('compare'),
-    alternates: refuse('alternates'),
-    runs: refuse('runs'),
+    compare: refuse('Compare'),
+    alternates: refuse('Alternates'),
+    runs: refuse('Runs'),
     run: refuse('run'),
-    ledger: refuse('ledger'),
+    ledger: refuse('Ledger'),
     ledgerCall: refuse('ledgerCall'),
-    overview: refuse('overview'),
+    overview: refuse('Overview'),
     spend: refuse('spend'),
     spendBy: refuse('spendBy'),
-    tools: refuse('tools'),
+    tools: refuse('Tools'),
     errors: refuse('errors'),
     evals: refuse('evals'),
     evalReport: refuse('evalReport'),
@@ -67,8 +67,8 @@ export function stubApi(overrides: Partial<Api> = {}): Api {
     correctParameter: refuse('correctParameter'),
     setStatus: refuse('setStatus'),
     audit: refuse('audit'),
-    cache: refuse('cache'),
-    launches: refuse('launches'),
+    cache: refuse('Cache'),
+    launches: refuse('Launches'),
     launch: refuse('launch'),
     estimate: refuse('estimate'),
     startLaunch: refuse('startLaunch'),
@@ -94,7 +94,7 @@ export function renderApp(path: string, overrides: Partial<Api> = {}): RenderRes
           {
             id: 'live',
             kind: 'live',
-            label: 'live store',
+            label: 'Live store',
             exists: true,
             writable: true,
             bytes: 1024,
@@ -106,7 +106,7 @@ export function renderApp(path: string, overrides: Partial<Api> = {}): RenderRes
       Promise.resolve({
         parameterKeys: ['vinMin', 'vinMax'],
         classificationAxes: ['vinClass'],
-        partStatuses: ['extracted', 'verified'],
+        partStatuses: ['Extracted', 'Verified'],
         prompts: ['extract.v1'],
         model: 'claude-opus-5',
         version: '1.0.0-test',

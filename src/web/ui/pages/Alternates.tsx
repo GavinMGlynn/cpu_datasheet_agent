@@ -77,10 +77,10 @@ export function Alternates(): ReactNode {
   );
 
   return (
-    <Page title="alternates" subtitle="cheaper parts that still meet every constraint you state">
+    <Page title="Alternates" subtitle="Cheaper parts that still meet every constraint you state">
       <div className="filters">
         <TextField
-          label="part to replace"
+          label="Part to replace"
           value={form.mpn}
           placeholder="TPS54331DR"
           onChange={(value) => {
@@ -88,7 +88,7 @@ export function Alternates(): ReactNode {
           }}
         />
         <TextField
-          label="input range it must cover"
+          label="Input range it must cover"
           value={form.vin}
           placeholder="8-28"
           onChange={(value) => {
@@ -96,7 +96,7 @@ export function Alternates(): ReactNode {
           }}
         />
         <TextField
-          label="output current, amps"
+          label="Output current, amps"
           value={form.iout}
           placeholder="2"
           onChange={(value) => {
@@ -104,19 +104,19 @@ export function Alternates(): ReactNode {
           }}
         />
         <Select
-          label="output"
+          label="Output"
           value={form.outputType}
           options={[
-            { value: '', label: 'either' },
-            { value: 'adjustable', label: 'adjustable' },
-            { value: 'fixed', label: 'fixed' },
+            { value: '', label: 'Either' },
+            { value: 'adjustable', label: 'Adjustable' },
+            { value: 'fixed', label: 'Fixed' },
           ]}
           onChange={(value) => {
             setForm({ ...form, outputType: value });
           }}
         />
         <TextField
-          label="quantity"
+          label="Quantity"
           type="number"
           value={form.quantity}
           onChange={(value) => {
@@ -124,7 +124,7 @@ export function Alternates(): ReactNode {
           }}
         />
         <Checkbox
-          label="include parts nothing has verified"
+          label="Include parts nothing has verified"
           checked={form.includeUnverified}
           onChange={(checked) => {
             setForm({ ...form, includeUnverified: checked });
@@ -138,11 +138,11 @@ export function Alternates(): ReactNode {
             setAsked({ ...form });
           }}
         >
-          find alternates
+          Find alternates
         </button>
       </div>
       {asked === undefined ? (
-        <p className="empty">name a part and the constraints it has to meet.</p>
+        <p className="empty">Name a part and the constraints it has to meet.</p>
       ) : (
         <Async state={result.state} label="the answer">
           {(value) =>
@@ -166,7 +166,7 @@ export function Alternates(): ReactNode {
                         <Badge kind="partStatus" value={alternate.part.status} />
                         <strong>
                           {alternate.price === null
-                            ? 'no price in this currency'
+                            ? 'No price in this currency'
                             : money(alternate.price.amount, alternate.price.currency)}
                         </strong>
                         {alternate.saving === null ? null : (
@@ -177,7 +177,7 @@ export function Alternates(): ReactNode {
                     <table>
                       <thead>
                         <tr>
-                          <th>parameter</th>
+                          <th>Parameter</th>
                           <th>{value.reference.mpn}</th>
                           <th>{alternate.part.mpn}</th>
                         </tr>

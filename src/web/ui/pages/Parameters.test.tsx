@@ -69,10 +69,10 @@ describe('the parameter grid', () => {
       distribution: () => Promise.resolve(distribution),
     });
     await waitFor(() => {
-      expect(screen.getByRole('img', { name: 'parameters by parts' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'Parameters by parts' })).toBeInTheDocument();
     });
-    expect(screen.getByText(/voutFixed 14%/u)).toBeInTheDocument();
-    expect(screen.getByText(/efficiencyPeak 18%/u)).toBeInTheDocument();
+    expect(screen.getByText(/voutFixed 14%/iu)).toBeInTheDocument();
+    expect(screen.getByText(/efficiencyPeak 18%/iu)).toBeInTheDocument();
   });
 
   it('plots the distribution of the parameter chosen', async () => {
@@ -82,10 +82,10 @@ describe('the parameter grid', () => {
       distribution: request,
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /vinMax across the set/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /vinMax across the set/iu })).toBeInTheDocument();
     });
     expect(screen.getByText('22 parts state a number; 0 do not')).toBeInTheDocument();
-    await userEvent.selectOptions(screen.getByLabelText('distribution of'), 'maxDutyCycle');
+    await userEvent.selectOptions(screen.getByLabelText('Distribution of'), 'maxDutyCycle');
     await waitFor(() => {
       expect(request.mock.calls.at(-1)?.[0]).toBe('maxDutyCycle');
     });
@@ -98,9 +98,9 @@ describe('the parameter grid', () => {
         Promise.resolve({ key: 'topology', points: [], buckets: [], nonNumeric: 22 }),
     });
     await waitFor(() => {
-      expect(screen.getByText('no part states a number for this parameter')).toBeInTheDocument();
+      expect(screen.getByText('No part states a number for this parameter')).toBeInTheDocument();
     });
-    expect(screen.getByText('no numeric values to plot')).toBeInTheDocument();
+    expect(screen.getByText('No numeric values to plot.')).toBeInTheDocument();
   });
 
   it('labels a parameter with no unit as a plain count', async () => {
@@ -116,7 +116,7 @@ describe('the parameter grid', () => {
         }),
     });
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /aecQ100 across the set/u })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /aecQ100 across the set/iu })).toBeInTheDocument();
     });
     expect(screen.getByText('1 parts state a number; 21 do not')).toBeInTheDocument();
   });
@@ -128,7 +128,7 @@ describe('the parameter grid', () => {
         Promise.resolve({ key: 'vinMax', points: [], buckets: [], nonNumeric: 0 }),
     });
     await waitFor(() => {
-      expect(screen.getByText('nothing stored yet')).toBeInTheDocument();
+      expect(screen.getByText('Nothing stored yet')).toBeInTheDocument();
     });
   });
 });

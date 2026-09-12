@@ -15,13 +15,13 @@ describe('Provenance', () => {
         onOpenPage={onOpenPage}
       />,
     );
-    await userEvent.click(screen.getByRole('button', { name: 'page 4' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Page 4' }));
     expect(onOpenPage).toHaveBeenCalledWith(4);
   });
 
   it('states the page without offering it where nothing can open it', () => {
     renderAt(<Provenance provenance={{ source: 'datasheet', page: 7 }} />);
-    expect(screen.getByText('page 7')).toBeInTheDocument();
+    expect(screen.getByText('Page 7')).toBeInTheDocument();
     expect(screen.queryByRole('button')).toBeNull();
   });
 
@@ -29,18 +29,18 @@ describe('Provenance', () => {
     renderAt(
       <>
         <Provenance provenance={{ source: 'distributor', distributor: 'digikey' }} />
-        <Provenance provenance={{ source: 'human', note: 'read the ordering table' }} />
+        <Provenance provenance={{ source: 'human', note: 'Read the ordering table' }} />
         <Provenance provenance={{ source: 'derived', rule: 'feedback-accuracy.v1' }} />
       </>,
     );
-    expect(screen.getByText('digikey')).toBeInTheDocument();
-    expect(screen.getByText('by hand')).toBeInTheDocument();
-    expect(screen.getByText('derived')).toBeInTheDocument();
+    expect(screen.getByText('Digi-Key')).toBeInTheDocument();
+    expect(screen.getByText('By hand')).toBeInTheDocument();
+    expect(screen.getByText('Derived')).toBeInTheDocument();
   });
 
   it('copes with a distributor value that names no distributor', () => {
     renderAt(<Provenance provenance={{ source: 'distributor' }} />);
-    expect(screen.getByText('distributor')).toBeInTheDocument();
+    expect(screen.getByText('Distributor')).toBeInTheDocument();
   });
 
   it('copes with a human or derived value that carries no note', () => {
@@ -50,12 +50,12 @@ describe('Provenance', () => {
         <Provenance provenance={{ source: 'derived' }} />
       </>,
     );
-    expect(screen.getByText('by hand')).toBeInTheDocument();
-    expect(screen.getByText('derived')).toBeInTheDocument();
+    expect(screen.getByText('By hand')).toBeInTheDocument();
+    expect(screen.getByText('Derived')).toBeInTheDocument();
   });
 
   it('treats a datasheet value with no page as not a citation', () => {
     renderAt(<Provenance provenance={{ source: 'datasheet' }} />);
-    expect(screen.getByText('derived')).toBeInTheDocument();
+    expect(screen.getByText('Derived')).toBeInTheDocument();
   });
 });

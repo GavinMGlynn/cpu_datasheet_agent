@@ -19,7 +19,7 @@ describe('runs', () => {
     expect(screen.getByText('$3.41')).toBeInTheDocument();
     expect(screen.getByText('18')).toBeInTheDocument();
     expect(screen.getByText('4m 0s')).toBeInTheDocument();
-    expect(screen.getByText('unfinished')).toBeInTheDocument();
+    expect(screen.getByText('Unfinished')).toBeInTheDocument();
     // The unfinished run has no cost, turns, calls or duration to show.
     expect(screen.getAllByText('—').length).toBeGreaterThan(2);
   });
@@ -30,11 +30,11 @@ describe('runs', () => {
     await waitFor(() => {
       expect(runs).toHaveBeenCalledTimes(1);
     });
-    await userEvent.selectOptions(screen.getByLabelText('kind'), 'verify');
+    await userEvent.selectOptions(screen.getByLabelText('Kind'), 'verify');
     await waitFor(() => {
       expect(runs.mock.calls.at(-1)?.[0]).toMatchObject({ kind: 'verify' });
     });
-    await userEvent.selectOptions(screen.getByLabelText('ended'), 'needs_human');
+    await userEvent.selectOptions(screen.getByLabelText('Ended'), 'needs_human');
     await waitFor(() => {
       expect(runs.mock.calls.at(-1)?.[0]).toMatchObject({ result: 'needs_human' });
     });
@@ -43,7 +43,7 @@ describe('runs', () => {
   it('sorts on every column it offers', async () => {
     renderApp('/runs', { runs: () => Promise.resolve(page()) });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'sort by cost' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Sort by cost' })).toBeInTheDocument();
     });
     for (const column of [
       'part',
@@ -55,7 +55,7 @@ describe('runs', () => {
       'took',
       'model',
     ]) {
-      await userEvent.click(screen.getByRole('button', { name: `sort by ${column}` }));
+      await userEvent.click(screen.getByRole('button', { name: `Sort by ${column}` }));
     }
     expect(screen.getAllByRole('row').length).toBe(3);
   });
@@ -79,7 +79,7 @@ describe('runs', () => {
   it('says when nothing matches', async () => {
     renderApp('/runs', { runs: () => Promise.resolve(page([])) });
     await waitFor(() => {
-      expect(screen.getByText('no run matches those filters')).toBeInTheDocument();
+      expect(screen.getByText('No run matches those filters.')).toBeInTheDocument();
     });
   });
 });

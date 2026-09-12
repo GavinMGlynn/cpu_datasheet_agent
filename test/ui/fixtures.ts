@@ -18,7 +18,7 @@ export function summary(overrides: SummaryOverrides = {}): PartSummary {
     verdicts: { confirmed: 0, contradicted: 0, notFound: 0, unchecked: 30 },
     classifications: { vinClass: 'le_42v' },
     offerCount: 1,
-    distributors: ['digikey'],
+    distributors: ['Digi-Key'],
     stock: 12_000,
     bestPrice: {
       amount: 1.42,

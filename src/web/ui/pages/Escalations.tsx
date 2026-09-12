@@ -6,8 +6,9 @@ import { Async } from '../components/Async.js';
 import { Dialog } from '../components/Dialog.js';
 import { Json } from '../components/Json.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Select, TextField } from '../components/Fields.js';
-import { errorMessage, when } from '../lib/format.js';
+import { errorMessage } from '../lib/format.js';
 import { useAsync } from '../lib/state.js';
 import type { Escalation } from '../lib/types.js';
 
@@ -50,15 +51,15 @@ export function Escalations(): ReactNode {
   };
 
   return (
-    <Page title="questions" subtitle="what the agent handed to a person rather than guessing at">
+    <Page title="Questions" subtitle="What the agent handed to a person rather than guessing at">
       <div className="filters">
         <Select
-          label="show"
+          label="Show"
           value={filter}
           options={[
-            { value: 'open', label: 'still open' },
-            { value: 'resolved', label: 'answered' },
-            { value: 'all', label: 'everything' },
+            { value: 'open', label: 'Still open' },
+            { value: 'resolved', label: 'Answered' },
+            { value: 'all', label: 'Everything' },
           ]}
           onChange={setFilter}
         />
@@ -66,7 +67,7 @@ export function Escalations(): ReactNode {
       <Async state={escalations.state} label="the questions">
         {(value) =>
           value.escalations.length === 0 ? (
-            <p className="empty">nothing is waiting on a person.</p>
+            <p className="empty">Nothing is waiting on a person.</p>
           ) : (
             <div className="stack">
               {value.escalations.map((escalation) => (
@@ -76,7 +77,7 @@ export function Escalations(): ReactNode {
                     <span className="badge">{escalation.kind.replace(/_/gu, ' ')}</span>
                   </div>
                   <p>{escalation.question}</p>
-                  <Json value={escalation.context} label="what the run was looking at" />
+                  <Json value={escalation.context} label="What the run was looking at" />
                   {escalation.resolution === undefined ? (
                     <button
                       type="button"
@@ -86,12 +87,13 @@ export function Escalations(): ReactNode {
                         setAnswering(escalation);
                       }}
                     >
-                      answer it
+                      Answer
                     </button>
                   ) : (
                     <p className="caption">
                       answered by {escalation.resolution.by} on{' '}
-                      {when(escalation.resolution.resolvedAt)}: {escalation.resolution.answer}
+                      <Time value={escalation.resolution.resolvedAt} />:{' '}
+                      {escalation.resolution.answer}
                     </p>
                   )}
                 </div>
@@ -102,8 +104,8 @@ export function Escalations(): ReactNode {
       </Async>
       {answering === undefined ? null : (
         <Dialog
-          title={`answer the question about ${answering.mpn}`}
-          confirmLabel="record the answer"
+          title={`Answer the question about ${answering.mpn}`}
+          confirmLabel="Record answer"
           busy={busy}
           confirmDisabled={form.answer.trim() === '' || form.reason.trim().length < 3}
           onCancel={() => {
@@ -132,7 +134,7 @@ export function Escalations(): ReactNode {
             </div>
           )}
           <TextField
-            label="your answer"
+            label="Your answer"
             value={form.answer}
             multiline
             onChange={(value) => {
@@ -140,14 +142,14 @@ export function Escalations(): ReactNode {
             }}
           />
           <TextField
-            label="why"
+            label="Why you are answering it"
             value={form.reason}
             onChange={(value) => {
               setForm({ ...form, reason: value });
             }}
           />
           <TextField
-            label="your name"
+            label="Your name"
             value={form.actor}
             onChange={(value) => {
               setForm({ ...form, actor: value });

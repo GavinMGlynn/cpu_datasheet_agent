@@ -19,7 +19,7 @@ function detail(overrides: Record<string, unknown> = {}) {
         verdict: {
           parameterKey: 'rdsOnLow',
           verdict: 'contradicted',
-          quote: 'page says 0.33',
+          quote: 'Page says 0.33',
           page: 5,
           checkedAt: '2026-09-12T00:00:00Z',
           model: 'claude-opus-5',
@@ -42,20 +42,20 @@ describe('a part', () => {
     expect(screen.getByText('Texas Instruments')).toBeInTheDocument();
     expect(screen.getByText('28/30')).toBeInTheDocument();
     expect(screen.getByRole('cell', { name: '28 V' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'page 4' })).toBeInTheDocument();
-    expect(screen.getByText('contradicted')).toBeInTheDocument();
-    expect(screen.getByText('not checked')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Page 4' })).toBeInTheDocument();
+    expect(screen.getByText('Contradicted')).toBeInTheDocument();
+    expect(screen.getByText('Not checked')).toBeInTheDocument();
     expect(screen.getByText('TPS54331D, TPS54331DR')).toBeInTheDocument();
   });
 
   it('opens the page a value cites', async () => {
     renderApp('/parts/TPS54331DR', { part: () => Promise.resolve(detail()) });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'page 4' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Page 4' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'page 4' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Page 4' }));
     expect(
-      screen.getByRole('img', { name: /page 4 of the datasheet/u }).getAttribute('src'),
+      screen.getByRole('img', { name: /page 4 of the datasheet/iu }).getAttribute('src'),
     ).toContain('/pages/4/image');
   });
 
@@ -68,16 +68,16 @@ describe('a part', () => {
               {
                 id: 'e-1',
                 mpn: 'TPS54331DR',
-                kind: 'conflict',
-                question: 'is Vin max 28 V or 30 V?',
+                kind: 'In conflict',
+                question: 'Is Vin max 28 V or 30 V?',
                 context: {},
                 createdAt: '2026-09-11T00:00:00Z',
               },
               {
                 id: 'e-2',
                 mpn: 'TPS54331DR',
-                kind: 'conflict',
-                question: 'already answered',
+                kind: 'In conflict',
+                question: 'Already answered',
                 context: {},
                 createdAt: '2026-09-11T00:00:00Z',
                 resolution: { answer: '28 V', resolvedAt: '2026-09-12T00:00:00Z', by: 'gavin' },
@@ -87,9 +87,9 @@ describe('a part', () => {
         ),
     });
     await waitFor(() => {
-      expect(screen.getByText('is Vin max 28 V or 30 V?')).toBeInTheDocument();
+      expect(screen.getByText('Is Vin max 28 V or 30 V?')).toBeInTheDocument();
     });
-    expect(screen.getByText('already answered')).toBeInTheDocument();
+    expect(screen.getByText('Already answered')).toBeInTheDocument();
   });
 
   it('corrects a value, and says what it will keep', async () => {
@@ -97,27 +97,27 @@ describe('a part', () => {
     const part = vi.fn(() => Promise.resolve(detail()));
     renderApp('/parts/TPS54331DR', { part, correctParameter });
     await waitFor(() => {
-      expect(first(screen.getAllByRole('button', { name: 'correct' }))).toBeInTheDocument();
+      expect(first(screen.getAllByRole('button', { name: 'Correct' }))).toBeInTheDocument();
     });
-    await userEvent.click(first(screen.getAllByRole('button', { name: 'correct' })));
-    expect(screen.getByRole('dialog', { name: 'correct vinMax' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'store the correction' })).toBeDisabled();
+    await userEvent.click(first(screen.getAllByRole('button', { name: 'Correct' })));
+    expect(screen.getByRole('dialog', { name: 'Correct vinMax' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save correction' })).toBeDisabled();
 
-    await userEvent.clear(screen.getByLabelText('value, as JSON'));
-    await userEvent.type(screen.getByLabelText('value, as JSON'), '{{"value":26,"unit":"V"}');
-    await userEvent.type(screen.getByLabelText('what you read, and where'), 'page 2');
-    await userEvent.type(screen.getByLabelText('why you are changing it'), 'the ordering table');
-    await userEvent.clear(screen.getByLabelText('your name'));
-    await userEvent.type(screen.getByLabelText('your name'), 'someone');
-    await userEvent.click(screen.getByRole('button', { name: 'store the correction' }));
+    await userEvent.clear(screen.getByLabelText('Value, as JSON'));
+    await userEvent.type(screen.getByLabelText('Value, as JSON'), '{{"value":26,"unit":"V"}');
+    await userEvent.type(screen.getByLabelText('What you read, and where'), 'Page 2');
+    await userEvent.type(screen.getByLabelText('Why you are changing it'), 'The ordering table');
+    await userEvent.clear(screen.getByLabelText('Your name'));
+    await userEvent.type(screen.getByLabelText('Your name'), 'someone');
+    await userEvent.click(screen.getByRole('button', { name: 'Save correction' }));
 
     await waitFor(() => {
       expect(correctParameter).toHaveBeenCalledWith(
         'TPS54331DR',
         'vinMax',
         expect.objectContaining({
-          note: 'page 2',
-          reason: 'the ordering table',
+          note: 'Page 2',
+          reason: 'The ordering table',
           actor: 'someone',
         }) as unknown,
       );
@@ -131,15 +131,15 @@ describe('a part', () => {
     const correctParameter = vi.fn(() => Promise.resolve({}));
     renderApp('/parts/TPS54331DR', { part: () => Promise.resolve(detail()), correctParameter });
     await waitFor(() => {
-      expect(first(screen.getAllByRole('button', { name: 'correct' }))).toBeInTheDocument();
+      expect(first(screen.getAllByRole('button', { name: 'Correct' }))).toBeInTheDocument();
     });
-    await userEvent.click(first(screen.getAllByRole('button', { name: 'correct' })));
-    await userEvent.clear(screen.getByLabelText('value, as JSON'));
-    await userEvent.type(screen.getByLabelText('value, as JSON'), 'twenty-eight volts');
-    await userEvent.type(screen.getByLabelText('what you read, and where'), 'page 2');
-    await userEvent.type(screen.getByLabelText('why you are changing it'), 'the ordering table');
-    await userEvent.click(screen.getByRole('button', { name: 'store the correction' }));
-    expect(await screen.findByRole('alert')).toHaveTextContent('that is not JSON');
+    await userEvent.click(first(screen.getAllByRole('button', { name: 'Correct' })));
+    await userEvent.clear(screen.getByLabelText('Value, as JSON'));
+    await userEvent.type(screen.getByLabelText('Value, as JSON'), 'Twenty-eight volts');
+    await userEvent.type(screen.getByLabelText('What you read, and where'), 'Page 2');
+    await userEvent.type(screen.getByLabelText('Why you are changing it'), 'The ordering table');
+    await userEvent.click(screen.getByRole('button', { name: 'Save correction' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('That is not JSON');
     expect(correctParameter).not.toHaveBeenCalled();
   });
 
@@ -147,25 +147,25 @@ describe('a part', () => {
     renderApp('/parts/TPS54331DR', {
       part: () => Promise.resolve(detail()),
       correctParameter: () =>
-        Promise.reject(new Error('a verified part must have every value verified')),
+        Promise.reject(new Error('A verified part must have every value verified')),
     });
     await waitFor(() => {
-      expect(first(screen.getAllByRole('button', { name: 'correct' }))).toBeInTheDocument();
+      expect(first(screen.getAllByRole('button', { name: 'Correct' }))).toBeInTheDocument();
     });
-    await userEvent.click(first(screen.getAllByRole('button', { name: 'correct' })));
-    await userEvent.type(screen.getByLabelText('what you read, and where'), 'page 2');
-    await userEvent.type(screen.getByLabelText('why you are changing it'), 'the ordering table');
-    await userEvent.click(screen.getByRole('button', { name: 'store the correction' }));
+    await userEvent.click(first(screen.getAllByRole('button', { name: 'Correct' })));
+    await userEvent.type(screen.getByLabelText('What you read, and where'), 'Page 2');
+    await userEvent.type(screen.getByLabelText('Why you are changing it'), 'The ordering table');
+    await userEvent.click(screen.getByRole('button', { name: 'Save correction' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('every value verified');
   });
 
   it('closes the correction without storing anything', async () => {
     renderApp('/parts/TPS54331DR', { part: () => Promise.resolve(detail()) });
     await waitFor(() => {
-      expect(first(screen.getAllByRole('button', { name: 'correct' }))).toBeInTheDocument();
+      expect(first(screen.getAllByRole('button', { name: 'Correct' }))).toBeInTheDocument();
     });
-    await userEvent.click(first(screen.getAllByRole('button', { name: 'correct' })));
-    await userEvent.click(screen.getByRole('button', { name: 'cancel' }));
+    await userEvent.click(first(screen.getAllByRole('button', { name: 'Correct' })));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
@@ -175,9 +175,9 @@ describe('a part', () => {
       parts: () => Promise.resolve({ source: 'live', total: 0, offset: 0, limit: 50, items: [] }),
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'back to the catalogue' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Back to catalogue' })).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'back to the catalogue' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Back to catalogue' }));
     await waitFor(() => {
       expect(globalThis.location.pathname).toBe('/parts');
     });
@@ -195,8 +195,8 @@ describe('a part', () => {
         ),
     });
     await waitFor(() => {
-      expect(screen.getByText('nothing else is recorded against it')).toBeInTheDocument();
+      expect(screen.getByText('Nothing else is recorded against it')).toBeInTheDocument();
     });
-    expect(screen.getByText('no run has touched this part in this database')).toBeInTheDocument();
+    expect(screen.getByText('No run has touched this part in this database.')).toBeInTheDocument();
   });
 });

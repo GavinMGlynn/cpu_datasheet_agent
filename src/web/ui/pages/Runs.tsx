@@ -4,9 +4,10 @@ import { useApp } from '../app.js';
 import { Async } from '../components/Async.js';
 import { Badge } from '../components/Badge.js';
 import { Page } from '../components/Page.js';
+import { Time } from '../components/Time.js';
 import { Select } from '../components/Fields.js';
 import { Table } from '../components/Table.js';
-import { count, duration, usd, when } from '../lib/format.js';
+import { count, duration, usd } from '../lib/format.js';
 import { navigate, withQuery } from '../lib/router.js';
 import { useAsync } from '../lib/state.js';
 import type { Run } from '../lib/types.js';
@@ -26,29 +27,29 @@ export function Runs(): ReactNode {
   );
 
   return (
-    <Page title="runs" subtitle="what the agent has done, and what each attempt cost">
+    <Page title="Runs" subtitle="What the agent has done, and what each attempt cost">
       <div className="filters">
         <Select
-          label="kind"
+          label="Kind"
           value={kind}
           options={[
-            { value: '', label: 'either' },
-            { value: 'extract', label: 'extraction' },
-            { value: 'verify', label: 'verification' },
+            { value: '', label: 'Either' },
+            { value: 'extract', label: 'Extraction' },
+            { value: 'verify', label: 'Verification' },
           ]}
           onChange={(value) => {
             navigate(withQuery(route, { kind: value }));
           }}
         />
         <Select
-          label="ended"
+          label="Ended"
           value={result}
           options={[
-            { value: '', label: 'any way' },
-            { value: 'extracted', label: 'a part stored' },
-            { value: 'verified', label: 'every value checked' },
-            { value: 'needs_human', label: 'a question raised' },
-            { value: 'rejected', label: 'rejected' },
+            { value: '', label: 'Any way' },
+            { value: 'extracted', label: 'A part stored' },
+            { value: 'verified', label: 'Every value checked' },
+            { value: 'needs_human', label: 'A question raised' },
+            { value: 'rejected', label: 'Rejected' },
           ]}
           onChange={(value) => {
             navigate(withQuery(route, { result: value }));
@@ -64,11 +65,11 @@ export function Runs(): ReactNode {
               rowKey={(run) => run.id}
               initialSort="started"
               initialDirection="desc"
-              empty="no run matches those filters"
+              empty="No run matches those filters."
               columns={[
                 {
                   key: 'mpn',
-                  label: 'part',
+                  label: 'Part',
                   sort: (run) => run.mpn,
                   render: (run) => (
                     <a
@@ -82,37 +83,37 @@ export function Runs(): ReactNode {
                     </a>
                   ),
                 },
-                { key: 'kind', label: 'kind', sort: (run) => run.kind, render: (run) => run.kind },
+                { key: 'kind', label: 'Kind', sort: (run) => run.kind, render: (run) => run.kind },
                 {
                   key: 'result',
-                  label: 'ended',
+                  label: 'Ended',
                   sort: (run) => run.result ?? 'unfinished',
                   render: (run) => <Badge kind="runResult" value={run.result ?? 'unfinished'} />,
                 },
                 {
                   key: 'cost',
-                  label: 'cost',
+                  label: 'Cost',
                   numeric: true,
                   sort: (run) => run.costUsd,
                   render: (run) => usd(run.costUsd),
                 },
                 {
                   key: 'turns',
-                  label: 'turns',
+                  label: 'Turns',
                   numeric: true,
                   sort: (run) => run.turns,
                   render: (run) => run.turns ?? '—',
                 },
                 {
                   key: 'calls',
-                  label: 'tool calls',
+                  label: 'Tool calls',
                   numeric: true,
                   sort: (run) => run.details?.toolCalls,
                   render: (run) => run.details?.toolCalls ?? '—',
                 },
                 {
                   key: 'took',
-                  label: 'took',
+                  label: 'Took',
                   numeric: true,
                   sort: (run) =>
                     run.endedAt === undefined
@@ -125,15 +126,15 @@ export function Runs(): ReactNode {
                 },
                 {
                   key: 'model',
-                  label: 'model',
+                  label: 'Model',
                   sort: (run) => run.model,
                   render: (run) => run.model,
                 },
                 {
                   key: 'started',
-                  label: 'started',
+                  label: 'Started',
                   sort: (run) => run.startedAt,
-                  render: (run) => when(run.startedAt),
+                  render: (run) => <Time value={run.startedAt} />,
                 },
               ]}
             />

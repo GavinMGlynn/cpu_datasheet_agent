@@ -13,7 +13,7 @@ const estimate = {
   meanCostUsd: 3.84,
   estimateUsd: 3.84,
   worstCaseUsd: 4.6,
-  basisDescription: 'from 22 extract run(s) already recorded',
+  basisDescription: 'From 22 extract run(s) already recorded',
 };
 
 const running: Launch = {
@@ -43,25 +43,28 @@ describe('run control', () => {
   it('will not start until a part and a reason are given', async () => {
     renderApp('/control', stubs());
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'start it' })).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Start run' })).toBeDisabled();
     });
     expect(
-      screen.getByText(/name some parts and this will say what they would cost/u),
+      screen.getByText(/name some parts and this will say what they would cost/iu),
     ).toBeInTheDocument();
   });
 
   it('says what it would cost before it asks', async () => {
     renderApp('/control', stubs());
-    await userEvent.type(await screen.findByLabelText('parts, comma separated'), 'TPS54331DR');
-    await userEvent.type(screen.getByLabelText('why'), 'checking the extraction');
+    await userEvent.type(await screen.findByLabelText('Parts, separated by commas'), 'TPS54331DR');
+    await userEvent.type(
+      screen.getByLabelText('Why you are running this'),
+      'Checking the extraction',
+    );
     await waitFor(() => {
-      expect(screen.getByText(/1 parts would cost about \$3.84/u)).toBeInTheDocument();
+      expect(screen.getByText(/1 parts would cost about \$3.84/iu)).toBeInTheDocument();
     });
-    await userEvent.click(screen.getByRole('button', { name: 'start it' }));
-    const dialog = screen.getByRole('dialog', { name: 'this will spend money' });
-    expect(dialog).toHaveTextContent('extracting 1 part');
+    await userEvent.click(screen.getByRole('button', { name: 'Start run' }));
+    const dialog = screen.getByRole('dialog', { name: 'This will spend money' });
+    expect(dialog).toHaveTextContent('Extracting 1 part');
     expect(dialog).toHaveTextContent('$3.84');
-    expect(dialog).toHaveTextContent('it may not spend at the distributors');
+    expect(dialog).toHaveTextContent('It may not spend at the distributors');
   });
 
   it('starts a launch with everything the form said', async () => {
@@ -71,21 +74,24 @@ describe('run control', () => {
     const launches = vi.fn(() => Promise.resolve({ launches: [running] }));
     renderApp('/control', stubs({ startLaunch, launches }));
     await userEvent.type(
-      await screen.findByLabelText('parts, comma separated'),
+      await screen.findByLabelText('Parts, separated by commas'),
       'TPS54331DR, AP62200WU-7',
     );
-    await userEvent.type(screen.getByLabelText('why'), 'checking the extraction');
-    await userEvent.click(screen.getByLabelText('let it spend at the distributors'));
-    await userEvent.clear(screen.getByLabelText('ceiling for the whole launch, dollars'));
-    await userEvent.type(screen.getByLabelText('ceiling for the whole launch, dollars'), '20');
-    await userEvent.clear(screen.getByLabelText('ceiling for one run, dollars'));
-    await userEvent.type(screen.getByLabelText('ceiling for one run, dollars'), '5');
-    await userEvent.clear(screen.getByLabelText('your name'));
-    await userEvent.type(screen.getByLabelText('your name'), 'someone else');
-    await userEvent.selectOptions(screen.getByLabelText('what to run'), 'verify');
-    await userEvent.click(screen.getByRole('button', { name: 'start it' }));
-    expect(screen.getByRole('dialog')).toHaveTextContent('it may fetch from the distributors');
-    await userEvent.click(screen.getByRole('button', { name: 'start the run' }));
+    await userEvent.type(
+      screen.getByLabelText('Why you are running this'),
+      'Checking the extraction',
+    );
+    await userEvent.click(screen.getByLabelText('Allow distributor spending'));
+    await userEvent.clear(screen.getByLabelText('Ceiling for the launch (USD)'));
+    await userEvent.type(screen.getByLabelText('Ceiling for the launch (USD)'), '20');
+    await userEvent.clear(screen.getByLabelText('Ceiling for one run (USD)'));
+    await userEvent.type(screen.getByLabelText('Ceiling for one run (USD)'), '5');
+    await userEvent.clear(screen.getByLabelText('Your name'));
+    await userEvent.type(screen.getByLabelText('Your name'), 'Someone else');
+    await userEvent.selectOptions(screen.getByLabelText('What to run'), 'verify');
+    await userEvent.click(screen.getByRole('button', { name: 'Start run' }));
+    expect(screen.getByRole('dialog')).toHaveTextContent('It may fetch from the distributors');
+    await userEvent.click(screen.getByRole('button', { name: 'Start the run' }));
     await waitFor(() => {
       expect(startLaunch).toHaveBeenCalledTimes(1);
     });
@@ -96,8 +102,8 @@ describe('run control', () => {
       maxCostUsd: 5,
       allowSpend: true,
       confirmed: true,
-      reason: 'checking the extraction',
-      actor: 'someone else',
+      reason: 'Checking the extraction',
+      actor: 'Someone else',
     });
     await waitFor(() => {
       expect(launches).toHaveBeenCalledTimes(2);
@@ -105,21 +111,21 @@ describe('run control', () => {
   });
 
   it('shows what the server said when it refuses to start', async () => {
-    renderApp('/control', stubs({ startLaunch: () => Promise.reject(new Error('no budget')) }));
-    await userEvent.type(await screen.findByLabelText('parts, comma separated'), 'TPS54331DR');
-    await userEvent.type(screen.getByLabelText('why'), 'checking it');
-    await userEvent.click(screen.getByRole('button', { name: 'start it' }));
-    await userEvent.click(screen.getByRole('button', { name: 'start the run' }));
-    expect(await screen.findByRole('alert')).toHaveTextContent('no budget');
+    renderApp('/control', stubs({ startLaunch: () => Promise.reject(new Error('No budget')) }));
+    await userEvent.type(await screen.findByLabelText('Parts, separated by commas'), 'TPS54331DR');
+    await userEvent.type(screen.getByLabelText('Why you are running this'), 'Checking it');
+    await userEvent.click(screen.getByRole('button', { name: 'Start run' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Start the run' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('No budget');
   });
 
   it('closes the confirmation without starting anything', async () => {
     const startLaunch = vi.fn(() => Promise.resolve({ launch: running }));
     renderApp('/control', stubs({ startLaunch }));
-    await userEvent.type(await screen.findByLabelText('parts, comma separated'), 'TPS54331DR');
-    await userEvent.type(screen.getByLabelText('why'), 'checking it');
-    await userEvent.click(screen.getByRole('button', { name: 'start it' }));
-    await userEvent.click(screen.getByRole('button', { name: 'cancel' }));
+    await userEvent.type(await screen.findByLabelText('Parts, separated by commas'), 'TPS54331DR');
+    await userEvent.type(screen.getByLabelText('Why you are running this'), 'Checking it');
+    await userEvent.click(screen.getByRole('button', { name: 'Start run' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(startLaunch).not.toHaveBeenCalled();
   });
@@ -131,14 +137,14 @@ describe('run control', () => {
     });
     expect(screen.getByText('$3.41')).toBeInTheDocument();
     expect(screen.getByText('1/2')).toBeInTheDocument();
-    expect(screen.getByText('running')).toBeInTheDocument();
+    expect(screen.getByText('Running')).toBeInTheDocument();
   });
 
   it('stops a launch after the part it is on', async () => {
     const cancelLaunch = vi.fn(() => Promise.resolve({ launch: { ...running, cancelling: true } }));
     const launches = vi.fn(() => Promise.resolve({ launches: [running] }));
     renderApp('/control', stubs({ cancelLaunch, launches }));
-    await userEvent.click(await screen.findByRole('button', { name: 'stop after this part' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Stop after this part' }));
     await waitFor(() => {
       expect(cancelLaunch).toHaveBeenCalledWith('launch-1');
     });
@@ -151,9 +157,9 @@ describe('run control', () => {
     const launches = vi.fn(() => Promise.resolve({ launches: [running] }));
     renderApp(
       '/control',
-      stubs({ cancelLaunch: () => Promise.reject(new Error('already done')), launches }),
+      stubs({ cancelLaunch: () => Promise.reject(new Error('Already done')), launches }),
     );
-    await userEvent.click(await screen.findByRole('button', { name: 'stop after this part' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Stop after this part' }));
     await waitFor(() => {
       expect(launches).toHaveBeenCalledTimes(2);
     });
@@ -165,9 +171,9 @@ describe('run control', () => {
       launches: () => Promise.resolve({ launches: [{ ...running, state: 'finished' as const }] }),
     });
     await waitFor(() => {
-      expect(screen.getByText('finished')).toBeInTheDocument();
+      expect(screen.getByText('Finished')).toBeInTheDocument();
     });
-    expect(screen.queryByRole('button', { name: 'stop after this part' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Stop after this part' })).toBeNull();
   });
 
   it('shows a launch with no runs behind it yet', async () => {
@@ -200,7 +206,7 @@ describe('run control', () => {
   it('says when nothing has been started here', async () => {
     renderApp('/control', { ...stubs(), launches: () => Promise.resolve({ launches: [] }) });
     await waitFor(() => {
-      expect(screen.getByText('nothing has been started from this browser')).toBeInTheDocument();
+      expect(screen.getByText('Nothing has been started from this browser.')).toBeInTheDocument();
     });
   });
 });

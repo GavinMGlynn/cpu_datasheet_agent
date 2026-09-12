@@ -6,25 +6,25 @@ import { renderAt } from '../../../../test/ui/render.js';
 import { HeatMap } from './HeatMap.js';
 
 const cells = [
-  { row: 'vinMax', column: 'found', value: 22, title: 'vinMax: stated for 22 of 22 parts' },
-  { row: 'vinMax', column: 'cited', value: 22, title: 'vinMax: cites a page for 22 parts' },
-  { row: 'maxDutyCycle', column: 'found', value: 10, title: 'maxDutyCycle: stated for 10 parts' },
-  { row: 'maxDutyCycle', column: 'cited', value: 22, title: 'maxDutyCycle: cites a page for 22' },
+  { row: 'vinMax', column: 'found', value: 22, title: 'VinMax: stated for 22 of 22 parts' },
+  { row: 'vinMax', column: 'cited', value: 22, title: 'VinMax: cites a page for 22 parts' },
+  { row: 'maxDutyCycle', column: 'found', value: 10, title: 'MaxDutyCycle: stated for 10 parts' },
+  { row: 'maxDutyCycle', column: 'cited', value: 22, title: 'MaxDutyCycle: cites a page for 22' },
 ];
 
 describe('HeatMap', () => {
   it('draws a cell per row and column, with the number in it', () => {
     const { container } = renderAt(
       <HeatMap
-        title="parameters by parts"
-        caption="how much of the schema gets filled in"
+        title="Parameters by parts"
+        caption="How much of the schema gets filled in"
         rows={['vinMax', 'maxDutyCycle']}
         columns={['found', 'cited']}
         cells={cells}
       />,
     );
-    expect(screen.getByRole('img', { name: 'parameters by parts' })).toBeInTheDocument();
-    expect(screen.getByText('how much of the schema gets filled in')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Parameters by parts' })).toBeInTheDocument();
+    expect(screen.getByText('How much of the schema gets filled in')).toBeInTheDocument();
     expect(container.querySelectorAll('rect')).toHaveLength(4);
     expect(screen.getAllByText('22')).toHaveLength(3);
     expect(screen.getByText('10')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('HeatMap', () => {
     // hovers without moving; this is the line under the grid.
     const live = (): string => container.querySelector('[aria-live]')?.textContent ?? '';
     fireEvent.mouseEnter(cell as Element);
-    expect(live()).toBe('vinMax: stated for 22 of 22 parts');
+    expect(live()).toBe('VinMax: stated for 22 of 22 parts');
     fireEvent.mouseLeave(cell as Element);
     expect(live().trim()).toBe('');
   });
@@ -50,8 +50,8 @@ describe('HeatMap', () => {
       <HeatMap
         title="coverage"
         rows={['vinMax']}
-        columns={['found', 'never measured']}
-        cells={[{ row: 'vinMax', column: 'found', value: 22, title: 'vinMax: 22 of 22' }]}
+        columns={['found', 'Never measured']}
+        cells={[{ row: 'vinMax', column: 'found', value: 22, title: 'VinMax: 22 of 22' }]}
       />,
     );
     expect(screen.getByText('0')).toBeInTheDocument();
@@ -92,6 +92,6 @@ describe('HeatMap', () => {
 
   it('says when there is nothing stored at all', () => {
     renderAt(<HeatMap title="coverage" rows={[]} columns={['found']} cells={[]} />);
-    expect(screen.getByText('nothing stored yet')).toBeInTheDocument();
+    expect(screen.getByText('Nothing stored yet')).toBeInTheDocument();
   });
 });
