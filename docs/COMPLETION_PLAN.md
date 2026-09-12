@@ -1059,6 +1059,30 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 - [ ] 19G.4 Tests: bundle contents, exclusion enforcement, a snapshot that
       opens with no server.
 
+### 19I Test layers
+
+Every part of this module carries all four layers, and the site carries a
+fifth. A module is not finished when its unit tests pass (D70).
+
+- [ ] 19I.1 Unit: every file at 100% lines, branches, functions and
+      statements, as the rest of `src/`.
+- [ ] 19I.2 Behaviour: what each endpoint does rather than how — status codes,
+      filter semantics, access decisions, error envelopes — against a seeded
+      store, a seeded ledger and real evaluation results.
+- [ ] 19I.3 Snapshot: the shape of every API payload and the rendering of
+      every page, component and chart, committed so a change shows up as a
+      reviewable diff rather than a passing test.
+- [ ] 19I.4 Integration: a real server on a real socket over a real SQLite
+      database, ledger and cache — token handoff, conditional requests, event
+      streams, run launching against a fake runner, and writes that land.
+- [ ] 19I.5 Browser: Playwright driving Chromium against a server started on a
+      seeded temporary data directory — navigation and deep links, filtering
+      and sorting, drill-through from a chart to the page that states a value,
+      launching a run and watching it stream, resolving an escalation,
+      light and dark, keyboard navigation, and screenshots of every page.
+- [ ] 19I.6 Scripts and CI: `npm run test:e2e` separate from the unit run,
+      browsers installed and cached in CI, and every layer green on `main`.
+
 ### 19H Documentation and sign-off
 
 - [ ] 19H.1 `src/web/README.md`: the public API, the errors, the invariants,
