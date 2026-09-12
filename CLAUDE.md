@@ -22,6 +22,9 @@ Read these in order at the start of every session:
    owns, and how they interact. Read this before changing a module boundary.
 4. `docs/REFERENCES.md` — every external source we rely on, with its
    verification status. Cite rows by ID.
+5. `docs/tutorial/index.html` — how the agent and the MCP server work, step
+   by step, for someone meeting them for the first time. Keep it true: a
+   change to the run loop, the gates or the tool surface changes this too.
 
 Every documentation change is committed and pushed immediately. Every
 commit is pushed.

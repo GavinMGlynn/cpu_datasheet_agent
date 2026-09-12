@@ -1,0 +1,1891 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Building an Agent and an MCP Server</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --plane: #f4f6f9;
+        --surface: #ffffff;
+        --surface-2: #eef1f6;
+        --line: #dde3ec;
+        --line-strong: #c7d0dd;
+        --ink: #0f1620;
+        --ink-2: #4d5866;
+        --ink-3: #79838f;
+        --accent: #2a78d6;
+        --accent-soft: #e9f1fc;
+        --model: #eb6834;
+        --money: #eda100;
+        --stored: #1baf7a;
+        --radius: 8px;
+        --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+        --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          color-scheme: dark;
+          --plane: #0d1117;
+          --surface: #161b22;
+          --surface-2: #1d242e;
+          --line: #2a323d;
+          --line-strong: #3a4450;
+          --ink: #e8eef6;
+          --ink-2: #aab6c5;
+          --ink-3: #7d8998;
+          --accent: #4d94ec;
+          --accent-soft: #16304d;
+          --model: #d95926;
+          --money: #c98500;
+          --stored: #199e70;
+        }
+      }
+
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+        --plane: #0d1117;
+        --surface: #161b22;
+        --surface-2: #1d242e;
+        --line: #2a323d;
+        --line-strong: #3a4450;
+        --ink: #e8eef6;
+        --ink-2: #aab6c5;
+        --ink-3: #7d8998;
+        --accent: #4d94ec;
+        --accent-soft: #16304d;
+        --model: #d95926;
+        --money: #c98500;
+        --stored: #199e70;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--plane);
+        color: var(--ink);
+        font: 15px/1.65 var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page {
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 230px minmax(0, 1fr);
+        margin: 0 auto;
+        max-width: 1180px;
+        padding: 40px 24px 96px;
+      }
+
+      nav.toc {
+        align-self: start;
+        position: sticky;
+        top: 24px;
+      }
+
+      nav.toc p {
+        color: var(--ink-3);
+        font-size: 11px;
+        font-weight: 650;
+        letter-spacing: 0.09em;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+      }
+
+      nav.toc ol {
+        border-left: 1px solid var(--line);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav.toc li {
+        margin: 0;
+      }
+
+      nav.toc a {
+        color: var(--ink-2);
+        display: block;
+        font-size: 13.5px;
+        padding: 5px 12px;
+        text-decoration: none;
+      }
+
+      nav.toc a:hover {
+        background: var(--surface-2);
+        color: var(--ink);
+      }
+
+      main {
+        min-width: 0;
+      }
+
+      header.title {
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 36px;
+        padding-bottom: 24px;
+      }
+
+      header.title h1 {
+        font-size: 32px;
+        font-weight: 660;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin: 0 0 10px;
+        text-wrap: balance;
+      }
+
+      header.title p {
+        color: var(--ink-2);
+        margin: 0;
+        max-width: 68ch;
+      }
+
+      section {
+        margin-bottom: 52px;
+        scroll-margin-top: 24px;
+      }
+
+      h2 {
+        font-size: 23px;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+        margin: 0 0 4px;
+        text-wrap: balance;
+      }
+
+      h2 .n {
+        color: var(--ink-3);
+        font-variant-numeric: tabular-nums;
+        font-weight: 550;
+        margin-right: 10px;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 640;
+        margin: 28px 0 6px;
+      }
+
+      p,
+      li {
+        max-width: 72ch;
+      }
+
+      p {
+        margin: 12px 0;
+      }
+
+      code {
+        background: var(--surface-2);
+        border-radius: 4px;
+        font-family: var(--mono);
+        font-size: 0.88em;
+        padding: 1px 5px;
+      }
+
+      pre {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        font-family: var(--mono);
+        font-size: 12.5px;
+        line-height: 1.6;
+        margin: 0;
+        overflow-x: auto;
+        padding: 14px 16px;
+      }
+
+      pre code {
+        background: none;
+        font-size: inherit;
+        padding: 0;
+      }
+
+      figure {
+        margin: 22px 0 26px;
+      }
+
+      figure.code {
+        margin: 14px 0 22px;
+      }
+
+      figure.code figcaption {
+        border: 1px solid var(--line);
+        border-bottom: 0;
+        border-radius: var(--radius) var(--radius) 0 0;
+        background: var(--surface-2);
+        color: var(--ink-2);
+        font-family: var(--mono);
+        font-size: 11.5px;
+        padding: 6px 14px;
+      }
+
+      figure.code figcaption + pre {
+        border-radius: 0 0 var(--radius) var(--radius);
+      }
+
+      figure.diagram {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px 18px 10px;
+      }
+
+      figure.diagram svg {
+        display: block;
+        height: auto;
+        max-width: 100%;
+      }
+
+      figure.diagram figcaption {
+        border-top: 1px solid var(--line);
+        color: var(--ink-2);
+        font-size: 12.5px;
+        margin-top: 14px;
+        padding-top: 10px;
+      }
+
+      .note {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--accent);
+        border-radius: var(--radius);
+        margin: 20px 0;
+        padding: 12px 16px;
+      }
+
+      .note.money {
+        border-left-color: var(--money);
+      }
+
+      .note p {
+        margin: 6px 0;
+      }
+
+      .note strong {
+        font-weight: 640;
+      }
+
+      .run {
+        background: var(--surface-2);
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius);
+        margin: 18px 0;
+        padding: 12px 16px;
+      }
+
+      .run p {
+        color: var(--ink-2);
+        font-size: 13px;
+        margin: 0 0 8px;
+      }
+
+      .run pre {
+        background: var(--surface);
+      }
+
+      table {
+        border-collapse: collapse;
+        font-size: 14px;
+        margin: 18px 0;
+        width: 100%;
+      }
+
+      th {
+        border-bottom: 1px solid var(--line-strong);
+        color: var(--ink-3);
+        font-size: 11px;
+        font-weight: 650;
+        letter-spacing: 0.06em;
+        padding: 0 10px 8px;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 9px 10px;
+        vertical-align: top;
+      }
+
+      .wrap {
+        overflow-x: auto;
+      }
+
+      .svg-label {
+        fill: var(--ink);
+        font-family: var(--sans);
+        font-size: 12px;
+      }
+
+      .svg-muted {
+        fill: var(--ink-2);
+        font-family: var(--sans);
+        font-size: 11px;
+      }
+
+      .svg-mono {
+        fill: var(--ink);
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+
+      .svg-box {
+        fill: var(--surface-2);
+        stroke: var(--line-strong);
+      }
+
+      .svg-line {
+        stroke: var(--line-strong);
+        fill: none;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--ink-3);
+        font-size: 13px;
+        margin-top: 56px;
+        padding-top: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .page {
+          gap: 0;
+          grid-template-columns: minmax(0, 1fr);
+          padding: 24px 16px 64px;
+        }
+
+        nav.toc {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="toc" aria-label="Contents">
+        <p>Contents</p>
+        <ol>
+          <li><a href="#what">1 · What an agent is here</a></li>
+          <li><a href="#anatomy">2 · Anatomy of a run</a></li>
+          <li><a href="#tools">3 · Tools: writing one</a></li>
+          <li><a href="#mcp">4 · MCP: the protocol</a></li>
+          <li><a href="#harness">5 · The harness</a></li>
+          <li><a href="#money">6 · The money gates</a></li>
+          <li><a href="#ledger">7 · Reading it back</a></li>
+          <li><a href="#verify">8 · The verification pass</a></li>
+          <li><a href="#testing">9 · Testing an agent</a></li>
+          <li><a href="#yourown">10 · Add your own tool</a></li>
+          <li><a href="#gotchas">11 · Gotchas</a></li>
+        </ol>
+      </nav>
+
+      <main>
+        <header class="title">
+          <h1>Building an agent, and the MCP server it works through</h1>
+          <p>
+            A tour of this repository for someone who knows Node and React and has used Claude, but
+            has not built an agent or written an MCP server. Everything here is code you can open:
+            file paths are real, and every command runs.
+          </p>
+        </header>
+        <section id="what">
+          <h2><span class="n">1</span>What an agent is here</h2>
+          <p>
+            An agent, in this project, is four things and nothing else: a
+            <strong>prompt file</strong>, a set of <strong>tools</strong>, a
+            <strong>harness</strong> that runs the model in a loop, and a <strong>record</strong> of
+            everything that happened. There is no framework, no planner, no chain abstraction. The
+            interesting part is not the loop — the SDK owns that — it is what the loop is allowed to
+            touch.
+          </p>
+          <p>
+            The project keeps two layers strictly apart. The
+            <em>deterministic layer</em> fetches, caches and stores; it has no judgement in it. The
+            <em>agent layer</em> does the one genuinely hard thing: reading parameters out of a
+            datasheet PDF and reconciling them against what distributors publish. A tool is how the
+            second reaches the first, and it is the only way it can.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 300"
+              role="img"
+              aria-label="The agent layer sits above a tool surface, which sits above the deterministic layer"
+            >
+              <rect
+                x="8"
+                y="8"
+                width="704"
+                height="74"
+                rx="8"
+                class="svg-box"
+                fill="none"
+                stroke="var(--model)"
+              />
+              <text x="24" y="32" class="svg-label" font-weight="650">Agent layer</text>
+              <text x="24" y="50" class="svg-muted">
+                one headless query per part, in a fresh context
+              </text>
+              <rect
+                x="330"
+                y="20"
+                width="170"
+                height="46"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="415" y="41" class="svg-mono" text-anchor="middle">extractPart()</text>
+              <text x="415" y="57" class="svg-muted" text-anchor="middle">
+                prompts/extract.v1.md
+              </text>
+              <rect
+                x="516"
+                y="20"
+                width="180"
+                height="46"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="606" y="41" class="svg-mono" text-anchor="middle">verifyPart()</text>
+              <text x="606" y="57" class="svg-muted" text-anchor="middle">
+                prompts/verify.v1.md
+              </text>
+
+              <path
+                d="M360 82 L360 106"
+                class="svg-line"
+                stroke-width="1.5"
+                marker-end="url(#arrow)"
+              />
+              <text x="372" y="100" class="svg-muted">tool calls, and only tool calls</text>
+
+              <rect
+                x="8"
+                y="110"
+                width="704"
+                height="64"
+                rx="8"
+                class="svg-box"
+                fill="none"
+                stroke="var(--accent)"
+              />
+              <text x="24" y="134" class="svg-label" font-weight="650">Tool surface</text>
+              <text x="24" y="152" class="svg-muted">
+                src/tools — 19 tools, schemas on both sides
+              </text>
+              <rect
+                x="330"
+                y="122"
+                width="366"
+                height="40"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="513" y="147" class="svg-mono" text-anchor="middle">
+                ToolRegistry — validate in · run · validate out · record
+              </text>
+
+              <path
+                d="M360 174 L360 198"
+                class="svg-line"
+                stroke-width="1.5"
+                marker-end="url(#arrow)"
+              />
+
+              <rect
+                x="8"
+                y="202"
+                width="704"
+                height="90"
+                rx="8"
+                class="svg-box"
+                fill="none"
+                stroke="var(--line-strong)"
+              />
+              <text x="24" y="226" class="svg-label" font-weight="650">Deterministic layer</text>
+              <text x="24" y="244" class="svg-muted">no judgement lives here</text>
+              <rect x="24" y="252" width="150" height="32" rx="6" class="svg-box" />
+              <text x="99" y="272" class="svg-mono" text-anchor="middle">cache → network</text>
+              <rect x="186" y="252" width="120" height="32" rx="6" class="svg-box" />
+              <text x="246" y="272" class="svg-mono" text-anchor="middle">SQLite</text>
+              <rect x="318" y="252" width="150" height="32" rx="6" class="svg-box" />
+              <text x="393" y="272" class="svg-mono" text-anchor="middle">poppler (PDF)</text>
+              <rect x="480" y="252" width="216" height="32" rx="6" class="svg-box" />
+              <text x="588" y="272" class="svg-mono" text-anchor="middle">
+                ledger (every call, append-only)
+              </text>
+              <defs>
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+            </svg>
+            <figcaption>
+              Figure 1. Arrows only go down. The agent cannot open a file, run a shell, or reach the
+              network except through a tool, and every network call goes through the cache — which
+              is why a rerun costs nothing.
+            </figcaption>
+          </figure>
+
+          <h3>Four rules that make a run reproducible</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Where it lives</th>
+                <th>Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The prompt is a versioned file, never an edited string</td>
+                <td><code>prompts/extract.v1.md</code></td>
+                <td>
+                  Its SHA-256 is stored with the run, so "extract.v1" means one thing for ever.
+                </td>
+              </tr>
+              <tr>
+                <td>No built-in tools, no settings files</td>
+                <td><code>tools: []</code>, <code>settingSources: []</code></td>
+                <td>Otherwise the same prompt means different things on two machines.</td>
+              </tr>
+              <tr>
+                <td>Every tool call is recorded before it runs and after it ends</td>
+                <td><code>src/log</code> (the ledger)</td>
+                <td>This is the eval dataset. It cannot be reconstructed afterwards.</td>
+              </tr>
+              <tr>
+                <td>Money is gated three ways</td>
+                <td>registry · hook · harness</td>
+                <td>An agent with a credit card needs more than good intentions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="anatomy">
+          <h2><span class="n">2</span>Anatomy of a run</h2>
+          <p>
+            One command starts an extraction:
+            <code>npx tsx bin/chip-run.ts extract TPS54331DR</code>. Here is everything that
+            happens, in order. Follow it in <code>src/agent/execute.ts</code> — the whole thing is
+            260 lines.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 380"
+              role="img"
+              aria-label="A run: the CLI starts executeRun, which drives the SDK query loop against the model, through a hook and an in-process MCP server into the tools"
+            >
+              <defs>
+                <marker
+                  id="a2"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)" />
+                </marker>
+                <marker
+                  id="a3"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+
+              <rect x="8" y="14" width="150" height="40" rx="6" class="svg-box" />
+              <text x="83" y="32" class="svg-mono" text-anchor="middle">bin/chip-run.ts</text>
+              <text x="83" y="47" class="svg-muted" text-anchor="middle">extract TPS54331DR</text>
+
+              <rect
+                x="8"
+                y="78"
+                width="150"
+                height="54"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="83" y="97" class="svg-mono" text-anchor="middle">executeRun()</text>
+              <text x="83" y="112" class="svg-muted" text-anchor="middle">writes the run row,</text>
+              <text x="83" y="125" class="svg-muted" text-anchor="middle">
+                opens a ledger entry
+              </text>
+
+              <path d="M83 54 L83 76" class="svg-line" marker-end="url(#a3)" />
+
+              <rect
+                x="210"
+                y="78"
+                width="180"
+                height="54"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="300" y="97" class="svg-mono" text-anchor="middle">
+                query({ prompt, options })
+              </text>
+              <text x="300" y="112" class="svg-muted" text-anchor="middle">
+                Agent SDK · the loop
+              </text>
+              <text x="300" y="125" class="svg-muted" text-anchor="middle">
+                model ⇄ tools, until done
+              </text>
+              <path
+                d="M158 105 L206 105"
+                class="svg-line"
+                marker-end="url(#a2)"
+                stroke="var(--accent)"
+              />
+
+              <rect
+                x="440"
+                y="78"
+                width="120"
+                height="54"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="500" y="103" class="svg-label" text-anchor="middle">the model</text>
+              <text x="500" y="120" class="svg-muted" text-anchor="middle">claude-opus-5</text>
+              <path
+                d="M390 96 L436 96"
+                class="svg-line"
+                marker-end="url(#a2)"
+                stroke="var(--accent)"
+              />
+              <path
+                d="M436 118 L392 118"
+                class="svg-line"
+                marker-end="url(#a2)"
+                stroke="var(--accent)"
+              />
+              <text x="413" y="148" class="svg-muted" text-anchor="middle">wants a tool</text>
+
+              <rect
+                x="404"
+                y="176"
+                width="192"
+                height="46"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--money)"
+              />
+              <text x="500" y="195" class="svg-mono" text-anchor="middle">PreToolUse hook</text>
+              <text x="500" y="211" class="svg-muted" text-anchor="middle">
+                allow · allow+confirm · deny
+              </text>
+              <path d="M500 132 L500 174" class="svg-line" marker-end="url(#a3)" />
+
+              <rect
+                x="404"
+                y="248"
+                width="192"
+                height="46"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="500" y="267" class="svg-mono" text-anchor="middle">
+                in-process MCP server
+              </text>
+              <text x="500" y="283" class="svg-muted" text-anchor="middle">
+                mcp__chip__read_pages…
+              </text>
+              <path d="M500 222 L500 246" class="svg-line" marker-end="url(#a3)" />
+
+              <rect x="150" y="248" width="200" height="46" rx="6" class="svg-box" />
+              <text x="250" y="267" class="svg-mono" text-anchor="middle">ToolRegistry.call()</text>
+              <text x="250" y="283" class="svg-muted" text-anchor="middle">
+                parse · run · parse · record
+              </text>
+              <path d="M402 271 L354 271" class="svg-line" marker-end="url(#a3)" />
+
+              <rect x="150" y="316" width="200" height="42" rx="6" class="svg-box" />
+              <text x="250" y="341" class="svg-mono" text-anchor="middle">
+                cache · SQLite · poppler
+              </text>
+              <path d="M250 294 L250 314" class="svg-line" marker-end="url(#a3)" />
+
+              <rect
+                x="404"
+                y="316"
+                width="192"
+                height="42"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="500" y="341" class="svg-mono" text-anchor="middle">ledger row per call</text>
+              <path d="M350 337 L400 337" class="svg-line" marker-end="url(#a3)" />
+
+              <rect
+                x="620"
+                y="248"
+                width="92"
+                height="110"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="666" y="288" class="svg-label" text-anchor="middle">run row</text>
+              <text x="666" y="306" class="svg-muted" text-anchor="middle">result</text>
+              <text x="666" y="322" class="svg-muted" text-anchor="middle">turns, cost</text>
+              <text x="666" y="338" class="svg-muted" text-anchor="middle">what it did</text>
+              <text x="666" y="266" class="svg-muted" text-anchor="middle">when the loop ends</text>
+            </svg>
+            <figcaption>
+              Figure 2. The model never touches a tool directly. It asks the harness; the hook
+              decides; the in-process MCP server dispatches; the registry validates, runs, validates
+              again and records. Only then does anything happen to the data.
+            </figcaption>
+          </figure>
+
+          <h3>The options the harness is given</h3>
+          <figure class="code">
+            <figcaption>src/agent/execute.ts — queryOptions()</figcaption>
+            <pre><code>return {
+  model: config.model,
+  effort: config.effort,
+  maxTurns: config.maxTurns,
+  // The third money gate, and the only one the agent cannot reach at all.
+  maxBudgetUsd: config.maxCostUsd,
+  systemPrompt,                 // the versioned prompt file, verbatim
+  cwd: config.dataDir,
+  settingSources: [],           // no CLAUDE.md, no settings, no surprises
+  tools: [],                    // every built-in tool disabled
+  allowedTools: registry.names().map((name) =&gt; `mcp__chip__${name}`),
+  permissionMode: 'default',
+  permissionPrompts: 'none',    // nobody is watching; unanswered means refused
+};</code></pre>
+          </figure>
+          <p>
+            Those two empty arrays are the whole of "reproducible". With
+            <code>tools: []</code> the run has no file system and no shell, so the only verbs it has
+            are the ones this project wrote. With <code>settingSources: []</code> it does not read
+            <code>CLAUDE.md</code> or any settings file, so a run on your machine and a run on the
+            build server are given the same words.
+          </p>
+
+          <div class="run">
+            <p>Try it — this one is free, because everything it needs is already cached:</p>
+            <pre><code>npx tsx bin/chip-run.ts extract TPS54331DR</code></pre>
+          </div>
+        </section>
+        <section id="tools">
+          <h2><span class="n">3</span>Tools: writing one</h2>
+          <p>
+            A tool is a name, a description the model reads, an input schema, an output schema, a
+            handler, and two flags. That is the entire contract. Here is a real one, trimmed:
+          </p>
+
+          <figure class="code">
+            <figcaption>src/tools/definitions/pdf-tools.ts</figcaption>
+            <pre><code>export const fetchDatasheet = defineTool({
+  name: 'fetch_datasheet',
+  description:
+    'Download a datasheet PDF and record it by digest. Repeat calls for the same URL ' +
+    'are served from disk. One datasheet usually covers a whole family, so the part ' +
+    'number given is linked to it rather than owning it.',
+  input: z.strictObject({
+    url: Url,
+    mpn: NormalisedMpn.optional(),
+  }),
+  output: z.strictObject({
+    datasheet: Datasheet,
+    hit: z.boolean(),           // true when it was already on disk
+  }),
+  spendsQuota: false,
+  annotations: { readOnlyHint: false, destructiveHint: false },
+  handler: async (input, context) =&gt; {
+    const fetched = await context.toolkit.fetchPdf(input.url);
+    // …record it, link the MPN, return { datasheet, hit }
+  },
+});</code></pre>
+          </figure>
+
+          <p>Four things are worth dwelling on, because they are what make the surface safe.</p>
+
+          <h3>The description is a prompt</h3>
+          <p>
+            The model chooses tools by reading descriptions. "Download a datasheet PDF" is an API
+            doc; "<em
+              >one datasheet usually covers a whole family, so the part number given is linked to it
+              rather than owning it</em
+            >" is a piece of domain knowledge that stops a whole class of wrong answer. Write
+            descriptions for a capable colleague who has never seen your data model.
+          </p>
+
+          <h3>Strict schemas, both directions</h3>
+          <p>
+            <code>z.strictObject</code> means an unrecognised key is an error, not something quietly
+            dropped. The registry parses the input before the handler sees it and parses the
+            handler's own output afterwards — a handler that breaks its own contract raises
+            <code>TOOL_OUTPUT_INVALID</code>, which is a different fault from the caller sending
+            nonsense and is worth telling apart.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 200"
+              role="img"
+              aria-label="A tool call: parse the input, run the handler, parse the output, record the call"
+            >
+              <defs>
+                <marker
+                  id="a4"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+
+              <rect x="8" y="60" width="120" height="44" rx="6" class="svg-box" />
+              <text x="68" y="79" class="svg-mono" text-anchor="middle">JSON from</text>
+              <text x="68" y="94" class="svg-mono" text-anchor="middle">the model</text>
+
+              <path d="M128 82 L166 82" class="svg-line" marker-end="url(#a4)" />
+
+              <rect
+                x="170"
+                y="60"
+                width="120"
+                height="44"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="230" y="79" class="svg-label" text-anchor="middle">parse input</text>
+              <text x="230" y="94" class="svg-muted" text-anchor="middle">strict schema</text>
+
+              <path d="M290 82 L328 82" class="svg-line" marker-end="url(#a4)" />
+
+              <rect x="332" y="60" width="120" height="44" rx="6" class="svg-box" />
+              <text x="392" y="79" class="svg-label" text-anchor="middle">handler</text>
+              <text x="392" y="94" class="svg-muted" text-anchor="middle">typed both ends</text>
+
+              <path d="M452 82 L490 82" class="svg-line" marker-end="url(#a4)" />
+
+              <rect
+                x="494"
+                y="60"
+                width="120"
+                height="44"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="554" y="79" class="svg-label" text-anchor="middle">parse output</text>
+              <text x="554" y="94" class="svg-muted" text-anchor="middle">its own schema</text>
+
+              <path d="M614 82 L652 82" class="svg-line" marker-end="url(#a4)" />
+              <rect
+                x="656"
+                y="60"
+                width="56"
+                height="44"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="684" y="86" class="svg-mono" text-anchor="middle">result</text>
+
+              <path
+                d="M230 104 L230 140"
+                class="svg-line"
+                stroke-dasharray="3 3"
+                marker-end="url(#a4)"
+              />
+              <text x="238" y="127" class="svg-muted">VALIDATION_FAILED</text>
+              <path
+                d="M554 104 L554 140"
+                class="svg-line"
+                stroke-dasharray="3 3"
+                marker-end="url(#a4)"
+              />
+              <text x="404" y="127" class="svg-muted">TOOL_OUTPUT_INVALID</text>
+
+              <rect
+                x="170"
+                y="144"
+                width="444"
+                height="40"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="392" y="169" class="svg-mono" text-anchor="middle">
+                ledger: begin before · end after, with the output or the error
+              </text>
+            </svg>
+            <figcaption>
+              Figure 3. Both failures are recorded, both come back to the model as readable error
+              codes, and neither one breaks the session.
+            </figcaption>
+          </figure>
+
+          <h3><code>spendsQuota</code> is the money flag</h3>
+          <p>
+            A tool that can cost real money — a distributor API call — says so. The declaration is
+            what the first money gate reads, and what the hook reads, and what the ledger records.
+            Downloading a manufacturer's PDF is free, so <code>fetch_datasheet</code> is not gated;
+            <code>fetch_offers</code> is.
+          </p>
+
+          <h3>Annotations are hints to the client</h3>
+          <p>
+            <code>readOnlyHint</code> and <code>destructiveHint</code> travel over MCP so a client
+            can decide what to confirm with a person. They are hints, not enforcement: the
+            enforcement is the gate.
+          </p>
+
+          <div class="note">
+            <p>
+              <strong>The pattern to steal:</strong> validate on the way in <em>and</em> on the way
+              out, record both ends, and let a failure be a value the model can read rather than an
+              exception that kills the run. A model that gets
+              <code
+                >TOOL_NOT_FOUND: no datasheet with digest … has been fetched; call fetch_datasheet
+                first</code
+              >
+              will do the right thing next turn. One that gets a transport error can only guess.
+            </p>
+          </div>
+        </section>
+
+        <section id="mcp">
+          <h2><span class="n">4</span>MCP: what it is, and what crosses the wire</h2>
+          <p>
+            The Model Context Protocol is a small JSON-RPC protocol for handing tools (and prompts,
+            and resources) to a model. A <em>server</em> advertises tools with JSON Schema; a
+            <em>client</em> — Claude Code, the MCP Inspector, your own harness — lists them and
+            calls them. That is genuinely all it is. The value is that the same tool surface works
+            for every client without being rewritten.
+          </p>
+          <p>
+            This project writes its tools <em>once</em>, in the registry, and adapts them twice:
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 260"
+              role="img"
+              aria-label="One registry with two adapters: a stdio MCP server for external clients and an in-process server for the runner"
+            >
+              <defs>
+                <marker
+                  id="a5"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)" />
+                </marker>
+              </defs>
+
+              <rect
+                x="260"
+                y="102"
+                width="200"
+                height="56"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="360" y="126" class="svg-mono" text-anchor="middle">ToolRegistry</text>
+              <text x="360" y="144" class="svg-muted" text-anchor="middle">
+                19 tools · one implementation
+              </text>
+
+              <path
+                d="M258 118 L176 118"
+                class="svg-line"
+                stroke="var(--accent)"
+                marker-end="url(#a5)"
+              />
+              <path
+                d="M462 118 L544 118"
+                class="svg-line"
+                stroke="var(--accent)"
+                marker-end="url(#a5)"
+              />
+
+              <rect x="20" y="86" width="156" height="64" rx="6" class="svg-box" />
+              <text x="98" y="108" class="svg-mono" text-anchor="middle">createMcpServer</text>
+              <text x="98" y="124" class="svg-muted" text-anchor="middle">
+                @modelcontextprotocol
+              </text>
+              <text x="98" y="139" class="svg-muted" text-anchor="middle">stdio · JSON-RPC</text>
+
+              <rect
+                x="20"
+                y="14"
+                width="156"
+                height="52"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="98" y="36" class="svg-label" text-anchor="middle">Claude Code,</text>
+              <text x="98" y="53" class="svg-label" text-anchor="middle">Inspector, anything</text>
+              <path
+                d="M98 84 L98 70"
+                class="svg-line"
+                marker-end="url(#a5)"
+                stroke="var(--accent)"
+              />
+
+              <rect x="544" y="86" width="156" height="64" rx="6" class="svg-box" />
+              <text x="622" y="108" class="svg-mono" text-anchor="middle">createInProcess…</text>
+              <text x="622" y="124" class="svg-muted" text-anchor="middle">Agent SDK server</text>
+              <text x="622" y="139" class="svg-muted" text-anchor="middle">
+                no socket, no process
+              </text>
+
+              <rect
+                x="544"
+                y="14"
+                width="156"
+                height="52"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="622" y="36" class="svg-label" text-anchor="middle">the runner</text>
+              <text x="622" y="53" class="svg-muted" text-anchor="middle">extract · verify</text>
+              <path
+                d="M622 84 L622 70"
+                class="svg-line"
+                marker-end="url(#a5)"
+                stroke="var(--accent)"
+              />
+
+              <rect
+                x="150"
+                y="190"
+                width="420"
+                height="52"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="360" y="212" class="svg-label" text-anchor="middle" font-weight="640">
+                A test asserts both adapters list identical tools
+              </text>
+              <text x="360" y="230" class="svg-muted" text-anchor="middle">
+                …because "the same surface" is the whole claim
+              </text>
+              <path
+                d="M360 158 L360 188"
+                class="svg-line"
+                marker-end="url(#a5)"
+                stroke="var(--accent)"
+              />
+            </svg>
+            <figcaption>
+              Figure 4. <code>src/mcp/server.ts</code> is the protocol server;
+              <code>src/mcp/sdk.ts</code> is the in-process one. Both are about sixty lines, because
+              all the work is in the registry.
+            </figcaption>
+          </figure>
+
+          <h3>Three things that actually cross the wire</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>What</th>
+                <th>How it travels</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The tool list</td>
+                <td>Name, description, JSON Schema for input (and output, when it is an object)</td>
+                <td>
+                  Generated from the Zod schemas. A schema the client cannot convert empties the
+                  <em>whole list</em>, not just its own entry — that bug once cost a real run every
+                  tool it had.
+                </td>
+              </tr>
+              <tr>
+                <td>Results</td>
+                <td>
+                  JSON as text, plus <code>structuredContent</code> for object outputs; an image
+                  block for <code>render_page</code>
+                </td>
+                <td>
+                  A model that can <em>see</em> a mangled table is the reason that tool exists.
+                  Base64 inside a JSON string is not that.
+                </td>
+              </tr>
+              <tr>
+                <td>Failures</td>
+                <td>
+                  Error <em>results</em> carrying <code>{ name, code, message, details }</code>
+                </td>
+                <td>
+                  The model reads the code and decides what to do. A transport failure tells it
+                  nothing and ends the session.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            <p>
+              <strong>stdout belongs to the protocol.</strong> An stdio MCP server speaks JSON-RPC
+              on stdout. One stray <code>console.log</code> corrupts the session — not "looks
+              untidy", <em>corrupts</em>. Every log line in this project goes to stderr, and a test
+              asserts a full session writes nothing to stdout.
+            </p>
+          </div>
+
+          <h3>Run it yourself</h3>
+          <div class="run">
+            <p>
+              Start the server (it talks JSON-RPC on stdin/stdout, so it will look like it hangs):
+            </p>
+            <pre><code>npx tsx bin/chip-mcp.ts</code></pre>
+            <p>
+              Point Claude Code at it by putting this in <code>.mcp.json</code> at the repo root:
+            </p>
+            <pre><code>{
+  "mcpServers": {
+    "chip": {
+      "command": "npx",
+      "args": ["tsx", "bin/chip-mcp.ts"],
+      "env": { "DATA_DIR": "./data" }
+    }
+  }
+}</code></pre>
+            <p>
+              Then ask Claude Code something like "use the chip tools to show me what is stored for
+              TPS54331DR". The tools appear as <code>mcp__chip__get_part</code> and friends.
+            </p>
+          </div>
+        </section>
+        <section id="harness">
+          <h2><span class="n">5</span>The harness, and the one line that makes it testable</h2>
+          <p>
+            <code>@anthropic-ai/claude-agent-sdk</code> gives you
+            <code>query({ prompt, options })</code>, an async iterable of messages. You consume it
+            to the end; the SDK runs the model, calls tools, feeds results back, and stops when the
+            model is done or a limit is hit. The run's own code is a <code>for await</code> loop and
+            a handful of bookkeeping.
+          </p>
+
+          <figure class="code">
+            <figcaption>src/agent/execute.ts — the loop</figcaption>
+            <pre><code>for await (const message of deps.query({ prompt: spec.request, options })) {
+  sessionId = message.session_id;
+  transcript.push(...condense(message));
+  if (message.type === 'result') {
+    result = message;
+  }
+}</code></pre>
+          </figure>
+
+          <p>
+            Note <code>deps.query</code>, not the imported <code>query</code>. That one indirection
+            is what makes an agent testable at all:
+          </p>
+
+          <figure class="code">
+            <figcaption>src/agent/execute.ts</figcaption>
+            <pre><code>/** The harness call this project makes: one query, driven to its result. */
+export type QueryFn = typeof sdkQuery;
+
+/** The real harness. Held as a value so a run can be given a scripted one. */
+export const SDK_QUERY: QueryFn = sdkQuery;</code></pre>
+          </figure>
+
+          <p>
+            In production the runner gets <code>SDK_QUERY</code>. In a test it gets a generator that
+            yields a scripted conversation — including tool calls, which really do run against a
+            temporary database. Every branch of a run (a model that gave up, a harness that threw, a
+            part stored cleanly, an escalation raised) is then an ordinary unit test with no network
+            and no API key.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 170"
+              role="img"
+              aria-label="The same runner code takes either the real SDK or a scripted transcript"
+            >
+              <defs>
+                <marker
+                  id="a6"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+              <rect
+                x="250"
+                y="60"
+                width="220"
+                height="52"
+                rx="6"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="360" y="82" class="svg-mono" text-anchor="middle">
+                extractPart(mpn, config, deps)
+              </text>
+              <text x="360" y="100" class="svg-muted" text-anchor="middle">
+                one code path, always
+              </text>
+
+              <rect
+                x="20"
+                y="14"
+                width="180"
+                height="46"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="110" y="34" class="svg-mono" text-anchor="middle">SDK_QUERY</text>
+              <text x="110" y="50" class="svg-muted" text-anchor="middle">
+                real model · real money
+              </text>
+              <path d="M200 44 L246 70" class="svg-line" marker-end="url(#a6)" />
+
+              <rect
+                x="20"
+                y="112"
+                width="180"
+                height="46"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="110" y="132" class="svg-mono" text-anchor="middle">scripted QueryFn</text>
+              <text x="110" y="148" class="svg-muted" text-anchor="middle">
+                a generator in a test
+              </text>
+              <path d="M200 130 L246 104" class="svg-line" marker-end="url(#a6)" />
+
+              <rect x="520" y="60" width="180" height="52" rx="6" class="svg-box" />
+              <text x="610" y="82" class="svg-label" text-anchor="middle">
+                real tools, real SQLite,
+              </text>
+              <text x="610" y="100" class="svg-label" text-anchor="middle">
+                real ledger — in a temp dir
+              </text>
+              <path d="M470 86 L516 86" class="svg-line" marker-end="url(#a6)" />
+            </svg>
+            <figcaption>
+              Figure 5. The seam is one function type. Everything below it is exercised for real in
+              tests; only the model is scripted.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="money">
+          <h2><span class="n">6</span>The money gates</h2>
+          <p>
+            This agent can spend real money: distributor APIs have quotas, and the model itself
+            costs per token. One check is not enough, because each one protects against a different
+            thing going wrong.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 250"
+              role="img"
+              aria-label="Three money gates: the registry policy, the PreToolUse hook, and the harness budget"
+            >
+              <rect
+                x="8"
+                y="16"
+                width="704"
+                height="66"
+                rx="8"
+                fill="var(--surface-2)"
+                stroke="var(--money)"
+              />
+              <text x="26" y="40" class="svg-label" font-weight="650">
+                1 ·
+                <tspan class="svg-mono">spendsQuota</tspan>
+                + QuotaPolicy
+              </text>
+              <text x="26" y="60" class="svg-muted">
+                src/tools/policy.ts — the tool refuses unless the run's policy allows a confirmed
+                spend
+              </text>
+              <text x="694" y="50" class="svg-muted" text-anchor="end">
+                protects against every client
+              </text>
+
+              <rect
+                x="8"
+                y="92"
+                width="704"
+                height="66"
+                rx="8"
+                fill="var(--surface-2)"
+                stroke="var(--money)"
+              />
+              <text x="26" y="116" class="svg-label" font-weight="650">
+                2 ·
+                <tspan class="svg-mono">PreToolUse</tspan>
+                hook
+              </text>
+              <text x="26" y="136" class="svg-muted">
+                src/agent/hook.ts — decides per call, before the tool runs, and records the decision
+              </text>
+              <text x="694" y="126" class="svg-muted" text-anchor="end">
+                protects against this agent
+              </text>
+
+              <rect
+                x="8"
+                y="168"
+                width="704"
+                height="66"
+                rx="8"
+                fill="var(--surface-2)"
+                stroke="var(--money)"
+              />
+              <text x="26" y="192" class="svg-label" font-weight="650">
+                3 ·
+                <tspan class="svg-mono">maxBudgetUsd</tspan>
+              </text>
+              <text x="26" y="212" class="svg-muted">
+                the harness stops the run when the model calls have cost this much, whatever it is
+                doing
+              </text>
+              <text x="694" y="202" class="svg-muted" text-anchor="end">
+                the agent cannot reach it at all
+              </text>
+            </svg>
+            <figcaption>Figure 6. Three gates, three different failure modes.</figcaption>
+          </figure>
+
+          <h3>What the hook decides</h3>
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 330"
+              role="img"
+              aria-label="The spend gate decision tree, from the tool call down to one of four outcomes"
+            >
+              <defs>
+                <marker
+                  id="a7"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+
+              <rect x="270" y="8" width="180" height="38" rx="6" class="svg-box" />
+              <text x="360" y="25" class="svg-mono" text-anchor="middle">tool call</text>
+              <text x="360" y="40" class="svg-muted" text-anchor="middle">from the model</text>
+              <path d="M360 46 L360 66" class="svg-line" marker-end="url(#a7)" />
+
+              <rect x="270" y="68" width="180" height="42" rx="6" class="svg-box" />
+              <text x="360" y="87" class="svg-label" text-anchor="middle">one of ours?</text>
+              <text x="360" y="103" class="svg-mono" text-anchor="middle">mcp__chip__*</text>
+              <path d="M268 89 L196 89" class="svg-line" marker-end="url(#a7)" />
+              <rect
+                x="14"
+                y="68"
+                width="180"
+                height="42"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="#d03b3b"
+              />
+              <text x="104" y="87" class="svg-label" text-anchor="middle">deny</text>
+              <text x="104" y="103" class="svg-muted" text-anchor="middle">
+                the run has no other tools
+              </text>
+              <path d="M360 110 L360 130" class="svg-line" marker-end="url(#a7)" />
+
+              <rect x="270" y="132" width="180" height="42" rx="6" class="svg-box" />
+              <text x="360" y="151" class="svg-label" text-anchor="middle">spends quota?</text>
+              <text x="360" y="167" class="svg-mono" text-anchor="middle">spendsQuota</text>
+              <path d="M268 153 L196 153" class="svg-line" marker-end="url(#a7)" />
+              <rect
+                x="14"
+                y="132"
+                width="180"
+                height="42"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="104" y="151" class="svg-label" text-anchor="middle">allow</text>
+              <text x="104" y="167" class="svg-muted" text-anchor="middle">it costs nothing</text>
+              <path d="M360 174 L360 194" class="svg-line" marker-end="url(#a7)" />
+
+              <rect x="270" y="196" width="180" height="42" rx="6" class="svg-box" />
+              <text x="360" y="215" class="svg-label" text-anchor="middle">
+                may this run spend?
+              </text>
+              <text x="360" y="231" class="svg-mono" text-anchor="middle">--allow-spend</text>
+              <path d="M450 217 L520 217" class="svg-line" marker-end="url(#a7)" />
+              <rect
+                x="524"
+                y="190"
+                width="190"
+                height="54"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--stored)"
+              />
+              <text x="619" y="209" class="svg-label" text-anchor="middle">allow, and add</text>
+              <text x="619" y="226" class="svg-mono" text-anchor="middle">confirmSpend: true</text>
+              <text x="619" y="240" class="svg-muted" text-anchor="middle">
+                approved once, for the run
+              </text>
+              <path d="M360 238 L360 258" class="svg-line" marker-end="url(#a7)" />
+
+              <rect
+                x="186"
+                y="260"
+                width="348"
+                height="60"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="var(--money)"
+              />
+              <text x="360" y="280" class="svg-label" text-anchor="middle">allow, unchanged</text>
+              <text x="360" y="297" class="svg-muted" text-anchor="middle">
+                it answers from the cache; a miss comes back as
+              </text>
+              <text x="360" y="313" class="svg-mono" text-anchor="middle">needs_confirmation</text>
+
+              <rect
+                x="14"
+                y="260"
+                width="160"
+                height="60"
+                rx="6"
+                fill="var(--surface-2)"
+                stroke="#d03b3b"
+              />
+              <text x="94" y="284" class="svg-label" text-anchor="middle">deny</text>
+              <text x="94" y="301" class="svg-muted" text-anchor="middle">if it asks to spend</text>
+              <text x="94" y="315" class="svg-muted" text-anchor="middle">anyway</text>
+              <path d="M184 290 L178 290" class="svg-line" />
+            </svg>
+            <figcaption>
+              Figure 7. The interesting branch is the second-to-last one. A no-spend run is not
+              crippled: it reads everything already paid for, and only a genuine miss — a question
+              that would cost something — comes back as a refusal the model can act on.
+            </figcaption>
+          </figure>
+
+          <div class="note money">
+            <p>
+              <strong>Why letting a cache-only call through matters.</strong> The obvious design —
+              deny every spending tool in a no-spend run — stops the run from reading data you have
+              already paid for. Being able to rerun a part for free is the entire point of the
+              cache, so the gate allows the call and lets the <em>miss</em> be the refusal.
+            </p>
+          </div>
+        </section>
+
+        <section id="ledger">
+          <h2><span class="n">7</span>Reading a run back</h2>
+          <p>
+            When the loop ends, nothing about the run is taken on trust. What it achieved is read
+            back out of the ledger and the database — not from what the model said it did.
+          </p>
+          <ul>
+            <li>
+              <strong>The ledger</strong> (<code>data/ledger/YYYY-MM-DD.jsonl</code>) has one line
+              per tool call: the session, the tool, the input, the output or the error, the
+              duration, whether it could spend, and the id of the call it hangs under. Every gate
+              decision is a line too.
+            </li>
+            <li>
+              <strong>The run row</strong> (SQLite) records turns, cost, how it ended, how many
+              tools failed, how many spends were refused, how many cache misses there were, and
+              whether a part was actually stored.
+            </li>
+            <li>
+              <strong>The part</strong> is the only thing that counts as output, and it is rejected
+              rather than repaired if any value is the wrong shape or lacks a page number.
+            </li>
+          </ul>
+
+          <div class="run">
+            <p>Look at what a run did, without leaving the terminal:</p>
+            <pre><code># the last runs, newest first
+sqlite3 data/chip.sqlite \
+  "select mpn, kind, result, turns, round(cost_usd,2) from runs order by started_at desc limit 5;"
+
+# every tool call of the most recent session
+tail -n 50 data/ledger/*.jsonl | jq -r '[.tool, .durationMs, (.error.code // "ok")] | @tsv'</code></pre>
+            <p>
+              Or open the site, which is the same data with charts on it: <code>npm run web</code>.
+            </p>
+          </div>
+        </section>
+
+        <section id="verify">
+          <h2><span class="n">8</span>The verification pass, and why it gets a fresh context</h2>
+          <p>
+            Extraction is optimistic by nature: the model that read a number is the worst possible
+            judge of whether it read it correctly. So a second run, with a different prompt and
+            <em>no memory of the first</em>, takes each stored value and checks it against the page
+            it claims to come from.
+          </p>
+
+          <figure class="diagram">
+            <svg
+              viewBox="0 0 720 210"
+              role="img"
+              aria-label="Extraction and verification are separate runs sharing only the database"
+            >
+              <defs>
+                <marker
+                  id="a8"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)" />
+                </marker>
+              </defs>
+              <rect
+                x="20"
+                y="16"
+                width="280"
+                height="76"
+                rx="8"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="160" y="42" class="svg-label" text-anchor="middle" font-weight="650">
+                Extraction run
+              </text>
+              <text x="160" y="62" class="svg-muted" text-anchor="middle">
+                reads the PDF, stores values
+              </text>
+              <text x="160" y="80" class="svg-muted" text-anchor="middle">
+                with a page number each
+              </text>
+
+              <rect
+                x="420"
+                y="16"
+                width="280"
+                height="76"
+                rx="8"
+                fill="var(--surface-2)"
+                stroke="var(--model)"
+              />
+              <text x="560" y="42" class="svg-label" text-anchor="middle" font-weight="650">
+                Verification run
+              </text>
+              <text x="560" y="62" class="svg-muted" text-anchor="middle">
+                reads the cited page and says
+              </text>
+              <text x="560" y="80" class="svg-muted" text-anchor="middle">
+                confirmed · contradicted · not found
+              </text>
+
+              <path d="M300 54 L416 54" class="svg-line" stroke-dasharray="4 4" />
+              <text x="358" y="46" class="svg-muted" text-anchor="middle">no</text>
+              <text x="358" y="70" class="svg-muted" text-anchor="middle">shared context</text>
+
+              <path d="M160 92 L160 132" class="svg-line" marker-end="url(#a8)" />
+              <path d="M560 92 L560 132" class="svg-line" marker-end="url(#a8)" />
+
+              <rect
+                x="160"
+                y="136"
+                width="400"
+                height="56"
+                rx="8"
+                fill="var(--accent-soft)"
+                stroke="var(--accent)"
+              />
+              <text x="360" y="160" class="svg-label" text-anchor="middle">
+                one SQLite database
+              </text>
+              <text x="360" y="179" class="svg-muted" text-anchor="middle">
+                a verdict sits beside the value, it does not overwrite it
+              </text>
+            </svg>
+            <figcaption>
+              Figure 8. Its first real run confirmed 29 of 30 values for $0.45 — and caught a wrong
+              page citation that the extraction could not possibly have noticed about itself.
+            </figcaption>
+          </figure>
+
+          <div class="run">
+            <pre><code>npx tsx bin/chip-run.ts verify TPS54331DR</code></pre>
+          </div>
+        </section>
+        <section id="testing">
+          <h2><span class="n">9</span>Testing an agent</h2>
+          <p>
+            "You can't test an agent, it's non-deterministic" is half true and usually used as an
+            excuse. Split the claim in two and both halves become testable.
+          </p>
+
+          <h3>The plumbing is deterministic — test it like any other code</h3>
+          <p>
+            Tools, schemas, the gate, the ledger, the run bookkeeping, the conclusion logic: all of
+            it is ordinary TypeScript with no model in it. This repository holds it to 100% lines,
+            branches and functions, per file. The scripted <code>QueryFn</code> from §5 is what lets
+            a run's own branches be covered without a single API call.
+          </p>
+
+          <figure class="code">
+            <figcaption>the shape of a scripted harness in a test</figcaption>
+            <pre><code>const query: QueryFn = () =&gt;
+  (async function* () {
+    yield assistantMessage({ tool: 'fetch_datasheet', input: { url } });
+    yield toolResult({ ok: true });
+    yield resultMessage({ subtype: 'success', num_turns: 2, total_cost_usd: 0.01 });
+  })() as never;
+
+const run = await extractPart('TPS54331DR', config, { ...deps, query });
+expect(run.run.result).toBe('extracted');</code></pre>
+          </figure>
+
+          <h3>The model's judgement is measured, not asserted</h3>
+          <p>
+            You cannot assert that a model read a table correctly. You can <em>measure</em> how
+            often it does, against parts a person has read by hand. That is the golden set
+            (<code>eval/golden/</code>) and the evaluation harness:
+          </p>
+
+          <div class="run">
+            <pre><code>npx tsx bin/chip-eval.ts run                       # scores every golden part
+npx tsx bin/chip-eval.ts compare eval/results/&lt;a&gt; eval/results/&lt;b&gt;</code></pre>
+          </div>
+
+          <p>
+            The first baseline — <code>extract.v1</code> on <code>claude-opus-5</code>, 22 parts —
+            scored 90.6% recall, 90.6% precision and 59.3% of citations on the exact page, for
+            $87.24. That last number is the one worth staring at: it is why the prompt is versioned
+            and why a rerun has to be free.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>What it proves</th>
+                <th>Costs money?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unit tests</td>
+                <td>Every branch of every tool and of the runner</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Behaviour tests</td>
+                <td>What an endpoint or a run does, not how</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Integration</td>
+                <td>A real database, a real ledger, a real PDF through poppler</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Live contract tests</td>
+                <td>That a distributor's API still answers the way the adapter believes</td>
+                <td>Opt-in</td>
+              </tr>
+              <tr>
+                <td>Evaluation</td>
+                <td>How well the <em>model</em> does, as a number you can compare</td>
+                <td>Yes — deliberately</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="yourown">
+          <h2><span class="n">10</span>Add your own tool, end to end</h2>
+          <p>
+            Say you want a tool that reports the cheapest stored part in a category. The whole job:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>File</th>
+                <th>What you write</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1 · Define it</td>
+                <td><code>src/tools/definitions/query-tools.ts</code></td>
+                <td>
+                  <code
+                    >defineTool({ name, description, input, output, spendsQuota, annotations,
+                    handler })</code
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>2 · Register it</td>
+                <td><code>src/tools/definitions/index.ts</code></td>
+                <td>Add it to <code>buildRegistry()</code>. Duplicate names are refused.</td>
+              </tr>
+              <tr>
+                <td>3 · Test it</td>
+                <td><code>…/query-tools.test.ts</code></td>
+                <td>
+                  Call it through <code>registry.call()</code> so the schemas and the ledger are in
+                  the test too.
+                </td>
+              </tr>
+              <tr>
+                <td>4 · Tell the model about it</td>
+                <td><code>prompts/extract.v2.md</code></td>
+                <td>A <em>new</em> prompt version if a run should use it. Never edit v1.</td>
+              </tr>
+              <tr>
+                <td>5 · Nothing else</td>
+                <td>—</td>
+                <td>
+                  Both MCP adapters pick it up automatically; the site's health page lists it; the
+                  ledger records it.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Checklist for the definition itself:</p>
+          <ul>
+            <li>Does the description say the <em>domain</em> thing a newcomer would get wrong?</li>
+            <li>
+              Is the input a <code>strictObject</code>, so a typo is refused rather than ignored?
+            </li>
+            <li>
+              Can the output represent "I could not find it" without lying? (<code>null</code> with
+              provenance is a fact; an invented number is not.)
+            </li>
+            <li>
+              Does it spend money? Then <code>spendsQuota: true</code> and accept
+              <code>confirmSpend</code>.
+            </li>
+            <li>Are failures thrown as errors with codes the model can read and act on?</li>
+          </ul>
+        </section>
+
+        <section id="gotchas">
+          <h2><span class="n">11</span>Gotchas worth knowing before you start</h2>
+
+          <h3>A schema the client cannot serialise empties the whole tool list</h3>
+          <p>
+            A Zod <code>record</code> in one tool's input once made the bundled SDK drop
+            <em>every</em> tool. The server reported itself connected, the model was handed nothing,
+            and it started writing tool calls as prose. Prefer arrays of
+            <code>{ key, value }</code> pairs to open-ended records, and have a test that lists the
+            tools over a real connection.
+          </p>
+
+          <h3>Context is the expensive part, not the tokens you think</h3>
+          <p>
+            One page of datasheet text costs about a dollar to hold in context across a run. The
+            single biggest cost saving in this project was not a cheaper model — it was not writing
+            the whole parameter set out twice.
+          </p>
+
+          <h3>Nobody is watching, so "ask" must not mean "wait"</h3>
+          <p>
+            A headless run cannot block on a person. <code>ask_human</code> records the question,
+            marks the part, and the run carries on. The site has a queue of those questions; an
+            answer is recorded there later, with who answered it and why.
+          </p>
+
+          <h3>Let the model see the page</h3>
+          <p>
+            Dense electrical-characteristics tables mangle badly through text extraction.
+            <code>read_pages</code> returns shape metrics with each page; when they say the columns
+            have collapsed, the prompt tells the model to call <code>render_page</code> and read the
+            image instead — and to record <code>method: "image"</code> so the verification pass
+            knows how the number was read.
+          </p>
+
+          <h3>Record before you act, not after</h3>
+          <p>
+            The ledger writes a line when a call <em>begins</em> and completes it when it ends. A
+            crash in the middle leaves evidence. A log written after the fact does not.
+          </p>
+        </section>
+
+        <footer>
+          <p>
+            Where to go next in this repository:
+            <code>src/agent/README.md</code> (the run loop and the gates) ·
+            <code>src/tools/README.md</code> (every tool, and the spending rules) ·
+            <code>src/mcp/README.md</code> (the two adapters) ·
+            <code>src/auth/README.md</code> (accounts and sessions) ·
+            <code>docs/ARCHITECTURE.md</code> (how the pieces fit) ·
+            <code>docs/PROJECT_PLAN.md</code> (every decision, with its reason).
+          </p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

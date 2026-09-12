@@ -266,6 +266,28 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
+### 2026-09-13 — Session 26: a tutorial for the agent and the MCP server
+
+`docs/tutorial/index.html` — a step-by-step tour for someone who knows Node
+and React and has used Claude, but has not built an agent or written an MCP
+server. Eleven chapters and eight hand-drawn SVG diagrams: what an agent is
+here, one run end to end, writing a tool, what MCP actually carries, the
+harness options, the three money gates, reading a run back out of the ledger,
+the verification pass, how an agent is tested, adding a tool, and the gotchas
+worth knowing first.
+
+Written from the code rather than in generalities: every file path is real,
+every command runs, and the numbers are this project's own. It is a page
+rather than Markdown because the diagrams are the point — the layering, the
+run loop, the gate decision tree and the two MCP adapters are all easier to
+see than to read. It fetches nothing and needs no server, like the snapshot.
+
+Also published as a private artifact for reading away from the repository:
+`https://claude.ai/code/artifact/343f2760-a2e1-43ca-b4f0-b83f99a122c0`.
+
+`CLAUDE.md` now lists it as a working document, with the note that a change
+to the run loop, the gates or the tool surface changes the tutorial too.
+
 ### 2026-09-12 — Session 25: a professional site, and real authentication
 
 Two things came out of reading the running site rather than its tests.

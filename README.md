@@ -5,7 +5,8 @@ parameters with page-level provenance, pulls distributor pricing, reconciles
 the two, and categorises the part. Buck regulators first.
 
 Read `CLAUDE.md` for the brief and `docs/` for the plan, the task list, and
-the references.
+the references. **New to agents or MCP?** `docs/tutorial/index.html` is a
+step-by-step tour of how this one works — open it in a browser.
 
 ## What it does
 
