@@ -82,6 +82,11 @@ module README, or a code comment must have a row here.
 | R-70 | Playwright Test | https://playwright.dev/docs/intro | Browser tests for the web application (M19, D70), version 1.63.0. Drives Chromium headless; `toHaveScreenshot` provides the visual snapshots. | verified 2026-09-12; installed and running headless here |
 | R-71 | Playwright on Linux distributions | https://playwright.dev/docs/browsers#install-system-dependencies | `playwright install-deps` supports Debian and Ubuntu only, which is why the Rocky Linux 10 runner verifies Chromium's shared libraries rather than installing them (D71). | verified 2026-09-12 |
 | R-72 | Rocky Linux 10 | https://docs.rockylinux.org/ | The build and test platform: the self-hosted runner, and the only platform whose screenshot baselines are committed (D71). | verified 2026-09-12 |
+| R-73 | React | https://react.dev/ | The browser application (M19, D66), version 19.3.0 with `react-dom`. Not React Native: this renders to the DOM and is served as static assets by the project's own server. | verified 2026-09-12 |
+| R-74 | Vite | https://vite.dev/ | Builds the front end into `dist/ui`, version 7.3.6. Asset names carry a content hash, which is what lets the static handler cache them for ever. | verified 2026-09-12 |
+| R-75 | Recharts | https://recharts.org/ | The charting library (D66), version 3.10.1. `Cell` is deprecated in 3.x in favour of the `shape` prop, which is what this project uses. | verified 2026-09-12 |
+| R-76 | Testing Library for React | https://testing-library.com/docs/react-testing-library/intro/ | Component tests under jsdom, version 16.3.3 with `user-event` 14 and `jest-dom` 6. | verified 2026-09-12 |
+| R-77 | jsdom | https://github.com/jsdom/jsdom | The DOM the component tests run against, version 27.4.0. | verified 2026-09-12 |
 
 ## Domain references
 

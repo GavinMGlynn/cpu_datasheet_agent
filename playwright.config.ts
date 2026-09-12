@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import { E2E_TOKEN } from './test/e2e/seed.js';
+
 /**
  * Browser tests.
  *
@@ -16,6 +18,7 @@ const isCi = process.env.CI === 'true';
 
 export default defineConfig({
   testDir: 'test/e2e',
+  globalSetup: './test/e2e/global-setup.ts',
   testMatch: '**/*.spec.ts',
   snapshotPathTemplate: `test/e2e/__screenshots__/${platform}/{testFileName}/{arg}{ext}`,
   outputDir: 'test/e2e/.output',
@@ -38,4 +41,16 @@ export default defineConfig({
     toHaveScreenshot: { maxDiffPixelRatio: 0.01 },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  /*
+   * A real server over the seeded directory, built from source each run. The
+   * token is fixed so a test can sign in; the data is temporary so a test can
+   * change it.
+   */
+  webServer: {
+    command: `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui --token ${E2E_TOKEN}`,
+    url: `http://127.0.0.1:${String(port)}/api/ping`,
+    reuseExistingServer: !isCi,
+    timeout: 60_000,
+    env: { LOG_LEVEL: 'error' },
+  },
 });

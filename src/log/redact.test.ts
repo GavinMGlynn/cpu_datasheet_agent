@@ -119,8 +119,21 @@ describe('redact', () => {
   });
 
   it('does not treat repeated references to the same leaf object as cycles', () => {
+    // Found by a browser test: the part payload carries each parameter twice,
+    // once in the stored aggregate and once in the projection the table
+    // renders, and the second copy came out as "[circular]" — so the page
+    // showed "[circular]" where a voltage belonged.
     const shared = { v: 1 };
-    expect(redact({ a: shared, b: shared })).toEqual({ a: { v: 1 }, b: '[circular]' });
+    expect(redact({ a: shared, b: shared })).toEqual({ a: { v: 1 }, b: { v: 1 } });
+  });
+
+  it('still catches a real cycle inside a shared object', () => {
+    const shared: { v: number; self?: unknown } = { v: 1 };
+    shared.self = shared;
+    expect(redact({ a: shared, b: shared })).toEqual({
+      a: { v: 1, self: '[circular]' },
+      b: { v: 1, self: '[circular]' },
+    });
   });
 });
 

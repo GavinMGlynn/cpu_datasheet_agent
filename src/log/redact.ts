@@ -78,7 +78,7 @@ function isSecretKey(key: string, resolved: Resolved): boolean {
   return resolved.keyPatterns.some((pattern) => pattern.test(key));
 }
 
-function walk(value: unknown, resolved: Resolved, seen: WeakSet<object>): unknown {
+function walk(value: unknown, resolved: Resolved, seen: Set<object>): unknown {
   if (typeof value === 'string') {
     return redactString(value, resolved);
   }
@@ -94,7 +94,19 @@ function walk(value: unknown, resolved: Resolved, seen: WeakSet<object>): unknow
   if (seen.has(value)) {
     return '[circular]';
   }
+  // On the way in and off again on the way out: a cycle is an object that
+  // contains itself, not one that appears twice. A payload that shows the
+  // same parameter in two places — the stored aggregate and a projection of
+  // it — is ordinary, and calling the second copy circular loses it.
   seen.add(value);
+  try {
+    return walkInto(value, resolved, seen);
+  } finally {
+    seen.delete(value);
+  }
+}
+
+function walkInto(value: object, resolved: Resolved, seen: Set<object>): unknown {
   if (value instanceof Date) {
     return value.toISOString();
   }
@@ -128,11 +140,11 @@ function walk(value: unknown, resolved: Resolved, seen: WeakSet<object>): unknow
  * dropped, and cycles become `"[circular]"`.
  */
 export function redact(value: unknown, options: RedactOptions = {}): unknown {
-  return walk(value, resolve(options), new WeakSet());
+  return walk(value, resolve(options), new Set());
 }
 
 /** Builds a redactor bound to fixed options, for injection into the logger and ledger. */
 export function createRedactor(options: RedactOptions = {}): (value: unknown) => unknown {
   const resolved = resolve(options);
-  return (value) => walk(value, resolved, new WeakSet());
+  return (value) => walk(value, resolved, new Set());
 }

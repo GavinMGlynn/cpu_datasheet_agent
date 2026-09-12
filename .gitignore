@@ -41,3 +41,6 @@ Thumbs.db
 /test/e2e/.output/
 /test/e2e/.report/
 /test/e2e/__screenshots__/local/
+
+# The browser tests' own data directory, rebuilt on every run.
+/test/e2e/.data/

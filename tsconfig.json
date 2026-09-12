@@ -21,6 +21,7 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
+  "exclude": ["src/web/ui", "test/e2e", "test/ui"],
   "include": [
     "src",
     "test",
@@ -28,6 +29,7 @@
     "bin",
     "vitest.config.ts",
     "vitest.live.config.ts",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "vite.config.ts"
   ]
 }

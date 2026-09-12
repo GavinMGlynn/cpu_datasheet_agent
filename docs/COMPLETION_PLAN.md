@@ -999,52 +999,52 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 
 ### 19F Front end
 
-- [ ] 19F.1 Vite + React + TypeScript build under `src/web/ui`, wired into
+- [x] 19F.1 Vite + React + TypeScript build under `src/web/ui`, wired into
       `npm run check` (typecheck, lint and 100% coverage on the same terms as
       the rest of `src/`) (D66).
-- [ ] 19F.2 Application shell: routing, database selector, keyboard
+- [x] 19F.2 Application shell: routing, database selector, keyboard
       navigation, error boundaries, loading and empty states, light and dark.
-- [ ] 19F.3 Chart layer: a small set of chart components with fixed,
+- [x] 19F.3 Chart layer: a small set of chart components with fixed,
       deterministic rendering so they can be unit-tested — time series, bar,
       histogram, scatter, heatmap, stacked breakdown.
-- [ ] 19F.4 Part catalogue: filter panel over every filter the API exposes,
+- [x] 19F.4 Part catalogue: filter panel over every filter the API exposes,
       sortable virtualised table, saved views, CSV and JSON export.
-- [ ] 19F.5 Part detail: parameters with provenance, confidence, conflicts and
+- [x] 19F.5 Part detail: parameters with provenance, confidence, conflicts and
       verdict; datasheet page image at the cited page; offers and price
       breaks; classification axes; run history; escalations.
-- [ ] 19F.6 Parameter explorer: coverage matrix, distributions, outliers, unit
+- [x] 19F.6 Parameter explorer: coverage matrix, distributions, outliers, unit
       normalisation shown, drill-through to the page that states the value.
-- [ ] 19F.7 Comparison workbench: any number of parts side by side, with the
+- [x] 19F.7 Comparison workbench: any number of parts side by side, with the
       differences called out.
-- [ ] 19F.8 Alternates workbench: the full constraint form, ranked results,
+- [x] 19F.8 Alternates workbench: the full constraint form, ranked results,
       per-parameter differences, the disclaimer, and export.
-- [ ] 19F.9 Pricing analysis: break curves, price against current and against
+- [x] 19F.9 Pricing analysis: break curves, price against current and against
       quantity, distributor and stock comparison.
-- [ ] 19F.10 Escalation queue: open and resolved, context, options, resolve
+- [x] 19F.10 Escalation queue: open and resolved, context, options, resolve
       with a reason.
-- [ ] 19F.11 Run explorer: every run with cost, turns, duration, result, tool
+- [x] 19F.11 Run explorer: every run with cost, turns, duration, result, tool
       calls, failures, denials and cache misses; the call tree and transcript.
-- [ ] 19F.12 Cost analytics: spend by day, model, prompt and part; cumulative
+- [x] 19F.12 Cost analytics: spend by day, model, prompt and part; cumulative
       against the project total; cost per stored parameter and per confirmed
       value; what a sweep would cost.
-- [ ] 19F.13 Tool analytics: call counts, error rates, duration percentiles,
+- [x] 19F.13 Tool analytics: call counts, error rates, duration percentiles,
       cache hit rates, spend-gate denials, per-tool drill-through.
-- [ ] 19F.14 Evaluation dashboard: recall, precision and citation accuracy
+- [x] 19F.14 Evaluation dashboard: recall, precision and citation accuracy
       overall, per part and per parameter; the failure inspector showing
       expected against actual beside the golden page; regression comparison of
       two reports; starved parts flagged.
-- [ ] 19F.15 Verification dashboard: confirmed, contradicted, not found and
+- [x] 19F.15 Verification dashboard: confirmed, contradicted, not found and
       unchecked, by part and by parameter, each linked to its page.
-- [ ] 19F.16 Golden-set review: value, citation and page image side by side,
+- [x] 19F.16 Golden-set review: value, citation and page image side by side,
       edit with reviewer recorded, health checks and coverage displayed.
-- [ ] 19F.17 Prompt registry: every prompt version, its hash, the runs that
+- [x] 19F.17 Prompt registry: every prompt version, its hash, the runs that
       used it and what they scored.
-- [ ] 19F.18 Run control: launch extraction, verification, batch or sweep with
+- [x] 19F.18 Run control: launch extraction, verification, batch or sweep with
       every parameter exposed, estimated cost, explicit confirmation, live
       progress and cancellation.
-- [ ] 19F.19 Health and limitations: readiness checks, and the known
+- [x] 19F.19 Health and limitations: readiness checks, and the known
       limitations L1 to L7 each linked to the rows that evidence them.
-- [ ] 19F.20 Tests: every component and page under jsdom with Testing Library,
+- [x] 19F.20 Tests: every component and page under jsdom with Testing Library,
       to the same 100% per-file bar.
 
 ### 19G Snapshot
@@ -1075,7 +1075,7 @@ fifth. A module is not finished when its unit tests pass (D70).
 - [x] 19I.4 Integration: a real server on a real socket over a real SQLite
       database, ledger and cache — token handoff, conditional requests, event
       streams, run launching against a fake runner, and writes that land.
-- [ ] 19I.5 Browser: Playwright driving Chromium against a server started on a
+- [x] 19I.5 Browser: Playwright driving Chromium against a server started on a
       seeded temporary data directory — navigation and deep links, filtering
       and sorting, drill-through from a chart to the page that states a value,
       launching a run and watching it stream, resolving an escalation,
