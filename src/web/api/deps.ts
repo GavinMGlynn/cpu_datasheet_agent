@@ -4,6 +4,7 @@ import type { Logger } from '../../log/logger.js';
 import type { FileCacheStore } from '../../cache/store.js';
 import type { PdfToolkit } from '../../pdf/toolkit.js';
 import type { PopplerTools } from '../../pdf/poppler.js';
+import type { Auditor } from '../audit.js';
 import type { Evals } from '../data/evals.js';
 import type { LedgerIndex } from '../data/ledger-index.js';
 import type { OpenSource, Sources } from '../data/sources.js';
@@ -14,6 +15,8 @@ import { SourceQuery, parseQuery } from './params.js';
 /** Everything the API reads from. Assembled once at startup and shared. */
 export interface ApiDeps {
   readonly sources: Sources;
+  /** The one path every change from the browser takes (D65). */
+  readonly auditor: Auditor;
   readonly evals: Evals;
   readonly ledger: LedgerIndex;
   readonly pdf: PdfToolkit;
@@ -25,6 +28,8 @@ export interface ApiDeps {
   readonly poppler: PopplerTools | undefined;
   readonly ledgerDir: string;
   readonly cacheDir: string;
+  /** Where the golden files live, for the human review pass (19D.6). */
+  readonly goldenDir: string;
   readonly version: string;
 }
 

@@ -1,6 +1,7 @@
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 
+import { AuditRepository } from './audit-repository.js';
 import { Db, type OpenOptions } from './database.js';
 import { DatasheetRepository } from './datasheet-repository.js';
 import { EscalationRepository } from './escalation-repository.js';
@@ -31,6 +32,7 @@ export function openDatabase(file: string, options: OpenOptions = {}): Db {
 }
 
 export interface Repositories {
+  readonly audit: AuditRepository;
   readonly parts: PartRepository;
   readonly offers: OfferRepository;
   readonly datasheets: DatasheetRepository;
@@ -42,6 +44,7 @@ export interface Repositories {
 
 export function createRepositories(db: Db): Repositories {
   return {
+    audit: new AuditRepository(db),
     parts: new PartRepository(db),
     offers: new OfferRepository(db),
     datasheets: new DatasheetRepository(db),

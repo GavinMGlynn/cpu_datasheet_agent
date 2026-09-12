@@ -8,6 +8,7 @@ import { registerHealth } from './health.js';
 import { registerParts } from './parts.js';
 import { registerRuns } from './runs.js';
 import { registerStats } from './stats.js';
+import { registerWrites } from './writes.js';
 import type { ApiDeps } from './deps.js';
 
 export * from './alternates.js';
@@ -20,6 +21,7 @@ export * from './params.js';
 export * from './parts.js';
 export * from './runs.js';
 export * from './stats.js';
+export * from './writes.js';
 
 /**
  * Registers every read endpoint.
@@ -37,4 +39,5 @@ export function registerApi(router: Router<RouteEntry>, deps: ApiDeps): void {
   registerStats(router, deps);
   registerEvals(router, deps);
   registerCache(router, deps);
+  registerWrites(router, deps);
 }

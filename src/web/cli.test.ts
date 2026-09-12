@@ -81,7 +81,7 @@ describe('serveWeb', () => {
     const lines: string[] = [];
     running = await serveWeb(
       { help: false, port: 0, dataDir: path.join(root, 'data'), uiDir: path.join(root, 'ui') },
-      { DATA_DIR: path.join(root, 'data') },
+      { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
     expect(running.url).toContain(`?token=${running.token}`);
@@ -94,7 +94,7 @@ describe('serveWeb', () => {
     const lines: string[] = [];
     running = await serveWeb(
       { help: false, port: 0 },
-      { DATA_DIR: path.join(root, 'data') },
+      { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
     const ping = await fetch(`${running.server.url}/api/ping`);
@@ -107,7 +107,7 @@ describe('serveWeb', () => {
     try {
       running = await serveWeb(
         { help: false, dataDir: path.join(root, 'data') },
-        { DATA_DIR: path.join(root, 'data') },
+        { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
         () => undefined,
       );
       expect(running.server.port).toBe(DEFAULT_PORT);
@@ -129,7 +129,7 @@ describe('serveWeb', () => {
         resultsDir: path.join(root, 'results'),
         token: 'a-token-worth-twenty-chars',
       },
-      { DATA_DIR: path.join(root, 'data') },
+      { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
     expect(running.token).toBe('a-token-worth-twenty-chars');
@@ -143,7 +143,7 @@ describe('serveWeb', () => {
     const lines: string[] = [];
     running = await serveWeb(
       { help: false, port: 0, host: '0.0.0.0', dataDir: path.join(root, 'data') },
-      { DATA_DIR: path.join(root, 'data') },
+      { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
     expect(lines.some((line) => line.startsWith('warning:'))).toBe(true);
@@ -182,7 +182,7 @@ describe('main', () => {
       stop = resolve;
     });
     const finished = main(['--port', '0', '--data', path.join(root, 'data')], {
-      env: { DATA_DIR: path.join(root, 'data') },
+      env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
         if (line.startsWith('open ')) {
@@ -199,7 +199,7 @@ describe('main', () => {
     const signals = new EventEmitter();
     const lines: string[] = [];
     const finished = main(['--port', '0', '--data', path.join(root, 'data')], {
-      env: { DATA_DIR: path.join(root, 'data') },
+      env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
         if (line.startsWith('open ')) {
@@ -221,7 +221,7 @@ describe('main', () => {
       stop = resolve;
     });
     const finished = main(['--port', '0', '--host', '0.0.0.0', '--data', path.join(root, 'data')], {
-      env: { DATA_DIR: path.join(root, 'data') },
+      env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
         if (line.startsWith('open ')) {

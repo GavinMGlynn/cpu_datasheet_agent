@@ -14,6 +14,7 @@ import {
 import { createRedactor } from '../../src/log/redact.js';
 import { PdfToolkit, popplerPreflight, type PdfRef } from '../../src/pdf/index.js';
 import type { ApiDeps } from '../../src/web/api/deps.js';
+import { createAuditor } from '../../src/web/audit.js';
 import { createEvals } from '../../src/web/data/evals.js';
 import { createLedgerIndex } from '../../src/web/data/ledger-index.js';
 import { createSources, type Sources } from '../../src/web/data/sources.js';
@@ -95,8 +96,13 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
   const log = capturedLogger();
   const ledger = createLedgerIndex(ledgerDir);
 
+  let auditIds = 0;
   const deps: ApiDeps = {
     sources,
+    auditor: createAuditor({
+      clock: () => new Date('2026-09-12T00:00:00.000Z'),
+      newId: () => `00000000-0000-4000-9000-${String((auditIds += 1)).padStart(12, '0')}`,
+    }),
     evals: createEvals({
       resultsDir,
       ...(options.goldenDir === undefined ? {} : { goldenDir: options.goldenDir }),
@@ -110,6 +116,7 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
     poppler: options.poppler === false ? undefined : await popplerPreflight(),
     ledgerDir,
     cacheDir,
+    goldenDir: options.goldenDir ?? 'eval/golden',
     version: '1.0.0-test',
   };
 

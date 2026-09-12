@@ -67,7 +67,7 @@ beforeAll(async () => {
 
   running = await serveWeb(
     { help: false, port: 0, dataDir, uiDir: path.join(root, 'ui') },
-    { DATA_DIR: dataDir },
+    { DATA_DIR: dataDir, LOG_LEVEL: 'error' },
     () => undefined,
   );
 });
@@ -187,6 +187,64 @@ describe('reading real data over HTTP', () => {
       Array.from({ length: 12 }, () => fetch(url('/api/parts'), { headers: withToken() })),
     );
     expect(responses.every((response) => response.status === 200)).toBe(true);
+  });
+});
+
+describe('changing something over HTTP', () => {
+  const correction = {
+    actor: 'gavin',
+    reason: 'read the ordering table on page 2',
+    value: { value: 26, unit: 'V' },
+    note: 'page 2, ordering information',
+  };
+
+  it('accepts a correction carrying the token in a header', async () => {
+    const response = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
+      method: 'POST',
+      headers: withToken({ 'content-type': 'application/json' }),
+      body: JSON.stringify(correction),
+    });
+    expect(response.status).toBe(200);
+    const body = (await response.json()) as { parameter: { value: { value: number } } };
+    expect(body.parameter.value.value).toBe(26);
+  });
+
+  it('refuses a correction carrying only the cookie', async () => {
+    const handoff = await fetch(url(`/?token=${running.token}`), { redirect: 'manual' });
+    const cookie = (handoff.headers.get('set-cookie') ?? '').split(';')[0] ?? '';
+    const refused = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
+      method: 'POST',
+      headers: { cookie, 'content-type': 'application/json' },
+      body: JSON.stringify(correction),
+    });
+    expect(refused.status).toBe(403);
+    expect(await refused.json()).toMatchObject({
+      error: { code: 'WEB_TOKEN_HEADER_REQUIRED' },
+    });
+
+    const accepted = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
+      method: 'POST',
+      headers: { cookie, 'x-chip-token': running.token, 'content-type': 'application/json' },
+      body: JSON.stringify(correction),
+    });
+    expect(accepted.status).toBe(200);
+  });
+
+  it('refuses a change from an origin it does not serve', async () => {
+    const response = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
+      method: 'POST',
+      headers: withToken({ origin: 'https://evil.example', 'content-type': 'application/json' }),
+      body: JSON.stringify(correction),
+    });
+    expect(response.status).toBe(403);
+    expect(await response.json()).toMatchObject({ error: { code: 'WEB_ORIGIN_REFUSED' } });
+  });
+
+  it('leaves the audit trail behind every one of them', async () => {
+    const response = await fetch(url('/api/audit'), { headers: withToken() });
+    const body = (await response.json()) as { total: number; items: { action: string }[] };
+    expect(body.total).toBeGreaterThan(0);
+    expect(body.items[0]?.action).toBe('parameter.correct');
   });
 });
 

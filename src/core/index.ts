@@ -1,3 +1,4 @@
+export * from './audit.js';
 export * from './buck-regulator.js';
 export * from './classification.js';
 export * from './datasheet.js';

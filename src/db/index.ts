@@ -1,3 +1,4 @@
+export * from './audit-repository.js';
 export * from './database.js';
 export * from './datasheet-repository.js';
 export * from './escalation-repository.js';

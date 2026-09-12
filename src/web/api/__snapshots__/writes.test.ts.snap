@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shape > keeps the shape of an audit event 1`] = `
+[
+  "action",
+  "actor",
+  "after",
+  "at",
+  "before",
+  "id",
+  "reason",
+  "targetId",
+  "targetKind",
+]
+`;

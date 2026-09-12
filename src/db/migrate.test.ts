@@ -169,6 +169,7 @@ describe('MIGRATIONS', () => {
   it('creates the full schema with its indices and the budget row', () => {
     applyMigrations(db, MIGRATIONS, clock);
     expect(tables(db)).toEqual([
+      'audit_events',
       'classifications',
       'datasheet_mpns',
       'datasheets',
@@ -189,6 +190,8 @@ describe('MIGRATIONS', () => {
       .all()
       .map((row) => row.name);
     expect(indices).toEqual([
+      'audit_events_at',
+      'audit_events_target',
       'classifications_axis_value',
       'datasheet_mpns_mpn',
       'escalations_open',

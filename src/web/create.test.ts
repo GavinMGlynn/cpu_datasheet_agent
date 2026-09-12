@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { recordedRequest, recordedResponse } from '../../test/helpers/web.js';
 import { createWeb, probePoppler, type WebParts } from './create.js';
@@ -11,7 +11,10 @@ let root: string;
 let built: WebParts | undefined;
 
 async function build(options: Parameters<typeof createWeb>[0] = {}): Promise<WebParts> {
-  built = await createWeb({ env: { DATA_DIR: path.join(root, 'data') }, ...options });
+  built = await createWeb({
+    env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
+    ...options,
+  });
   return built;
 }
 
@@ -88,22 +91,37 @@ describe('createWeb', () => {
     });
   });
 
+  it('takes the clock, the golden directory and the version it is given', async () => {
+    const goldenDir = path.join(root, 'golden');
+    await mkdir(goldenDir, { recursive: true });
+    const parts = await build({
+      token: 'a-token-worth-twenty-chars',
+      clock: () => new Date('2026-01-01T00:00:00.000Z'),
+      goldenDir,
+      version: '9.9.9-test',
+    });
+    const health = await call(parts, '/api/health', {
+      authorization: 'Bearer a-token-worth-twenty-chars',
+    });
+    expect(JSON.parse(health.body) as unknown).toMatchObject({
+      version: '9.9.9-test',
+      now: '2026-01-01T00:00:00.000Z',
+    });
+    const golden = await call(parts, '/api/golden', {
+      authorization: 'Bearer a-token-worth-twenty-chars',
+    });
+    expect(JSON.parse(golden.body) as unknown).toStrictEqual({ parts: [] });
+  });
+
   it('reads the process environment when it is given none', async () => {
-    const realDataDir = process.env.DATA_DIR;
-    process.env.DATA_DIR = path.join(root, 'from-env');
-    try {
-      built = await createWeb({ token: 'a-token-worth-twenty-chars' });
-      const sources = await call(built, '/api/sources', {
-        authorization: 'Bearer a-token-worth-twenty-chars',
-      });
-      expect(sources.body).toContain(path.join(root, 'from-env'));
-    } finally {
-      if (realDataDir === undefined) {
-        delete process.env.DATA_DIR;
-      } else {
-        process.env.DATA_DIR = realDataDir;
-      }
-    }
+    vi.stubEnv('DATA_DIR', path.join(root, 'from-env'));
+    vi.stubEnv('LOG_LEVEL', 'error');
+    built = await createWeb({ token: 'a-token-worth-twenty-chars' });
+    const sources = await call(built, '/api/sources', {
+      authorization: 'Bearer a-token-worth-twenty-chars',
+    });
+    expect(sources.body).toContain(path.join(root, 'from-env'));
+    vi.unstubAllEnvs();
   });
 
   it('reads evaluation results from where it is told', async () => {

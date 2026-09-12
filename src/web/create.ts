@@ -8,7 +8,9 @@ import { createLogger, type Logger } from '../log/logger.js';
 import { createRedactor, secretsFromConfig } from '../log/redact.js';
 import { PdfToolkit, popplerPreflight, type PopplerTools } from '../pdf/index.js';
 import { registerApi, type ApiDeps } from './api/index.js';
+import { createAuditor } from './audit.js';
 import { createEvals } from './data/evals.js';
+import { GOLDEN_DIR } from '../eval/load.js';
 import { createLedgerIndex } from './data/ledger-index.js';
 import { createSources, type Sources } from './data/sources.js';
 import {
@@ -37,6 +39,8 @@ export interface WebOptions {
   readonly uiDir?: string;
   /** Where evaluation results are read from. */
   readonly resultsDir?: string;
+  /** Where the golden files live. */
+  readonly goldenDir?: string;
   readonly port?: number;
   readonly host?: string;
   /** A token to use instead of minting one, so a restart can keep a session. */
@@ -131,7 +135,11 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
 
   const deps: ApiDeps = {
     sources,
-    evals: createEvals(options.resultsDir === undefined ? {} : { resultsDir: options.resultsDir }),
+    auditor: createAuditor(options.clock === undefined ? {} : { clock: options.clock }),
+    evals: createEvals({
+      ...(options.resultsDir === undefined ? {} : { resultsDir: options.resultsDir }),
+      ...(options.goldenDir === undefined ? {} : { goldenDir: options.goldenDir }),
+    }),
     ledger: createLedgerIndex(ledgerDir),
     pdf,
     store,
@@ -141,6 +149,7 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     poppler,
     ledgerDir,
     cacheDir,
+    goldenDir: options.goldenDir ?? GOLDEN_DIR,
     version: options.version ?? '1.0.0',
   };
 

@@ -883,102 +883,102 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 
 ### 19A Server foundation
 
-- [ ] 19A.1 `src/web/server/router.ts`: method and path-pattern matching with
+- [x] 19A.1 `src/web/server/router.ts`: method and path-pattern matching with
       typed parameters, query-string parsing, 404 and 405 with `Allow`.
-- [ ] 19A.2 `src/web/server/respond.ts`: JSON, text, binary and stream
+- [x] 19A.2 `src/web/server/respond.ts`: JSON, text, binary and stream
       responses; `ETag` and conditional `GET`; `Cache-Control` per resource
       class; error envelopes that carry a `ChipAgentError` code without
       leaking internals.
-- [ ] 19A.3 `src/web/server/errors.ts`: maps every error class the modules
+- [x] 19A.3 `src/web/server/errors.ts`: maps every error class the modules
       throw (`ValidationError`, `DbError`, `CacheMissError`, `QueryError`,
       `AgentError`, `ConfigError`, `LedgerReadError`) to a status and a stable
       machine-readable code.
-- [ ] 19A.4 `src/web/server/security.ts`: binds `127.0.0.1` unless `--host` is
+- [x] 19A.4 `src/web/server/security.ts`: binds `127.0.0.1` unless `--host` is
       given, per-start bearer token required for every write and every run
       launch, `Origin` check, no credential value ever serialised (D67).
-- [ ] 19A.5 `src/web/server/sse.ts`: server-sent events with heartbeat,
+- [x] 19A.5 `src/web/server/sse.ts`: server-sent events with heartbeat,
       backpressure and client-disconnect cleanup, used by run streaming.
-- [ ] 19A.6 `src/web/server/server.ts`: `createWebServer(deps)` over
+- [x] 19A.6 `src/web/server/server.ts`: `createWebServer(deps)` over
       `node:http`, static asset serving with content types and long-lived
       hashed-asset caching, graceful shutdown.
-- [ ] 19A.7 `bin/chip-web.ts` and `npm run web`: parses `--port --host --db
+- [x] 19A.7 `bin/chip-web.ts` and `npm run web`: parses `--port --host --db
       --ledger --open --token`, prints the URL and the token, exits non-zero
       on a bad flag.
-- [ ] 19A.8 Tests: router table including trailing slashes and encoded
+- [x] 19A.8 Tests: router table including trailing slashes and encoded
       segments, every error mapping, token rejection paths, SSE lifecycle,
       static serving, CLI parsing.
 
 ### 19B Read models
 
-- [ ] 19B.1 `src/web/data/catalog.ts`: part list projections (status,
+- [x] 19B.1 `src/web/data/catalog.ts`: part list projections (status,
       manufacturer, category, parameter summary, verification state, best
       price at quantity), the parts × parameter-keys coverage matrix, and
       cross-part parameter distributions.
-- [ ] 19B.2 `src/web/data/ledger-index.ts`: one pass over the ledger day files
+- [x] 19B.2 `src/web/data/ledger-index.ts`: one pass over the ledger day files
       building an in-memory index — by session, by tool, by parent, by day —
       with incremental refresh on file growth and malformed lines surfaced
       rather than dropped.
-- [ ] 19B.3 `src/web/data/stats.ts`: spend by day, model, prompt version, run
+- [x] 19B.3 `src/web/data/stats.ts`: spend by day, model, prompt version, run
       kind and part; turns and duration percentiles (p50/p90/p99); tool-call
       counts, error rates by tool and error code; cache hit, miss, expired and
       forced rates; spend-gate denials; cost per stored parameter and per
       confirmed value.
-- [ ] 19B.4 `src/web/data/aggregate.ts`: the grouping, percentile, histogram
+- [x] 19B.4 `src/web/data/aggregate.ts`: the grouping, percentile, histogram
       and time-bucketing helpers the above share, as pure functions.
-- [ ] 19B.5 `src/web/data/evals.ts`: loads every result directory, the
+- [x] 19B.5 `src/web/data/evals.ts`: loads every result directory, the
       per-parameter score matrix, the starved-part list, and two-report
       comparison via `compareReports`.
-- [ ] 19B.6 `src/web/data/sources.ts`: multiple databases at once — the main
+- [x] 19B.6 `src/web/data/sources.ts`: multiple databases at once — the main
       store and every `data/eval-runs/*.sqlite` — selectable per request, so
       the twenty-two-part baseline is as readable as the live store (D69).
-- [ ] 19B.7 Tests: fixtures for each read model, including an empty store, a
+- [x] 19B.7 Tests: fixtures for each read model, including an empty store, a
       ledger with malformed lines, and a database with no runs.
 
 ### 19C Read API
 
-- [ ] 19C.1 Parts: list with the full filter set (status, manufacturer,
+- [x] 19C.1 Parts: list with the full filter set (status, manufacturer,
       category, classification axis, parameter range, text), detail with
       parameters, provenance, conflicts, confidence, verdicts, classifications,
       offers, price breaks, runs and escalations.
-- [ ] 19C.2 Datasheets: metadata, family MPN coverage, page text, page image
+- [x] 19C.2 Datasheets: metadata, family MPN coverage, page text, page image
       (PNG through the existing PDF toolkit, cached), and page search.
-- [ ] 19C.3 Alternates: the whole `AlternateQuery` surface, returning the
+- [x] 19C.3 Alternates: the whole `AlternateQuery` surface, returning the
       comparison table and the mandatory pin-compatibility disclaimer verbatim.
-- [ ] 19C.4 Pricing: price-break curves, unit price at quantity, price per
+- [x] 19C.4 Pricing: price-break curves, unit price at quantity, price per
       ampere, distributor comparison and stock.
-- [ ] 19C.5 Runs: list, filter, detail with the ledger call tree and the
+- [x] 19C.5 Runs: list, filter, detail with the ledger call tree and the
       condensed transcript.
-- [ ] 19C.6 Ledger: paged and filtered tool calls, single record with blob
+- [x] 19C.6 Ledger: paged and filtered tool calls, single record with blob
       hydration, aggregates, and per-session trace reconstruction.
-- [ ] 19C.7 Stats: every aggregate in 19B.3 as an endpoint with a time window.
-- [ ] 19C.8 Evals: result list, one report, per-parameter failure inspector,
+- [x] 19C.7 Stats: every aggregate in 19B.3 as an endpoint with a time window.
+- [x] 19C.8 Evals: result list, one report, per-parameter failure inspector,
       comparison of two reports, golden health checks and coverage.
-- [ ] 19C.9 Verifications: verdict counts by part and parameter, with the
+- [x] 19C.9 Verifications: verdict counts by part and parameter, with the
       cited page and quote.
-- [ ] 19C.10 Cache: namespace entry counts, disk footprint, age distribution.
-- [ ] 19C.11 Health: config issues, which credentials are present (booleans
+- [x] 19C.10 Cache: namespace entry counts, disk footprint, age distribution.
+- [x] 19C.11 Health: config issues, which credentials are present (booleans
       only), poppler availability, applied migrations, ledger integrity.
-- [ ] 19C.12 Tests: every endpoint against a seeded database and ledger,
+- [x] 19C.12 Tests: every endpoint against a seeded database and ledger,
       including filter combinations, empty results and bad input.
 
 ### 19D Write and audit
 
-- [ ] 19D.1 Migration `0004-audit.ts`: `audit_events` (id, at, actor, action,
+- [x] 19D.1 Migration `0004-audit.ts`: `audit_events` (id, at, actor, action,
       target kind, target id, before, after, reason) (D65).
-- [ ] 19D.2 `src/web/audit.ts`: every mutation routed through one writer that
+- [x] 19D.2 `src/web/audit.ts`: every mutation routed through one writer that
       records before and after; a write without a reason is rejected.
-- [ ] 19D.3 Parameter correction: stores a human value beside the model's,
+- [x] 19D.3 Parameter correction: stores a human value beside the model's,
       keeping the original and marking provenance `human`, validated by the
       same schema that rejects rather than coerces.
-- [ ] 19D.4 Escalation resolution from the browser, writing the resolution and
+- [x] 19D.4 Escalation resolution from the browser, writing the resolution and
       the audit row.
-- [ ] 19D.5 Part status changes, with the rules that govern them enforced
+- [x] 19D.5 Part status changes, with the rules that govern them enforced
       server-side.
-- [ ] 19D.6 Golden-set editing: read and write `eval/golden/*.json` with the
+- [x] 19D.6 Golden-set editing: read and write `eval/golden/*.json` with the
       cited page image beside the value, recording reviewer and timestamp —
       the tool for the human pass Q6 asks for.
-- [ ] 19D.7 Cache entry purge, audited.
-- [ ] 19D.8 Tests: audit row for every mutation, rejection without a reason,
+- [x] 19D.7 Cache entry purge, audited.
+- [x] 19D.8 Tests: audit row for every mutation, rejection without a reason,
       validation failures, golden round-trip, concurrent-write conflict.
 
 ### 19E Run control
@@ -1064,15 +1064,15 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 Every part of this module carries all four layers, and the site carries a
 fifth. A module is not finished when its unit tests pass (D70).
 
-- [ ] 19I.1 Unit: every file at 100% lines, branches, functions and
+- [x] 19I.1 Unit: every file at 100% lines, branches, functions and
       statements, as the rest of `src/`.
-- [ ] 19I.2 Behaviour: what each endpoint does rather than how — status codes,
+- [x] 19I.2 Behaviour: what each endpoint does rather than how — status codes,
       filter semantics, access decisions, error envelopes — against a seeded
       store, a seeded ledger and real evaluation results.
-- [ ] 19I.3 Snapshot: the shape of every API payload and the rendering of
+- [x] 19I.3 Snapshot: the shape of every API payload and the rendering of
       every page, component and chart, committed so a change shows up as a
       reviewable diff rather than a passing test.
-- [ ] 19I.4 Integration: a real server on a real socket over a real SQLite
+- [x] 19I.4 Integration: a real server on a real socket over a real SQLite
       database, ledger and cache — token handoff, conditional requests, event
       streams, run launching against a fake runner, and writes that land.
 - [ ] 19I.5 Browser: Playwright driving Chromium against a server started on a
