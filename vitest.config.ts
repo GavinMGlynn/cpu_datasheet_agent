@@ -10,6 +10,12 @@ export default defineConfig({
   // scope; the UI's own tsconfig says the same thing to the type checker.
   esbuild: { jsx: 'automatic' },
   test: {
+    // The build machine is one VM with a handful of cores, and a password
+    // hash is deliberately expensive: two hundred workers each asking for
+    // 32 MiB of scrypt at once is a test of the runner, not of the code.
+    ...(process.env.CI === 'true'
+      ? { maxWorkers: 4, minWorkers: 1, testTimeout: 30_000, hookTimeout: 30_000 }
+      : {}),
     // Persist module transforms between runs (node_modules/.vitest-cache).
     // Set explicitly: Vitest prints a performance hint when it is not, and the
     // project runs with zero warnings (docs/PROJECT_PLAN.md D20).
