@@ -5,6 +5,7 @@ import { createApi, type Api } from './lib/api.js';
 import { navigate, useRoute, withQuery, type Route } from './lib/router.js';
 import { useAsync, useStored } from './lib/state.js';
 import { Async } from './components/Async.js';
+import { ErrorBoundary } from './components/ErrorBoundary.js';
 import { Alternates } from './pages/Alternates.js';
 import { Audit } from './pages/Audit.js';
 import { Compare } from './pages/Compare.js';
@@ -190,7 +191,11 @@ export function App(props: AppProps): ReactNode {
             </nav>
           ))}
         </aside>
-        <main>{render(route)}</main>
+        <main>
+          {/* Keyed by the path: navigating away from a page that broke gives
+              the next one a clean slate. */}
+          <ErrorBoundary resetKey={route.path}>{render(route)}</ErrorBoundary>
+        </main>
       </div>
     </AppContext.Provider>
   );
