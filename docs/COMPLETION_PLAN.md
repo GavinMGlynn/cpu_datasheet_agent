@@ -1049,14 +1049,17 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 
 ### 19G Snapshot
 
-- [ ] 19G.1 `npm run web:snapshot`: builds a self-contained read-only bundle
-      from the same read models, with the data embedded.
-- [ ] 19G.2 Exclusions enforced in code: no credentials, no `.env` values, no
+- [x] 19G.1 `npm run web:snapshot`: builds a self-contained read-only bundle
+      from the same read models, with the data embedded. `--source <id>` takes
+      the snapshot from an evaluation database instead of the live store.
+- [x] 19G.2 Exclusions enforced in code: no credentials, no `.env` values, no
       raw datasheet text or page images (manufacturer copyright), no ledger
       blobs holding raw distributor responses (D68).
-- [ ] 19G.3 Publication as a shareable page, with the exclusions listed on the
-      page itself.
-- [ ] 19G.4 Tests: bundle contents, exclusion enforcement, a snapshot that
+- [x] 19G.3 Publication as a shareable page, with the exclusions listed on the
+      page itself. The baseline is published at
+      `https://claude.ai/code/artifact/ff2af1e7-1aa2-4691-a428-1af0debf058d`
+      (private until shared).
+- [x] 19G.4 Tests: bundle contents, exclusion enforcement, a snapshot that
       opens with no server.
 
 ### 19I Test layers

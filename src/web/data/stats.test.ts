@@ -219,7 +219,7 @@ describe('toolStats and errorStats', () => {
       errors: { PDF_PAGE_MISSING: 1 },
     });
     expect(pages?.failureRate).toBeCloseTo(1 / 3, 10);
-    expect(pages?.duration?.p50).toBe(100);
+    expect(pages?.duration.p50).toBe(100);
     expect(offers).toMatchObject({ tool: 'fetch_offers', spending: 1, failures: 0, errors: {} });
   });
 

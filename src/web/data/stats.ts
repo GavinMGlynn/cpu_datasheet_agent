@@ -151,7 +151,8 @@ export interface ToolStat {
   readonly failureRate: number;
   /** Calls that could have spent money, whether or not they did. */
   readonly spending: number;
-  readonly duration: Summary | undefined;
+  /** Present because a tool in this list has been called at least once. */
+  readonly duration: Summary;
   readonly totalMs: number;
   /** Failure codes and how often each one came up. */
   readonly errors: Readonly<Record<string, number>>;
@@ -177,7 +178,10 @@ export function toolStats(records: readonly ToolCallRecord[]): ToolStat[] {
         failures: failed.length,
         failureRate: rate(failed.length, calls.length),
         spending: calls.filter((call) => call.spendsQuota).length,
-        duration: summarise(calls.map((call) => call.durationMs)),
+        duration: required(
+          summarise(calls.map((call) => call.durationMs)),
+          'the timings of a tool that was called',
+        ),
         totalMs: sumBy(calls, (call) => call.durationMs),
         errors: Object.fromEntries(
           countBy(failed, (call) => required(call.error, 'the error on a failed call').code),

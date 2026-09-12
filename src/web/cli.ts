@@ -3,6 +3,7 @@ import { elementAt } from '../util/array.js';
 import { DEFAULT_HOST, DEFAULT_PORT, startWebServer, type RunningServer } from './server/server.js';
 import { bindWarning } from './server/security.js';
 import { createWeb, type WebOptions } from './create.js';
+import { writeSnapshot } from './snapshot/write.js';
 
 export class WebCliError extends ChipAgentError {}
 
@@ -17,6 +18,8 @@ options:
   --ui <dir>        the built front end, if it is not dist/ui
   --results <dir>   evaluation results (default eval/results)
   --token <value>   use this token instead of minting one
+  --snapshot <file> write a shareable snapshot and exit, instead of serving
+  --source <id>     which database the snapshot reads (default live)
   --help            print this
 `;
 
@@ -28,6 +31,10 @@ export interface WebCliOptions {
   readonly uiDir?: string;
   readonly resultsDir?: string;
   readonly token?: string;
+  /** Write a snapshot to this file and exit. */
+  readonly snapshot?: string;
+  /** The database a snapshot reads. */
+  readonly source?: string;
   readonly help: boolean;
 }
 
@@ -85,6 +92,14 @@ export function parseWebCli(argv: readonly string[]): WebCliOptions {
         break;
       case '--token':
         options = { ...options, token: text(value, '--token') };
+        index += 1;
+        break;
+      case '--snapshot':
+        options = { ...options, snapshot: text(value, '--snapshot') };
+        index += 1;
+        break;
+      case '--source':
+        options = { ...options, source: text(value, '--source') };
         index += 1;
         break;
       default:
@@ -181,6 +196,16 @@ export async function main(argv: readonly string[], deps: WebMainDeps): Promise<
   }
   if (options.help) {
     deps.out(USAGE);
+    return 0;
+  }
+  if (options.snapshot !== undefined) {
+    const written = await writeSnapshot(
+      options.snapshot,
+      webOptions(options, deps.env),
+      options.source === undefined ? {} : { source: options.source },
+    );
+    deps.out(`snapshot written to ${written.file} (${String(written.bytes)} bytes)`);
+    deps.out('it holds no credentials, no datasheet text and no distributor payloads.');
     return 0;
   }
   const warning = bindWarning(options.host ?? DEFAULT_HOST);

@@ -166,7 +166,7 @@ export interface ToolStat {
   readonly failures: number;
   readonly failureRate: number;
   readonly spending: number;
-  readonly duration?: Summary;
+  readonly duration: Summary;
   readonly totalMs: number;
   readonly errors: Readonly<Record<string, number>>;
 }

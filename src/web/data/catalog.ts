@@ -168,6 +168,7 @@ export interface CoverageCell {
   readonly key: ParameterKey;
   /** Parts where this parameter has a value. */
   readonly stated: number;
+  /** Of the parts that state it, how many cite a datasheet page. */
   readonly cited: number;
   readonly verified: number;
   readonly conflicted: number;
@@ -193,9 +194,14 @@ export function parameterCoverage(parts: readonly Part[]): CoverageCell[] {
     let contradicted = 0;
     for (const part of parts) {
       const parameter = part.parameters[key];
-      if (parameter.value !== null) {
-        stated += 1;
+      // Everything here is counted against a value that exists. A part whose
+      // datasheet does not state `maxDutyCycle` still carries a provenance
+      // for the absence, and counting that as a citation would report a page
+      // cited for a value nothing stated.
+      if (parameter.value === null) {
+        continue;
       }
+      stated += 1;
       if (parameter.provenance.source === 'datasheet') {
         cited += 1;
       }

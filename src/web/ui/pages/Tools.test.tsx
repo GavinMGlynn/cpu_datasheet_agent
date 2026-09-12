@@ -23,6 +23,7 @@ const tools = {
       failures: 9,
       failureRate: 0.0957,
       spending: 0,
+      duration: { count: 94, sum: 94, min: 0, max: 4, mean: 1, p50: 1, p90: 3, p99: 4 },
       totalMs: 94,
       errors: { UNIT_PARSE_FAILED: 9 },
     },
@@ -59,7 +60,7 @@ describe('tools', () => {
     });
     expect(screen.getByRole('cell', { name: '1,101' })).toBeInTheDocument();
     expect(screen.getByText('9 (10%)')).toBeInTheDocument();
-    // The tool with no timings shows a dash rather than a zero.
+    // A tool that has never failed shows a dash rather than a zero.
     expect(screen.getAllByText('—').length).toBeGreaterThan(0);
   });
 

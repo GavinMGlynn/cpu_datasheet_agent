@@ -1,4 +1,4 @@
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -41,6 +41,10 @@ describe('parseWebCli', () => {
         '/tmp/results',
         '--token',
         'abc',
+        '--snapshot',
+        '/tmp/snapshot.html',
+        '--source',
+        'eval-2026-09-11',
       ]),
     ).toStrictEqual({
       port: 8080,
@@ -50,6 +54,8 @@ describe('parseWebCli', () => {
       uiDir: '/tmp/ui',
       resultsDir: '/tmp/results',
       token: 'abc',
+      snapshot: '/tmp/snapshot.html',
+      source: 'eval-2026-09-11',
       help: false,
     });
   });
@@ -73,6 +79,8 @@ describe('parseWebCli', () => {
     expect(() => parseWebCli(['--host'])).toThrow(/needs a value/u);
     expect(() => parseWebCli(['--data', ''])).toThrow(/needs a value/u);
     expect(() => parseWebCli(['--nonsense'])).toThrow(/unknown option/u);
+    expect(() => parseWebCli(['--snapshot'])).toThrow(/needs a value/u);
+    expect(() => parseWebCli(['--source', ''])).toThrow(/needs a value/u);
   });
 });
 
@@ -147,6 +155,43 @@ describe('serveWeb', () => {
       (line) => lines.push(line),
     );
     expect(lines.some((line) => line.startsWith('warning:'))).toBe(true);
+  });
+});
+
+describe('main --snapshot', () => {
+  it('writes the file and stops, without ever binding a port', async () => {
+    const lines: string[] = [];
+    const file = path.join(root, 'out', 'snapshot.html');
+    const code = await main(['--snapshot', file, '--data', path.join(root, 'data')], {
+      env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
+      out: (line) => lines.push(line),
+    });
+    expect(code).toBe(0);
+    expect(lines[0]).toContain(`snapshot written to ${file}`);
+    expect(lines[1]).toContain('no credentials');
+    const html = await readFile(file, 'utf8');
+    expect(html).toContain('chip datasheet agent');
+    expect(lines.some((line) => line.includes('listening'))).toBe(false);
+  });
+
+  it('reads the database it is pointed at, and says so when there is none', async () => {
+    const lines: string[] = [];
+    await expect(
+      main(
+        [
+          '--snapshot',
+          path.join(root, 'snapshot.html'),
+          '--data',
+          path.join(root, 'data'),
+          '--source',
+          'nowhere',
+        ],
+        {
+          env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
+          out: (line) => lines.push(line),
+        },
+      ),
+    ).rejects.toThrow(expect.objectContaining({ code: 'WEB_SOURCE_NOT_FOUND' }));
   });
 });
 

@@ -156,6 +156,15 @@ describe('parameterCoverage', () => {
     expect(rdsOnLow).toMatchObject({ stated: 0, coverage: 0 });
   });
 
+  it('does not count a page cited for a value the datasheet never states', () => {
+    // voutFixed is read from page 1 and found to be absent: the part is
+    // adjustable. Counting that as a citation would report a page cited for a
+    // value nothing stated.
+    const voutFixed = parameterCoverage([tps]).find((cell) => cell.key === 'voutFixed');
+    expect(voutFixed).toMatchObject({ stated: 0, cited: 0, verified: 0, conflicted: 0 });
+    expect(tps.parameters.voutFixed.provenance.source).toBe('datasheet');
+  });
+
   it('counts conflicts and contradictions, which is what sends a part back', () => {
     const disputed = part({
       status: 'needs_human',
