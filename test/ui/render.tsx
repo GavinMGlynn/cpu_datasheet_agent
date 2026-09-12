@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import '@testing-library/jest-dom/vitest';
 
-import { cleanup, render, type RenderResult } from '@testing-library/react';
+import { cleanup, configure, render, type RenderResult } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { afterEach } from 'vitest';
 
@@ -14,6 +14,11 @@ import type { Api } from '../../src/web/ui/lib/api.js';
  * The API is a stub the test writes: every page is a function of what the
  * server said, so a page test is "Given this answer, show this".
  */
+
+// A page is two round trips now — who is signed in, then what the page
+// shows — and the whole suite runs two hundred workers at once. One second
+// is not a statement about the code, it is a statement about the machine.
+configure({ asyncUtilTimeout: 5000 });
 
 afterEach(() => {
   cleanup();
