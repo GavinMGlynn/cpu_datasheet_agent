@@ -133,6 +133,8 @@ that supersedes the old one, and the old row's status changes to
 | D72 | 2026-09-12 | The address is what names the database: the front end reads `?source=` when it is there, remembers it, and falls back to the selector otherwise. | Every endpoint already takes `?source=`, so an address could carry one and be ignored — and it was. A link to a part in the baseline opened the live store's copy of it with no sign that it had done so, which is the worst kind of wrong answer: the right page, the wrong two hundred numbers. | active |
 | D73 | 2026-09-12 | The browser suite always starts its own server; it never reuses one that is already listening. | A `npm run web` over the real data directory answers `/api/ping` exactly as the seeded server does, so Playwright adopted it and ran thirty-three tests against live data — the one thing D70 forbids. Refusing to reuse turns a silent wrong target into a port-in-use failure. | active |
 | D74 | 2026-09-12 | The site is written in sentence case, translates stored vocabulary into words on the way out, and shows every timestamp as how long ago with the exact local instant on hover. Identifiers stay exactly as they are stored. | Reading the running site, the all-lowercase copy read as a draft rather than a tool, and `needs_human` and `2026-09-11 11:03` are what the database calls things, not what a person calls them. The rule is one standard rather than a page-by-page judgement, because the mixture is what looks unfinished. | active |
+| D75 | 2026-09-12 | The site authenticates with accounts: a username and a password (scrypt), a server-side session in an HttpOnly cookie, and optional single sign-on against any OIDC issuer. The token in the address is removed entirely, along with `--token`. | A token in a URL is in the shell history, the browser history, the referrer and any copy of the link, and it dies with the process that minted it — a restart signed every open tab out with eighteen red panels and no way back in. A session cookie is what the browser is for, and an account is what an audit row should name. | active |
+| D76 | 2026-09-12 | Two roles. A viewer reads everything; an admin may correct values, answer questions, purge the cache, manage accounts and start runs that spend money. Enforced at the endpoint, not in the front end. | The site has a button that spends real money at a distributor and another that rewrites the golden set. Reading the data and changing it are different permissions, and the front end hiding a button is a courtesy, not a control. | active |
 
 ## 4. Status
 
@@ -162,6 +164,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
 | M19 | Web application | complete | 19A–19I; the site, the snapshot, and five test layers |
+| M20 | Authentication | in progress | accounts, sessions, roles, OIDC (D75, D76) |
 
 ## 5. Conventions
 
