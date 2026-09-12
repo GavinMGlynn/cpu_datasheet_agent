@@ -4,6 +4,8 @@ import type { Logger } from '../../log/logger.js';
 import type { FileCacheStore } from '../../cache/store.js';
 import type { PdfToolkit } from '../../pdf/toolkit.js';
 import type { PopplerTools } from '../../pdf/poppler.js';
+import type { AuthService } from '../../auth/service.js';
+import type { Oidc } from '../../auth/oidc.js';
 import type { Auditor } from '../audit.js';
 import type { Launcher } from '../runs/launcher.js';
 import type { LaunchRegistry } from '../runs/registry.js';
@@ -17,6 +19,10 @@ import { SourceQuery, parseQuery } from './params.js';
 /** Everything the API reads from. Assembled once at startup and shared. */
 export interface ApiDeps {
   readonly sources: Sources;
+  /** Who may use the site, and the sessions they hold (D75). */
+  readonly auth: AuthService;
+  /** Single sign-on, when an issuer is configured (20E.1). */
+  readonly oidc: Oidc | undefined;
   /** The one path every change from the browser takes (D65). */
   readonly auditor: Auditor;
   /** Starts runs that spend money, behind the gates (D64). */

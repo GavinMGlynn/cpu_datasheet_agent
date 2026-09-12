@@ -9,10 +9,11 @@ import { createRedactor } from '../../log/redact.js';
 import { createApp, type RouteEntry } from './app.js';
 import { createResponder } from './respond.js';
 import { Router } from './router.js';
-import { createSecurity, originsFor, SESSION_COOKIE } from './security.js';
+import { createSecurity, originsFor } from './security.js';
+import { createAuthService } from '../../auth/service.js';
+import { createAuthStore } from '../../auth/store.js';
 import { contentTypeOf, createStaticHandler, policyFor, type StaticOptions } from './static.js';
 
-const TOKEN = 'tokentokentokentoken';
 let dir: string;
 
 function appFor(options: StaticOptions, pattern = '/*path') {
@@ -24,7 +25,10 @@ function appFor(options: StaticOptions, pattern = '/*path') {
   return createApp({
     router,
     responder: createResponder(redact),
-    security: createSecurity({ token: TOKEN, origins: originsFor('127.0.0.1', 5174) }),
+    security: createSecurity({
+      auth: createAuthService({ store: createAuthStore(':memory:') }),
+      origins: originsFor('127.0.0.1', 5174),
+    }),
     logger: capturedLogger().logger,
     redact,
   });
@@ -128,31 +132,19 @@ describe('serving', () => {
   });
 });
 
-describe('token handoff', () => {
-  it('trades a valid token in the query for a cookie and a clean URL', async () => {
+describe('the shell', () => {
+  it('is served to anyone, because it is what draws the sign-in page', async () => {
     const response = recordedResponse();
-    await appFor({ dir })(recordedRequest({ url: `/?token=${TOKEN}&view=costs` }), response);
-    expect(response.statusCode).toBe(303);
-    expect(response.headers.Location).toBe('/?view=costs');
-    expect(response.headers['Set-Cookie']).toStrictEqual([
-      `${SESSION_COOKIE}=${TOKEN}; Path=/; HttpOnly; SameSite=Strict`,
-      `chip_csrf=${TOKEN}; Path=/; SameSite=Strict`,
-    ]);
-    expect(response.headers['Cache-Control']).toBe('no-store');
-  });
-
-  it('serves the page as usual when the token is wrong', async () => {
-    const response = recordedResponse();
-    await appFor({ dir })(recordedRequest({ url: '/?token=wrong' }), response);
+    await appFor({ dir })(recordedRequest({ url: '/' }), response);
     expect(response.statusCode).toBe(200);
     expect(response.headers['Set-Cookie']).toBeUndefined();
   });
 
-  it('hands over on a deep link too', async () => {
+  it('ignores a token in the address, which is no longer a way in', async () => {
     const response = recordedResponse();
-    await appFor({ dir })(recordedRequest({ url: `/runs/abc?token=${TOKEN}` }), response);
-    expect(response.statusCode).toBe(303);
-    expect(response.headers.Location).toBe('/runs/abc');
+    await appFor({ dir })(recordedRequest({ url: '/?token=anything' }), response);
+    expect(response.statusCode).toBe(200);
+    expect(response.headers.Location).toBeUndefined();
   });
 
   it('serves the index when mounted on a route with no path parameter', async () => {

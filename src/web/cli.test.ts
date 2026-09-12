@@ -13,6 +13,15 @@ import { USAGE, main, parseWebCli, serveWeb, untilSignal, type ServeResult } fro
 let root: string;
 let running: ServeResult | undefined;
 
+/** An account on the running server, and the headers a browser would send. */
+function signedIn(server: ServeResult): Record<string, string> {
+  const accounts = server.auth.store.accounts;
+  const account =
+    accounts.byUsername('tester') ?? accounts.create({ username: 'tester', role: 'admin' });
+  const issued = server.auth.signInAs(account);
+  return { cookie: `chip_session=${issued.cookie}`, 'x-chip-token': issued.csrf };
+}
+
 beforeEach(async () => {
   root = await mkdtemp(path.join(tmpdir(), 'chip-web-cli-'));
 });
@@ -39,8 +48,6 @@ describe('parseWebCli', () => {
         '/tmp/ui',
         '--results',
         '/tmp/results',
-        '--token',
-        'abc',
         '--snapshot',
         '/tmp/snapshot.html',
         '--source',
@@ -53,7 +60,6 @@ describe('parseWebCli', () => {
       databaseFile: '/tmp/chip.sqlite',
       uiDir: '/tmp/ui',
       resultsDir: '/tmp/results',
-      token: 'abc',
       snapshot: '/tmp/snapshot.html',
       source: 'eval-2026-09-11',
       help: false,
@@ -85,17 +91,21 @@ describe('parseWebCli', () => {
 });
 
 describe('serveWeb', () => {
-  it('starts a server and prints where to open it, token and all', async () => {
+  it('starts a server and prints where to open it', async () => {
     const lines: string[] = [];
     running = await serveWeb(
       { help: false, port: 0, dataDir: path.join(root, 'data'), uiDir: path.join(root, 'ui') },
       { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
-    expect(running.url).toContain(`?token=${running.token}`);
+    expect(running.url).toBe(running.server.url);
+    expect(running.url).not.toContain('token');
     expect(lines[0]).toContain('chip-web listening on http://127.0.0.1:');
+    // Nothing can sign in yet, and it says so rather than leaving a person
+    // at a sign-in page no password will get past (20G.3).
+    expect(lines.join(' ')).toContain('no accounts yet');
     const ping = await fetch(`${running.server.url}/api/ping`);
-    expect(await ping.json()).toMatchObject({ ok: true, authenticated: false });
+    expect(await ping.json()).toMatchObject({ ok: true, signedInAs: null });
   });
 
   it('takes nothing but a port, and finds the rest from the environment', async () => {
@@ -135,16 +145,33 @@ describe('serveWeb', () => {
         databaseFile: path.join(root, 'data', 'elsewhere.sqlite'),
         uiDir: path.join(root, 'ui'),
         resultsDir: path.join(root, 'results'),
-        token: 'a-token-worth-twenty-chars',
       },
       { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       (line) => lines.push(line),
     );
-    expect(running.token).toBe('a-token-worth-twenty-chars');
     const sources = await fetch(`${running.server.url}/api/sources`, {
-      headers: { authorization: 'Bearer a-token-worth-twenty-chars' },
+      headers: signedIn(running),
     });
     expect(JSON.stringify(await sources.json())).toContain('elsewhere.sqlite');
+  });
+
+  it('says nothing about accounts once there is one', async () => {
+    const lines: string[] = [];
+    const dataDir = path.join(root, 'data');
+    running = await serveWeb(
+      { help: false, port: 0, dataDir },
+      { DATA_DIR: dataDir, LOG_LEVEL: 'error' },
+      (line) => lines.push(line),
+    );
+    running.auth.store.accounts.create({ username: 'gavin', role: 'admin' });
+    await running.close();
+    const second: string[] = [];
+    running = await serveWeb(
+      { help: false, port: 0, dataDir },
+      { DATA_DIR: dataDir, LOG_LEVEL: 'error' },
+      (line) => second.push(line),
+    );
+    expect(second.join(' ')).not.toContain('no accounts yet');
   });
 
   it('announces a bind beyond the loopback interface', async () => {
@@ -230,7 +257,7 @@ describe('main', () => {
       env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
-        if (line.startsWith('open ')) {
+        if (line.startsWith('chip-web listening')) {
           stop();
         }
       },
@@ -247,7 +274,7 @@ describe('main', () => {
       env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
-        if (line.startsWith('open ')) {
+        if (line.startsWith('chip-web listening')) {
           // After the current turn: main subscribes to the signal only once
           // serveWeb has returned, which is after this line is printed.
           setTimeout(() => signals.emit('SIGINT'), 0);
@@ -269,7 +296,7 @@ describe('main', () => {
       env: { DATA_DIR: path.join(root, 'data'), LOG_LEVEL: 'error' },
       out: (line) => {
         lines.push(line);
-        if (line.startsWith('open ')) {
+        if (line.startsWith('chip-web listening')) {
           stop();
         }
       },

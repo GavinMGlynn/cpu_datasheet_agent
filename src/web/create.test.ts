@@ -25,6 +25,18 @@ async function call(parts: WebParts, url: string, headers: Record<string, string
   return response;
 }
 
+/**
+ * An admin account and a session for it, the way a person would have one.
+ * Called more than once against the same site, so the account is reused.
+ */
+function signIn(parts: WebParts): Record<string, string> {
+  const accounts = parts.auth.store.accounts;
+  const account =
+    accounts.byUsername('tester') ?? accounts.create({ username: 'tester', role: 'admin' });
+  const issued = parts.auth.signInAs(account);
+  return { cookie: `chip_session=${issued.cookie}`, 'x-chip-token': issued.csrf };
+}
+
 beforeEach(async () => {
   root = await mkdtemp(path.join(tmpdir(), 'chip-web-create-'));
 });
@@ -37,18 +49,18 @@ afterEach(async () => {
 
 describe('createWeb', () => {
   it('wires an application that answers', async () => {
-    const parts = await build({ token: 'a-token-worth-twenty-chars' });
+    const parts = await build({});
     const ping = await call(parts, '/api/ping');
     expect(ping.statusCode).toBe(200);
-    const health = await call(parts, '/api/health', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const health = await call(parts, '/api/health', signIn(parts));
     expect(health.statusCode).toBe(200);
   });
 
-  it('mints a token when it is given none', async () => {
+  it('opens an identity store beside the data, with nobody in it yet', async () => {
     const parts = await build();
-    expect(parts.token).toMatch(/^[A-Za-z0-9_-]{43}$/u);
+    expect(parts.auth.accounts()).toBe(0);
+    // Nothing can read anything until an account exists and signs in.
+    expect((await call(parts, '/api/health')).statusCode).toBe(401);
   });
 
   it('says the front end is not built rather than 404ing the whole site', async () => {
@@ -71,10 +83,8 @@ describe('createWeb', () => {
   });
 
   it('runs without poppler, and says so', async () => {
-    const parts = await build({ noPoppler: true, token: 'a-token-worth-twenty-chars' });
-    const health = await call(parts, '/api/health', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const parts = await build({ noPoppler: true });
+    const health = await call(parts, '/api/health', signIn(parts));
     expect(JSON.parse(health.body) as unknown).toMatchObject({ poppler: { available: false } });
   });
 
@@ -83,10 +93,8 @@ describe('createWeb', () => {
       binaries: { pdftotext: 'pdftotext', pdftoppm: 'pdftoppm', pdfinfo: 'pdfinfo' },
       versions: { pdftotext: '24.0', pdftoppm: '24.0', pdfinfo: '24.0' },
     };
-    const parts = await build({ poppler, token: 'a-token-worth-twenty-chars' });
-    const health = await call(parts, '/api/health', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const parts = await build({ poppler });
+    const health = await call(parts, '/api/health', signIn(parts));
     expect(JSON.parse(health.body) as unknown).toMatchObject({
       poppler: { available: true, versions: { pdftotext: '24.0' } },
     });
@@ -96,31 +104,24 @@ describe('createWeb', () => {
     const goldenDir = path.join(root, 'golden');
     await mkdir(goldenDir, { recursive: true });
     const parts = await build({
-      token: 'a-token-worth-twenty-chars',
       clock: () => new Date('2026-01-01T00:00:00.000Z'),
       goldenDir,
       version: '9.9.9-test',
     });
-    const health = await call(parts, '/api/health', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const health = await call(parts, '/api/health', signIn(parts));
     expect(JSON.parse(health.body) as unknown).toMatchObject({
       version: '9.9.9-test',
       now: '2026-01-01T00:00:00.000Z',
     });
-    const golden = await call(parts, '/api/golden', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const golden = await call(parts, '/api/golden', signIn(parts));
     expect(JSON.parse(golden.body) as unknown).toStrictEqual({ parts: [] });
   });
 
   it('reads the process environment when it is given none', async () => {
     vi.stubEnv('DATA_DIR', path.join(root, 'from-env'));
     vi.stubEnv('LOG_LEVEL', 'error');
-    built = await createWeb({ token: 'a-token-worth-twenty-chars' });
-    const sources = await call(built, '/api/sources', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    built = await createWeb({});
+    const sources = await call(built, '/api/sources', signIn(built));
     expect(sources.body).toContain(path.join(root, 'from-env'));
     vi.unstubAllEnvs();
   });
@@ -128,25 +129,21 @@ describe('createWeb', () => {
   it('reads evaluation results from where it is told', async () => {
     const resultsDir = path.join(root, 'results');
     await mkdir(resultsDir, { recursive: true });
-    const parts = await build({ resultsDir, token: 'a-token-worth-twenty-chars' });
-    const result = await call(parts, '/api/evals', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const parts = await build({ resultsDir });
+    const result = await call(parts, '/api/evals', signIn(parts));
     expect(JSON.parse(result.body) as unknown).toStrictEqual({ results: [] });
   });
 
   it('takes the harness a launch will run through', async () => {
     const { query } = scriptedQuery([resultMessage({ numTurns: 1, costUsd: 0 })]);
-    const parts = await build({ token: 'a-token-worth-twenty-chars', query });
+    const parts = await build({ query });
     expect(parts.deps.launcher).toBeDefined();
   });
 
   it('reads the live store from where it is told', async () => {
     const databaseFile = path.join(root, 'elsewhere', 'chip.sqlite');
-    const parts = await build({ databaseFile, token: 'a-token-worth-twenty-chars' });
-    const sources = await call(parts, '/api/sources', {
-      authorization: 'Bearer a-token-worth-twenty-chars',
-    });
+    const parts = await build({ databaseFile });
+    const sources = await call(parts, '/api/sources', signIn(parts));
     expect(sources.body).toContain(databaseFile);
   });
 });

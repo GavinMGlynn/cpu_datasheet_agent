@@ -1,6 +1,7 @@
 import type { RouteEntry } from '../server/app.js';
 import type { Router } from '../server/router.js';
 import { registerAlternates } from './alternates.js';
+import { registerAuth } from './auth.js';
 import { registerCache } from './cache.js';
 import { registerDatasheets } from './datasheets.js';
 import { registerEvals } from './evals.js';
@@ -13,6 +14,7 @@ import { registerWrites } from './writes.js';
 import type { ApiDeps } from './deps.js';
 
 export * from './alternates.js';
+export * from './auth.js';
 export * from './cache.js';
 export * from './datasheets.js';
 export * from './deps.js';
@@ -33,6 +35,7 @@ export * from './writes.js';
  * module keeps its own order internally. Across modules there is no overlap.
  */
 export function registerApi(router: Router<RouteEntry>, deps: ApiDeps): void {
+  registerAuth(router, deps);
   registerHealth(router, deps);
   registerParts(router, deps);
   registerDatasheets(router, deps);

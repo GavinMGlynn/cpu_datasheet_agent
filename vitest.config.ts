@@ -28,6 +28,10 @@ export default defineConfig({
         // The browser entry point: three lines that find the root element and
         // mount the application. Covered by the browser tests, not by jsdom.
         'src/web/ui/main.tsx',
+        // Turning the terminal's echo off and reading standard input to its
+        // end: mechanics with no decision in them, and no way to exercise
+        // them without a real TTY.
+        'src/auth/terminal.ts',
       ],
       reporter: ['text', 'lcov', 'json-summary'],
       thresholds: {

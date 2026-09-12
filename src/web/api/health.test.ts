@@ -108,9 +108,8 @@ describe('GET /api/meta', () => {
 });
 
 describe('GET /api/ping', () => {
-  it('answers without a token, saying whether the caller has one', async () => {
-    const signedIn = await api.get('/api/ping');
-    expect(signedIn.body).toMatchObject({ ok: true, authenticated: true });
+  it('answers whoever asks, and names them when they are signed in', async () => {
+    expect((await api.get('/api/ping')).body).toMatchObject({ ok: true, signedInAs: 'tester' });
   });
 });
 

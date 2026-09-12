@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import type { RequestContext } from './app.js';
 import { WebError } from './errors.js';
-import { sendEmpty, type CachePolicy } from './respond.js';
+import type { CachePolicy } from './respond.js';
 
 /** Extensions the application is built from. Anything else is refused rather than guessed at. */
 export const CONTENT_TYPES: Readonly<Record<string, string>> = Object.freeze({
@@ -58,35 +58,12 @@ function isMissing(error: unknown): boolean {
 }
 
 /**
- * Trades a valid token in the query for a cookie and a redirect to the same
- * path without it, so the token stops living in the address bar, the history
- * and every `Referer` the page later sends (D67). Returns false when there
- * was no token to trade.
- *
- * Separate from serving the page because signing in must work before the
- * front end is built: otherwise a fresh checkout has no way in at all.
- */
-export function tradeTokenForCookie(context: RequestContext): boolean {
-  if (context.query.get('token') === null || !context.auth.authenticated) {
-    return false;
-  }
-  const clean = new URL(context.url.href);
-  clean.searchParams.delete('token');
-  sendEmpty(context.response, 303, {
-    Location: `${clean.pathname}${clean.search}`,
-    'Set-Cookie': context.security.sessionCookies(),
-    'Cache-Control': 'no-store',
-  });
-  return true;
-}
-
-/**
  * Serves the built application.
  *
  * A path with no extension that does not exist gets `index.html`, because
  * the application routes in the browser and a reload of `/runs/abc` must not
- * 404. A request carrying a valid token is handed a cookie first; see
- * {@link tradeTokenForCookie}.
+ * 404. The shell is served to anyone: it is what draws the sign-in page, and
+ * every endpoint behind it refuses without a session (D75).
  */
 export function createStaticHandler(
   options: StaticOptions,
@@ -103,9 +80,6 @@ export function createStaticHandler(
   };
 
   const serveIndex = async (context: RequestContext): Promise<void> => {
-    if (tradeTokenForCookie(context)) {
-      return;
-    }
     await serve(context, path.join(root, index));
   };
 

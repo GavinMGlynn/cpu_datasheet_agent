@@ -16,6 +16,8 @@ import { createEvals } from './data/evals.js';
 import { GOLDEN_DIR } from '../eval/load.js';
 import { createLedgerIndex } from './data/ledger-index.js';
 import { createSources, type Sources } from './data/sources.js';
+import { createAuthService, type AuthService } from '../auth/service.js';
+import { createAuthStore } from '../auth/store.js';
 import {
   createApp,
   type ResponseSink,
@@ -25,8 +27,8 @@ import {
 import { WebError } from './server/errors.js';
 import { createResponder } from './server/respond.js';
 import { Router } from './server/router.js';
-import { createSecurity, mintToken, originsFor, type Security } from './server/security.js';
-import { createStaticHandler, tradeTokenForCookie } from './server/static.js';
+import { createSecurity, originsFor, type Security } from './server/security.js';
+import { createStaticHandler } from './server/static.js';
 
 /** Where the built front end is looked for, relative to this file's package. */
 export const UI_DIR = fileURLToPath(new URL('../../dist/ui/', import.meta.url));
@@ -46,8 +48,8 @@ export interface WebOptions {
   readonly goldenDir?: string;
   readonly port?: number;
   readonly host?: string;
-  /** A token to use instead of minting one, so a restart can keep a session. */
-  readonly token?: string;
+  /** The identity store. Defaults to `auth.sqlite` in the data directory. */
+  readonly authFile?: string;
   readonly version?: string;
   readonly logger?: Logger;
   readonly clock?: () => Date;
@@ -63,7 +65,7 @@ export interface WebParts {
   readonly deps: ApiDeps;
   readonly sources: Sources;
   readonly security: Security;
-  readonly token: string;
+  readonly auth: AuthService;
   readonly config: Config;
   readonly app: (request: HttpRequestLike, response: ResponseSink) => Promise<void>;
   readonly router: Router<RouteEntry>;
@@ -114,7 +116,7 @@ async function present(dir: string): Promise<boolean> {
 export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
   const config = loadConfig(options.env ?? process.env);
   const dataDir = options.dataDir ?? config.dataDir;
-  const token = options.token ?? mintToken();
+
   const port = options.port ?? 5174;
   const host = options.host ?? '127.0.0.1';
   const redact = createRedactor({ secrets: secretsFromConfig(config) });
@@ -123,6 +125,11 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     createLogger({ level: config.logLevel, fields: { name: 'chip-web' }, redact });
 
   const databaseFile = options.databaseFile ?? path.join(dataDir, 'chip.sqlite');
+  const authStore = createAuthStore(options.authFile ?? path.join(dataDir, 'auth.sqlite'));
+  const auth = createAuthService({
+    store: authStore,
+    ...(options.clock === undefined ? {} : { clock: options.clock }),
+  });
   const sources = createSources({
     databaseFile,
     evalRunsDir: path.join(dataDir, 'eval-runs'),
@@ -151,6 +158,8 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
 
   const deps: ApiDeps = {
     sources,
+    auth,
+    oidc: undefined,
     auditor: createAuditor(options.clock === undefined ? {} : { clock: options.clock }),
     launcher,
     launches,
@@ -190,11 +199,6 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
   router.get('/*path', {
     access: 'open',
     handler: async (context) => {
-      // Signing in has to work before the front end exists, or a fresh
-      // checkout has no way in at all.
-      if (tradeTokenForCookie(context)) {
-        return;
-      }
       if (!built) {
         throw new WebError(
           503,
@@ -207,7 +211,7 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     },
   });
 
-  const security = createSecurity({ token, origins: originsFor(host, port) });
+  const security = createSecurity({ auth, origins: originsFor(host, port) });
   const app = createApp({
     router,
     responder: createResponder(redact),
@@ -220,12 +224,13 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     deps,
     sources,
     security,
-    token,
+    auth,
     config,
     app,
     router,
     close() {
       sources.close();
+      authStore.close();
     },
   };
 }

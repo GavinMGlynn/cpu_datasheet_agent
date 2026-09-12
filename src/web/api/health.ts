@@ -110,7 +110,7 @@ export function registerHealth(router: Router<RouteEntry>, deps: ApiDeps): void 
     handler: (context) => {
       context.respond.json(context.response, context.facts, {
         ok: true,
-        authenticated: context.auth.authenticated,
+        signedInAs: context.caller?.account.username ?? null,
         version: deps.version,
       });
     },

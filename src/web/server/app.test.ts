@@ -8,25 +8,43 @@ import { WebError } from './errors.js';
 import { createResponder } from './respond.js';
 import { Router } from './router.js';
 import { createSecurity, originsFor, SESSION_COOKIE, TOKEN_HEADER } from './security.js';
+import { createAuthService } from '../../auth/service.js';
+import { createAuthStore } from '../../auth/store.js';
 
-const TOKEN = 'tokentokentokentoken';
 const redact = createRedactor({ secrets: ['super-secret-key'] });
 
+/**
+ * A real identity store behind every test: access control is the app's job,
+ * and a fake one would be testing the fake.
+ */
 function build(routes: (router: Router<RouteEntry>) => void) {
   const router = new Router<RouteEntry>();
   routes(router);
   const log = capturedLogger();
   let now = 1_000;
+  const store = createAuthStore(':memory:');
+  const auth = createAuthService({ store });
+  const admin = store.accounts.create({ username: 'gavin', role: 'admin' });
+  const viewer = store.accounts.create({ username: 'onlooker', role: 'viewer' });
   const app = createApp({
     router,
     responder: createResponder(redact),
-    security: createSecurity({ token: TOKEN, origins: originsFor('127.0.0.1', 5174) }),
+    security: createSecurity({ auth, origins: originsFor('127.0.0.1', 5174) }),
     logger: log.logger,
     redact,
     maxBodyBytes: 64,
     clock: () => (now += 5),
   });
-  return { app, log };
+  const signedIn = auth.signInAs(admin);
+  const onlooker = auth.signInAs(viewer);
+  return {
+    app,
+    log,
+    store,
+    auth,
+    session: { cookie: `${SESSION_COOKIE}=${signedIn.cookie}`, csrf: signedIn.csrf },
+    viewer: { cookie: `${SESSION_COOKIE}=${onlooker.cookie}`, csrf: onlooker.csrf },
+  };
 }
 
 const open = (handler: RouteEntry['handler']): RouteEntry => ({ access: 'open', handler });
@@ -36,8 +54,6 @@ const write = (handler: RouteEntry['handler']): RouteEntry => ({ access: 'write'
 const hello = (context: RequestContext): void => {
   context.respond.json(context.response, context.facts, { hello: context.params.name ?? 'all' });
 };
-
-const bearer = { authorization: `Bearer ${TOKEN}` };
 
 describe('routing and access', () => {
   it('answers an open route with no credential at all', async () => {
@@ -54,24 +70,24 @@ describe('routing and access', () => {
     });
   });
 
-  it('refuses a read route without a token and allows it with one', async () => {
-    const { app } = build((router) => router.get('/api/parts', read(hello)));
+  it('refuses a read route to nobody, and allows it to whoever is signed in', async () => {
+    const { app, session } = build((router) => router.get('/api/parts', read(hello)));
     const refused = recordedResponse();
     await app(recordedRequest({ url: '/api/parts' }), refused);
     expect(refused.statusCode).toBe(401);
     const allowed = recordedResponse();
-    await app(recordedRequest({ url: '/api/parts', headers: bearer }), allowed);
+    await app(recordedRequest({ url: '/api/parts', headers: { cookie: session.cookie } }), allowed);
     expect(allowed.statusCode).toBe(200);
   });
 
   it('applies the stricter checks to a write route', async () => {
-    const { app } = build((router) => router.post('/api/parts', write(hello)));
+    const { app, session, viewer } = build((router) => router.post('/api/parts', write(hello)));
     const cookieOnly = recordedResponse();
     await app(
       recordedRequest({
         method: 'POST',
         url: '/api/parts',
-        headers: { cookie: `${SESSION_COOKIE}=${TOKEN}` },
+        headers: { cookie: session.cookie },
       }),
       cookieOnly,
     );
@@ -81,11 +97,24 @@ describe('routing and access', () => {
       recordedRequest({
         method: 'POST',
         url: '/api/parts',
-        headers: { cookie: `${SESSION_COOKIE}=${TOKEN}`, [TOKEN_HEADER]: TOKEN },
+        headers: { cookie: session.cookie, [TOKEN_HEADER]: session.csrf },
       }),
       withHeader,
     );
     expect(withHeader.statusCode).toBe(200);
+
+    // The same request from a viewer is refused by the role, not the token.
+    const refused = recordedResponse();
+    await app(
+      recordedRequest({
+        method: 'POST',
+        url: '/api/parts',
+        headers: { cookie: viewer.cookie, [TOKEN_HEADER]: viewer.csrf },
+      }),
+      refused,
+    );
+    expect(refused.statusCode).toBe(403);
+    expect(refused.json()).toMatchObject({ error: { code: 'WEB_ROLE_INSUFFICIENT' } });
   });
 
   it('says what is served nowhere', async () => {
@@ -156,10 +185,14 @@ describe('defaults', () => {
     const router = new Router<RouteEntry>();
     router.get('/hello/:name', open(hello));
     const log = capturedLogger();
+    const store = createAuthStore(':memory:');
     const app = createApp({
       router,
       responder: createResponder(redact),
-      security: createSecurity({ token: TOKEN, origins: originsFor('127.0.0.1', 5174) }),
+      security: createSecurity({
+        auth: createAuthService({ store }),
+        origins: originsFor('127.0.0.1', 5174),
+      }),
       logger: log.logger,
       redact,
     });
@@ -177,45 +210,46 @@ describe('request bodies', () => {
       context.respond.json(context.response, context.facts, body);
     });
 
-  function post(body: string | readonly string[], headers = bearer) {
-    return recordedRequest({ method: 'POST', url: '/api/echo', headers, body });
+  /** Every one of these is a signed-in caller; the body is what is on trial. */
+  function post(cookie: string, body: string | readonly string[]) {
+    return recordedRequest({ method: 'POST', url: '/api/echo', headers: { cookie }, body });
   }
 
   it('reads and validates JSON', async () => {
-    const { app } = build((router) => router.post('/api/echo', read(echo)));
+    const { app, session } = build((router) => router.post('/api/echo', read(echo)));
     const response = recordedResponse();
-    await app(post(['{"mpn":', '"TPS54331DR"}']), response);
+    await app(post(session.cookie, ['{"mpn":', '"TPS54331DR"}']), response);
     expect(response.json()).toStrictEqual({ mpn: 'TPS54331DR' });
   });
 
   it('rejects a body that is not JSON, and one that is not the right JSON', async () => {
-    const { app } = build((router) => router.post('/api/echo', read(echo)));
+    const { app, session } = build((router) => router.post('/api/echo', read(echo)));
     const broken = recordedResponse();
-    await app(post('{nope'), broken);
+    await app(post(session.cookie, '{nope'), broken);
     expect(broken.json()).toMatchObject({ error: { code: 'WEB_BAD_JSON', status: 400 } });
     const wrong = recordedResponse();
-    await app(post('{"mpn":7}'), wrong);
+    await app(post(session.cookie, '{"mpn":7}'), wrong);
     expect(wrong.json()).toMatchObject({ error: { code: 'VALIDATION_FAILED', status: 400 } });
   });
 
   it('rejects an empty body where one is required', async () => {
-    const { app } = build((router) => router.post('/api/echo', read(echo)));
+    const { app, session } = build((router) => router.post('/api/echo', read(echo)));
     const response = recordedResponse();
-    await app(post('  '), response);
+    await app(post(session.cookie, '  '), response);
     expect(response.json()).toMatchObject({ error: { code: 'WEB_BODY_REQUIRED' } });
   });
 
   it('refuses a body larger than the limit', async () => {
-    const { app } = build((router) => router.post('/api/echo', read(echo)));
+    const { app, session } = build((router) => router.post('/api/echo', read(echo)));
     const response = recordedResponse();
-    await app(post(`{"mpn":"${'x'.repeat(200)}"}`), response);
+    await app(post(session.cookie, `{"mpn":"${'x'.repeat(200)}"}`), response);
     expect(response.json()).toMatchObject({
       error: { code: 'WEB_BODY_TOO_LARGE', details: { limit: 64 } },
     });
   });
 
   it('hands raw bytes to a handler that wants them', async () => {
-    const { app } = build((router) =>
+    const { app, session } = build((router) =>
       router.post(
         '/api/raw',
         read(async (context) => {
@@ -226,7 +260,12 @@ describe('request bodies', () => {
     );
     const response = recordedResponse();
     await app(
-      recordedRequest({ method: 'POST', url: '/api/raw', headers: bearer, body: 'abcd' }),
+      recordedRequest({
+        method: 'POST',
+        url: '/api/raw',
+        headers: { cookie: session.cookie },
+        body: 'abcd',
+      }),
       response,
     );
     expect(response.json()).toStrictEqual({ bytes: 4 });

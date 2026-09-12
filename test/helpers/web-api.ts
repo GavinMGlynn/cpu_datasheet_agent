@@ -21,6 +21,10 @@ import { createLaunchRegistry } from '../../src/web/runs/registry.js';
 import { createEvals } from '../../src/web/data/evals.js';
 import { createLedgerIndex } from '../../src/web/data/ledger-index.js';
 import { createSources, type Sources } from '../../src/web/data/sources.js';
+import { createAuthService, type AuthService } from '../../src/auth/service.js';
+import { createAuthStore } from '../../src/auth/store.js';
+import type { Account } from '../../src/auth/account.js';
+import type { IssuedSession } from '../../src/auth/sessions.js';
 import {
   createApp,
   type HttpRequestLike,
@@ -33,7 +37,8 @@ import { createSecurity, originsFor } from '../../src/web/server/security.js';
 import { buildPdf, datasheetSpec } from './pdf-fixtures.js';
 import { capturedLogger, recordedRequest, recordedResponse } from './web.js';
 
-export const TEST_TOKEN = 'tokentokentokentoken';
+/** The account every test signs in as, unless it asks for another. */
+export const TEST_USER = 'tester';
 
 export interface ApiResult {
   readonly status: number;
@@ -43,6 +48,21 @@ export interface ApiResult {
 }
 
 export interface TestApi {
+  /** The identity service the app was built with. */
+  readonly auth: AuthService;
+  /** The two accounts every test has: one of each role. */
+  readonly accounts: { readonly admin: Account; readonly viewer: Account };
+  /** The session the requests carry. */
+  readonly session: IssuedSession;
+  /** Signs in as the other role, and returns the session that follows. */
+  signInAs(role: 'admin' | 'viewer'): IssuedSession;
+  /** A request with exactly the headers given: for testing who is refused. */
+  requestAs(
+    headers: Record<string, string>,
+    method: string,
+    url: string,
+    body?: unknown,
+  ): Promise<ApiResult>;
   readonly root: string;
   readonly deps: ApiDeps;
   readonly db: Db;
@@ -114,8 +134,27 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
     clock: () => new Date('2026-09-12T00:00:00.000Z'),
     newId: () => `00000000-0000-4000-a000-${String((launchIds += 1)).padStart(12, '0')}`,
   });
+  const authStore = createAuthStore(path.join(root, 'auth.sqlite'));
+  const auth = createAuthService({
+    store: authStore,
+    clock: () => new Date('2026-09-12T00:00:00.000Z'),
+  });
+  const tester = authStore.accounts.create(
+    { username: TEST_USER, role: 'admin' },
+    '2026-09-12T00:00:00.000Z',
+  );
+  const viewer = authStore.accounts.create(
+    { username: 'onlooker', role: 'viewer' },
+    '2026-09-12T00:00:00.000Z',
+  );
+  // Signed in directly: a password would cost a scrypt hash in every test,
+  // and what is being tested here is what a signed-in caller may do.
+  let session = auth.signInAs(tester);
+
   const deps: ApiDeps = {
     sources,
+    auth,
+    oidc: undefined,
     launches,
     launcher: createLauncher({
       config,
@@ -151,19 +190,24 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
   const app = createApp({
     router,
     responder: createResponder(redact),
-    security: createSecurity({ token: TEST_TOKEN, origins: originsFor('127.0.0.1', 5174) }),
+    security: createSecurity({ auth, origins: originsFor('127.0.0.1', 5174) }),
     logger: log.logger,
     redact,
   });
 
-  const request = async (method: string, url: string, body?: unknown): Promise<ApiResult> => {
+  const requestWith = async (
+    headers: Record<string, string>,
+    method: string,
+    url: string,
+    body?: unknown,
+  ): Promise<ApiResult> => {
     const response = recordedResponse();
     await app(
       recordedRequest({
         method,
         url,
         headers: {
-          authorization: `Bearer ${TEST_TOKEN}`,
+          ...headers,
           ...(body === undefined ? {} : { 'content-type': 'application/json' }),
         },
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
@@ -184,9 +228,27 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
     };
   };
 
+  const request = (method: string, url: string, body?: unknown): Promise<ApiResult> =>
+    requestWith(
+      { cookie: `chip_session=${session.cookie}`, 'x-chip-token': session.csrf },
+      method,
+      url,
+      body,
+    );
+
   return {
     root,
     deps,
+    auth,
+    accounts: { admin: tester, viewer },
+    get session() {
+      return session;
+    },
+    signInAs(role: 'admin' | 'viewer') {
+      session = auth.signInAs(role === 'admin' ? tester : viewer);
+      return session;
+    },
+    requestAs: (headers, method, url, body) => requestWith(headers, method, url, body),
     db,
     repositories,
     sources,
@@ -226,6 +288,7 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
 
     async close() {
       sources.close();
+      authStore.close();
       db.close();
       await rm(root, { recursive: true, force: true });
     },

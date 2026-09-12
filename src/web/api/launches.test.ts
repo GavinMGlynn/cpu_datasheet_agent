@@ -8,7 +8,7 @@ import {
   run as runFixture,
 } from '../../../test/helpers/core-fixtures.js';
 import { recordedRequest, recordedResponse } from '../../../test/helpers/web.js';
-import { createTestApi, TEST_TOKEN, type TestApi } from '../../../test/helpers/web-api.js';
+import { createTestApi, type TestApi } from '../../../test/helpers/web-api.js';
 import type { RunResult } from '../../core/run.js';
 import { registerApi } from './index.js';
 
@@ -120,7 +120,7 @@ describe('POST /api/launches', () => {
     const withCookie = recordedRequest({
       method: 'POST',
       url: '/api/launches',
-      headers: { cookie: `chip_session=${TEST_TOKEN}`, 'content-type': 'application/json' },
+      headers: { cookie: `chip_session=${api.session.cookie}`, 'content-type': 'application/json' },
       body: JSON.stringify(launch),
     });
     await api.app(withCookie, response);
@@ -159,7 +159,7 @@ describe('watching a launch', () => {
     await api.app(
       recordedRequest({
         url: `/api/launches/${id}/events`,
-        headers: { authorization: `Bearer ${TEST_TOKEN}` },
+        headers: { cookie: `chip_session=${api.session.cookie}` },
       }),
       response,
     );
@@ -178,7 +178,7 @@ describe('watching a launch', () => {
     await api.app(
       recordedRequest({
         url: `/api/launches/${id}/events`,
-        headers: { authorization: `Bearer ${TEST_TOKEN}`, 'last-event-id': '2' },
+        headers: { cookie: `chip_session=${api.session.cookie}`, 'last-event-id': '2' },
       }),
       response,
     );
@@ -201,7 +201,7 @@ describe('watching a launch', () => {
     const streaming = api.app(
       recordedRequest({
         url: `/api/launches/${record.id}/events`,
-        headers: { authorization: `Bearer ${TEST_TOKEN}` },
+        headers: { cookie: `chip_session=${api.session.cookie}` },
       }),
       response,
     );
@@ -220,7 +220,7 @@ describe('watching a launch', () => {
     await api.app(
       recordedRequest({
         url: `/api/launches/${started.launch.id}/events`,
-        headers: { authorization: `Bearer ${TEST_TOKEN}`, 'last-event-id': 'nonsense' },
+        headers: { cookie: `chip_session=${api.session.cookie}`, 'last-event-id': 'nonsense' },
       }),
       response,
     );

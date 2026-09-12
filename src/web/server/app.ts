@@ -5,7 +5,7 @@ import type { Logger } from '../../log/logger.js';
 import { WebError, failureFor } from './errors.js';
 import type { HttpResponseLike, RequestFacts, Responder } from './respond.js';
 import type { RouteParams, Router } from './router.js';
-import type { AuthResult, Security } from './security.js';
+import type { Caller, Security } from './security.js';
 import { openSse, type SseOptions, type SseSink, type SseStream } from './sse.js';
 
 /**
@@ -39,7 +39,8 @@ export interface RequestContext {
   readonly response: ResponseSink;
   readonly respond: Responder;
   readonly security: Security;
-  readonly auth: AuthResult;
+  /** Who is asking, when anyone is. */
+  readonly caller: Caller | undefined;
   readonly log: Logger;
   /** Reads the request body as JSON and validates it. Never coerces. */
   json<T extends z.ZodType>(schema: T, subject: string): Promise<z.output<T>>;
@@ -131,7 +132,7 @@ export function createApp(
     const method = request.method ?? 'GET';
     let status = 500;
     let path = request.url ?? '';
-    let via: AuthResult['via'] = 'none';
+    let who = 'nobody';
     try {
       const url = urlOf(request);
       path = url.pathname;
@@ -158,16 +159,15 @@ export function createApp(
       }
 
       const authRequest = { method, headers: request.headers, query: url.searchParams };
-      let auth: AuthResult = { authenticated: false, via: 'none' };
+      let caller: Caller | undefined;
       if (lookup.handler.access === 'read') {
-        auth = security.requireRead(authRequest);
+        caller = security.requireRead(authRequest);
       } else if (lookup.handler.access === 'write') {
-        security.requireWrite(authRequest);
-        auth = security.authenticate(authRequest);
+        caller = security.requireWrite(authRequest);
       } else {
-        auth = security.authenticate(authRequest);
+        caller = security.caller(authRequest);
       }
-      via = auth.via;
+      who = caller?.account.username ?? 'nobody';
 
       // A holder rather than a plain boolean: the handler sets it through the
       // closure, which narrowing on a local would not see.
@@ -182,7 +182,7 @@ export function createApp(
         response,
         respond: responder,
         security,
-        auth,
+        caller,
         log: logger,
         async json(schema, subject) {
           return parseOrThrow(schema, parseJsonBody(await readBytes(request, limit)), subject);
@@ -215,7 +215,7 @@ export function createApp(
         responder.failure(response, { method }, failure);
       }
     } finally {
-      logger.info('request', { method, path, status, ms: clock() - started, auth: via });
+      logger.info('request', { method, path, status, ms: clock() - started, who });
     }
   };
 }

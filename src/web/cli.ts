@@ -3,6 +3,7 @@ import { elementAt } from '../util/array.js';
 import { DEFAULT_HOST, DEFAULT_PORT, startWebServer, type RunningServer } from './server/server.js';
 import { bindWarning } from './server/security.js';
 import { createWeb, type WebOptions } from './create.js';
+import type { AuthService } from '../auth/service.js';
 import { writeSnapshot } from './snapshot/write.js';
 
 export class WebCliError extends ChipAgentError {}
@@ -17,7 +18,6 @@ options:
   --db <file>       the live store, if it is not <data>/chip.sqlite
   --ui <dir>        the built front end, if it is not dist/ui
   --results <dir>   evaluation results (default eval/results)
-  --token <value>   use this token instead of minting one
   --snapshot <file> write a shareable snapshot and exit, instead of serving
   --source <id>     which database the snapshot reads (default live)
   --help            print this
@@ -30,7 +30,6 @@ export interface WebCliOptions {
   readonly databaseFile?: string;
   readonly uiDir?: string;
   readonly resultsDir?: string;
-  readonly token?: string;
   /** Write a snapshot to this file and exit. */
   readonly snapshot?: string;
   /** The database a snapshot reads. */
@@ -90,10 +89,6 @@ export function parseWebCli(argv: readonly string[]): WebCliOptions {
         options = { ...options, resultsDir: text(value, '--results') };
         index += 1;
         break;
-      case '--token':
-        options = { ...options, token: text(value, '--token') };
-        index += 1;
-        break;
       case '--snapshot':
         options = { ...options, snapshot: text(value, '--snapshot') };
         index += 1;
@@ -111,9 +106,10 @@ export function parseWebCli(argv: readonly string[]): WebCliOptions {
 
 export interface ServeResult {
   readonly server: RunningServer;
-  /** The address to open, token and all. */
+  /** The address to open. Signing in happens on the page. */
   readonly url: string;
-  readonly token: string;
+  /** The running server's accounts and sessions, for whoever started it. */
+  readonly auth: AuthService;
   close(): Promise<void>;
 }
 
@@ -124,7 +120,6 @@ function webOptions(options: WebCliOptions, env: NodeJS.ProcessEnv): WebOptions 
     ...(options.databaseFile === undefined ? {} : { databaseFile: options.databaseFile }),
     ...(options.uiDir === undefined ? {} : { uiDir: options.uiDir }),
     ...(options.resultsDir === undefined ? {} : { resultsDir: options.resultsDir }),
-    ...(options.token === undefined ? {} : { token: options.token }),
     ...(options.port === undefined ? {} : { port: options.port }),
     ...(options.host === undefined ? {} : { host: options.host }),
   };
@@ -133,9 +128,8 @@ function webOptions(options: WebCliOptions, env: NodeJS.ProcessEnv): WebOptions 
 /**
  * Starts the site and returns how to reach it.
  *
- * The address it prints carries the token, which the page trades for a cookie
- * on arrival (D67). That is the whole sign-in: no password to store, nothing
- * shared between machines, and a new token every start.
+ * The address it prints is just the address: signing in is a username and a
+ * password on the page, against an account in `auth.sqlite` (D75).
  */
 export async function serveWeb(
   options: WebCliOptions,
@@ -151,13 +145,16 @@ export async function serveWeb(
       out(`warning: ${warning}`);
     },
   });
-  const url = `${server.url}/?token=${parts.token}`;
   out(`chip-web listening on ${server.url}`);
-  out(`open ${url}`);
+  if (parts.auth.accounts() === 0) {
+    // Nothing can sign in yet, and the sign-in page says the same thing. A
+    // default account with a known password would be worse than no account.
+    out('no accounts yet: create one with `npx tsx bin/chip-auth.ts add <name> --role admin`');
+  }
   return {
     server,
-    url,
-    token: parts.token,
+    url: server.url,
+    auth: parts.auth,
     async close() {
       await server.close();
       parts.close();

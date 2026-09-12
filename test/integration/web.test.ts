@@ -13,6 +13,9 @@ import {
 import { buildPdf, datasheetSpec } from '../helpers/pdf-fixtures.js';
 import { createRepositories, openDatabase } from '../../src/db/index.js';
 import { serveWeb, type ServeResult } from '../../src/web/cli.js';
+import { hashPassword } from '../../src/auth/password.js';
+import type { IssuedSession } from '../../src/auth/sessions.js';
+import { required } from '../../src/util/present.js';
 
 /**
  * The site as it actually runs: a real socket, a real SQLite file, a real
@@ -23,14 +26,18 @@ import { serveWeb, type ServeResult } from '../../src/web/cli.js';
 let root: string;
 let dataDir: string;
 let running: ServeResult;
+let session: IssuedSession;
+
+const PASSWORD = 'correct horse battery staple';
 let sha256: string;
 
 function url(pathname: string): string {
   return `${running.server.url}${pathname}`;
 }
 
-function withToken(headers: Record<string, string> = {}): Record<string, string> {
-  return { authorization: `Bearer ${running.token}`, ...headers };
+/** The headers a signed-in browser sends: the session, and its own token. */
+function signedIn(headers: Record<string, string> = {}): Record<string, string> {
+  return { cookie: `chip_session=${session.cookie}`, 'x-chip-token': session.csrf, ...headers };
 }
 
 beforeAll(async () => {
@@ -70,6 +77,16 @@ beforeAll(async () => {
     { DATA_DIR: dataDir, LOG_LEVEL: 'error' },
     () => undefined,
   );
+  // A real account with a real password, hashed the way the site hashes it:
+  // signing in over the wire is one of the things being tested.
+  running.auth.store.accounts.create({
+    username: 'gavin',
+    role: 'admin',
+    passwordHash: await hashPassword(PASSWORD),
+  });
+  session = running.auth.signInAs(
+    required(running.auth.store.accounts.byUsername('gavin'), 'the account just created'),
+  );
 });
 
 afterAll(async () => {
@@ -95,28 +112,43 @@ function humanRead(): Record<string, unknown> {
 }
 
 describe('reaching the site', () => {
-  it('answers a ping without a token and refuses data without one', async () => {
+  it('answers a ping to anyone and refuses data to nobody in particular', async () => {
     const ping = await fetch(url('/api/ping'));
     expect(ping.status).toBe(200);
-    expect(await ping.json()).toMatchObject({ ok: true, authenticated: false });
+    expect(await ping.json()).toMatchObject({ ok: true, signedInAs: null });
     const refused = await fetch(url('/api/parts'));
     expect(refused.status).toBe(401);
     expect(await refused.json()).toMatchObject({ error: { code: 'WEB_UNAUTHENTICATED' } });
   });
 
-  it('trades the token in the address for a cookie', async () => {
-    const response = await fetch(url(`/?token=${running.token}`), { redirect: 'manual' });
-    expect(response.status).toBe(303);
-    expect(response.headers.get('location')).toBe('/');
-    const cookie = response.headers.get('set-cookie') ?? '';
-    expect(cookie).toContain('chip_session=');
-    expect(cookie).toContain('HttpOnly');
-    expect(cookie).toContain('SameSite=Strict');
-
-    const withCookie = await fetch(url('/api/parts'), {
-      headers: { cookie: cookie.split(';')[0] ?? '' },
+  it('signs in with a username and a password, over the wire', async () => {
+    const response = await fetch(url('/api/auth/login'), {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ username: 'gavin', password: PASSWORD }),
     });
-    expect(withCookie.status).toBe(200);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({
+      account: { username: 'gavin', role: 'admin' },
+    });
+    const cookies = response.headers.getSetCookie();
+    expect(cookies.join(' ')).toContain('HttpOnly');
+    expect(cookies.join(' ')).toContain('SameSite=Strict');
+    const cookie = cookies.map((one) => one.split(';')[0]).join('; ');
+    const parts = await fetch(url('/api/parts'), { headers: { cookie } });
+    expect(parts.status).toBe(200);
+  });
+
+  it('refuses the wrong password without saying which half was wrong', async () => {
+    const response = await fetch(url('/api/auth/login'), {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ username: 'gavin', password: 'not the password' }),
+    });
+    expect(response.status).toBe(401);
+    const body = (await response.json()) as { error: { code: string; message: string } };
+    expect(body.error.code).toBe('AUTH_REFUSED');
+    expect(body.error.message).not.toContain('password is wrong');
   });
 
   it('says the front end is not built rather than serving nothing', async () => {
@@ -128,7 +160,7 @@ describe('reaching the site', () => {
 
 describe('reading real data over HTTP', () => {
   it('lists the parts in the store', async () => {
-    const response = await fetch(url('/api/parts'), { headers: withToken() });
+    const response = await fetch(url('/api/parts'), { headers: signedIn() });
     expect(response.status).toBe(200);
     expect(response.headers.get('content-type')).toBe('application/json; charset=utf-8');
     const body = (await response.json()) as { total: number; items: { mpn: string }[] };
@@ -137,18 +169,18 @@ describe('reading real data over HTTP', () => {
   });
 
   it('answers a conditional request with 304', async () => {
-    const first = await fetch(url('/api/parts'), { headers: withToken() });
+    const first = await fetch(url('/api/parts'), { headers: signedIn() });
     const etag = first.headers.get('etag') ?? '';
     expect(etag).not.toBe('');
     const second = await fetch(url('/api/parts'), {
-      headers: withToken({ 'if-none-match': etag }),
+      headers: signedIn({ 'if-none-match': etag }),
     });
     expect(second.status).toBe(304);
     expect(await second.text()).toBe('');
   });
 
   it('answers HEAD with the headers and no body', async () => {
-    const response = await fetch(url('/api/parts'), { method: 'HEAD', headers: withToken() });
+    const response = await fetch(url('/api/parts'), { method: 'HEAD', headers: signedIn() });
     expect(response.status).toBe(200);
     expect(response.headers.get('content-length')).not.toBe(null);
     expect(await response.text()).toBe('');
@@ -156,7 +188,7 @@ describe('reading real data over HTTP', () => {
 
   it('renders a datasheet page as a PNG through poppler', async () => {
     const response = await fetch(url(`/api/datasheets/${sha256}/pages/1/image?dpi=72`), {
-      headers: withToken(),
+      headers: signedIn(),
     });
     expect(response.status).toBe(200);
     expect(response.headers.get('content-type')).toBe('image/png');
@@ -167,13 +199,13 @@ describe('reading real data over HTTP', () => {
   });
 
   it('reads the ledger from disk', async () => {
-    const response = await fetch(url('/api/ledger'), { headers: withToken() });
+    const response = await fetch(url('/api/ledger'), { headers: signedIn() });
     const body = (await response.json()) as { total: number };
     expect(body.total).toBe(1);
   });
 
   it('reports its own health', async () => {
-    const response = await fetch(url('/api/health'), { headers: withToken() });
+    const response = await fetch(url('/api/health'), { headers: signedIn() });
     const body = (await response.json()) as {
       database: { totals: { parts: number } };
       credentials: Record<string, boolean>;
@@ -184,7 +216,7 @@ describe('reading real data over HTTP', () => {
 
   it('serves many requests at once', async () => {
     const responses = await Promise.all(
-      Array.from({ length: 12 }, () => fetch(url('/api/parts'), { headers: withToken() })),
+      Array.from({ length: 12 }, () => fetch(url('/api/parts'), { headers: signedIn() })),
     );
     expect(responses.every((response) => response.status === 200)).toBe(true);
   });
@@ -201,7 +233,7 @@ describe('changing something over HTTP', () => {
   it('accepts a correction carrying the token in a header', async () => {
     const response = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
       method: 'POST',
-      headers: withToken({ 'content-type': 'application/json' }),
+      headers: signedIn({ 'content-type': 'application/json' }),
       body: JSON.stringify(correction),
     });
     expect(response.status).toBe(200);
@@ -210,8 +242,7 @@ describe('changing something over HTTP', () => {
   });
 
   it('refuses a correction carrying only the cookie', async () => {
-    const handoff = await fetch(url(`/?token=${running.token}`), { redirect: 'manual' });
-    const cookie = (handoff.headers.get('set-cookie') ?? '').split(';')[0] ?? '';
+    const cookie = `chip_session=${session.cookie}`;
     const refused = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
       method: 'POST',
       headers: { cookie, 'content-type': 'application/json' },
@@ -224,16 +255,34 @@ describe('changing something over HTTP', () => {
 
     const accepted = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
       method: 'POST',
-      headers: { cookie, 'x-chip-token': running.token, 'content-type': 'application/json' },
+      headers: { cookie, 'x-chip-token': session.csrf, 'content-type': 'application/json' },
       body: JSON.stringify(correction),
     });
     expect(accepted.status).toBe(200);
   });
 
+  it('refuses a correction from a viewer, whatever they carry', async () => {
+    const viewer = running.auth.signInAs(
+      running.auth.store.accounts.byUsername('onlooker') ??
+        running.auth.store.accounts.create({ username: 'onlooker', role: 'viewer' }),
+    );
+    const response = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
+      method: 'POST',
+      headers: {
+        cookie: `chip_session=${viewer.cookie}`,
+        'x-chip-token': viewer.csrf,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(correction),
+    });
+    expect(response.status).toBe(403);
+    expect(await response.json()).toMatchObject({ error: { code: 'WEB_ROLE_INSUFFICIENT' } });
+  });
+
   it('refuses a change from an origin it does not serve', async () => {
     const response = await fetch(url('/api/parts/TPS54331DR/parameters/vinMax'), {
       method: 'POST',
-      headers: withToken({ origin: 'https://evil.example', 'content-type': 'application/json' }),
+      headers: signedIn({ origin: 'https://evil.example', 'content-type': 'application/json' }),
       body: JSON.stringify(correction),
     });
     expect(response.status).toBe(403);
@@ -241,7 +290,7 @@ describe('changing something over HTTP', () => {
   });
 
   it('leaves the audit trail behind every one of them', async () => {
-    const response = await fetch(url('/api/audit'), { headers: withToken() });
+    const response = await fetch(url('/api/audit'), { headers: signedIn() });
     const body = (await response.json()) as { total: number; items: { action: string }[] };
     expect(body.total).toBeGreaterThan(0);
     expect(body.items[0]?.action).toBe('parameter.correct');
@@ -250,7 +299,7 @@ describe('changing something over HTTP', () => {
 
 describe('refusing what it should', () => {
   it('405s a method the route does not serve, and names what it does', async () => {
-    const response = await fetch(url('/api/parts'), { method: 'DELETE', headers: withToken() });
+    const response = await fetch(url('/api/parts'), { method: 'DELETE', headers: signedIn() });
     expect(response.status).toBe(405);
     expect(await response.json()).toMatchObject({
       error: { code: 'WEB_METHOD_NOT_ALLOWED', details: { allow: ['GET', 'HEAD'] } },
@@ -258,13 +307,13 @@ describe('refusing what it should', () => {
   });
 
   it('answers OPTIONS with the methods allowed', async () => {
-    const response = await fetch(url('/api/parts'), { method: 'OPTIONS', headers: withToken() });
+    const response = await fetch(url('/api/parts'), { method: 'OPTIONS', headers: signedIn() });
     expect(response.status).toBe(204);
     expect(response.headers.get('allow')).toBe('GET, HEAD');
   });
 
   it('404s a path it does not serve under /api', async () => {
-    const response = await fetch(url('/api/nothing'), { headers: withToken() });
+    const response = await fetch(url('/api/nothing'), { headers: signedIn() });
     expect(response.status).toBe(404);
   });
 

@@ -46,6 +46,13 @@ export interface Failure {
  */
 const BY_CODE: Readonly<Record<string, number>> = Object.freeze({
   VALIDATION_FAILED: 400,
+  AUTH_REFUSED: 401,
+  AUTH_LOCKED_OUT: 429,
+  AUTH_PASSWORD_TOO_SHORT: 400,
+  AUTH_PASSWORD_TOO_LONG: 400,
+  AUTH_ACCOUNT_EXISTS: 409,
+  AUTH_ACCOUNT_NOT_FOUND: 404,
+  AUTH_HASH_UNREADABLE: 500,
   WEB_BAD_PATH: 400,
   WEB_ROUTE_PATTERN: 500,
   CLI_USAGE: 400,
@@ -62,6 +69,9 @@ const BY_CODE: Readonly<Record<string, number>> = Object.freeze({
 /** Fallback by error class, read from the name every `ChipAgentError` sets. */
 const BY_CLASS: Readonly<Record<string, number>> = Object.freeze({
   ValidationError: 400,
+  AuthError: 401,
+  LockedOutError: 429,
+  PasswordError: 400,
   QueryError: 400,
   MpnError: 400,
   ParseError: 400,
