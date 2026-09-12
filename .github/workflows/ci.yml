@@ -123,7 +123,7 @@ jobs:
 
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-rocky10
           path: coverage/
@@ -184,7 +184,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the distribution
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.package.outputs.name }}
           path: ${{ steps.package.outputs.archive }}
@@ -209,7 +209,7 @@ jobs:
         run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test'].replace(/^[^0-9]*/, '')")" >> "$GITHUB_OUTPUT"
 
       - name: Cache the browser
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ steps.playwright.outputs.version }}-rocky10
@@ -239,7 +239,7 @@ jobs:
 
       - name: Upload the report and any screenshots
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-rocky10
           path: |
@@ -260,7 +260,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Download the distribution
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           pattern: chip-datasheet-agent-*
           path: release

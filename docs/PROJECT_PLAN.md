@@ -130,6 +130,8 @@ that supersedes the old one, and the old row's status changes to
 | D69 | 2026-09-12 | The site reads any of the project's databases, the live store and every `data/eval-runs/*.sqlite`, selectable per request. | The twenty-two parts the baseline extracted live in an evaluation-run database, not in `data/chip.sqlite`, which holds two. A site that could only read the live store would show almost none of the work. | active |
 | D70 | 2026-09-12 | Every part of the web module carries four test layers — unit, behaviour, snapshot, integration — and the site carries a fifth: Playwright driving Chromium against a real server on seeded temporary data. Snapshots are committed and reviewed as diffs. | The user's requirement, and the right one for a surface that is mostly rendering: 100% coverage proves every line ran, not that the page shows the right thing. A snapshot catches a payload that quietly changed shape; a browser test catches a chart that renders blank, a filter that stops filtering, and a dialog that spends money without asking. The browser never touches the live store: an end-to-end test that can delete real data is a test nobody dares run. | active |
 | D71 | 2026-09-12 | Every pipeline job runs on the Rocky Linux 10 self-hosted runner, and the first job refuses to continue unless `/etc/os-release` says Rocky 10. Tools — poppler, Chromium's shared libraries, the GitHub CLI — are verified, never installed. Screenshot baselines are taken only on that runner and committed under `test/e2e/__screenshots__/rocky10/`; a local run writes to `local/`, which is git-ignored. | The target platform is one private VM, so "works on my machine" and "works on the build machine" are the same claim only if the build machine is checked. A package manager running unattended on that VM is not a build step, it is a change to the machine nobody reviewed. And a screenshot baseline is a photograph of one machine's fonts: taken here and compared there, it fails for reasons that have nothing to do with the page. | active |
+| D72 | 2026-09-12 | The address is what names the database: the front end reads `?source=` when it is there, remembers it, and falls back to the selector otherwise. | Every endpoint already takes `?source=`, so an address could carry one and be ignored — and it was. A link to a part in the baseline opened the live store's copy of it with no sign that it had done so, which is the worst kind of wrong answer: the right page, the wrong two hundred numbers. | active |
+| D73 | 2026-09-12 | The browser suite always starts its own server; it never reuses one that is already listening. | A `npm run web` over the real data directory answers `/api/ping` exactly as the seeded server does, so Playwright adopted it and ran thirty-three tests against live data — the one thing D70 forbids. Refusing to reuse turns a silent wrong target into a port-in-use failure. | active |
 
 ## 4. Status
 
@@ -158,7 +160,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M16 | Evaluation harness | complete | 2026-09-12 |
 | M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
-| M19 | Web application | in progress | |
+| M19 | Web application | complete | 19A–19I; the site, the snapshot, and five test layers |
 
 ## 5. Conventions
 
@@ -259,6 +261,63 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 24: Module 19 built, and what the site found
+
+The web application, end to end: the server, the read models, the API, the
+audited write path, run control, the front end, the snapshot, and the five
+test layers D70 asks for. 3,070 tests, 100% coverage per file, 402 gate files
+clean, 33 Playwright tests against a seeded temporary directory.
+
+**What the site is**
+
+A local server on the loopback interface with a token minted per start, a
+React front end of eighteen pages, and a snapshot that is one file with the
+charts drawn as SVG. Every read takes `?source=`, so the live store and any
+evaluation-run database are read the same way; only the live store accepts a
+write, and every write lands with an audit row in the same transaction. Runs
+can be started from the page, under the three money gates the CLI uses plus a
+ceiling for the launch.
+
+**Driving it against the real data found four defects the tests did not**
+
+| What was wrong | What it showed | Now |
+| --- | --- | --- |
+| Citations and verifications counted against parameters with no value | the live store reported 54 parameters stated and 60 pages cited; the baseline claimed 537 confirmations of 586 values | counted against values that exist: 54 and 54, and 476 confirmations |
+| The spend chart bucketed by day | 47 runs inside one day drew a single point, which is exactly the shape an evaluation has | falls back to hourly buckets and names the bucket on the chart |
+| `?source=` in the address was ignored | a link to a part in the baseline opened the live store's copy, silently | the address wins, and is remembered (D72) |
+| Playwright reused whatever answered on port 5199 | a `npm run web` over the real data directory was adopted as the test server; 30 of 33 tests failed against data they should never have seen | the suite starts its own server or fails loudly (D73) |
+
+The first of those is the one worth remembering: the wrong number was
+produced by code that was fully covered, fully typed and passing every
+assertion written about it. It was only visibly wrong once a person read a
+page that said more pages were cited than parameters were found.
+
+**What the baseline reads, through the site**
+
+22 parts, 17 datasheets, 586 parameters stated, 476 confirmed by a second
+pass; 47 runs, 981 turns, $109.33 — $4.97 a part, 18.7¢ a stated parameter,
+4.6¢ a confirmed one. 922 tool calls, 1,101 gate decisions with no denial, a
+2.3% cache miss rate over the 299 calls that could miss. The slowest tools are
+the two that call the model (`extract_part` p50 219 s, `verify_part` p50
+79 s); of the rest, `resolve_mpn` has a p90 of 1.9 s against a p50 of 13 ms,
+which is the shape of a call that is usually cached and occasionally is not.
+`normalise_value` failed nine times, every one `UNIT_PARSE_FAILED`. The
+evaluation reads 90.6% recall, 90.6% precision, 59.3% exact citations, $87.24.
+
+**The pipeline**
+
+Every job runs on the Rocky Linux 10 self-hosted runner (D71): environment,
+check, build, browser tests, release. The twenty-one functional browser tests
+pass there. The twelve screenshot baselines are generated on that runner and
+committed under `test/e2e/__screenshots__/rocky10/`, because a screenshot
+baseline is a photograph of one machine's fonts.
+
+**Next concrete step**
+
+The plan is finished again. What the evidence suggests is Q7 — which column of
+a MIN/TYP/MAX row is the value — and `extract.v2` against the eval, now that
+the site makes the difference between two runs a page rather than a diff.
 
 ### 2026-09-12 — Session 23: Module 19 planned, a web application
 

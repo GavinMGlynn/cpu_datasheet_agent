@@ -169,6 +169,14 @@ describe('renderSnapshot', () => {
     expect(html).toContain('vinMin');
   });
 
+  it('turns the ink white where the shading is too dark to read through', () => {
+    // Both parts state vinMin, so that cell is the top of the ramp; nothing
+    // states rdsOnLow, so that one is the bottom.
+    const html = renderSnapshot(base);
+    expect(html).toContain('class="heat on"');
+    expect(html).toMatch(/<td class="heat" style="background:#cde2fb">0<\/td>/u);
+  });
+
   it('shades nothing rather than dividing by zero when no part is stored', () => {
     const html = renderSnapshot({ ...base, totals: { ...base.totals, parts: 0 } });
     expect(html).toContain('of 0 parts');

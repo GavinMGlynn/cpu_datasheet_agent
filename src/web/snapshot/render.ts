@@ -38,7 +38,9 @@ function spendChart(snapshot: Snapshot): string {
   const top = 16;
   const bottom = height - 28;
   const largest = points.reduce((most, point) => Math.max(most, point.cumulativeUsd), 0);
-  const step = points.length === 1 ? 0 : (width - 80) / (points.length - 1);
+  // Sixty each side: the last tick is a label centred on its point, and a
+  // twenty-pixel margin cut it in half.
+  const step = points.length === 1 ? 0 : (width - 120) / (points.length - 1);
   const x = (index: number): number => 60 + index * step;
   const y = (value: number): number =>
     largest === 0 ? bottom : bottom - (value / largest) * (bottom - top);
@@ -47,7 +49,7 @@ function spendChart(snapshot: Snapshot): string {
     points.map((point, index) => `${String(x(index))},${String(y(pick(point)))}`).join(' ');
   return `
 <svg viewBox="0 0 ${String(width)} ${String(height)}" role="img" aria-label="what it cost, ${period} by ${period}">
-  <line x1="60" y1="${String(bottom)}" x2="${String(width - 20)}" y2="${String(bottom)}" class="axis" />
+  <line x1="60" y1="${String(bottom)}" x2="${String(width - 40)}" y2="${String(bottom)}" class="axis" />
   <polyline points="${line((point) => point.cumulativeUsd)}" fill="none" stroke="${seriesColor(1)}" stroke-width="2" />
   <polyline points="${line((point) => point.costUsd)}" fill="none" stroke="${seriesColor(0)}" stroke-width="2" />
   ${points
@@ -70,8 +72,13 @@ function spendChart(snapshot: Snapshot): string {
 /** The coverage grid, as a table whose cells are shaded by the same ramp the site uses. */
 function coverageGrid(snapshot: Snapshot): string {
   const parts = snapshot.totals.parts;
-  const cell = (value: number): string =>
-    `<td class="heat" style="background:${rampColor(parts === 0 ? 0 : value / parts)}">${count(value)}</td>`;
+  const cell = (value: number): string => {
+    const fraction = parts === 0 ? 0 : value / parts;
+    // Past the middle of the ramp the step is dark enough that dark ink
+    // disappears into it — the same threshold the site's heat map uses.
+    const ink = fraction > 0.55 ? ' on' : '';
+    return `<td class="heat${ink}" style="background:${rampColor(fraction)}">${count(value)}</td>`;
+  };
   return `
 <table>
   <thead>${row(['parameter', 'found', 'cites a page', 'confirmed', 'disputed'], 'th')}</thead>
@@ -125,6 +132,7 @@ table { border-collapse: collapse; font-variant-numeric: tabular-nums; width: 10
 th { border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 12px; text-align: left; padding: 6px 8px; }
 td { border-bottom: 1px solid var(--line); padding: 5px 8px; }
 td.heat { color: #0b0b0b; text-align: right; }
+td.heat.on { color: #ffffff; }
 svg { max-width: 100%; }
 .axis { stroke: var(--line); }
 .tick { fill: var(--ink-3); font-size: 10px; }

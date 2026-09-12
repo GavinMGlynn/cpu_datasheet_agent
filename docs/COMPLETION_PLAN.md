@@ -1097,6 +1097,6 @@ fifth. A module is not finished when its unit tests pass (D70).
 - [x] 19H.3 `docs/REFERENCES.md`: a row for every new dependency (R-70 to
       R-77).
 - [x] 19H.4 `README.md`, `CLAUDE.md`: how to run the site.
-- [ ] 19H.5 End-to-end: the site driven against the real data — the live store
+- [x] 19H.5 End-to-end: the site driven against the real data — the live store
       and the twenty-two-part baseline — with what it showed recorded in the
       session log.
