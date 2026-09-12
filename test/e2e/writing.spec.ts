@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { E2E_TOKEN } from './seed.js';
+import { sessionHeaders, signIn } from './sign-in.js';
 
 /**
  * Changing things, in a real browser, against a real store.
@@ -11,11 +11,11 @@ import { E2E_TOKEN } from './seed.js';
  */
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(`/?token=${E2E_TOKEN}`);
+  await signIn(page);
 });
 
 test('correcting a value stores it, keeps the old one, and says who asked', async ({ page }) => {
-  await page.goto(`/parts/TPS54331DR?token=${E2E_TOKEN}`);
+  await page.goto('/parts/TPS54331DR');
   await page
     .getByRole('row', { name: /^vinMax/iu })
     .getByRole('button', { name: 'Correct' })
@@ -44,7 +44,7 @@ test('correcting a value stores it, keeps the old one, and says who asked', asyn
 });
 
 test('a correction the schema refuses changes nothing', async ({ page }) => {
-  await page.goto(`/parts/AP62200WU-7?token=${E2E_TOKEN}`);
+  await page.goto('/parts/AP62200WU-7');
   await page
     .getByRole('row', { name: /^vinMin/iu })
     .getByRole('button', { name: 'Correct' })
@@ -76,7 +76,7 @@ test('the site refuses to change an evaluation database', async ({ page }) => {
   // The seeded directory has no evaluation runs, so this checks the refusal
   // at the API rather than through the selector.
   const response = await page.request.post('/api/parts/TPS54331DR/status?source=nowhere', {
-    headers: { 'x-chip-token': E2E_TOKEN },
+    headers: await sessionHeaders(page),
     data: { actor: 'gavin', reason: 'trying it on', status: 'rejected' },
   });
   expect(response.status()).toBe(404);

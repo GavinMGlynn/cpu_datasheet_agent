@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { E2E_TOKEN } from './seed.js';
+import { sessionHeaders, signIn } from './sign-in.js';
 
 /**
  * Run control, without starting a run.
@@ -11,7 +11,8 @@ import { E2E_TOKEN } from './seed.js';
  */
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(`/control?token=${E2E_TOKEN}`);
+  await signIn(page);
+  await page.goto('/control');
 });
 
 test('will not start until it has parts and a reason', async ({ page }) => {
@@ -46,7 +47,7 @@ test('asks before it spends, and takes no for an answer', async ({ page }) => {
 
 test('the server refuses a launch that was never confirmed', async ({ page }) => {
   const response = await page.request.post('/api/launches', {
-    headers: { 'x-chip-token': E2E_TOKEN },
+    headers: await sessionHeaders(page),
     data: {
       kind: 'extract',
       mpns: ['TPS54331DR'],

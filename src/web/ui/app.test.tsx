@@ -110,7 +110,13 @@ describe('useApp', () => {
   });
 
   it('builds its own client when it is given none', async () => {
-    const answer = { ok: true, status: 200, text: () => Promise.resolve('{"sources":[]}') };
+    // Whatever it asks for first, it gets an answer that says nobody is
+    // signed in — which is enough to prove it built a client of its own.
+    const answer = {
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve('{"accounts":0,"oidc":false,"oidcLabel":null,"signedInAs":null}'),
+    };
     vi.stubGlobal(
       'fetch',
       vi.fn(() => Promise.resolve(answer as Response)),
@@ -155,8 +161,10 @@ describe('the database selector', () => {
           ],
         }),
     });
+    // The list arrives after the sign-in state does, so what says the
+    // selector is ready is an option in it.
     await waitFor(() => {
-      expect(screen.getByLabelText('Database')).toBeInTheDocument();
+      expect(screen.getByRole('option', { name: 'Evaluation run dd212de6' })).toBeInTheDocument();
     });
     await userEvent.selectOptions(screen.getByLabelText('Database'), 'dd212de6');
     await waitFor(() => {

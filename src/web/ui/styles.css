@@ -221,6 +221,57 @@ main {
   padding: 24px 28px 72px;
 }
 
+.signed-out {
+  display: grid;
+  padding: 56px 16px;
+  place-items: start center;
+}
+
+.signed-out .panel {
+  max-width: 460px;
+  padding: 24px 26px 26px;
+  width: 100%;
+}
+
+.signed-out h1 {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+
+.signed-out .field input {
+  width: 100%;
+}
+
+.account {
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 12px 10px 0;
+}
+
+.account .who {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  min-width: 0;
+}
+
+.account .who span {
+  flex-shrink: 0;
+}
+
+a.button {
+  align-items: center;
+  display: inline-flex;
+  text-decoration: none;
+}
+
 /* ------------------------------------------------------------ page head -- */
 
 .page-head {

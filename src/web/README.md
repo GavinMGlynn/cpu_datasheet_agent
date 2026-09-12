@@ -90,20 +90,35 @@ message of an internal error is not the browser's business.
 ## Security
 
 The machine running this holds distributor credentials and a button that
-spends money, so the model is deliberately small and stated in one place
-(`server/security.ts`, D67):
+spends money, so the model is stated in one place (`server/security.ts`, D67,
+D75, D76):
 
 - **Loopback by default.** `--host` anything else prints a warning first.
-- **A token per start**, 32 random bytes. `GET /?token=…` trades it for
-  `chip_session` (HttpOnly) and `chip_csrf` (readable) and redirects, so the
-  token leaves the address bar and the browser history entry.
-- **Double-submit on writes.** A state-changing request repeats the token in
-  `x-chip-token`; a cross-site page can neither read the cookie nor set the
-  header. Reads accept the cookie, a bearer header, or `?token=` (the handoff).
+- **Accounts, not tokens.** A browser signs in with a username and a password
+  against `data/auth.sqlite` (or through an OIDC issuer, when one is
+  configured) and holds a session cookie. There is nothing to put in an
+  address, and nothing to copy out of one. See `src/auth/README.md`.
+- **Double-submit on writes.** The session cookie is HttpOnly; a second,
+  readable cookie carries a value the page repeats in `x-chip-token`. A
+  cross-site page can read neither cookie nor set the header.
 - **Origin checked** on writes; a foreign `Origin` is 403 `WEB_ORIGIN_REFUSED`.
+- **Roles.** A viewer reads; an admin changes things and spends money. A write
+  by a viewer is 403 `WEB_ROLE_INSUFFICIENT`, refused at the endpoint.
 - **Credentials are booleans.** `/api/health` reports which are configured,
   never their values, and every response passes through the redactor.
 - **Bodies are capped** at 4 MiB; over that is 413.
+
+Signing in, out, and changing a password:
+
+```
+POST /api/auth/login             username and password, sets the cookies
+POST /api/auth/logout            ends this session
+POST /api/auth/logout-everywhere ends every session this account holds
+POST /api/auth/password          current and next; ends every other session
+GET  /api/auth/state             how many accounts exist, and who is signed in
+GET  /api/auth/oidc/start        to the issuer, when one is configured
+GET  /api/auth/oidc/callback     back from it
+```
 
 ## Caching
 

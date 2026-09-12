@@ -300,10 +300,83 @@ export class SessionRepository {
   }
 }
 
+/** One single sign-on handshake, between the redirect out and the way back. */
+export interface OidcFlow {
+  readonly state: string;
+  readonly codeVerifier: string;
+  readonly nonce: string;
+  readonly redirectTo: string;
+  readonly createdAt: string;
+  readonly expiresAt: string;
+}
+
+interface FlowRow {
+  state: string;
+  code_verifier: string;
+  nonce: string;
+  redirect_to: string;
+  created_at: string;
+  expires_at: string;
+}
+
+/**
+ * The handshakes in flight.
+ *
+ * Server-side and short-lived: a row is written before the browser is sent
+ * to the identity provider and deleted the moment it comes back, so a state
+ * value cannot be replayed (20E.3).
+ */
+export class OidcFlowRepository {
+  constructor(private readonly db: Db) {}
+
+  create(flow: OidcFlow): OidcFlow {
+    this.db.raw
+      .prepare(
+        `INSERT INTO oidc_flows (state, code_verifier, nonce, redirect_to, created_at, expires_at)
+         VALUES (@state, @code_verifier, @nonce, @redirect_to, @created_at, @expires_at)`,
+      )
+      .run({
+        state: flow.state,
+        code_verifier: flow.codeVerifier,
+        nonce: flow.nonce,
+        redirect_to: flow.redirectTo,
+        created_at: flow.createdAt,
+        expires_at: flow.expiresAt,
+      });
+    return flow;
+  }
+
+  /** Reads a flow and removes it: a handshake is good for one attempt. */
+  take(state: string): OidcFlow | undefined {
+    const row = this.db.raw
+      .prepare<[string], FlowRow>(
+        'SELECT state, code_verifier, nonce, redirect_to, created_at, expires_at FROM oidc_flows WHERE state = ?',
+      )
+      .get(state);
+    if (row === undefined) {
+      return undefined;
+    }
+    this.db.raw.prepare('DELETE FROM oidc_flows WHERE state = ?').run(state);
+    return {
+      state: row.state,
+      codeVerifier: row.code_verifier,
+      nonce: row.nonce,
+      redirectTo: row.redirect_to,
+      createdAt: row.created_at,
+      expiresAt: row.expires_at,
+    };
+  }
+
+  removeExpired(now: string): number {
+    return this.db.raw.prepare('DELETE FROM oidc_flows WHERE expires_at <= ?').run(now).changes;
+  }
+}
+
 export interface AuthStore {
   readonly db: Db;
   readonly accounts: AccountRepository;
   readonly sessions: SessionRepository;
+  readonly flows: OidcFlowRepository;
   close(): void;
 }
 
@@ -313,6 +386,7 @@ export function createAuthStore(file: string, options: OpenOptions = {}): AuthSt
     db,
     accounts: new AccountRepository(db),
     sessions: new SessionRepository(db),
+    flows: new OidcFlowRepository(db),
     close: () => {
       db.close();
     },

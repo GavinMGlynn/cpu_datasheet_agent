@@ -2,6 +2,7 @@ import type { RouteEntry } from '../server/app.js';
 import type { Router } from '../server/router.js';
 import { registerAlternates } from './alternates.js';
 import { registerAuth } from './auth.js';
+import { registerOidc } from './oidc.js';
 import { registerCache } from './cache.js';
 import { registerDatasheets } from './datasheets.js';
 import { registerEvals } from './evals.js';
@@ -15,6 +16,7 @@ import type { ApiDeps } from './deps.js';
 
 export * from './alternates.js';
 export * from './auth.js';
+export * from './oidc.js';
 export * from './cache.js';
 export * from './datasheets.js';
 export * from './deps.js';
@@ -36,6 +38,7 @@ export * from './writes.js';
  */
 export function registerApi(router: Router<RouteEntry>, deps: ApiDeps): void {
   registerAuth(router, deps);
+  registerOidc(router, deps);
   registerHealth(router, deps);
   registerParts(router, deps);
   registerDatasheets(router, deps);

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { E2E_TOKEN } from './seed.js';
+import { signIn } from './sign-in.js';
 
 /**
  * What the pages look like.
@@ -27,7 +27,7 @@ const PAGES: readonly { readonly path: string; readonly name: string }[] = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(`/?token=${E2E_TOKEN}`);
+  await signIn(page);
 });
 
 for (const one of PAGES) {

@@ -124,13 +124,15 @@ authoritative status table.
 - `npx tsx bin/chip-run.ts alternates <mpn> --vin 8-28 --iout 2 --qty 100`
   answers from stored parts, with every difference listed and the
   pin-compatibility disclaimer in the answer.
-- The site reads all of it at once: `npm run build:ui` once, then `npm run web`
-  and open the address it prints — it carries the token, which is the whole
-  sign-in. It binds to loopback, writes are audited, and runs started from the
-  page pass the same money gates as the CLI plus a per-launch ceiling.
-  `npm run web:snapshot` writes one shareable file that needs no server; what
-  it excludes is enforced in code and printed on the page (D68). See
-  `src/web/README.md`.
+- The site reads all of it at once: `npm run build:ui` once, an account with
+  `npx tsx bin/chip-auth.ts add <name> --role admin`, then `npm run web` and
+  open http://127.0.0.1:5174. Signing in is a username and a password against
+  `data/auth.sqlite` (scrypt, server-side sessions, viewer/admin roles, with
+  optional OIDC single sign-on); it binds to loopback, writes are audited, and
+  runs started from the page pass the same money gates as the CLI plus a
+  per-launch ceiling. `npm run web:snapshot` writes one shareable file that
+  needs no server; what it excludes is enforced in code and printed on the
+  page (D68). See `src/auth/README.md` and `src/web/README.md`.
 
 ## Next steps
 

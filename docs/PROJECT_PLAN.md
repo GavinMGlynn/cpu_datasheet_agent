@@ -164,7 +164,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
 | M19 | Web application | complete | 19A–19I; the site, the snapshot, and five test layers |
-| M20 | Authentication | in progress | accounts, sessions, roles, OIDC (D75, D76) |
+| M20 | Authentication | in progress | 20A–20I; sign-in page and browser tests done |
 
 ## 5. Conventions
 

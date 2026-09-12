@@ -1109,108 +1109,108 @@ This module replaces it with accounts, sessions and roles (D75, D76).
 
 ### 20A Identity store
 
-- [ ] 20A.1 `data/auth.sqlite`, separate from the parts database: credentials
+- [x] 20A.1 `data/auth.sqlite`, separate from the parts database: credentials
       never travel with the data a snapshot, an evaluation copy or a backup
       of the catalogue touches.
-- [ ] 20A.2 Migration: `accounts` (id, username unique and case-folded,
+- [x] 20A.2 Migration: `accounts` (id, username unique and case-folded,
       display name, role, password hash, OIDC issuer and subject, timestamps,
       disabled) and `sessions` (hashed id, account, CSRF value, created, last
       seen, expires, user agent, address).
-- [ ] 20A.3 Repository with the queries the server needs, and nothing that
+- [x] 20A.3 Repository with the queries the server needs, and nothing that
       returns a password hash to a caller that did not ask to verify one.
-- [ ] 20A.4 Tests: schema, uniqueness, case folding, cascade on delete.
+- [x] 20A.4 Tests: schema, uniqueness, case folding, cascade on delete.
 
 ### 20B Passwords
 
-- [ ] 20B.1 scrypt (N=2^15, r=8, p=1, 32-byte key, 16-byte salt) from
+- [x] 20B.1 scrypt (N=2^15, r=8, p=1, 32-byte key, 16-byte salt) from
       `node:crypto`; no new dependency. Encoded as
       `scrypt$N$r$p$salt$hash`, so the parameters travel with the hash and can
       be raised later without invalidating what is stored.
-- [ ] 20B.2 Verification in constant time, and re-hashing on sign-in when the
+- [x] 20B.2 Verification in constant time, and re-hashing on sign-in when the
       stored parameters are weaker than the current ones.
-- [ ] 20B.3 A policy that is stated rather than implied: at least twelve
+- [x] 20B.3 A policy that is stated rather than implied: at least twelve
       characters, no upper bound short of 200, and no composition rules.
-- [ ] 20B.4 Tests: round trip, wrong password, tampered encoding, parameter
+- [x] 20B.4 Tests: round trip, wrong password, tampered encoding, parameter
       upgrade, and that a hash never appears in a log or a response.
 
 ### 20C Sessions
 
-- [ ] 20C.1 32 random bytes in an HttpOnly, SameSite=Strict cookie; only its
+- [x] 20C.1 32 random bytes in an HttpOnly, SameSite=Strict cookie; only its
       SHA-256 is stored, so the database cannot be replayed against the site.
-- [ ] 20C.2 Idle timeout and absolute lifetime, both enforced server-side;
+- [x] 20C.2 Idle timeout and absolute lifetime, both enforced server-side;
       the id is rotated on every sign-in, which is what stops fixation.
-- [ ] 20C.3 Sign out here, and sign out everywhere.
-- [ ] 20C.4 The CSRF value is bound to the session rather than to the process,
+- [x] 20C.3 Sign out here, and sign out everywhere.
+- [x] 20C.4 The CSRF value is bound to the session rather than to the process,
       and a write still repeats it in `x-chip-token` (D67 keeps this half).
-- [ ] 20C.5 Tests: expiry either way, rotation, revocation, a cookie that
+- [x] 20C.5 Tests: expiry either way, rotation, revocation, a cookie that
       names a session nobody has, and a CSRF value from another session.
 
 ### 20D Refusing the wrong ones
 
-- [ ] 20D.1 Failed attempts counted per account and per address, with an
+- [x] 20D.1 Failed attempts counted per account and per address, with an
       increasing delay and a lockout, in memory because there is one process.
-- [ ] 20D.2 The same answer and the same timing whether the account exists or
+- [x] 20D.2 The same answer and the same timing whether the account exists or
       the password is wrong.
-- [ ] 20D.3 Every attempt, refusal and lockout audited; every sign-in and
+- [x] 20D.3 Every attempt, refusal and lockout audited; every sign-in and
       sign-out audited (M19's audit trail, actor = the account).
-- [ ] 20D.4 Tests: lockout, expiry of the lockout, and that a valid password
+- [x] 20D.4 Tests: lockout, expiry of the lockout, and that a valid password
       during a lockout is still refused.
 
 ### 20E Single sign-on (generic OIDC)
 
-- [ ] 20E.1 Configuration by environment: issuer, client id, client secret,
+- [x] 20E.1 Configuration by environment: issuer, client id, client secret,
       redirect. Absent means the button is not shown and the endpoints answer
       404 — this has to run offline.
-- [ ] 20E.2 Discovery (`/.well-known/openid-configuration`), cached, with the
+- [x] 20E.2 Discovery (`/.well-known/openid-configuration`), cached, with the
       JWKS fetched and cached by key id.
-- [ ] 20E.3 Authorization code with PKCE (S256), `state` and `nonce` in a
+- [x] 20E.3 Authorization code with PKCE (S256), `state` and `nonce` in a
       short-lived HttpOnly cookie, and the code exchanged from the server.
-- [ ] 20E.4 The ID token verified properly: signature against the JWKS,
+- [x] 20E.4 The ID token verified properly: signature against the JWKS,
       issuer, audience, expiry with a small skew, and the nonce.
-- [ ] 20E.5 An identity is matched to an account by issuer and subject, or
+- [x] 20E.5 An identity is matched to an account by issuer and subject, or
       bound on first sign-in to an account whose username is the verified
       email. No self-registration: an admin creates accounts.
-- [ ] 20E.6 Tests: the whole flow against a fake issuer with a locally
+- [x] 20E.6 Tests: the whole flow against a fake issuer with a locally
       generated key, plus every refusal — bad signature, wrong issuer, wrong
       audience, expired, replayed state, missing nonce, unknown identity.
 
 ### 20F Roles
 
-- [ ] 20F.1 Two roles. A viewer reads everything the site shows. An admin may
+- [x] 20F.1 Two roles. A viewer reads everything the site shows. An admin may
       correct a value, answer a question, purge the cache, manage accounts and
       start a run that spends money.
-- [ ] 20F.2 Enforced at the endpoint, not in the front end: the browser hides
+- [x] 20F.2 Enforced at the endpoint, not in the front end: the browser hides
       what a viewer cannot do, and the server refuses it regardless.
-- [ ] 20F.3 Tests: every write endpoint refused for a viewer, allowed for an
+- [x] 20F.3 Tests: every write endpoint refused for a viewer, allowed for an
       admin, and the refusal audited.
 
 ### 20G Managing accounts
 
-- [ ] 20G.1 `bin/chip-auth.ts`: add, list, passwd, role, disable, enable,
+- [x] 20G.1 `bin/chip-auth.ts`: add, list, passwd, role, disable, enable,
       bind an OIDC identity, revoke sessions.
-- [ ] 20G.2 A password is read from a terminal without echo, or from stdin;
+- [x] 20G.2 A password is read from a terminal without echo, or from stdin;
       never from a command line, where it would sit in the shell history and
       in `ps`.
-- [ ] 20G.3 The first account: the server says how to create one when none
+- [x] 20G.3 The first account: the server says how to create one when none
       exists, and the sign-in page says the same thing.
-- [ ] 20G.4 Tests: every command, the refusals, and that no password reaches
+- [x] 20G.4 Tests: every command, the refusals, and that no password reaches
       a log, an argument list or an error message.
 
 ### 20H The sign-in page
 
-- [ ] 20H.1 A real page: username, password, the single sign-on button when
+- [x] 20H.1 A real page: username, password, the single sign-on button when
       one is configured, and one error that does not say which half was wrong.
-- [ ] 20H.2 The shell shows it whenever the server says the session is not
+- [x] 20H.2 The shell shows it whenever the server says the session is not
       one of its own, rather than eighteen red panels.
-- [ ] 20H.3 Who is signed in, their role, and signing out, in the sidebar.
-- [ ] 20H.4 Tests: component, behaviour, and a browser test that signs in
+- [x] 20H.3 Who is signed in, their role, and signing out, in the sidebar.
+- [x] 20H.4 Tests: component, behaviour, and a browser test that signs in
       through the form, is refused with the wrong password, and signs out.
 
 ### 20I Removing the old way
 
-- [ ] 20I.1 `?token=` gone from the server, the client, the CLI and the
+- [x] 20I.1 `?token=` gone from the server, the client, the CLI and the
       documentation; `--token` gone with it.
-- [ ] 20I.2 `src/web/README.md` and `docs/ARCHITECTURE.md` state the new model;
+- [x] 20I.2 `src/web/README.md` and `docs/ARCHITECTURE.md` state the new model;
       `README.md` and `CLAUDE.md` say how to create the first account.
-- [ ] 20I.3 The browser suite signs in the way a person does, against a seeded
+- [x] 20I.3 The browser suite signs in the way a person does, against a seeded
       account, with the screenshot baselines regenerated on the runner.

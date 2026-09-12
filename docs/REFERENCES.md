@@ -126,3 +126,9 @@ these can.
 | R-52 | Completion plan | `docs/COMPLETION_PLAN.md` | Module-by-module task list and Definition of Done. |
 | R-54 | Architecture | `docs/ARCHITECTURE.md` | How the system works: layers, pipeline, module responsibilities, and the seams. |
 | R-53 | Repository | https://github.com/GavinMGlynn/cpu_datasheet_agent | Private repository. Every commit is pushed here (D15). |
+| R-78 | scrypt (RFC 7914) | https://www.rfc-editor.org/rfc/rfc7914 | The password hash (20B), through `node:crypto.scrypt`. N=2^15, r=8, p=1 follows the RFC's own guidance for interactive use. | verified 2026-09-12 |
+| R-79 | OpenID Connect Core 1.0 | https://openid.net/specs/openid-connect-core-1_0.html | Single sign-on (20E): the authorization code flow, the ID token, and every claim checked before it is believed. | verified 2026-09-12 |
+| R-80 | OpenID Connect Discovery 1.0 | https://openid.net/specs/openid-connect-discovery-1_0.html | `/.well-known/openid-configuration`, which is how the endpoints and the key set are found rather than configured. | verified 2026-09-12 |
+| R-81 | PKCE (RFC 7636) | https://www.rfc-editor.org/rfc/rfc7636 | S256 code challenge on the authorization request, so an intercepted code is worth nothing without the verifier. | verified 2026-09-12 |
+| R-82 | JSON Web Signature (RFC 7515) and JWK (RFC 7517) | https://www.rfc-editor.org/rfc/rfc7515 | The ID token's signature and the issuer's published keys; `src/auth/jwt.ts` implements RS256 and ES256 against these. | verified 2026-09-12 |
+| R-83 | OWASP Password Storage Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html | Why scrypt with these parameters, why length and not composition rules, and why the hash carries its own cost. | verified 2026-09-12 |

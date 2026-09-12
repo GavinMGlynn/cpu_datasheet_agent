@@ -503,8 +503,22 @@ What it adds is three things the other surfaces have no place for:
 The boundary rule is the same one the rest of the system follows: the browser
 never reaches the network, the database or the model directly. It reaches the
 server, and the server reaches the modules that already know how. The server
-binds to the loopback interface and mints a token per start, because this
-machine holds distributor credentials and a button that spends money (D67).
+binds to the loopback interface because this machine holds distributor
+credentials and a button that spends money (D67).
+
+### Identity (`src/auth/`)
+
+Who may use the site is a separate concern with a separate database
+(`data/auth.sqlite`) and a separate command line (`bin/chip-auth.ts`): an
+account, a password hashed with scrypt, a server-side session in an HttpOnly
+cookie, and a role that decides whether a request may change anything (D75,
+D76). Optional single sign-on against any OpenID Connect issuer ends in the
+same session cookie, so everything downstream of the sign-in is identical
+whichever way a person got there.
+
+Nothing in `src/web/data/` knows the identity store exists: it is not one of
+the readable "sources", it is never copied into a snapshot, and a password
+hash leaves it through exactly one method, which only the sign-in path calls.
 
 The snapshot is the same read models rendered once into a static bundle, with
 datasheet text, page images, raw distributor responses and every credential

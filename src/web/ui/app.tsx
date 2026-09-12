@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { createApi, type Api } from './lib/api.js';
 import { navigate, useRoute, withQuery, type Route } from './lib/router.js';
 import { useAsync, useStored } from './lib/state.js';
 import { Async } from './components/Async.js';
 import { ErrorBoundary } from './components/ErrorBoundary.js';
+import { SignIn } from './pages/SignIn.js';
+import { errorMessage } from './lib/format.js';
 import { Alternates } from './pages/Alternates.js';
 import { Audit } from './pages/Audit.js';
 import { Compare } from './pages/Compare.js';
@@ -133,6 +135,9 @@ export interface AppProps {
 
 export function App(props: AppProps): ReactNode {
   const route = useRoute();
+  // Asked before anything else: the shell is no use to a browser that is not
+  // signed in, and every other call would answer 401 (D75).
+  const [signedInAt, setSignedInAt] = useState(0);
   const [stored, setSource] = useStored('chip:source', 'live');
   // An address that names a database wins over the remembered one, and is
   // remembered in turn: every endpoint takes `?source=`, so a link to a part
@@ -146,12 +151,56 @@ export function App(props: AppProps): ReactNode {
     }
   }, [asked, stored, setSource]);
   const api = useMemo(() => props.api ?? createApi(), [props.api]);
-  const sources = useAsync('sources', () => api.sources());
-  const meta = useAsync('meta', () => api.meta());
+  const auth = useAsync(`auth:${String(signedInAt)}`, () => api.authState());
+  const account = auth.state.status === 'loaded' ? auth.state.value.signedInAs : null;
+  // Keyed by who is signed in: the hooks run before the sign-in page is
+  // decided on, so the question changes the moment an account appears.
+  const who = account?.username ?? 'nobody';
+  const sources = useAsync(`sources:${who}`, () =>
+    account === null ? Promise.resolve({ sources: [] }) : api.sources(),
+  );
+  const meta = useAsync(`meta:${who}`, () =>
+    account === null
+      ? Promise.resolve({
+          parameterKeys: [],
+          classificationAxes: [],
+          partStatuses: [],
+          prompts: [],
+          model: '',
+          version: '',
+        })
+      : api.meta(),
+  );
   const context = useMemo<AppContextValue>(
     () => ({ api, source, route, setSource }),
     [api, source, route, setSource],
   );
+
+  if (auth.state.status === 'loading') {
+    return (
+      <p className="caption" role="status">
+        Loading…
+      </p>
+    );
+  }
+  if (auth.state.status === 'failed') {
+    return (
+      <div className="failed" role="alert">
+        The site is not answering: {errorMessage(auth.state.error)}
+      </div>
+    );
+  }
+  if (account === null) {
+    return (
+      <SignIn
+        api={api}
+        state={auth.state.value}
+        onSignedIn={() => {
+          setSignedInAt(Date.now());
+        }}
+      />
+    );
+  }
 
   return (
     <AppContext.Provider value={context}>
@@ -203,6 +252,23 @@ export function App(props: AppProps): ReactNode {
               ))}
             </nav>
           ))}
+          <div className="account">
+            <p className="who">
+              {account.displayName}
+              <span className="badge">{account.role}</span>
+            </p>
+            <button
+              type="button"
+              className="link"
+              onClick={() => {
+                void api.signOut().then(() => {
+                  setSignedInAt(Date.now());
+                });
+              }}
+            >
+              Sign out
+            </button>
+          </div>
         </aside>
         <main>
           {/* Keyed by the path: navigating away from a page that broke gives

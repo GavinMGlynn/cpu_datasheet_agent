@@ -1,16 +1,16 @@
 import { expect, test } from '@playwright/test';
 
-import { E2E_TOKEN } from './seed.js';
+import { signIn } from './sign-in.js';
 
 /**
  * Reading the site in a real browser.
  *
- * Every test signs in the way a person does: open the address the server
- * printed, which trades the token for a cookie.
+ * Every test signs in the way a person does: the form, a username and a
+ * password, against a seeded account (D75).
  */
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(`/?token=${E2E_TOKEN}`);
+  await signIn(page);
 });
 
 test('the overview leads with what is stored and what it cost', async ({ page }) => {
@@ -33,7 +33,7 @@ test('the catalogue lists the parts and filters them', async ({ page }) => {
 });
 
 test('a part shows its parameters, their provenance and their verdicts', async ({ page }) => {
-  await page.goto(`/parts/TPS54331DR?token=${E2E_TOKEN}`);
+  await page.goto('/parts/TPS54331DR');
   await expect(page.getByRole('heading', { name: 'TPS54331DR' })).toBeVisible();
   await expect(page.getByRole('cell', { name: 'vinMax' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '28 V' }).first()).toBeVisible();
@@ -41,7 +41,7 @@ test('a part shows its parameters, their provenance and their verdicts', async (
 });
 
 test('a page number opens the page it cites', async ({ page }) => {
-  await page.goto(`/parts/TPS54331DR?token=${E2E_TOKEN}`);
+  await page.goto('/parts/TPS54331DR');
   await page.getByRole('button', { name: 'page 4' }).first().click();
   const image = page.getByRole('img', { name: /page 4 of the datasheet/iu });
   await expect(image).toBeVisible();
@@ -103,12 +103,12 @@ test('health reports the tools and never a credential', async ({ page }) => {
 });
 
 test('a deep link reloads into the same page', async ({ page }) => {
-  await page.goto(`/runs?token=${E2E_TOKEN}`);
+  await page.goto('/runs');
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Runs' })).toBeVisible();
 });
 
 test('an address that is not a page says so rather than blanking', async ({ page }) => {
-  await page.goto(`/nonsense?token=${E2E_TOKEN}`);
+  await page.goto('/nonsense');
   await expect(page.getByText('there is no page at')).toBeVisible();
 });

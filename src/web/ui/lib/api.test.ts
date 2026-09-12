@@ -98,6 +98,47 @@ describe('reading', () => {
   });
 });
 
+describe('signing in and out', () => {
+  it('asks the server who is signed in before anything else', async () => {
+    const { fetch, calls } = fakeFetch({ accounts: 1, oidc: false, signedInAs: null });
+    await createApi({ fetch }).authState();
+    expect(calls[0]?.url).toBe('/api/auth/state');
+    expect(calls[0]?.init?.method).toBeUndefined();
+  });
+
+  it('sends the credentials as JSON, and carries no token: there is none yet', async () => {
+    const { fetch, calls } = fakeFetch({ account: { username: 'gavin' } });
+    await createApi({ fetch, cookies: () => '' }).signIn('gavin', 'correct horse battery staple');
+    expect(calls[0]?.url).toBe('/api/auth/login');
+    expect(calls[0]?.init?.method).toBe('POST');
+    expect(calls[0]?.init?.body).toBe(
+      JSON.stringify({ username: 'gavin', password: 'correct horse battery staple' }),
+    );
+    expect((calls[0]?.init?.headers as Record<string, string>)['x-chip-token']).toBeUndefined();
+  });
+
+  it('signs out here, and everywhere, repeating the session token', async () => {
+    const { fetch, calls } = fakeFetch({ signedOut: true });
+    const api = createApi({ fetch, token: 'the-token' });
+    await api.signOut();
+    await api.signOutEverywhere();
+    expect(calls.map((one) => one.url)).toStrictEqual([
+      '/api/auth/logout',
+      '/api/auth/logout-everywhere',
+    ]);
+    expect((calls[0]?.init?.headers as Record<string, string>)['x-chip-token']).toBe('the-token');
+  });
+
+  it('changes the password, sending both', async () => {
+    const { fetch, calls } = fakeFetch({ changed: true });
+    await createApi({ fetch, token: 'the-token' }).changePassword('old one', 'a new passphrase');
+    expect(calls[0]?.url).toBe('/api/auth/password');
+    expect(calls[0]?.init?.body).toBe(
+      JSON.stringify({ current: 'old one', next: 'a new passphrase' }),
+    );
+  });
+});
+
 describe('writing', () => {
   it('repeats the token in a header, because a cookie alone is refused', async () => {
     const { fetch, calls } = fakeFetch();

@@ -35,6 +35,19 @@ export function stubApi(overrides: Partial<Api> = {}): Api {
     throw new Error(`the test did not stub ${name}`);
   };
   const base = {
+    // Signed in as an admin unless a test says otherwise: every page test is
+    // about what a page shows, not about getting past the door.
+    authState: () =>
+      Promise.resolve({
+        accounts: 1,
+        oidc: false,
+        oidcLabel: null,
+        signedInAs: { username: 'tester', displayName: 'Tester', role: 'admin' },
+      }),
+    signIn: refuse('signIn'),
+    signOut: () => Promise.resolve({ signedOut: true }),
+    signOutEverywhere: refuse('signOutEverywhere'),
+    changePassword: refuse('changePassword'),
     sources: refuse('sources'),
     health: refuse('Health'),
     meta: refuse('meta'),

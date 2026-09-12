@@ -1,7 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { E2E_TOKEN } from './test/e2e/seed.js';
-
 /**
  * Browser tests.
  *
@@ -43,8 +41,8 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   /*
    * A real server over the seeded directory, built from source each run. The
-   * token is fixed so a test can sign in; the data is temporary so a test can
-   * change it.
+   * accounts are seeded with it, so a test signs in through the form the way
+   * a person does (D75); the data is temporary so a test can change it.
    *
    * Never reused. Something else already listening on this port answers
    * `/api/ping` just as well — including a `npm run web` over the real data
@@ -53,7 +51,7 @@ export default defineConfig({
    * into a port-in-use failure, which is the loud version of the same fact.
    */
   webServer: {
-    command: `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui --token ${E2E_TOKEN}`,
+    command: `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui`,
     url: `http://127.0.0.1:${String(port)}/api/ping`,
     reuseExistingServer: false,
     timeout: 60_000,

@@ -68,10 +68,12 @@ describe('one run', () => {
     renderApp('/runs/00000000-0000-4000-8000-000000000001', {
       run: () => Promise.resolve(detail()),
     });
+    // The heading is drawn from the address, so it is there before the run
+    // is: what says the page has loaded is the run's own numbers.
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /run 00000000/iu })).toBeInTheDocument();
+      expect(screen.getByText('$3.41')).toBeInTheDocument();
     });
-    expect(screen.getByText('$3.41')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /run 00000000/iu })).toBeInTheDocument();
     expect(screen.getByText('4m 0s')).toBeInTheDocument();
     expect(screen.getByText('claude-opus-5')).toBeInTheDocument();
     expect(screen.getByText('2 calls the money gate refused')).toBeInTheDocument();

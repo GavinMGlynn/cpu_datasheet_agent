@@ -18,6 +18,7 @@ import { createLedgerIndex } from './data/ledger-index.js';
 import { createSources, type Sources } from './data/sources.js';
 import { createAuthService, type AuthService } from '../auth/service.js';
 import { createAuthStore } from '../auth/store.js';
+import { createOidc, oidcConfigFrom } from '../auth/oidc.js';
 import {
   createApp,
   type ResponseSink,
@@ -126,6 +127,7 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
 
   const databaseFile = options.databaseFile ?? path.join(dataDir, 'chip.sqlite');
   const authStore = createAuthStore(options.authFile ?? path.join(dataDir, 'auth.sqlite'));
+  const oidcConfig = oidcConfigFrom(options.env ?? process.env);
   const auth = createAuthService({
     store: authStore,
     ...(options.clock === undefined ? {} : { clock: options.clock }),
@@ -159,7 +161,8 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
   const deps: ApiDeps = {
     sources,
     auth,
-    oidc: undefined,
+    oidc:
+      oidcConfig === undefined ? undefined : createOidc({ store: authStore, config: oidcConfig }),
     auditor: createAuditor(options.clock === undefined ? {} : { clock: options.clock }),
     launcher,
     launches,

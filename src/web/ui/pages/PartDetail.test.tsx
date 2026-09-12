@@ -36,10 +36,12 @@ function detail(overrides: Record<string, unknown> = {}) {
 describe('a part', () => {
   it('shows what is stored, where it came from, and what checked it', async () => {
     renderApp('/parts/TPS54331DR', { part: () => Promise.resolve(detail()) });
+    // The heading comes from the address; the manufacturer comes from the
+    // server, so that is what says the page has loaded.
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'TPS54331DR' })).toBeInTheDocument();
+      expect(screen.getByText('Texas Instruments')).toBeInTheDocument();
     });
-    expect(screen.getByText('Texas Instruments')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'TPS54331DR' })).toBeInTheDocument();
     expect(screen.getByText('28/30')).toBeInTheDocument();
     expect(screen.getByRole('cell', { name: '28 V' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Page 4' })).toBeInTheDocument();

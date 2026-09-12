@@ -63,6 +63,28 @@ describe('createWeb', () => {
     expect((await call(parts, '/api/health')).statusCode).toBe(401);
   });
 
+  it('offers single sign-on only when an issuer is configured', async () => {
+    const without = await build();
+    expect(without.deps.oidc).toBeUndefined();
+    const withIssuer = await createWeb({
+      dataDir: path.join(root, 'sso'),
+      env: {
+        DATA_DIR: path.join(root, 'sso'),
+        LOG_LEVEL: 'error',
+        AUTH_OIDC_ISSUER: 'https://issuer.invalid',
+        AUTH_OIDC_CLIENT_ID: 'a-client-id',
+        AUTH_OIDC_CLIENT_SECRET: 'a-secret',
+        AUTH_OIDC_REDIRECT_URI: 'http://127.0.0.1:5174/api/auth/oidc/callback',
+      },
+    });
+    try {
+      expect(withIssuer.deps.oidc?.configured()).toBe(true);
+      expect(withIssuer.deps.oidc?.label()).toBe('Sign in with issuer.invalid');
+    } finally {
+      withIssuer.close();
+    }
+  });
+
   it('says the front end is not built rather than 404ing the whole site', async () => {
     const parts = await build({ uiDir: path.join(root, 'nowhere') });
     const result = await call(parts, '/');

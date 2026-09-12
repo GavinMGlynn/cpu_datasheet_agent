@@ -20,6 +20,8 @@ import {
 } from '../helpers/core-fixtures.js';
 import { createRepositories, openDatabase } from '../../src/db/index.js';
 import { buildPdf, datasheetSpec } from '../helpers/pdf-fixtures.js';
+import { createAuthStore } from '../../src/auth/store.js';
+import { hashPassword } from '../../src/auth/password.js';
 
 /**
  * The data the browser tests run against.
@@ -29,7 +31,10 @@ import { buildPdf, datasheetSpec } from '../helpers/pdf-fixtures.js';
  * nobody dares run (D70).
  */
 
-export const E2E_TOKEN = 'e2e-token-e2e-token-e2e';
+/** The accounts the browser tests sign in as, and the password they use. */
+export const E2E_ADMIN = 'tester';
+export const E2E_VIEWER = 'onlooker';
+export const E2E_PASSWORD = 'a browser test passphrase';
 
 export interface Seeded {
   readonly dataDir: string;
@@ -221,6 +226,24 @@ export async function seed(dataDir: string): Promise<Seeded> {
     path.join(dataDir, 'ledger', '2026-09-11.jsonl'),
     `${calls.map((call) => JSON.stringify(call)).join('\n')}\n`,
   );
+
+  // Two accounts, with real hashes: the browser signs in the way a person
+  // does, and one of them is a viewer so the role can be tested (D76).
+  const auth = createAuthStore(path.join(dataDir, 'auth.sqlite'));
+  const hash = await hashPassword(E2E_PASSWORD);
+  auth.accounts.create({
+    username: E2E_ADMIN,
+    displayName: 'Tester',
+    role: 'admin',
+    passwordHash: hash,
+  });
+  auth.accounts.create({
+    username: E2E_VIEWER,
+    displayName: 'Onlooker',
+    role: 'viewer',
+    passwordHash: hash,
+  });
+  auth.close();
 
   return { dataDir, sha256 };
 }

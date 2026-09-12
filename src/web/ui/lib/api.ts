@@ -113,7 +113,26 @@ export interface LedgerQuery {
   readonly offset?: number;
 }
 
+export interface SignedInAccount {
+  readonly username: string;
+  readonly displayName: string;
+  readonly role: 'viewer' | 'admin';
+}
+
+export interface AuthState {
+  /** How many accounts exist at all: none means nobody can sign in yet. */
+  readonly accounts: number;
+  readonly oidc: boolean;
+  readonly oidcLabel: string | null;
+  readonly signedInAs: SignedInAccount | null;
+}
+
 export interface Api {
+  authState(): Promise<AuthState>;
+  signIn(username: string, password: string): Promise<{ readonly account: SignedInAccount }>;
+  signOut(): Promise<unknown>;
+  signOutEverywhere(): Promise<unknown>;
+  changePassword(current: string, next: string): Promise<unknown>;
   sources(): Promise<{ sources: readonly DataSource[] }>;
   health(source: string): Promise<Health>;
   meta(): Promise<{
@@ -239,8 +258,8 @@ export function createApi(options: ApiOptions = {}): Api {
   const baseUrl = options.baseUrl ?? '';
   const doFetch = options.fetch ?? globalThis.fetch.bind(globalThis);
   const cookies = options.cookies ?? ((): string => globalThis.document.cookie);
-  // Read per call rather than once: a page that has just traded its token for
-  // cookies must be able to write without a reload.
+  // Read per call rather than once: a page that has just signed in must be
+  // able to write without a reload.
   const token = (): string | undefined => options.token ?? tokenFromCookies(cookies());
 
   const call = async <T>(
@@ -279,6 +298,16 @@ export function createApi(options: ApiOptions = {}): Api {
     call<T>(path, { method: 'POST', body: JSON.stringify(body), writes: true });
 
   return {
+    authState: () => call('/api/auth/state'),
+    // The one call that goes out with no session: everything else needs one.
+    signIn: (username, password) =>
+      call('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+      }),
+    signOut: () => post('/api/auth/logout', {}),
+    signOutEverywhere: () => post('/api/auth/logout-everywhere', {}),
+    changePassword: (current, next) => post('/api/auth/password', { current, next }),
     sources: () => call('/api/sources'),
     health: (source) => call(`/api/health${query({ source })}`),
     meta: () => call('/api/meta'),

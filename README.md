@@ -32,9 +32,10 @@ npx tsx bin/chip-mcp.ts
 ## The site
 
 ```bash
-npm run build:ui     # once, and after any change to src/web/ui
-npm run web          # then open the address it prints, token and all
-npm run web:snapshot # one shareable file, no server needed to read it
+npm run build:ui                                  # once, and after a UI change
+npx tsx bin/chip-auth.ts add <name> --role admin  # once: prompts for a password
+npm run web                                       # then open http://127.0.0.1:5174
+npm run web:snapshot                              # one shareable file, no server
 ```
 
 Everything above, read across all of it at once: the parts and what was found
@@ -44,10 +45,13 @@ golden set. Corrections are written back with an audit row saying who changed
 what and why, and runs can be started from the page under the same money gates
 the CLI uses plus a ceiling for the launch.
 
-It binds to the loopback interface and mints a token each start. `--host`
-anything else is announced before it binds, because this machine holds
-distributor credentials and a button that spends money. `src/web/README.md` has
-the endpoints, the errors and the security model.
+Signing in is a username and a password against accounts kept in
+`data/auth.sqlite` — scrypt hashes, server-side sessions in HttpOnly cookies,
+and two roles: a viewer reads, an admin changes things and spends money.
+Single sign-on against an OpenID Connect issuer is optional and off until one
+is configured. It binds to the loopback interface; `--host` anything else is
+announced before it binds. `src/auth/README.md` has the identity model and
+`src/web/README.md` the endpoints and the errors.
 
 A run spends nothing unless it is told to: distributor calls are answered from
 the cache and a miss comes back as `needs_confirmation` rather than a charge.

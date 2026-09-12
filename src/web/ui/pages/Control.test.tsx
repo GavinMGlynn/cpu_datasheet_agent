@@ -43,11 +43,11 @@ describe('run control', () => {
   it('will not start until a part and a reason are given', async () => {
     renderApp('/control', stubs());
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Start run' })).toBeDisabled();
+      expect(
+        screen.getByText(/name some parts and this will say what they would cost/iu),
+      ).toBeInTheDocument();
     });
-    expect(
-      screen.getByText(/name some parts and this will say what they would cost/iu),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Start run' })).toBeDisabled();
   });
 
   it('says what it would cost before it asks', async () => {
