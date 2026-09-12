@@ -1080,8 +1080,10 @@ fifth. A module is not finished when its unit tests pass (D70).
       and sorting, drill-through from a chart to the page that states a value,
       launching a run and watching it stream, resolving an escalation,
       light and dark, keyboard navigation, and screenshots of every page.
-- [ ] 19I.6 Scripts and CI: `npm run test:e2e` separate from the unit run,
-      browsers installed and cached in CI, and every layer green on `main`.
+- [x] 19I.6 Scripts and CI: `npm run test:e2e` separate from the unit run,
+      Chromium cached on the runner, and a pipeline that builds everything on
+      Rocky Linux 10 — environment proof, check, packaged tarball, browser
+      tests, and a release attached to a tag (D71).
 
 ### 19H Documentation and sign-off
 

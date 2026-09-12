@@ -79,6 +79,9 @@ module README, or a code comment must have a row here.
 | R-35 | Node.js 22 documentation | https://nodejs.org/docs/latest-v22.x/api/ | Runtime APIs (`node:fs`, `node:crypto`, `node:child_process`, `fetch`). | verified 2026-09-12; the index covers all of them, currently at 22.23.2 |
 | R-36 | simple-git-hooks | https://github.com/toplenboren/simple-git-hooks | Pre-push hook (M0 task 0.12), version 2.14.0. The hook is declared in the `simple-git-hooks` object in `package.json`, as the README describes. | verified 2026-09-12 |
 | R-37 | tsx | https://github.com/privatenumber/tsx | Running TypeScript scripts under `scripts/` and `bin/`, version 4.23.13. | verified 2026-09-12 at the repository; `https://tsx.is/` fails certificate validation from this machine |
+| R-70 | Playwright Test | https://playwright.dev/docs/intro | Browser tests for the web application (M19, D70), version 1.63.0. Drives Chromium headless; `toHaveScreenshot` provides the visual snapshots. | verified 2026-09-12; installed and running headless here |
+| R-71 | Playwright on Linux distributions | https://playwright.dev/docs/browsers#install-system-dependencies | `playwright install-deps` supports Debian and Ubuntu only, which is why the Rocky Linux 10 runner verifies Chromium's shared libraries rather than installing them (D71). | verified 2026-09-12 |
+| R-72 | Rocky Linux 10 | https://docs.rockylinux.org/ | The build and test platform: the self-hosted runner, and the only platform whose screenshot baselines are committed (D71). | verified 2026-09-12 |
 
 ## Domain references
 

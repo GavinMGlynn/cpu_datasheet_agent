@@ -3,7 +3,14 @@ name: CI
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
+  workflow_dispatch:
+    inputs:
+      update_screenshots:
+        description: 'Regenerate the Rocky Linux 10 screenshot baselines on this runner'
+        type: boolean
+        default: false
 
 # There is one self-hosted runner, so a superseded run must not hold the queue.
 concurrency:
@@ -15,34 +22,255 @@ env:
   GIT_CONFIG_COUNT: 1
   GIT_CONFIG_KEY_0: init.defaultBranch
   GIT_CONFIG_VALUE_0: main
+  # Screenshot baselines belong to the platform that took them. This runner is
+  # the only one whose baselines are committed (D71).
+  SNAPSHOT_PLATFORM: rocky10
+  NODE_VERSION: '22'
 
 jobs:
+  # Everything is built for and on Rocky Linux 10. This job proves that is
+  # what we are standing on before anything else runs, and reports what the
+  # rest of the pipeline depends on. Tools are verified, never installed: a
+  # package manager running unattended on a private VM is not a build step.
+  environment:
+    name: Environment (Rocky Linux 10)
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Confirm the runner is Rocky Linux 10
+        run: |
+          set -euo pipefail
+          . /etc/os-release
+          echo "$PRETTY_NAME"
+          if [ "${ID:-}" != "rocky" ]; then
+            echo "::error::this pipeline builds for Rocky Linux; runner reports ID=${ID:-unknown}"
+            exit 1
+          fi
+          case "${VERSION_ID:-}" in
+            10|10.*) ;;
+            *)
+              echo "::error::this pipeline builds for Rocky Linux 10; runner reports ${VERSION_ID:-unknown}"
+              exit 1
+              ;;
+          esac
+
+      - name: Verify poppler
+        run: |
+          set -uo pipefail
+          missing=0
+          for tool in pdftotext pdftoppm pdfinfo; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              "$tool" -v 2>&1 | head -1
+            else
+              echo "::error::$tool not found; install it with: sudo dnf install -y poppler-utils"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Verify the shared libraries Chromium needs
+        run: |
+          set -uo pipefail
+          # Playwright's install-deps does not support RHEL-family distributions,
+          # so the libraries are a runner prerequisite and this reports the one
+          # dnf line that supplies whatever is missing.
+          libs="libnss3.so libnssutil3.so libatk-1.0.so.0 libatk-bridge-2.0.so.0 libcups.so.2 libdrm.so.2 libxkbcommon.so.0 libXcomposite.so.1 libXdamage.so.1 libXfixes.so.3 libXrandr.so.2 libgbm.so.1 libpango-1.0.so.0 libcairo.so.2 libasound.so.2"
+          missing=""
+          for lib in $libs; do
+            if ! /sbin/ldconfig -p | grep -q "$lib"; then
+              missing="$missing $lib"
+            fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::missing shared libraries for Chromium:$missing"
+            echo "install with: sudo dnf install -y nss nspr atk at-spi2-atk cups-libs libdrm libxkbcommon libXcomposite libXdamage libXfixes libXrandr mesa-libgbm pango cairo alsa-lib"
+            exit 1
+          fi
+          echo "every library Chromium needs is present"
+
+      - name: Record the environment
+        run: |
+          set -uo pipefail
+          . /etc/os-release
+          {
+            echo "### Build environment"
+            echo
+            echo "| What | Version |"
+            echo "| --- | --- |"
+            echo "| OS | $PRETTY_NAME |"
+            echo "| Kernel | $(uname -r) |"
+            echo "| Node | $(node --version 2>/dev/null || echo 'not yet installed') |"
+            echo "| pdftotext | $(pdftotext -v 2>&1 | head -1) |"
+            echo "| Free disk | $(df -h . | awk 'NR==2 {print $4}') |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
   check:
+    name: Check (format, lint, types, tests, gate)
+    needs: environment
     runs-on: [self-hosted, Linux, X64]
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
-
-      # poppler is a runtime dependency of the PDF toolkit. The runner provides
-      # it; CI verifies rather than installs, so a missing tool fails loudly
-      # instead of a package manager running unattended.
-      - name: Verify poppler
-        run: |
-          missing=0
-          for tool in pdftotext pdftoppm pdfinfo; do
-            if command -v "$tool" >/dev/null 2>&1; then
-              "$tool" -v 2>&1 | head -1
-            else
-              echo "::error::$tool not found on this runner; install poppler-utils"
-              missing=1
-            fi
-          done
-          exit "$missing"
 
       - run: npm ci
 
       - run: npm run check
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-rocky10
+          path: coverage/
+          retention-days: 14
+
+  build:
+    name: Build for Rocky Linux 10
+    needs: check
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Package the distribution
+        id: package
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./package.json').version")"
+          name="chip-datasheet-agent-${version}-rocky10-node${NODE_VERSION}-${GITHUB_SHA::7}"
+          staging="dist-package/$name"
+          mkdir -p "$staging"
+          cp -r dist "$staging/"
+          cp -r prompts "$staging/"
+          cp -r eval/golden "$staging/golden"
+          cp package.json package-lock.json README.md CLAUDE.md "$staging/"
+          cp -r docs "$staging/"
+          # The lock file travels; the dependencies do not. better-sqlite3 is a
+          # native module, and a copy built here would only ever be right for a
+          # machine identical to this one. The target runs `npm ci --omit=dev`.
+          cat > "$staging/INSTALL.md" <<'NOTE'
+          # Installing on Rocky Linux 10
+
+          1. `sudo dnf install -y poppler-utils` — the PDF toolkit shells out to
+             `pdftotext`, `pdftoppm` and `pdfinfo`.
+          2. Node 22.
+          3. `npm ci --omit=dev` in this directory, which builds better-sqlite3
+             against the Node on the target rather than the one that built this.
+          4. Copy `.env.example` from the repository and fill in credentials.
+          5. `node dist/web/server/serve.js` for the site, or see `docs/` for the
+             command-line entry points.
+          NOTE
+          sed -i 's/^          //' "$staging/INSTALL.md"
+          tar -czf "dist-package/$name.tar.gz" -C dist-package "$name"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "archive=dist-package/$name.tar.gz" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Package"
+            echo
+            echo "\`$name.tar.gz\` — $(du -h "dist-package/$name.tar.gz" | cut -f1)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.package.outputs.name }}
+          path: ${{ steps.package.outputs.archive }}
+          retention-days: 30
+
+  e2e:
+    name: Browser tests (Chromium on Rocky Linux 10)
+    needs: build
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Read the Playwright version
+        id: playwright
+        run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test'].replace(/^[^0-9]*/, '')")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache the browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright.outputs.version }}-rocky10
+
+      - name: Install Chromium
+        run: npx playwright install chromium
+
+      - name: Run the browser tests
+        if: ${{ github.event.inputs.update_screenshots != 'true' }}
+        env:
+          CI: 'true'
+        run: npm run test:e2e
+
+      # A deliberate regeneration: the baselines are only ever taken on this
+      # runner, so they are produced here and uploaded for a person to commit.
+      - name: Regenerate the screenshot baselines
+        if: ${{ github.event.inputs.update_screenshots == 'true' }}
+        env:
+          CI: 'true'
+        run: npm run test:e2e:update
+
+      - name: Upload the report and any screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-rocky10
+          path: |
+            test/e2e/.report/
+            test/e2e/.output/
+            test/e2e/__screenshots__/rocky10/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  release:
+    name: Release
+    needs: [check, build, e2e]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: [self-hosted, Linux, X64]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download the distribution
+        uses: actions/download-artifact@v4
+        with:
+          pattern: chip-datasheet-agent-*
+          path: release
+          merge-multiple: true
+
+      - name: Attach it to the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if ! command -v gh >/dev/null 2>&1; then
+            echo "::error::the GitHub CLI is not on this runner; install it with: sudo dnf install -y gh"
+            exit 1
+          fi
+          tag="${GITHUB_REF_NAME}"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --title "$tag" --generate-notes
+          fi
+          gh release upload "$tag" release/*.tar.gz --clobber

@@ -11,7 +11,9 @@ export default defineConfig({
     // project runs with zero warnings (docs/PROJECT_PLAN.md D20).
     fsModuleCache: true,
     include: ['src/**/*.test.ts', 'test/**/*.test.ts'],
-    exclude: ['test/live/**', 'node_modules/**', 'dist/**'],
+    // test/e2e holds Playwright specs (`*.spec.ts`), which have their own
+    // runner and their own browser; vitest must not try to run them.
+    exclude: ['test/live/**', 'test/e2e/**', 'node_modules/**', 'dist/**'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.ts'],
