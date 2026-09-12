@@ -983,18 +983,18 @@ ask it. A read-only snapshot ships alongside for sharing (D63, D69).
 
 ### 19E Run control
 
-- [ ] 19E.1 `src/web/runs/launcher.ts`: extraction, verification, batch and
+- [x] 19E.1 `src/web/runs/launcher.ts`: extraction, verification, batch and
       eval sweeps launched with model, effort, prompt version, turn limit and
       cost ceiling, behind the three existing money gates (D12, D49, D50) and
       a per-request ceiling (D64).
-- [ ] 19E.2 `src/web/runs/registry.ts`: in-flight run registry with live
+- [x] 19E.2 `src/web/runs/registry.ts`: in-flight run registry with live
       turn, cost and tool-call events, cancellation, and recovery of a run
       whose client disconnected.
-- [ ] 19E.3 Estimated cost before launch, from this project's own history, and
+- [x] 19E.3 Estimated cost before launch, from this project's own history, and
       a confirmation that names the figure.
-- [ ] 19E.4 Spend-gate transparency: what each gate would decide for the
+- [x] 19E.4 Spend-gate transparency: what each gate would decide for the
       request, and every denial shown rather than swallowed.
-- [ ] 19E.5 Tests: launcher with a fake runner, ceiling enforcement,
+- [x] 19E.5 Tests: launcher with a fake runner, ceiling enforcement,
       cancellation, gate denial, event stream ordering, recovery.
 
 ### 19F Front end

@@ -5,6 +5,7 @@ import { registerCache } from './cache.js';
 import { registerDatasheets } from './datasheets.js';
 import { registerEvals } from './evals.js';
 import { registerHealth } from './health.js';
+import { registerLaunches } from './launches.js';
 import { registerParts } from './parts.js';
 import { registerRuns } from './runs.js';
 import { registerStats } from './stats.js';
@@ -17,6 +18,7 @@ export * from './datasheets.js';
 export * from './deps.js';
 export * from './evals.js';
 export * from './health.js';
+export * from './launches.js';
 export * from './params.js';
 export * from './parts.js';
 export * from './runs.js';
@@ -40,4 +42,5 @@ export function registerApi(router: Router<RouteEntry>, deps: ApiDeps): void {
   registerEvals(router, deps);
   registerCache(router, deps);
   registerWrites(router, deps);
+  registerLaunches(router, deps);
 }

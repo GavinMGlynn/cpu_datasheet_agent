@@ -14,11 +14,19 @@ import {
 import { createRedactor } from '../../src/log/redact.js';
 import { PdfToolkit, popplerPreflight, type PdfRef } from '../../src/pdf/index.js';
 import type { ApiDeps } from '../../src/web/api/deps.js';
+import type { QueryFn } from '../../src/agent/execute.js';
 import { createAuditor } from '../../src/web/audit.js';
+import { createLauncher } from '../../src/web/runs/launcher.js';
+import { createLaunchRegistry } from '../../src/web/runs/registry.js';
 import { createEvals } from '../../src/web/data/evals.js';
 import { createLedgerIndex } from '../../src/web/data/ledger-index.js';
 import { createSources, type Sources } from '../../src/web/data/sources.js';
-import { createApp, type RouteEntry } from '../../src/web/server/app.js';
+import {
+  createApp,
+  type HttpRequestLike,
+  type ResponseSink,
+  type RouteEntry,
+} from '../../src/web/server/app.js';
 import { createResponder } from '../../src/web/server/respond.js';
 import { Router } from '../../src/web/server/router.js';
 import { createSecurity, originsFor } from '../../src/web/server/security.js';
@@ -41,6 +49,8 @@ export interface TestApi {
   readonly repositories: Repositories;
   readonly sources: Sources;
   readonly router: Router<RouteEntry>;
+  /** The request handler itself, for tests that need a raw request or a stream. */
+  readonly app: (request: HttpRequestLike, response: ResponseSink) => Promise<void>;
   readonly logLines: Record<string, unknown>[];
   request(method: string, url: string, body?: unknown): Promise<ApiResult>;
   get(url: string): Promise<ApiResult>;
@@ -64,6 +74,8 @@ export interface TestApiOptions {
   readonly env?: Readonly<Record<string, string>>;
   /** False stands in for a runner with no poppler installed. */
   readonly poppler?: boolean;
+  /** A scripted harness, so a launch can be tested without spending anything. */
+  readonly query?: QueryFn;
 }
 
 /**
@@ -97,8 +109,21 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
   const ledger = createLedgerIndex(ledgerDir);
 
   let auditIds = 0;
+  let launchIds = 0;
+  const launches = createLaunchRegistry({
+    clock: () => new Date('2026-09-12T00:00:00.000Z'),
+    newId: () => `00000000-0000-4000-a000-${String((launchIds += 1)).padStart(12, '0')}`,
+  });
   const deps: ApiDeps = {
     sources,
+    launches,
+    launcher: createLauncher({
+      config,
+      registry: launches,
+      logger: log.logger,
+      databasePath: databaseFile,
+      ...(options.query === undefined ? {} : { query: options.query }),
+    }),
     auditor: createAuditor({
       clock: () => new Date('2026-09-12T00:00:00.000Z'),
       newId: () => `00000000-0000-4000-9000-${String((auditIds += 1)).padStart(12, '0')}`,
@@ -166,6 +191,7 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
     repositories,
     sources,
     router,
+    app,
     logLines: log.lines,
     request,
     get: (url) => request('GET', url),

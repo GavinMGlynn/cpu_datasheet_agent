@@ -4,6 +4,7 @@ import path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { resultMessage, scriptedQuery } from '../../test/helpers/agent-sdk.js';
 import { recordedRequest, recordedResponse } from '../../test/helpers/web.js';
 import { createWeb, probePoppler, type WebParts } from './create.js';
 
@@ -132,6 +133,12 @@ describe('createWeb', () => {
       authorization: 'Bearer a-token-worth-twenty-chars',
     });
     expect(JSON.parse(result.body) as unknown).toStrictEqual({ results: [] });
+  });
+
+  it('takes the harness a launch will run through', async () => {
+    const { query } = scriptedQuery([resultMessage({ numTurns: 1, costUsd: 0 })]);
+    const parts = await build({ token: 'a-token-worth-twenty-chars', query });
+    expect(parts.deps.launcher).toBeDefined();
   });
 
   it('reads the live store from where it is told', async () => {

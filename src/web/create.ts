@@ -2,6 +2,7 @@ import path from 'node:path';
 import { access, constants } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
+import type { QueryFn } from '../agent/execute.js';
 import { Cache, FileCacheStore } from '../cache/index.js';
 import { loadConfig, type Config } from '../config.js';
 import { createLogger, type Logger } from '../log/logger.js';
@@ -9,6 +10,8 @@ import { createRedactor, secretsFromConfig } from '../log/redact.js';
 import { PdfToolkit, popplerPreflight, type PopplerTools } from '../pdf/index.js';
 import { registerApi, type ApiDeps } from './api/index.js';
 import { createAuditor } from './audit.js';
+import { createLauncher } from './runs/launcher.js';
+import { createLaunchRegistry } from './runs/registry.js';
 import { createEvals } from './data/evals.js';
 import { GOLDEN_DIR } from '../eval/load.js';
 import { createLedgerIndex } from './data/ledger-index.js';
@@ -52,6 +55,8 @@ export interface WebOptions {
   readonly poppler?: PopplerTools;
   /** Treat poppler as absent without probing, for testing that path. */
   readonly noPoppler?: boolean;
+  /** The harness runs are executed through. Defaults to the real one. */
+  readonly query?: QueryFn;
 }
 
 export interface WebParts {
@@ -133,9 +138,22 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     tools: poppler ?? POPPLER_ABSENT,
   });
 
+  const launches = createLaunchRegistry(
+    options.clock === undefined ? {} : { clock: options.clock },
+  );
+  const launcher = createLauncher({
+    config,
+    registry: launches,
+    logger,
+    ...(options.query === undefined ? {} : { query: options.query }),
+    databasePath: databaseFile,
+  });
+
   const deps: ApiDeps = {
     sources,
     auditor: createAuditor(options.clock === undefined ? {} : { clock: options.clock }),
+    launcher,
+    launches,
     evals: createEvals({
       ...(options.resultsDir === undefined ? {} : { resultsDir: options.resultsDir }),
       ...(options.goldenDir === undefined ? {} : { goldenDir: options.goldenDir }),

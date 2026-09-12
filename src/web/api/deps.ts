@@ -5,6 +5,8 @@ import type { FileCacheStore } from '../../cache/store.js';
 import type { PdfToolkit } from '../../pdf/toolkit.js';
 import type { PopplerTools } from '../../pdf/poppler.js';
 import type { Auditor } from '../audit.js';
+import type { Launcher } from '../runs/launcher.js';
+import type { LaunchRegistry } from '../runs/registry.js';
 import type { Evals } from '../data/evals.js';
 import type { LedgerIndex } from '../data/ledger-index.js';
 import type { OpenSource, Sources } from '../data/sources.js';
@@ -17,6 +19,10 @@ export interface ApiDeps {
   readonly sources: Sources;
   /** The one path every change from the browser takes (D65). */
   readonly auditor: Auditor;
+  /** Starts runs that spend money, behind the gates (D64). */
+  readonly launcher: Launcher;
+  /** What those runs are doing, for anything watching. */
+  readonly launches: LaunchRegistry;
   readonly evals: Evals;
   readonly ledger: LedgerIndex;
   readonly pdf: PdfToolkit;

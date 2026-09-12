@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shape > keeps the shape of a launch 1`] = `
+[
+  "actor",
+  "allowSpend",
+  "cancelling",
+  "id",
+  "kind",
+  "maxCostUsd",
+  "model",
+  "mpns",
+  "promptVersion",
+  "runs",
+  "startedAt",
+  "state",
+]
+`;
