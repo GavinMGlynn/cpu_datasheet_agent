@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shape > keeps the shape of an answer 1`] = `
+[
+  "alternates",
+  "disclaimer",
+  "excluded",
+  "reference",
+  "referencePrice",
+]
+`;

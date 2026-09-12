@@ -48,6 +48,8 @@ export interface TestApi {
   addDatasheet(): Promise<PdfRef & { pageCount: number; url: string }>;
   /** Appends ledger records, as the ledger itself would. */
   appendLedger(records: readonly unknown[], day?: string): Promise<void>;
+  /** Writes a blob beside the ledger, for an output too large to inline. */
+  writeBlob(relative: string, content: string): Promise<void>;
   close(): Promise<void>;
 }
 
@@ -57,6 +59,10 @@ export interface TestApiOptions {
   /** Where evaluation results are read from. Defaults to a temp directory. */
   readonly resultsDir?: string;
   readonly goldenDir?: string;
+  /** Extra environment for `loadConfig`, to give the API credentials to report on. */
+  readonly env?: Readonly<Record<string, string>>;
+  /** False stands in for a runner with no poppler installed. */
+  readonly poppler?: boolean;
 }
 
 /**
@@ -85,7 +91,7 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
   const store = new FileCacheStore(cacheDir);
   const cache = new Cache({ store });
   const pdf = new PdfToolkit({ cache, store, tools: await popplerPreflight() });
-  const config = loadConfig({ DATA_DIR: dataDir });
+  const config = loadConfig({ DATA_DIR: dataDir, ...options.env });
   const log = capturedLogger();
   const ledger = createLedgerIndex(ledgerDir);
 
@@ -101,7 +107,7 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
     config,
     logger: log.logger,
     clock: () => new Date('2026-09-12T00:00:00.000Z'),
-    poppler: await popplerPreflight(),
+    poppler: options.poppler === false ? undefined : await popplerPreflight(),
     ledgerDir,
     cacheDir,
     version: '1.0.0-test',
@@ -177,6 +183,12 @@ export async function createTestApi(options: TestApiOptions): Promise<TestApi> {
       const lines = records.map((record) => `${JSON.stringify(record)}\n`).join('');
       await appendFile(file, lines);
       await ledger.refresh();
+    },
+
+    async writeBlob(relative, content) {
+      const file = path.join(ledgerDir, relative);
+      await mkdir(path.dirname(file), { recursive: true });
+      await writeFile(file, content);
     },
 
     async close() {

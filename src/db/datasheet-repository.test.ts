@@ -69,6 +69,24 @@ describe('DatasheetRepository', () => {
     }).toThrow(ValidationError);
   });
 
+  it('lists every datasheet, most recently fetched first', () => {
+    repo.record(datasheet());
+    repo.record(
+      datasheet({
+        sha256: OTHER_SHA,
+        url: 'https://example.invalid/other.pdf',
+        fetchedAt: '2026-09-11T00:00:00Z',
+        coversMpns: ['LM5164DDAR'],
+      }),
+    );
+    expect(repo.list().map((sheet) => sheet.sha256)).toEqual([OTHER_SHA, SHA]);
+    expect(repo.list()[0]?.coversMpns).toEqual(['LM5164DDAR']);
+  });
+
+  it('has no datasheets to list in an empty store', () => {
+    expect(repo.list()).toEqual([]);
+  });
+
   it('finds every datasheet covering an MPN, ordered by digest', () => {
     repo.record(datasheet({ sha256: OTHER_SHA, coversMpns: ['TPS54331DR'] }));
     repo.record(datasheet());

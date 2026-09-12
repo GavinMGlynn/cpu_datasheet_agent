@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shapes > keeps the shape of the overview and of a spend breakdown 1`] = `
+[
+  "cache",
+  "estimates",
+  "gate",
+  "ledger",
+  "runs",
+  "source",
+  "value",
+]
+`;
+
+exports[`payload shapes > keeps the shape of the overview and of a spend breakdown 2`] = `
+{
+  "breakdown": [
+    {
+      "costUsd": 3.41,
+      "key": "extract",
+      "meanCostUsd": 3.41,
+      "runs": 1,
+      "turns": 18,
+      "unsuccessful": 0,
+    },
+    {
+      "costUsd": 0.45,
+      "key": "verify",
+      "meanCostUsd": 0.45,
+      "runs": 1,
+      "turns": 6,
+      "unsuccessful": 0,
+    },
+  ],
+  "dimension": "kind",
+}
+`;

@@ -58,14 +58,35 @@ function isMissing(error: unknown): boolean {
 }
 
 /**
+ * Trades a valid token in the query for a cookie and a redirect to the same
+ * path without it, so the token stops living in the address bar, the history
+ * and every `Referer` the page later sends (D67). Returns false when there
+ * was no token to trade.
+ *
+ * Separate from serving the page because signing in must work before the
+ * front end is built: otherwise a fresh checkout has no way in at all.
+ */
+export function tradeTokenForCookie(context: RequestContext): boolean {
+  if (context.query.get('token') === null || !context.auth.authenticated) {
+    return false;
+  }
+  const clean = new URL(context.url.href);
+  clean.searchParams.delete('token');
+  sendEmpty(context.response, 303, {
+    Location: `${clean.pathname}${clean.search}`,
+    'Set-Cookie': context.security.sessionCookie(),
+    'Cache-Control': 'no-store',
+  });
+  return true;
+}
+
+/**
  * Serves the built application.
  *
- * Two behaviours are worth knowing. A path with no extension that does not
- * exist gets `index.html`, because the application routes in the browser and
- * a reload of `/runs/abc` must not 404. And a request that arrives carrying a
- * valid token in the query is answered with a cookie and a redirect to the
- * same path without it, so the token stops living in the address bar, the
- * history and every `Referer` the page later sends (D67).
+ * A path with no extension that does not exist gets `index.html`, because
+ * the application routes in the browser and a reload of `/runs/abc` must not
+ * 404. A request carrying a valid token is handed a cookie first; see
+ * {@link tradeTokenForCookie}.
  */
 export function createStaticHandler(
   options: StaticOptions,
@@ -82,15 +103,7 @@ export function createStaticHandler(
   };
 
   const serveIndex = async (context: RequestContext): Promise<void> => {
-    const token = context.query.get('token');
-    if (token !== null && context.auth.authenticated) {
-      const clean = new URL(context.url.href);
-      clean.searchParams.delete('token');
-      sendEmpty(context.response, 303, {
-        Location: `${clean.pathname}${clean.search}`,
-        'Set-Cookie': context.security.sessionCookie(),
-        'Cache-Control': 'no-store',
-      });
+    if (tradeTokenForCookie(context)) {
       return;
     }
     await serve(context, path.join(root, index));

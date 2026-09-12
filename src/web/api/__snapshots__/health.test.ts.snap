@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shape > keeps the shape of the health report 1`] = `
+[
+  "cacheDir",
+  "credentials",
+  "database",
+  "ledger",
+  "now",
+  "poppler",
+  "source",
+  "version",
+]
+`;

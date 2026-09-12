@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shapes > keeps the shape of a listing row and of a parameter score 1`] = `
+{
+  "costUsd": 0.42,
+  "id": "2026-09-11T00-00-00-000Z-extract.v1-claude-opus-5",
+  "model": "claude-opus-5",
+  "parts": 1,
+  "precision": 1,
+  "promptVersion": "extract.v1",
+  "provenanceAccuracy": 1,
+  "recall": 1,
+  "startedAt": "2026-09-11T00:00:00.000Z",
+  "starved": 0,
+  "turns": 12,
+  "withinOnePage": 0,
+}
+`;
+
+exports[`payload shapes > keeps the shape of a listing row and of a parameter score 2`] = `
+{
+  "accuracy": 0,
+  "citationExact": 1,
+  "citationWithinOne": 0,
+  "correct": 0,
+  "key": "vinMax",
+  "missingParts": [],
+  "stated": 1,
+  "wrongParts": [
+    "AP62200WU-7",
+  ],
+}
+`;

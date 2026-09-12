@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shape > keeps the shape of a namespace summary 1`] = `
+[
+  "bytes",
+  "entries",
+  "namespace",
+  "newest",
+  "oldest",
+]
+`;

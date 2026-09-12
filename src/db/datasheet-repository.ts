@@ -99,6 +99,22 @@ export class DatasheetRepository {
       .map((row) => row.mpn);
   }
 
+  /**
+   * Every datasheet, newest fetch first.
+   *
+   * Added for the web application (M19), which lists them: one datasheet
+   * commonly covers a whole family, so the set of datasheets is a smaller and
+   * more useful index than the set of parts.
+   */
+  list(): Datasheet[] {
+    return this.db.raw
+      .prepare<[], DatasheetRow>(
+        `SELECT ${COLUMNS} FROM datasheets ORDER BY fetched_at DESC, sha256`,
+      )
+      .all()
+      .map((row) => this.hydrate(row));
+  }
+
   /** Datasheets whose ordering table lists the MPN, ordered by digest. */
   findByMpn(mpn: string): Datasheet[] {
     return this.db.raw

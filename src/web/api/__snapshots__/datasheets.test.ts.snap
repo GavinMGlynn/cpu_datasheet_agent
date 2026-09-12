@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shapes > keeps the shape of a datasheet listing 1`] = `
+{
+  "coversMpns": [
+    "XYZ54331D",
+    "XYZ54331DR",
+  ],
+  "fetchedAt": "<fixed>",
+  "localPath": "<temp>",
+  "pageCount": 4,
+  "parts": [
+    "XYZ54331D",
+    "XYZ54331DR",
+  ],
+  "sha256": "69d332aaf745ee1759f425471e74571735dd81929ae781ae46a267ed2debef75",
+  "url": "https://example.invalid/datasheet.pdf",
+}
+`;
+
+exports[`payload shapes > keeps the shape of a page read 1`] = `
+[
+  "hit",
+  "metrics",
+  "page",
+  "text",
+]
+`;
