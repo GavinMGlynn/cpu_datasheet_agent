@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { test as setup } from '@playwright/test';
+import { test as setup, type Page } from '@playwright/test';
 
 import { E2E_ADMIN, E2E_PASSWORD, E2E_VIEWER } from './seed.js';
 
@@ -16,11 +16,7 @@ import { E2E_ADMIN, E2E_PASSWORD, E2E_VIEWER } from './seed.js';
 export const ADMIN_STATE = path.join('test', 'e2e', '.data', 'admin-state.json');
 export const VIEWER_STATE = path.join('test', 'e2e', '.data', 'viewer-state.json');
 
-async function signInAndSave(
-  page: import('@playwright/test').Page,
-  username: string,
-  file: string,
-): Promise<void> {
+async function signInAndSave(page: Page, username: string, file: string): Promise<void> {
   await page.goto('/');
   await page.getByLabel('Username').fill(username);
   await page.getByLabel('Password').fill(E2E_PASSWORD);
