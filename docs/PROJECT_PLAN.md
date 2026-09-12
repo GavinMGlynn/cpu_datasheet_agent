@@ -121,6 +121,13 @@ that supersedes the old one, and the old row's status changes to
 | D60 | 2026-09-12 | An alternate is offered only from parts a verification pass has confirmed, unless the caller passes `includeUnverified`. A part that needs a person, or was rejected, is never offered. | Recommending a replacement on the strength of an unchecked reading is how a wrong absolute maximum reaches a board. A part with a known conflict is not a recommendation at any price. | active |
 | D61 | 2026-09-12 | `createdAt` and `updatedAt` belong to the store, not to the part: `upsert_part` takes a `PartDraft` without them and stamps both, keeping the original creation time when a part is stored again. | Three parts extracted after midnight Brisbane were stored with a `createdAt` of `2026-09-12T00:00:00Z`, which was five hours in the future in UTC. The verification pass then could not write them back at all — `updatedAt` cannot be earlier than `createdAt` — and the sweep died on the seventeenth part. A model asked for a timestamp writes the date it believes it is (D52, same rule for `checkedAt`). | active |
 | D62 | 2026-09-12 | A batch records a part it could not run and carries on, rather than stopping. The part has no finished run, so a later resume picks it up. | The same crash cost sixteen good runs their sweep. One part that cannot be started is not a reason to abandon the other ninety-nine, and the resume rule already makes an unfinished part safe to retry. | active |
+| D63 | 2026-09-12 | A web application is added as Module 19: a local HTTP server in this repository serving a React front end over the live SQLite store, the ledger and the evaluation results, with a read-only snapshot for sharing. | Six hundred and sixty parameters with page provenance, 2,505 ledger calls, 573 verification verdicts and an $87 evaluation cannot be read from a terminal, and every question worth asking of them — which parameter the prompt gets wrong, what a value cost, whether a run regressed — is comparative. The user's requirement is a complete site: where the CLI can do a thing, the site can too. | active |
+| D64 | 2026-09-12 | The site may launch runs that spend money — extraction, verification, batch and evaluation sweeps — behind the three existing money gates (D12, D49, D50) plus a per-request cost ceiling and a confirmation naming the estimated figure. | The user's decision, taken against real numbers: an extraction costs $3.41 to $4.27, a verification $0.45 to $1.05, a full twenty-two-part sweep $87.24. A control surface that cannot start a run is not control, and the gates that make the CLI safe are the same ones here. | active |
+| D65 | 2026-09-12 | Every write from the browser goes through one audited writer: actor, action, target, before, after, and a reason that is not optional. A human correction is stored beside the model's value, never over it. | The ledger exists because a tool call that is not recorded cannot be reconstructed (non-negotiable 4); a hand edit is no different, and is more dangerous because nothing else witnesses it. Keeping both values is what makes the golden set an independent reference rather than a rewritten one. | active |
+| D66 | 2026-09-12 | The front end is React with Vite and a charting library, unit-tested under jsdom with Testing Library at the same 100% per-file coverage bar as the rest of `src/`. | The user's choice, taken over a zero-dependency vanilla build: virtualised tables over 2,505 ledger records and a dozen chart types are worth the dependency budget. The coverage bar does not move for the browser; a component that cannot be tested is a component written wrong. | active |
+| D67 | 2026-09-12 | The server binds `127.0.0.1` unless `--host` is passed with a printed warning, mints a bearer token at every start that every write and every run launch must carry, and checks `Origin`. No credential value is ever serialised: health reports booleans. | The machine holds Digi-Key and Anthropic credentials and a button that spends money. A page open in another tab must not be able to reach either, and a token that changes per start cannot be pasted into a bookmark by accident. | active |
+| D68 | 2026-09-12 | The shareable snapshot excludes credentials, `.env` values, datasheet text and page images, and the ledger blobs holding raw distributor responses. The exclusions are enforced in code and listed on the page itself. | Datasheet text and rendered pages are the manufacturers' copyright — the same reason `eval/golden/work/` is not committed — and a raw API response is the distributor's data, not ours to republish. A snapshot that leaks either is not shareable at all. | active |
+| D69 | 2026-09-12 | The site reads any of the project's databases, the live store and every `data/eval-runs/*.sqlite`, selectable per request. | The twenty-two parts the baseline extracted live in an evaluation-run database, not in `data/chip.sqlite`, which holds two. A site that could only read the live store would show almost none of the work. | active |
 
 ## 4. Status
 
@@ -149,6 +156,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M16 | Evaluation harness | complete | 2026-09-12 |
 | M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
+| M19 | Web application | in progress | |
 
 ## 5. Conventions
 
@@ -249,6 +257,42 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 23: Module 19 planned, a web application
+
+The previous session ended when Claude and the WSL session both died. Nothing
+was lost: the tree was clean at `a8e0df5`, `origin/main` matched it, and
+`npm run check` came back green. One defect fell out of the restart —
+Claude Code rewrites `.claude/settings.local.json` at every start in its own
+JSON style, and `prettier --check` failed on it. The file is git-ignored and
+tool-owned, so it is now in `.prettierignore` with the reason.
+
+**The new requirement**
+
+A complete web application over everything the project holds: the engineering
+data and the statistics of the AI work that produced it. Four choices settled
+it (D63 to D69): a local server plus a shareable snapshot; full run control
+with the money gates enforced; full write-back under an audit trail; React
+with a charting library. The instruction was explicit that no assumption
+should limit what the site can do, so Module 19 mirrors the CLI's whole
+surface rather than a reading of it.
+
+**What the site has to work with**
+
+| Source | What is there |
+| --- | --- |
+| `data/chip.sqlite` | 2 parts, 60 parameters, 8 offers, 30 verdicts, 6 runs |
+| `data/eval-runs/dd212de6….sqlite` | the baseline: 22 parts, 660 parameters, 82 offers, 573 verdicts, 47 runs, 7 escalations |
+| `data/ledger/2026-09-11.jsonl` | 2,505 tool calls, 7.3 MB, with inputs, outputs, errors, durations and transcripts |
+| `eval/results/…extract.v1-claude-opus-5` | 90.6% recall, 90.6% precision, 59.3% exact citations, $87.24 |
+| `data/cache/` | fourteen namespaces, every network call and rendered page |
+
+That the baseline lives in an evaluation database and not the live store is
+why D69 exists: the site reads either.
+
+**Next concrete step**
+
+19A.1 to 19A.8, the server foundation, then the read models in 19B.
 
 ### 2026-09-12 — Session 22: Module 18, and the plan is finished
 

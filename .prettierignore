@@ -10,3 +10,8 @@ package-lock.json
 # Source of the published architecture page. Kept byte-identical to what is
 # deployed, so formatting must not rewrite it.
 docs/architecture.html
+
+# Claude Code's local, machine-written settings (git-ignored globally, and
+# rewritten by the tool on every session). Formatting it is futile: the tool
+# writes its own JSON style back the next time it starts.
+.claude/settings.local.json

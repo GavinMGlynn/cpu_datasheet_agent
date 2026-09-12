@@ -869,3 +869,204 @@ exists, and the repository is tagged.
 - [x] 18.4 `docs/REFERENCES.md`: every row re-checked, dates updated,
       unverified rows resolved or removed.
 - [x] 18.5 Tag `v1.0.0`, push the tag, log entry closing the plan.
+
+---
+
+## M19 — Web application
+
+Goal: a complete browser application over everything this project holds — the
+extracted engineering data and the statistics of the AI work that produced it —
+that reads, analyses, writes back under audit, and launches runs. Nothing in
+this module is a view-only cut of a richer CLI: where the CLI can do a thing,
+the site can do it too, and where the data supports a question, the site can
+ask it. A read-only snapshot ships alongside for sharing (D63, D69).
+
+### 19A Server foundation
+
+- [ ] 19A.1 `src/web/server/router.ts`: method and path-pattern matching with
+      typed parameters, query-string parsing, 404 and 405 with `Allow`.
+- [ ] 19A.2 `src/web/server/respond.ts`: JSON, text, binary and stream
+      responses; `ETag` and conditional `GET`; `Cache-Control` per resource
+      class; error envelopes that carry a `ChipAgentError` code without
+      leaking internals.
+- [ ] 19A.3 `src/web/server/errors.ts`: maps every error class the modules
+      throw (`ValidationError`, `DbError`, `CacheMissError`, `QueryError`,
+      `AgentError`, `ConfigError`, `LedgerReadError`) to a status and a stable
+      machine-readable code.
+- [ ] 19A.4 `src/web/server/security.ts`: binds `127.0.0.1` unless `--host` is
+      given, per-start bearer token required for every write and every run
+      launch, `Origin` check, no credential value ever serialised (D67).
+- [ ] 19A.5 `src/web/server/sse.ts`: server-sent events with heartbeat,
+      backpressure and client-disconnect cleanup, used by run streaming.
+- [ ] 19A.6 `src/web/server/server.ts`: `createWebServer(deps)` over
+      `node:http`, static asset serving with content types and long-lived
+      hashed-asset caching, graceful shutdown.
+- [ ] 19A.7 `bin/chip-web.ts` and `npm run web`: parses `--port --host --db
+      --ledger --open --token`, prints the URL and the token, exits non-zero
+      on a bad flag.
+- [ ] 19A.8 Tests: router table including trailing slashes and encoded
+      segments, every error mapping, token rejection paths, SSE lifecycle,
+      static serving, CLI parsing.
+
+### 19B Read models
+
+- [ ] 19B.1 `src/web/data/catalog.ts`: part list projections (status,
+      manufacturer, category, parameter summary, verification state, best
+      price at quantity), the parts × parameter-keys coverage matrix, and
+      cross-part parameter distributions.
+- [ ] 19B.2 `src/web/data/ledger-index.ts`: one pass over the ledger day files
+      building an in-memory index — by session, by tool, by parent, by day —
+      with incremental refresh on file growth and malformed lines surfaced
+      rather than dropped.
+- [ ] 19B.3 `src/web/data/stats.ts`: spend by day, model, prompt version, run
+      kind and part; turns and duration percentiles (p50/p90/p99); tool-call
+      counts, error rates by tool and error code; cache hit, miss, expired and
+      forced rates; spend-gate denials; cost per stored parameter and per
+      confirmed value.
+- [ ] 19B.4 `src/web/data/aggregate.ts`: the grouping, percentile, histogram
+      and time-bucketing helpers the above share, as pure functions.
+- [ ] 19B.5 `src/web/data/evals.ts`: loads every result directory, the
+      per-parameter score matrix, the starved-part list, and two-report
+      comparison via `compareReports`.
+- [ ] 19B.6 `src/web/data/sources.ts`: multiple databases at once — the main
+      store and every `data/eval-runs/*.sqlite` — selectable per request, so
+      the twenty-two-part baseline is as readable as the live store (D69).
+- [ ] 19B.7 Tests: fixtures for each read model, including an empty store, a
+      ledger with malformed lines, and a database with no runs.
+
+### 19C Read API
+
+- [ ] 19C.1 Parts: list with the full filter set (status, manufacturer,
+      category, classification axis, parameter range, text), detail with
+      parameters, provenance, conflicts, confidence, verdicts, classifications,
+      offers, price breaks, runs and escalations.
+- [ ] 19C.2 Datasheets: metadata, family MPN coverage, page text, page image
+      (PNG through the existing PDF toolkit, cached), and page search.
+- [ ] 19C.3 Alternates: the whole `AlternateQuery` surface, returning the
+      comparison table and the mandatory pin-compatibility disclaimer verbatim.
+- [ ] 19C.4 Pricing: price-break curves, unit price at quantity, price per
+      ampere, distributor comparison and stock.
+- [ ] 19C.5 Runs: list, filter, detail with the ledger call tree and the
+      condensed transcript.
+- [ ] 19C.6 Ledger: paged and filtered tool calls, single record with blob
+      hydration, aggregates, and per-session trace reconstruction.
+- [ ] 19C.7 Stats: every aggregate in 19B.3 as an endpoint with a time window.
+- [ ] 19C.8 Evals: result list, one report, per-parameter failure inspector,
+      comparison of two reports, golden health checks and coverage.
+- [ ] 19C.9 Verifications: verdict counts by part and parameter, with the
+      cited page and quote.
+- [ ] 19C.10 Cache: namespace entry counts, disk footprint, age distribution.
+- [ ] 19C.11 Health: config issues, which credentials are present (booleans
+      only), poppler availability, applied migrations, ledger integrity.
+- [ ] 19C.12 Tests: every endpoint against a seeded database and ledger,
+      including filter combinations, empty results and bad input.
+
+### 19D Write and audit
+
+- [ ] 19D.1 Migration `0004-audit.ts`: `audit_events` (id, at, actor, action,
+      target kind, target id, before, after, reason) (D65).
+- [ ] 19D.2 `src/web/audit.ts`: every mutation routed through one writer that
+      records before and after; a write without a reason is rejected.
+- [ ] 19D.3 Parameter correction: stores a human value beside the model's,
+      keeping the original and marking provenance `human`, validated by the
+      same schema that rejects rather than coerces.
+- [ ] 19D.4 Escalation resolution from the browser, writing the resolution and
+      the audit row.
+- [ ] 19D.5 Part status changes, with the rules that govern them enforced
+      server-side.
+- [ ] 19D.6 Golden-set editing: read and write `eval/golden/*.json` with the
+      cited page image beside the value, recording reviewer and timestamp —
+      the tool for the human pass Q6 asks for.
+- [ ] 19D.7 Cache entry purge, audited.
+- [ ] 19D.8 Tests: audit row for every mutation, rejection without a reason,
+      validation failures, golden round-trip, concurrent-write conflict.
+
+### 19E Run control
+
+- [ ] 19E.1 `src/web/runs/launcher.ts`: extraction, verification, batch and
+      eval sweeps launched with model, effort, prompt version, turn limit and
+      cost ceiling, behind the three existing money gates (D12, D49, D50) and
+      a per-request ceiling (D64).
+- [ ] 19E.2 `src/web/runs/registry.ts`: in-flight run registry with live
+      turn, cost and tool-call events, cancellation, and recovery of a run
+      whose client disconnected.
+- [ ] 19E.3 Estimated cost before launch, from this project's own history, and
+      a confirmation that names the figure.
+- [ ] 19E.4 Spend-gate transparency: what each gate would decide for the
+      request, and every denial shown rather than swallowed.
+- [ ] 19E.5 Tests: launcher with a fake runner, ceiling enforcement,
+      cancellation, gate denial, event stream ordering, recovery.
+
+### 19F Front end
+
+- [ ] 19F.1 Vite + React + TypeScript build under `src/web/ui`, wired into
+      `npm run check` (typecheck, lint and 100% coverage on the same terms as
+      the rest of `src/`) (D66).
+- [ ] 19F.2 Application shell: routing, database selector, keyboard
+      navigation, error boundaries, loading and empty states, light and dark.
+- [ ] 19F.3 Chart layer: a small set of chart components with fixed,
+      deterministic rendering so they can be unit-tested — time series, bar,
+      histogram, scatter, heatmap, stacked breakdown.
+- [ ] 19F.4 Part catalogue: filter panel over every filter the API exposes,
+      sortable virtualised table, saved views, CSV and JSON export.
+- [ ] 19F.5 Part detail: parameters with provenance, confidence, conflicts and
+      verdict; datasheet page image at the cited page; offers and price
+      breaks; classification axes; run history; escalations.
+- [ ] 19F.6 Parameter explorer: coverage matrix, distributions, outliers, unit
+      normalisation shown, drill-through to the page that states the value.
+- [ ] 19F.7 Comparison workbench: any number of parts side by side, with the
+      differences called out.
+- [ ] 19F.8 Alternates workbench: the full constraint form, ranked results,
+      per-parameter differences, the disclaimer, and export.
+- [ ] 19F.9 Pricing analysis: break curves, price against current and against
+      quantity, distributor and stock comparison.
+- [ ] 19F.10 Escalation queue: open and resolved, context, options, resolve
+      with a reason.
+- [ ] 19F.11 Run explorer: every run with cost, turns, duration, result, tool
+      calls, failures, denials and cache misses; the call tree and transcript.
+- [ ] 19F.12 Cost analytics: spend by day, model, prompt and part; cumulative
+      against the project total; cost per stored parameter and per confirmed
+      value; what a sweep would cost.
+- [ ] 19F.13 Tool analytics: call counts, error rates, duration percentiles,
+      cache hit rates, spend-gate denials, per-tool drill-through.
+- [ ] 19F.14 Evaluation dashboard: recall, precision and citation accuracy
+      overall, per part and per parameter; the failure inspector showing
+      expected against actual beside the golden page; regression comparison of
+      two reports; starved parts flagged.
+- [ ] 19F.15 Verification dashboard: confirmed, contradicted, not found and
+      unchecked, by part and by parameter, each linked to its page.
+- [ ] 19F.16 Golden-set review: value, citation and page image side by side,
+      edit with reviewer recorded, health checks and coverage displayed.
+- [ ] 19F.17 Prompt registry: every prompt version, its hash, the runs that
+      used it and what they scored.
+- [ ] 19F.18 Run control: launch extraction, verification, batch or sweep with
+      every parameter exposed, estimated cost, explicit confirmation, live
+      progress and cancellation.
+- [ ] 19F.19 Health and limitations: readiness checks, and the known
+      limitations L1 to L7 each linked to the rows that evidence them.
+- [ ] 19F.20 Tests: every component and page under jsdom with Testing Library,
+      to the same 100% per-file bar.
+
+### 19G Snapshot
+
+- [ ] 19G.1 `npm run web:snapshot`: builds a self-contained read-only bundle
+      from the same read models, with the data embedded.
+- [ ] 19G.2 Exclusions enforced in code: no credentials, no `.env` values, no
+      raw datasheet text or page images (manufacturer copyright), no ledger
+      blobs holding raw distributor responses (D68).
+- [ ] 19G.3 Publication as a shareable page, with the exclusions listed on the
+      page itself.
+- [ ] 19G.4 Tests: bundle contents, exclusion enforcement, a snapshot that
+      opens with no server.
+
+### 19H Documentation and sign-off
+
+- [ ] 19H.1 `src/web/README.md`: the public API, the errors, the invariants,
+      and the security model.
+- [ ] 19H.2 `docs/ARCHITECTURE.md`: the web layer, its boundary with the
+      deterministic and agent layers, and what it may and may not do.
+- [ ] 19H.3 `docs/REFERENCES.md`: a row for every new dependency.
+- [ ] 19H.4 `README.md`, `CLAUDE.md`: how to run the site.
+- [ ] 19H.5 End-to-end: the site driven against the real data — the live store
+      and the twenty-two-part baseline — with what it showed recorded in the
+      session log.

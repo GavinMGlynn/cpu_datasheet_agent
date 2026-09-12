@@ -475,6 +475,41 @@ ends with the disclaimer. Nothing here reads a pinout, a footprint or a
 reference design, so nothing here can say a part drops in — the gotcha
 `CLAUDE.md` names, stated in the answer rather than in the documentation.
 
+### Web application (`src/web/`) — building
+
+The third surface onto the same two layers. The CLI runs one thing and prints
+it; the MCP server hands tools to a model; the web application is for a person
+reading across everything at once — which parameter the prompt gets wrong,
+what a value cost, whether today's run is worse than last week's.
+
+It owns no domain logic. Every number it shows comes from the repositories,
+the ledger reader, the evaluation report or the alternates engine, and every
+run it starts goes through `executeRun` and the same spend gate the CLI uses.
+What it adds is three things the other surfaces have no place for:
+
+- **Read models** (`src/web/data/`) — projections built for comparison rather
+  than for one part: the parts-by-parameter coverage matrix, the ledger index
+  by session, tool and day, spend and latency aggregates, and the evaluation
+  score matrix. Pure functions over loaded data, so they are tested without a
+  server.
+- **An audited write path** (`src/web/audit.ts`) — the only way the browser
+  changes anything. Before, after, actor and reason, on every mutation. A
+  human correction sits beside the model's value rather than replacing it,
+  which is what keeps the golden set a reference rather than a rewrite (D65).
+- **Run control** (`src/web/runs/`) — launching extraction, verification,
+  batches and evaluation sweeps with a per-request ceiling on top of the three
+  money gates, streaming turns, cost and tool calls as they happen (D64).
+
+The boundary rule is the same one the rest of the system follows: the browser
+never reaches the network, the database or the model directly. It reaches the
+server, and the server reaches the modules that already know how. The server
+binds to the loopback interface and mints a token per start, because this
+machine holds distributor credentials and a button that spends money (D67).
+
+The snapshot is the same read models rendered once into a static bundle, with
+datasheet text, page images, raw distributor responses and every credential
+excluded in code rather than by convention (D68).
+
 ## 5. How the pieces interact
 
 ### The cache is the only door to the network
