@@ -3,8 +3,10 @@ import { z } from 'zod';
 import { CLASSIFICATION_AXES, type ClassificationAxis } from '../../core/classification.js';
 import { PARAMETER_KEYS, ParameterKey } from '../../core/parameter-keys.js';
 import { CATEGORIES, PART_STATUSES, type Part } from '../../core/part.js';
+import { parseOrThrow } from '../../core/validation-error.js';
 import type { Verification } from '../../core/verification.js';
 import { unitPriceAt } from '../../query/pricing.js';
+import { required } from '../../util/present.js';
 import type { RequestContext, RouteEntry } from '../server/app.js';
 import type { Router } from '../server/router.js';
 import {
@@ -158,7 +160,7 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     read(async (context) => {
       const opened = await openSource(context, deps);
       const { quantity, currency } = parseQuery(z.looseObject(PricingShape), context.query);
-      const mpn = context.params.mpn ?? '';
+      const mpn = required(context.params.mpn, 'a part number in the path');
       const part = requirePart(opened, mpn);
       context.respond.json(context.response, context.facts, {
         source: opened.source.id,
@@ -180,7 +182,7 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     '/api/parts/:mpn/parameters',
     read(async (context) => {
       const opened = await openSource(context, deps);
-      const part = requirePart(opened, context.params.mpn ?? '');
+      const part = requirePart(opened, required(context.params.mpn, 'a part number in the path'));
       context.respond.json(context.response, context.facts, { parameters: parameterRows(part) });
     }),
   );
@@ -190,7 +192,7 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     read(async (context) => {
       const opened = await openSource(context, deps);
       const { quantity } = parseQuery(z.looseObject(PricingShape), context.query);
-      const part = requirePart(opened, context.params.mpn ?? '');
+      const part = requirePart(opened, required(context.params.mpn, 'a part number in the path'));
       context.respond.json(context.response, context.facts, {
         offers: part.offers.map((offer) => ({
           ...offer,
@@ -204,7 +206,7 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     '/api/parts/:mpn/runs',
     read(async (context) => {
       const opened = await openSource(context, deps);
-      const mpn = context.params.mpn ?? '';
+      const mpn = required(context.params.mpn, 'a part number in the path');
       requirePart(opened, mpn);
       context.respond.json(context.response, context.facts, {
         runs: opened.repositories.runs.list({ mpn }),
@@ -216,7 +218,7 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     '/api/parts/:mpn/verifications',
     read(async (context) => {
       const opened = await openSource(context, deps);
-      const mpn = context.params.mpn ?? '';
+      const mpn = required(context.params.mpn, 'a part number in the path');
       const part = requirePart(opened, mpn);
       context.respond.json(context.response, context.facts, {
         counts: verdictCounts(part),
@@ -255,7 +257,11 @@ export function registerParts(router: Router<RouteEntry>, deps: ApiDeps): void {
     '/api/catalog/distribution/:key',
     read(async (context) => {
       const query = parseQuery(DistributionQuery, context.query);
-      const key = ParameterKey.parse(context.params.key);
+      const key = parseOrThrow(
+        ParameterKey,
+        required(context.params.key, 'a parameter key in the path'),
+        'the parameter key',
+      );
       const opened = await deps.sources.open(query.source);
       context.respond.json(
         context.response,

@@ -1,0 +1,256 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`payload shapes > keeps the shape of a conflicted parameter 1`] = `
+{
+  "confidence": "conflict",
+  "conflicts": [
+    {
+      "observed": {
+        "kind": "quantity",
+        "value": {
+          "unit": "V",
+          "value": 36,
+        },
+      },
+      "provenance": {
+        "cacheKey": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "distributor": "digikey",
+        "fetchedAt": "2026-09-10T00:00:00Z",
+        "sku": "296-28446-1-ND",
+        "source": "distributor",
+      },
+      "rule": "quantity-tolerance.v1",
+    },
+  ],
+  "key": "rdsOnLow",
+  "provenance": {
+    "method": "text",
+    "page": 5,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "source": "datasheet",
+  },
+  "value": {
+    "unit": "Ohm",
+    "value": 0.34,
+  },
+}
+`;
+
+exports[`payload shapes > keeps the shape of a distribution 1`] = `
+{
+  "buckets": [
+    {
+      "count": 1,
+      "from": 18,
+      "to": 21.333333333333332,
+    },
+    {
+      "count": 0,
+      "from": 21.333333333333332,
+      "to": 24.666666666666668,
+    },
+    {
+      "count": 2,
+      "from": 24.666666666666668,
+      "to": 28,
+    },
+  ],
+  "key": "vinMax",
+  "nonNumeric": 0,
+  "points": [
+    {
+      "max": 18,
+      "min": 18,
+      "mpn": "AP62200WU-7",
+      "unit": "V",
+    },
+    {
+      "max": 28,
+      "min": 28,
+      "mpn": "LM5164QDDARQ1",
+      "unit": "V",
+    },
+    {
+      "max": 28,
+      "min": 28,
+      "mpn": "TPS54331DR",
+      "unit": "V",
+    },
+  ],
+  "summary": {
+    "count": 3,
+    "max": 28,
+    "mean": 24.666666666666668,
+    "min": 18,
+    "p50": 28,
+    "p90": 28,
+    "p99": 28,
+    "sum": 74,
+  },
+  "unit": "V",
+}
+`;
+
+exports[`payload shapes > keeps the shape of a parameter row, with and without a verdict 1`] = `
+{
+  "confidence": "verified",
+  "key": "vinMax",
+  "provenance": {
+    "method": "text",
+    "page": 4,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "source": "datasheet",
+  },
+  "value": {
+    "unit": "V",
+    "value": 18,
+  },
+  "verdict": {
+    "checkedAt": "2026-09-10T00:00:00Z",
+    "model": "claude-opus-5",
+    "page": 4,
+    "parameterKey": "vinMax",
+    "promptVersion": "verify.v1",
+    "quote": "Input voltage range 3.5 V to 28 V",
+    "verdict": "confirmed",
+  },
+}
+`;
+
+exports[`payload shapes > keeps the shape of a parameter row, with and without a verdict 2`] = `
+{
+  "confidence": "verified",
+  "key": "rdsOnLow",
+  "provenance": {
+    "method": "text",
+    "page": 5,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "source": "datasheet",
+  },
+  "value": null,
+}
+`;
+
+exports[`payload shapes > keeps the shape of a part summary 1`] = `
+{
+  "bestPrice": {
+    "amount": 0.92,
+    "breakQuantity": 1,
+    "currency": "AUD",
+    "distributor": "digikey",
+    "sku": "296-28446-1-ND",
+    "stock": 500,
+  },
+  "category": "buck_regulator",
+  "classifications": {
+    "vinClass": "le_42v",
+  },
+  "createdAt": "2026-09-10T00:00:00Z",
+  "datasheet": {
+    "pageCount": 40,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "url": "https://www.ti.com/lit/ds/symlink/tps54331.pdf",
+  },
+  "distributors": [
+    "digikey",
+  ],
+  "headline": {
+    "ioutMax": {
+      "unit": "A",
+      "value": 3,
+    },
+    "package": "SOIC-8",
+    "switchingFrequency": {
+      "unit": "Hz",
+      "value": 570000,
+    },
+    "vinMax": {
+      "unit": "V",
+      "value": 18,
+    },
+    "vinMin": {
+      "unit": "V",
+      "value": 3.5,
+    },
+  },
+  "manufacturer": "Diodes Incorporated",
+  "mpn": "AP62200WU-7",
+  "offerCount": 1,
+  "parameters": {
+    "cited": 30,
+    "conflicted": 0,
+    "stated": 28,
+    "total": 30,
+    "verified": 30,
+  },
+  "status": "verified",
+  "stock": 500,
+  "updatedAt": "2026-09-10T00:00:00Z",
+  "verdicts": {
+    "confirmed": 1,
+    "contradicted": 0,
+    "notFound": 0,
+    "unchecked": 29,
+  },
+}
+`;
+
+exports[`payload shapes > keeps the shape of the coverage matrix and the totals 1`] = `
+{
+  "source": "live",
+  "totals": {
+    "byCategory": {
+      "buck_regulator": 3,
+    },
+    "byManufacturer": {
+      "Diodes Incorporated": 1,
+      "Texas Instruments": 2,
+    },
+    "byStatus": {
+      "extracted": 1,
+      "needs_human": 1,
+      "verified": 1,
+    },
+    "datasheets": 1,
+    "offers": 2,
+    "parametersCited": 90,
+    "parametersStated": 85,
+    "parts": 3,
+  },
+}
+`;
+
+exports[`payload shapes > keeps the shape of the coverage matrix and the totals 2`] = `
+[
+  {
+    "cited": 3,
+    "conflicted": 0,
+    "contradicted": 0,
+    "coverage": 1,
+    "key": "vinMin",
+    "parts": 3,
+    "stated": 3,
+    "verified": 1,
+  },
+  {
+    "cited": 3,
+    "conflicted": 0,
+    "contradicted": 0,
+    "coverage": 1,
+    "key": "vinMax",
+    "parts": 3,
+    "stated": 3,
+    "verified": 1,
+  },
+  {
+    "cited": 3,
+    "conflicted": 0,
+    "contradicted": 0,
+    "coverage": 1,
+    "key": "vinAbsMax",
+    "parts": 3,
+    "stated": 3,
+    "verified": 1,
+  },
+]
+`;

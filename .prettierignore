@@ -15,3 +15,8 @@ docs/architecture.html
 # rewritten by the tool on every session). Formatting it is futile: the tool
 # writes its own JSON style back the next time it starts.
 .claude/settings.local.json
+
+# Vitest snapshots. Prettier has no parser for .snap, and the file is written
+# by the test runner in its own format — formatting it would only ever create
+# a diff the next test run undoes.
+**/__snapshots__/
