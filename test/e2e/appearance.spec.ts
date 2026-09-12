@@ -11,17 +11,19 @@ import { E2E_TOKEN } from './seed.js';
  * (D71). A local run writes its own under `local/`, which is not committed.
  */
 
+// The file name is lowercase and stays put; what the page is called can
+// change with the copy without orphaning a committed baseline.
 const PAGES: readonly { readonly path: string; readonly name: string }[] = [
-  { path: '/', name: 'Overview' },
-  { path: '/parts', name: 'Catalogue' },
+  { path: '/', name: 'overview' },
+  { path: '/parts', name: 'catalogue' },
   { path: '/parts/TPS54331DR', name: 'part' },
-  { path: '/parameters', name: 'Parameters' },
-  { path: '/runs', name: 'Runs' },
-  { path: '/costs', name: 'Cost' },
-  { path: '/tools', name: 'Tools' },
-  { path: '/ledger', name: 'Ledger' },
+  { path: '/parameters', name: 'parameters' },
+  { path: '/runs', name: 'runs' },
+  { path: '/costs', name: 'cost' },
+  { path: '/tools', name: 'tools' },
+  { path: '/ledger', name: 'ledger' },
   { path: '/control', name: 'control' },
-  { path: '/health', name: 'Health' },
+  { path: '/health', name: 'health' },
 ];
 
 test.beforeEach(async ({ page }) => {
