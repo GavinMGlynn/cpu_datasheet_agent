@@ -45,11 +45,17 @@ export default defineConfig({
    * A real server over the seeded directory, built from source each run. The
    * token is fixed so a test can sign in; the data is temporary so a test can
    * change it.
+   *
+   * Never reused. Something else already listening on this port answers
+   * `/api/ping` just as well — including a `npm run web` over the real data
+   * directory — and the suite would then be reading the live store and
+   * reporting whatever it found there (D70). Refusing to reuse turns that
+   * into a port-in-use failure, which is the loud version of the same fact.
    */
   webServer: {
     command: `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui --token ${E2E_TOKEN}`,
     url: `http://127.0.0.1:${String(port)}/api/ping`,
-    reuseExistingServer: !isCi,
+    reuseExistingServer: false,
     timeout: 60_000,
     env: { LOG_LEVEL: 'error' },
   },

@@ -475,7 +475,7 @@ ends with the disclaimer. Nothing here reads a pinout, a footprint or a
 reference design, so nothing here can say a part drops in — the gotcha
 `CLAUDE.md` names, stated in the answer rather than in the documentation.
 
-### Web application (`src/web/`) — building
+### Web application (`src/web/`)
 
 The third surface onto the same two layers. The CLI runs one thing and prints
 it; the MCP server hands tools to a model; the web application is for a person
@@ -508,7 +508,30 @@ machine holds distributor credentials and a button that spends money (D67).
 
 The snapshot is the same read models rendered once into a static bundle, with
 datasheet text, page images, raw distributor responses and every credential
-excluded in code rather than by convention (D68).
+excluded in code rather than by convention (D68). It is one file with the
+charts as inline SVG: it fetches nothing and runs nothing, so it opens from a
+directory or from a link, and `--source <id>` takes it from an evaluation
+database instead of the live store.
+
+Inside, the layering is the same shape as the rest of the system. A request
+passes through the app (access control, body limits, the responder) to a
+router registered in `api/index.ts`; an endpoint parses its parameters, opens
+a source, calls a read model, and hands the result to `respond.json`, which
+sets one of three cache policies and an ETag. Nothing below `api/` knows what
+HTTP is: `data/` is pure functions over loaded rows, which is why the snapshot
+can use them with no server at all.
+
+The front end (`src/web/ui/`) is React and Vite, built to `dist/ui` and served
+as hashed immutable assets. It holds no domain knowledge either — it fetches,
+formats and draws. Its charts follow one palette validated for colour-vision
+deficiency, and every chart offers the numbers behind it as a table, because a
+figure nobody can read is not a measurement.
+
+Reads are addressable across sources: `?source=live` is the working store and
+any `data/eval-runs/*.sqlite` is addressable by its id, so this morning's work
+and a month-old evaluation are read the same way. Only `live` accepts a write;
+an evaluation database is evidence, and editing it would make the eval a
+rewrite of its own history (D65).
 
 ## 5. How the pieces interact
 

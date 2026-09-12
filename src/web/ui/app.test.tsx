@@ -164,6 +164,32 @@ describe('the database selector', () => {
     });
   });
 
+  it('reads the database the address names, and remembers it', async () => {
+    globalThis.localStorage.removeItem('chip:source');
+    const parts = vi.fn((_query: { source?: string }) =>
+      Promise.resolve({ source: 'dd212de6', total: 0, offset: 0, limit: 50, items: [] }),
+    );
+    renderApp('/parts?source=dd212de6', { parts });
+    await waitFor(() => {
+      expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ source: 'dd212de6' });
+    });
+    expect(globalThis.localStorage.getItem('chip:source')).toBe('dd212de6');
+    globalThis.localStorage.removeItem('chip:source');
+  });
+
+  it('stores nothing again when the address names the database already in use', async () => {
+    globalThis.localStorage.setItem('chip:source', 'dd212de6');
+    const parts = vi.fn((_query: { source?: string }) =>
+      Promise.resolve({ source: 'dd212de6', total: 0, offset: 0, limit: 50, items: [] }),
+    );
+    renderApp('/parts?source=dd212de6', { parts });
+    await waitFor(() => {
+      expect(parts.mock.calls.at(-1)?.[0]).toMatchObject({ source: 'dd212de6' });
+    });
+    expect(globalThis.localStorage.getItem('chip:source')).toBe('dd212de6');
+    globalThis.localStorage.removeItem('chip:source');
+  });
+
   it('says so when it cannot even list the databases', async () => {
     renderApp('/', { sources: () => Promise.reject(new Error('the data directory is gone')) });
     await waitFor(() => {

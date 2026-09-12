@@ -29,6 +29,26 @@ npx tsx bin/chip-eval.ts compare eval/results/<a> eval/results/<b>
 npx tsx bin/chip-mcp.ts
 ```
 
+## The site
+
+```bash
+npm run build:ui     # once, and after any change to src/web/ui
+npm run web          # then open the address it prints, token and all
+npm run web:snapshot # one shareable file, no server needed to read it
+```
+
+Everything above, read across all of it at once: the parts and what was found
+for each, the datasheets with the pages a value was taken from, spend by day,
+model and part, tool latencies and failures, the evaluation scores, and the
+golden set. Corrections are written back with an audit row saying who changed
+what and why, and runs can be started from the page under the same money gates
+the CLI uses plus a ceiling for the launch.
+
+It binds to the loopback interface and mints a token each start. `--host`
+anything else is announced before it binds, because this machine holds
+distributor credentials and a button that spends money. `src/web/README.md` has
+the endpoints, the errors and the security model.
+
 A run spends nothing unless it is told to: distributor calls are answered from
 the cache and a miss comes back as `needs_confirmation` rather than a charge.
 `--allow-spend` permits them, and a per-run cost ceiling stops the model
@@ -64,6 +84,10 @@ cp .env.example .env   # then fill in credentials as they become needed
 | `npm run lint` / `npm run typecheck` / `npm run format` | Individual checks. |
 | `npm run gate` | Static scan for forbidden tokens in code directories. |
 | `npm run build` | Emit JavaScript to `dist/`. |
+| `npm run build:ui` | Build the front end into `dist/ui`. |
+| `npm run web` | Serve the site on 127.0.0.1:5174. |
+| `npm run web:snapshot` | Write a shareable snapshot to `dist/snapshot/index.html`. |
+| `npm run test:e2e` | Playwright against a seeded temporary data directory. |
 
 A `pre-push` git hook runs `npm run check`.
 

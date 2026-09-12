@@ -320,9 +320,13 @@ export function valueCost(parts: readonly Part[], runs: readonly Run[]): ValueCo
   for (const part of parts) {
     for (const key of PARAMETER_KEYS) {
       const parameter = part.parameters[key];
-      if (parameter.value !== null) {
-        stated += 1;
+      // Both counts are against a value that exists: confirming that a
+      // datasheet does not state something is worth doing, but it is not a
+      // parameter this project bought.
+      if (parameter.value === null) {
+        continue;
       }
+      stated += 1;
       if (parameter.confidence === 'verified') {
         verified += 1;
       }

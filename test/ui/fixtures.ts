@@ -14,7 +14,7 @@ export function summary(overrides: SummaryOverrides = {}): PartSummary {
     createdAt: '2026-09-11T10:00:00Z',
     updatedAt: '2026-09-11T10:31:00Z',
     datasheet: { sha256: 'a'.repeat(64), url: 'https://example.invalid/ds.pdf', pageCount: 40 },
-    parameters: { stated: 28, cited: 30, verified: 0, conflicted: 0, total: 30 },
+    parameters: { stated: 28, cited: 28, verified: 0, conflicted: 0, total: 30 },
     verdicts: { confirmed: 0, contradicted: 0, notFound: 0, unchecked: 30 },
     classifications: { vinClass: 'le_42v' },
     offerCount: 1,

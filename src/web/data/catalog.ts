@@ -69,9 +69,14 @@ function countParameters(part: Part): ParameterCounts {
   let conflicted = 0;
   for (const key of PARAMETER_KEYS) {
     const parameter = part.parameters[key];
-    if (parameter.value !== null) {
-      stated += 1;
+    // A parameter the datasheet does not state still records where that was
+    // read, so every count here is against a value that exists. Otherwise a
+    // part reports more pages cited than parameters found, which is nonsense
+    // on its face.
+    if (parameter.value === null) {
+      continue;
     }
+    stated += 1;
     if (parameter.provenance.source === 'datasheet') {
       cited += 1;
     }

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 
 import { createApi, type Api } from './lib/api.js';
 import { navigate, useRoute, withQuery, type Route } from './lib/router.js';
@@ -133,7 +133,18 @@ export interface AppProps {
 
 export function App(props: AppProps): ReactNode {
   const route = useRoute();
-  const [source, setSource] = useStored('chip:source', 'live');
+  const [stored, setSource] = useStored('chip:source', 'live');
+  // An address that names a database wins over the remembered one, and is
+  // remembered in turn: every endpoint takes `?source=`, so a link to a part
+  // in an evaluation run has to open that run's copy rather than whichever
+  // database this browser last looked at.
+  const asked = route.query.get('source');
+  const source = asked ?? stored;
+  useEffect(() => {
+    if (asked !== null && asked !== stored) {
+      setSource(asked);
+    }
+  }, [asked, stored, setSource]);
   const api = useMemo(() => props.api ?? createApi(), [props.api]);
   const sources = useAsync('sources', () => api.sources());
   const meta = useAsync('meta', () => api.meta());

@@ -35,9 +35,12 @@ const tps = part();
 describe('summarisePart', () => {
   it('counts what the extraction found and where it came from', () => {
     const summary = summarisePart(tps);
+    // Thirty keys, twenty-eight with a value, every one of those read from
+    // the datasheet. The two the datasheet does not state carry a provenance
+    // for the absence, and neither is counted as a page cited.
     expect(summary.parameters).toStrictEqual({
       stated: 28,
-      cited: 30,
+      cited: 28,
       verified: 0,
       conflicted: 0,
       total: 30,
@@ -99,7 +102,7 @@ describe('summarisePart', () => {
         vinMax: { ...param(q(28, 'V')), confidence: 'conflict', conflicts: [conflict()] },
       },
     });
-    expect(summarisePart(disputed).parameters).toMatchObject({ verified: 29, conflicted: 1 });
+    expect(summarisePart(disputed).parameters).toMatchObject({ verified: 27, conflicted: 1 });
   });
 
   it('summarises a list in one call', () => {
@@ -267,7 +270,7 @@ describe('catalogTotals', () => {
     expect(totals).toMatchObject({
       parts: 2,
       parametersStated: 56,
-      parametersCited: 60,
+      parametersCited: 56,
       offers: 2,
       datasheets: 1,
       byStatus: { extracted: 1, verified: 1 },

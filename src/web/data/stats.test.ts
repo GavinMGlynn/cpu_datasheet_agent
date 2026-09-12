@@ -360,13 +360,13 @@ describe('valueCost', () => {
     expect(cost).toMatchObject({
       parts: 2,
       parametersStated: 56,
-      parametersVerified: 30,
+      parametersVerified: 28,
       verificationUsd: 0.45,
     });
     expect(cost.extractionUsd).toBeCloseTo(7.68, 10);
     expect(cost.perPart).toBeCloseTo(4.065, 10);
     expect(cost.perStatedParameter).toBeCloseTo(8.13 / 56, 10);
-    expect(cost.perVerifiedParameter).toBeCloseTo(0.015, 10);
+    expect(cost.perVerifiedParameter).toBeCloseTo(0.45 / 28, 10);
   });
 
   it('costs nothing per nothing rather than failing', () => {
