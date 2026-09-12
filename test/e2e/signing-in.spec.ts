@@ -3,6 +3,9 @@ import { expect, test } from '@playwright/test';
 import { E2E_ADMIN, E2E_PASSWORD, E2E_VIEWER } from './seed.js';
 import { signIn } from './sign-in.js';
 
+// This file is about the door, so it starts outside it.
+test.use({ storageState: { cookies: [], origins: [] } });
+
 /**
  * The door.
  *

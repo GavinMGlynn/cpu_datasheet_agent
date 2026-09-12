@@ -11,6 +11,12 @@ import { E2E_ADMIN, E2E_PASSWORD } from './seed.js';
  */
 export async function signIn(page: Page, username = E2E_ADMIN): Promise<void> {
   await page.goto('/');
+  // Already signed in, from the saved session the setup project made: there
+  // is nothing to fill in.
+  if ((await page.getByLabel('Username').count()) === 0) {
+    await page.getByRole('navigation', { name: 'Parts' }).waitFor();
+    return;
+  }
   await page.getByLabel('Username').fill(username);
   await page.getByLabel('Password').fill(E2E_PASSWORD);
   await page.getByRole('button', { name: 'Sign in' }).click();

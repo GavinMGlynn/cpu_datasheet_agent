@@ -17,7 +17,7 @@ const isCi = process.env.CI === 'true';
 export default defineConfig({
   testDir: 'test/e2e',
   globalSetup: './test/e2e/global-setup.ts',
-  testMatch: '**/*.spec.ts',
+  testMatch: ['**/*.setup.ts', '**/*.spec.ts'],
   snapshotPathTemplate: `test/e2e/__screenshots__/${platform}/{testFileName}/{arg}{ext}`,
   outputDir: 'test/e2e/.output',
   fullyParallel: false,
@@ -38,7 +38,21 @@ export default defineConfig({
     // has genuinely changed differs by far more than this.
     toHaveScreenshot: { maxDiffPixelRatio: 0.01 },
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    // Signing in costs a scrypt verify by design; this pays for it once and
+    // hands the session to everything else (the specs about signing in start
+    // from nothing of their own accord).
+    { name: 'sign in', testMatch: /.*\.setup\.ts/u, use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      testMatch: /.*\.spec\.ts/u,
+      dependencies: ['sign in'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'test/e2e/.data/admin-state.json',
+      },
+    },
+  ],
   /*
    * A real server over the seeded directory, built from source each run. The
    * accounts are seeded with it, so a test signs in through the form the way

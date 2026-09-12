@@ -164,7 +164,7 @@ items in `COMPLETION_PLAN.md` satisfied).
 | M17 | Alternates query | complete | 2026-09-12 |
 | M18 | Release and end-to-end sign-off | complete | 2026-09-12 |
 | M19 | Web application | complete | 19A–19I; the site, the snapshot, and five test layers |
-| M20 | Authentication | in progress | 20A–20I; sign-in page and browser tests done |
+| M20 | Authentication | complete | accounts, passwords, sessions, roles, OIDC (D75, D76) |
 
 ## 5. Conventions
 
@@ -265,6 +265,52 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
+
+### 2026-09-12 — Session 25: a professional site, and real authentication
+
+Two things came out of reading the running site rather than its tests.
+
+**The look, and the words.** The site was lowercase throughout, which reads
+as a draft; `main` had no `min-width: 0`, so a wide chart pushed the whole
+grid past the window and the cards ran off the right-hand side; and the
+datasheet reader rendered a page image nine hundred pixels below the button
+that opened it, where it looked like nothing had happened. The design is now
+a bench instrument — cool slate neutrals, hairline rules, a type scale,
+tabular figures, one accent for what can be acted on — with both themes
+re-validated against the chart palette (light `#ffffff`, dark `#161b22`,
+every check passing). Sentence case everywhere, stored vocabulary translated
+on the way out (`needs_human` reads "Needs a person"), timestamps as how long
+ago with the exact local instant on hover, and the reader in a dialog with
+Previous, Next and a page box that will not step past either end (D74).
+
+**Authentication.** A token in an address is not authentication: it is in the
+shell history, the browser history and every referrer, and it dies with the
+process that minted it — a restart signed every open tab out with eighteen
+red panels and no way back in. Module 20 replaced it (D75, D76):
+
+| Piece | What it is |
+| --- | --- |
+| Accounts | `data/auth.sqlite`, separate from the parts store so a snapshot or a backup of the catalogue can never carry a password hash |
+| Passwords | scrypt from `node:crypto`, N=2¹⁵, r=8, 32-byte key, 16-byte salt, parameters stored with the hash and upgraded at the next sign-in |
+| Sessions | 32 random bytes in an HttpOnly `SameSite=Strict` cookie; only the SHA-256 is stored; twelve hours idle, seven days absolute, rotated on sign-in |
+| Refusals | the same answer and the same scrypt work whichever half was wrong; five failures per account or address closes the door for fifteen minutes |
+| Roles | a viewer reads everything; an admin changes things and spends money, checked at the endpoint |
+| Single sign-on | any OIDC issuer, off until configured: discovery, PKCE, and the ID token verified against the issuer's keys in about a hundred lines rather than a dependency |
+| Accounts CLI | `bin/chip-auth.ts` — add, passwd, role, disable, enable, bind, sessions, revoke, list; the password is typed at a prompt with the echo off or piped in, never an argument |
+
+The handshake in flight is a row in `oidc_flows` rather than a signed cookie:
+this installation already has somewhere to put short-lived server-side state,
+and a row can be deleted the moment it is used, so a `state` is good once.
+
+**What the build machine taught us.** The suite passed here and timed out
+there. Two hundred isolated workers each asking for 32 MiB of scrypt is a
+measurement of the runner, not of the code: four workers and a thirty-second
+timeout under CI, unchanged locally.
+
+**Next concrete step**
+
+Q7 — which column of a MIN/TYP/MAX row is the value — and `extract.v2`
+against the eval.
 
 ### 2026-09-12 — Session 24: Module 19 built, and what the site found
 
