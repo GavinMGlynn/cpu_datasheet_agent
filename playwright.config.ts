@@ -16,7 +16,6 @@ const isCi = process.env.CI === 'true';
 
 export default defineConfig({
   testDir: 'test/e2e',
-  globalSetup: './test/e2e/global-setup.ts',
   testMatch: ['**/*.setup.ts', '**/*.spec.ts'],
   snapshotPathTemplate: `test/e2e/__screenshots__/${platform}/{testFileName}/{arg}{ext}`,
   outputDir: 'test/e2e/.output',
@@ -55,8 +54,10 @@ export default defineConfig({
   ],
   /*
    * A real server over the seeded directory, built from source each run. The
-   * accounts are seeded with it, so a test signs in through the form the way
-   * a person does (D75); the data is temporary so a test can change it.
+   * seeding is the first half of this command on purpose: the server must not
+   * open a database that is about to be deleted and rebuilt underneath it.
+   * The accounts are seeded with the data, so a test signs in through the
+   * form the way a person does (D75).
    *
    * Never reused. Something else already listening on this port answers
    * `/api/ping` just as well — including a `npm run web` over the real data
@@ -65,7 +66,9 @@ export default defineConfig({
    * into a port-in-use failure, which is the loud version of the same fact.
    */
   webServer: {
-    command: `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui`,
+    command:
+      `npx tsx test/e2e/prepare.ts && ` +
+      `npx tsx bin/chip-web.ts --port ${String(port)} --data test/e2e/.data --ui dist/ui`,
     url: `http://127.0.0.1:${String(port)}/api/ping`,
     reuseExistingServer: false,
     timeout: 60_000,
