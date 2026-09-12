@@ -134,7 +134,10 @@ describe('token handoff', () => {
     await appFor({ dir })(recordedRequest({ url: `/?token=${TOKEN}&view=costs` }), response);
     expect(response.statusCode).toBe(303);
     expect(response.headers.Location).toBe('/?view=costs');
-    expect(response.headers['Set-Cookie']).toContain(`${SESSION_COOKIE}=${TOKEN}`);
+    expect(response.headers['Set-Cookie']).toStrictEqual([
+      `${SESSION_COOKIE}=${TOKEN}; Path=/; HttpOnly; SameSite=Strict`,
+      `chip_csrf=${TOKEN}; Path=/; SameSite=Strict`,
+    ]);
     expect(response.headers['Cache-Control']).toBe('no-store');
   });
 

@@ -10,7 +10,7 @@ import type { Failure } from './errors.js';
  */
 export interface HttpResponseLike {
   statusCode: number;
-  setHeader(name: string, value: string): unknown;
+  setHeader(name: string, value: string | readonly string[]): unknown;
   end(chunk?: Uint8Array | string): unknown;
   readonly writableEnded: boolean;
 }
@@ -42,7 +42,7 @@ const CACHE_CONTROL: Readonly<Record<CachePolicy, string>> = Object.freeze({
 export interface SendOptions {
   readonly status?: number;
   readonly policy?: CachePolicy;
-  readonly headers?: Readonly<Record<string, string>>;
+  readonly headers?: Readonly<Record<string, string | readonly string[]>>;
   /** Skip the entity tag. Streams and very large bodies do not want one. */
   readonly etag?: boolean;
 }
@@ -63,7 +63,7 @@ function matches(header: string | undefined, etag: string): boolean {
 
 function writeHeaders(
   response: HttpResponseLike,
-  headers: Readonly<Record<string, string>> | undefined,
+  headers: Readonly<Record<string, string | readonly string[]>> | undefined,
 ): void {
   for (const [name, value] of Object.entries(headers ?? {})) {
     response.setHeader(name, value);
@@ -119,7 +119,11 @@ export function sendText(
 }
 
 /** A response with no body at all: 204, or 304 from a caller that made its own tag. */
-export function sendEmpty(response: HttpResponseLike, status: number, headers = {}): void {
+export function sendEmpty(
+  response: HttpResponseLike,
+  status: number,
+  headers: Readonly<Record<string, string | readonly string[]>> = {},
+): void {
   writeHeaders(response, headers);
   response.statusCode = status;
   response.end();

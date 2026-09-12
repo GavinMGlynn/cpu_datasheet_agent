@@ -37,7 +37,7 @@ export const TEST_TOKEN = 'tokentokentokentoken';
 
 export interface ApiResult {
   readonly status: number;
-  readonly headers: Readonly<Record<string, string>>;
+  readonly headers: Readonly<Record<string, string | readonly string[]>>;
   readonly body: unknown;
   readonly text: string;
 }

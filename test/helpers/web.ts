@@ -3,7 +3,7 @@ import type { HttpRequestLike, IncomingHeaders, ResponseSink } from '../../src/w
 
 /** A response that records what was written to it, standing in for a socket. */
 export interface RecordedResponse extends ResponseSink {
-  readonly headers: Record<string, string>;
+  readonly headers: Record<string, string | readonly string[]>;
   readonly chunks: string[];
   body: string;
   writableEnded: boolean;
@@ -21,7 +21,7 @@ export function recordedResponse(): RecordedResponse {
     body: '',
     writableEnded: false,
     accepting: true,
-    setHeader(name: string, value: string) {
+    setHeader(name: string, value: string | readonly string[]) {
       this.headers[name] = value;
     },
     write(chunk: string) {

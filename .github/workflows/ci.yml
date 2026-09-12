@@ -217,6 +217,12 @@ jobs:
       - name: Install Chromium
         run: npx playwright install chromium
 
+      # The browser tests drive the built application, not the sources: the
+      # server serves dist/ui, and a stale or missing build would test
+      # nothing.
+      - name: Build the front end
+        run: npm run build:ui
+
       - name: Run the browser tests
         if: ${{ github.event.inputs.update_screenshots != 'true' }}
         env:

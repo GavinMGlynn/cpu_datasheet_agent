@@ -10,7 +10,7 @@
 
 export interface SseSink {
   statusCode: number;
-  setHeader(name: string, value: string): unknown;
+  setHeader(name: string, value: string | readonly string[]): unknown;
   write(chunk: string): boolean;
   end(chunk?: Uint8Array | string): unknown;
   once(event: 'drain', listener: () => void): unknown;

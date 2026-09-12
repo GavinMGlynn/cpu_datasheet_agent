@@ -6,6 +6,16 @@ import { WebError } from './errors.js';
 export const SESSION_COOKIE = 'chip_session';
 /** The header a state-changing request must repeat the token in. */
 export const TOKEN_HEADER = 'x-chip-token';
+/**
+ * The readable half of the pair.
+ *
+ * The session cookie is HttpOnly, which is what stops a script from stealing
+ * it — and also stops the page's own script from repeating it in a header.
+ * This one carries the same token and is readable, which is the double-submit
+ * pattern: a cross-site page still cannot read it (cookies are origin-scoped)
+ * and still cannot set a custom header, so the check keeps its point.
+ */
+export const CSRF_COOKIE = 'chip_csrf';
 
 export const LOOPBACK_HOSTS: readonly string[] = Object.freeze([
   '127.0.0.1',
@@ -94,8 +104,8 @@ export interface Security {
    * in a cookie.
    */
   requireWrite(request: RequestFactsForAuth): void;
-  /** The `Set-Cookie` value that admits a browser that arrived with the token. */
-  sessionCookie(): string;
+  /** The `Set-Cookie` values that admit a browser that arrived with the token. */
+  sessionCookies(): readonly string[];
   /** Whether an origin may make state-changing requests. */
   allowsOrigin(origin: string): boolean;
 }
@@ -161,8 +171,12 @@ export function createSecurity(options: SecurityOptions): Security {
       }
     },
 
-    sessionCookie() {
-      return `${SESSION_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Strict`;
+    sessionCookies() {
+      const value = encodeURIComponent(token);
+      return [
+        `${SESSION_COOKIE}=${value}; Path=/; HttpOnly; SameSite=Strict`,
+        `${CSRF_COOKIE}=${value}; Path=/; SameSite=Strict`,
+      ];
     },
   };
 }

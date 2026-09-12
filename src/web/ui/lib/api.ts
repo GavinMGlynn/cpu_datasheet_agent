@@ -43,8 +43,30 @@ export class ApiError extends Error {
 export interface ApiOptions {
   readonly baseUrl?: string;
   readonly fetch?: typeof fetch;
-  /** Repeated in a header on every write. Read from the page when not given. */
+  /**
+   * Repeated in a header on every write. Read from the readable session
+   * cookie when not given, which is how the page gets it: the session cookie
+   * itself is HttpOnly and deliberately out of reach.
+   */
   readonly token?: string;
+  /** Where the token is read from. Defaults to the document's cookies. */
+  readonly cookies?: () => string;
+}
+
+/** The readable half of the session pair, as the server sets it. */
+export const CSRF_COOKIE = 'chip_csrf';
+
+export function tokenFromCookies(cookies: string): string | undefined {
+  for (const part of cookies.split(';')) {
+    const index = part.indexOf('=');
+    if (index <= 0) {
+      continue;
+    }
+    if (part.slice(0, index).trim() === CSRF_COOKIE) {
+      return decodeURIComponent(part.slice(index + 1).trim());
+    }
+  }
+  return undefined;
 }
 
 interface ErrorBody {
@@ -216,6 +238,10 @@ export interface Api {
 export function createApi(options: ApiOptions = {}): Api {
   const baseUrl = options.baseUrl ?? '';
   const doFetch = options.fetch ?? globalThis.fetch.bind(globalThis);
+  const cookies = options.cookies ?? ((): string => globalThis.document.cookie);
+  // Read per call rather than once: a page that has just traded its token for
+  // cookies must be able to write without a reload.
+  const token = (): string | undefined => options.token ?? tokenFromCookies(cookies());
 
   const call = async <T>(
     path: string,
@@ -226,8 +252,9 @@ export function createApi(options: ApiOptions = {}): Api {
     if (rest.body !== undefined) {
       headers['content-type'] = 'application/json';
     }
-    if (writes === true && options.token !== undefined) {
-      headers['x-chip-token'] = options.token;
+    const repeated = writes === true ? token() : undefined;
+    if (repeated !== undefined) {
+      headers['x-chip-token'] = repeated;
     }
     const response = await doFetch(`${baseUrl}${path}`, {
       credentials: 'same-origin',

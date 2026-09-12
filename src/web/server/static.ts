@@ -74,7 +74,7 @@ export function tradeTokenForCookie(context: RequestContext): boolean {
   clean.searchParams.delete('token');
   sendEmpty(context.response, 303, {
     Location: `${clean.pathname}${clean.search}`,
-    'Set-Cookie': context.security.sessionCookie(),
+    'Set-Cookie': context.security.sessionCookies(),
     'Cache-Control': 'no-store',
   });
   return true;

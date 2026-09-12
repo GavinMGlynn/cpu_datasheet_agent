@@ -141,7 +141,7 @@ describe('routing and access', () => {
     const { app } = build((router) => router.get('/hello/:name', open(hello)));
     const first = recordedResponse();
     await app(recordedRequest({ url: '/hello/world' }), first);
-    const etag = first.headers.ETag ?? '';
+    const etag = String(first.headers.ETag ?? '');
     const second = recordedResponse();
     await app(
       recordedRequest({ url: '/hello/world', headers: { 'if-none-match': [etag, '"other"'] } }),

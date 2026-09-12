@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  CSRF_COOKIE,
   SESSION_COOKIE,
   TOKEN_HEADER,
   bindWarning,
@@ -167,10 +168,11 @@ describe('requireWrite', () => {
   });
 });
 
-describe('sessionCookie', () => {
-  it('is same-site, http-only and path-wide', () => {
-    expect(security.sessionCookie()).toBe(
+describe('sessionCookies', () => {
+  it('sets one cookie a script cannot read and one it must', () => {
+    expect(security.sessionCookies()).toStrictEqual([
       `${SESSION_COOKIE}=${TOKEN}; Path=/; HttpOnly; SameSite=Strict`,
-    );
+      `${CSRF_COOKIE}=${TOKEN}; Path=/; SameSite=Strict`,
+    ]);
   });
 });

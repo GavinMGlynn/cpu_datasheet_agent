@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 
-import { ApiError, createApi } from './api.js';
+import { ApiError, createApi, tokenFromCookies } from './api.js';
 
 /**
  * The client, against a fake fetch. What matters is the address it asks for,
@@ -109,15 +109,37 @@ describe('writing', () => {
     expect(calls[0]?.init?.method).toBe('POST');
   });
 
-  it('sends no token header when it has no token', async () => {
+  it('reads the token from the readable cookie the server set', async () => {
     const { fetch, calls } = fakeFetch();
-    await createApi({ fetch }).setStatus('TPS54331DR', { status: 'needs_human' });
+    const api = createApi({ fetch, cookies: () => 'other=1; chip_csrf=from-the-cookie' });
+    await api.setStatus('TPS54331DR', { status: 'needs_human' });
+    expect((calls[0]?.init?.headers as Record<string, string>)['x-chip-token']).toBe(
+      'from-the-cookie',
+    );
+  });
+
+  it('sends no token header when there is nothing to send', async () => {
+    const { fetch, calls } = fakeFetch();
+    const api = createApi({ fetch, cookies: () => '' });
+    await api.setStatus('TPS54331DR', { status: 'needs_human' });
     expect((calls[0]?.init?.headers as Record<string, string>)['x-chip-token']).toBeUndefined();
+  });
+
+  it('reads the cookie on every write, not once at startup', async () => {
+    const { fetch, calls } = fakeFetch();
+    let jar = '';
+    const api = createApi({ fetch, cookies: () => jar });
+    await api.setStatus('TPS54331DR', { status: 'needs_human' });
+    jar = 'chip_csrf=arrived-later';
+    await api.setStatus('TPS54331DR', { status: 'needs_human' });
+    expect((calls[1]?.init?.headers as Record<string, string>)['x-chip-token']).toBe(
+      'arrived-later',
+    );
   });
 
   it('reaches every write endpoint it offers', async () => {
     const { fetch, calls } = fakeFetch();
-    const api = createApi({ fetch });
+    const api = createApi({ fetch, cookies: () => '' });
     await Promise.all([
       api.alternates({ mpn: 'x' }, 'live'),
       api.resolveEscalation('e-1', {}),
@@ -130,6 +152,18 @@ describe('writing', () => {
       '/api/launches',
       '/api/launches/launch-1/cancel',
     ]);
+  });
+});
+
+describe('tokenFromCookies', () => {
+  it('finds the readable half of the session pair', () => {
+    expect(tokenFromCookies('chip_csrf=abc')).toBe('abc');
+    expect(tokenFromCookies('a=1; chip_csrf=abc%2Fdef; b=2')).toBe('abc/def');
+  });
+
+  it('finds nothing in a jar that has none', () => {
+    expect(tokenFromCookies('')).toBeUndefined();
+    expect(tokenFromCookies('a=1; nonsense; =2')).toBeUndefined();
   });
 });
 
@@ -169,6 +203,15 @@ describe('failures', () => {
     const error = new ApiError(404, 'X', 'y');
     expect(error).toBeInstanceOf(Error);
     expect(error.name).toBe('ApiError');
+  });
+
+  it('reads the cookies of the document when it is given no reader', async () => {
+    const { fetch, calls } = fakeFetch();
+    globalThis.document = { cookie: 'chip_csrf=from-the-document' } as Document;
+    await createApi({ fetch }).setStatus('TPS54331DR', { status: 'needs_human' });
+    expect((calls[0]?.init?.headers as Record<string, string>)['x-chip-token']).toBe(
+      'from-the-document',
+    );
   });
 
   it('uses the global fetch when it is given none', async () => {
