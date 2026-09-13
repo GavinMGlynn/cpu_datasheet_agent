@@ -270,6 +270,57 @@ pinned: `typescript` 6.0.3, `typescript-eslint` 8.70.0, `eslint` 10.10.0,
 Newest entry first. One entry per working session, or per significant docs
 change. Never edit past entries; add a new one.
 
+### 2026-09-13 — Session 27: public, GPL v3, and off the self-hosted runner
+
+The question was whether anything stopped this being a public repository
+under the GPL. Four things did, and none of them was the code.
+
+**The runner.** Every job ran on the Rocky Linux 10 self-hosted runner, and
+the workflow triggers on `pull_request`. On a public repository that means a
+stranger's fork can run its own workflow code on a private VM, which GitHub
+says plainly not to do [R-84]. The pipeline now runs on GitHub-hosted runners
+and installs what it needs, because a machine that is destroyed afterwards is
+not a machine anyone has to review.
+
+That cost the argument D71 rested on — the build machine was the target
+machine — so the screenshots needed a platform that is not one person's
+computer. They are taken inside `mcr.microsoft.com/playwright`, pinned to the
+version in `package.json` and checked against it before the pipeline starts,
+and committed under `test/e2e/__screenshots__/playwright-noble/`. Anyone with
+Docker can now reproduce a baseline; the README has the one command (D78).
+
+**The licence.** GNU GPL v3.0 or later, verbatim in `LICENSE`. Version 3 and
+not 2 because TypeScript and Playwright are Apache-2.0, which GPLv2 cannot
+take. Every one of the ~450 transitive dependencies is permissive — MIT, ISC,
+Apache-2.0, BSD, MPL-2.0, CC0 — so nothing in the tree fights it. The one
+awkward dependency is the harness itself: the Claude Agent SDK is Anthropic's
+proprietary software [R-87], so a section 7 additional permission covers
+combining the two and says so out loud rather than leaving it implied (D79).
+
+**What the repository says it is.** A project to learn how to build an agent
+and an MCP server with Claude. That is now the first line of the README and of
+`CLAUDE.md`, with the tutorial as the thing a reader is pointed at first, and
+sections saying how it is tested, what it refuses to do, and that it is not
+affiliated with Anthropic or any distributor or manufacturer.
+
+**The version.** It said 1.0.0 in the sidebar because a default in
+`create.ts` said so. `src/version.ts` reads `package.json` instead, and the
+first public release is `v0.1.0-beta1` (D80).
+
+Checked before any of it: no credential in the tree or in any of the 64
+commits — the only `sk-ant-` strings are obvious fakes in the redaction tests;
+no datasheets, cache, database or golden working files, all git-ignored; no
+personal identifiers outside commit metadata.
+
+One thing deliberately not done. The recorded Digi-Key and Mouser responses
+under `test/fixtures/` are real: fifteen parts in full and 746 part numbers
+for the decoders. Replacing their values with invented ones would remove the
+only reason they are worth having — they exist to prove the adapters survive
+what a distributor actually sends, and `test/live/` diffs against them when a
+response shape changes. They stay, with `test/fixtures/README.md` saying what
+they are, how few there are, whose data it is, and that any of it will be
+removed on request.
+
 ### 2026-09-13 — Session 26: a tutorial for the agent and the MCP server
 
 `docs/tutorial/index.html` — a step-by-step tour for someone who knows Node
