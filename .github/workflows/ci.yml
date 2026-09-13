@@ -185,6 +185,11 @@ jobs:
     # contributor's laptop — with `docker run` and the same tag (D78).
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
+    # The image's default shell is dash, which has no `pipefail`; every other
+    # job gets bash from the runner image and these steps expect the same one.
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v7
 
