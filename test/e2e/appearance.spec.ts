@@ -26,7 +26,19 @@ const PAGES: readonly { readonly path: string; readonly name: string }[] = [
   { path: '/health', name: 'health' },
 ];
 
+/**
+ * The seeded runs happened on fixed dates and the site says how long ago that
+ * was, so "yesterday" depends on the day the screenshot was taken: a baseline
+ * captured today fails tomorrow for no reason anyone changed. Freezing the
+ * browser's clock makes the relative times as fixed as the data behind them.
+ * The instant is chosen so nothing rounds near a boundary: the seeded runs
+ * are 28 and 45 hours before it, which is squarely "yesterday" and "2 days
+ * ago" however the rounding falls.
+ */
+const NOW = new Date('2026-09-13T06:00:00Z');
+
 test.beforeEach(async ({ page }) => {
+  await page.clock.setFixedTime(NOW);
   await signIn(page);
 });
 

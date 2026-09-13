@@ -114,7 +114,8 @@ nothing from a schema you can't validate.
 ## Current state
 
 Every module in `docs/COMPLETION_PLAN.md` is complete except M9 (Nexar,
-deferred by D29) and task 12.7 (waits on Q3). Tagged `v1.0.0`: schemas, ledger, cache, SQLite, units, the
+deferred by D29) and task 12.7 (waits on Q3). Released as `v0.1.0-beta1`, the
+first public tag (D80): schemas, ledger, cache, SQLite, units, the
 PDF toolkit, the Digi-Key and Mouser adapters, the part report generator, MPN
 resolution, reconciliation and classification, the tool registry and MCP
 server, the golden evaluation set, the extraction runner, the verification pass, and
