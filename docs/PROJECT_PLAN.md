@@ -135,6 +135,7 @@ that supersedes the old one, and the old row's status changes to
 | D74 | 2026-09-12 | The site is written in sentence case, translates stored vocabulary into words on the way out, and shows every timestamp as how long ago with the exact local instant on hover. Identifiers stay exactly as they are stored. | Reading the running site, the all-lowercase copy read as a draft rather than a tool, and `needs_human` and `2026-09-11 11:03` are what the database calls things, not what a person calls them. The rule is one standard rather than a page-by-page judgement, because the mixture is what looks unfinished. | active |
 | D75 | 2026-09-12 | The site authenticates with accounts: a username and a password (scrypt), a server-side session in an HttpOnly cookie, and optional single sign-on against any OIDC issuer. The token in the address is removed entirely, along with `--token`. | A token in a URL is in the shell history, the browser history, the referrer and any copy of the link, and it dies with the process that minted it — a restart signed every open tab out with eighteen red panels and no way back in. A session cookie is what the browser is for, and an account is what an audit row should name. | active |
 | D76 | 2026-09-12 | Two roles. A viewer reads everything; an admin may correct values, answer questions, purge the cache, manage accounts and start runs that spend money. Enforced at the endpoint, not in the front end. | The site has a button that spends real money at a distributor and another that rewrites the golden set. Reading the data and changing it are different permissions, and the front end hiding a button is a courtesy, not a control. | active |
+| D77 | 2026-09-13 | The tutorial is served by the site itself at `/tutorial`, without a session, and the sidebar links to it as an external entry — one that leaves the application rather than routing inside it. | A page that only exists as a file on disk is a page nobody reads: opening it through the running site gave "there is no page at …", because the address fell through to the application. It is documentation, not data, so a session gate on it would only stop the person who most needs it; nothing under `docs/tutorial/` reads the store or a credential. | active |
 
 ## 4. Status
 
@@ -287,6 +288,13 @@ Also published as a private artifact for reading away from the repository:
 
 `CLAUDE.md` now lists it as a working document, with the note that a change
 to the run loop, the gates or the tool surface changes the tutorial too.
+
+The site serves it. `/tutorial` answers with the pages under `docs/tutorial/`,
+open to anyone who can reach the site, and says which directory is empty rather
+than answering 500 when the documentation is not installed. The sidebar carries
+"How this works" under **This machine** as a plain link, which is what an
+external entry in `NAVIGATION` now means (D77). `docs/` already travels in the
+release archive, so the address works in a packaged installation too.
 
 ### 2026-09-12 — Session 25: a professional site, and real authentication
 
