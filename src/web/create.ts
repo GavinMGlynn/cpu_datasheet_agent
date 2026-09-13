@@ -20,6 +20,7 @@ import { createSources, type Sources } from './data/sources.js';
 import { createAuthService, type AuthService } from '../auth/service.js';
 import { createAuthStore } from '../auth/store.js';
 import { createOidc, oidcConfigFrom } from '../auth/oidc.js';
+import { VERSION } from '../version.js';
 import {
   createApp,
   type ResponseSink,
@@ -192,7 +193,7 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
     ledgerDir,
     cacheDir,
     goldenDir: options.goldenDir ?? GOLDEN_DIR,
-    version: options.version ?? '1.0.0',
+    version: options.version ?? VERSION,
   };
 
   const router = new Router<RouteEntry>();
