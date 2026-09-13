@@ -198,13 +198,15 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
-      # The image carries the browser and its libraries, not the PDF toolkit;
-      # the datasheet reader renders a page with pdftoppm while the tests watch.
-      - name: Install poppler
+      # The image carries the browser and its libraries, and nothing else this
+      # needs: the datasheet reader renders a page with pdftoppm while the
+      # tests watch, and better-sqlite3 has no prebuild for this Node, so it
+      # compiles and wants a C++ toolchain.
+      - name: Install poppler and a compiler
         run: |
           set -euo pipefail
           apt-get update -qq
-          apt-get install -y -qq poppler-utils
+          apt-get install -y -qq poppler-utils build-essential python3
 
       - run: npm ci
 
