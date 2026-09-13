@@ -7,8 +7,18 @@ parameters, pulls distributor pricing, and categorises the part along multiple
 axes. The end goal is answering questions like "find me a cheaper alternate to
 this buck regulator that still meets my Vin range".
 
-This is a learning project as much as a working one — the point is to build a
-real agent with real tool use, not to wrap an API.
+**This is a project to learn how to build an agent and an MCP server with
+Claude.** That is the point of it: not to wrap an API, but to write out in
+full the parts a framework usually hides — the tool surface, the run loop, the
+money gates, the ledger, the separate verification pass, and how each of them
+is tested. The chip problem is real work chosen because it is unforgiving:
+a wrong V(DS) max is a dead board, so the agent has to cite its sources and
+escalate rather than guess.
+
+It is public, under the GNU General Public License v3.0 or later (`LICENSE`),
+with a section 7 additional permission for combining it with Anthropic's
+Claude Agent SDK, which is not free software. `docs/tutorial/index.html` is
+what a reader is meant to find first.
 
 ## Working documents
 
@@ -31,7 +41,9 @@ commit is pushed.
 
 ## Stack
 
-- TypeScript / Node, running in WSL 2 on Windows 11
+- TypeScript / Node, developed in WSL 2 on Windows 11 (Rocky Linux 10)
+- CI on GitHub-hosted runners; the screenshot baselines are taken inside the
+  pinned `mcr.microsoft.com/playwright` image so anyone can reproduce them (D78)
 - MCP server exposing the tool surface (`chip-mcp-server.ts`)
 - `@anthropic-ai/claude-agent-sdk` as the runtime harness for headless runs
 - SQLite locally; Postgres if/when this moves to AWS

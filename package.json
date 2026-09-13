@@ -1,9 +1,14 @@
 {
   "name": "chip-datasheet-agent",
-  "version": "0.0.0",
+  "version": "0.1.0-beta1",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "description": "Agent that downloads chip datasheets, extracts parameters with provenance, pulls distributor pricing, and categorises parts.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GavinMGlynn/cpu_datasheet_agent.git"
+  },
   "engines": {
     "node": ">=22.12.0"
   },

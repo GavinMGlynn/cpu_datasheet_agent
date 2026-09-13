@@ -100,11 +100,12 @@ before a single line of domain code exists.
       line. Tests for the scanner itself.
 - [x] 0.10 `src/errors.ts`: `ChipAgentError` base with `code`, `cause`,
       `details`; helper `isChipAgentError`. Tests.
-- [x] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: runs on the
-      self-hosted runner (`[self-hosted, Linux, X64]`), pins Node 22 with
-      `actions/setup-node`, verifies poppler is present rather than installing
-      it, then `npm ci` and `npm run check`. Runs on push and pull request,
-      cancels superseded runs, no secrets. [R-26]
+- [x] 0.11 GitHub Actions workflow `.github/workflows/ci.yml`: pins Node 22
+      with `actions/setup-node`, installs poppler, then `npm ci` and
+      `npm run check`. Runs on push and pull request, cancels superseded runs,
+      no secrets. [R-26] It ran on the self-hosted runner until D78 moved it
+      to GitHub-hosted ones, which is what a public repository can safely use
+      [R-84].
 - [x] 0.12 Git hooks via `simple-git-hooks`: `pre-push` runs `npm run check`.
       Document the bypass (`--no-verify`) as forbidden except for docs-only
       commits.
@@ -1084,9 +1085,11 @@ fifth. A module is not finished when its unit tests pass (D70).
       launching a run and watching it stream, resolving an escalation,
       light and dark, keyboard navigation, and screenshots of every page.
 - [x] 19I.6 Scripts and CI: `npm run test:e2e` separate from the unit run,
-      Chromium cached on the runner, and a pipeline that builds everything on
-      Rocky Linux 10 — environment proof, check, packaged tarball, browser
-      tests, and a release attached to a tag (D71).
+      and a pipeline that builds everything — environment report, check,
+      packaged tarball, browser tests, and a release attached to a tag. Built
+      on the Rocky Linux 10 runner (D71); since D78 it runs on GitHub-hosted
+      runners, with the browser tests and their screenshot baselines inside
+      the pinned Playwright image [R-85].
 
 ### 19H Documentation and sign-off
 
