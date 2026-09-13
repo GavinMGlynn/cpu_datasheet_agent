@@ -321,6 +321,20 @@ response shape changes. They stay, with `test/fixtures/README.md` saying what
 they are, how few there are, whose data it is, and that any of it will be
 removed on request.
 
+Two things the move turned up. The Playwright image has neither poppler nor a
+compiler, and better-sqlite3 has no prebuild for the Node in it, so the
+browser job installs both — the failures were loud and took two runs to clear.
+And the appearance tests were passing for the wrong reason: the seeded runs
+have fixed dates, the site says "yesterday", and the 1% pixel tolerance was
+quietly absorbing the difference as the days passed. The browser's clock is
+now frozen at an instant chosen so nothing rounds near a boundary. That
+tolerance is worth a harder look on its own account: 1% of a full-page
+screenshot is a lot of pixels.
+
+`v0.1.0-beta1` is tagged and released, with the archive attached by the
+pipeline, and CI is green end to end on hosted runners: environment, check,
+build, browser tests against the container baselines, release.
+
 ### 2026-09-13 — Session 26: a tutorial for the agent and the MCP server
 
 `docs/tutorial/index.html` — a step-by-step tour for someone who knows Node
