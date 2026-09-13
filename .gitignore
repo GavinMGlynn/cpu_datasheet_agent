@@ -36,8 +36,8 @@ Thumbs.db
 # values read out of them, with the page each came from.
 /eval/golden/work/
 
-# Browser-test output, and screenshot baselines taken anywhere but the Rocky
-# Linux 10 runner. Only CI-generated baselines are committed (D71).
+# Browser-test output, and screenshot baselines taken anywhere but inside the
+# pinned Playwright image. Only those baselines are committed (D78).
 /test/e2e/.output/
 /test/e2e/.report/
 /test/e2e/__screenshots__/local/

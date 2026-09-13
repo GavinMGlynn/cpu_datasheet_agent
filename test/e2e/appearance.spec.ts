@@ -5,10 +5,10 @@ import { signIn } from './sign-in.js';
 /**
  * What the pages look like.
  *
- * The baselines belong to one machine: they are taken on the Rocky Linux 10
- * runner and compared there, because fonts and rasterisation differ enough
- * between machines to fail for reasons that have nothing to do with the page
- * (D71). A local run writes its own under `local/`, which is not committed.
+ * The baselines belong to one font stack: they are taken inside the pinned
+ * Playwright image and compared there, because fonts and rasterisation differ
+ * enough between machines to fail for reasons that have nothing to do with
+ * the page (D78). A local run writes its own under `local/`, not committed.
  */
 
 // The file name is lowercase and stays put; what the page is called can

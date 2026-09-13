@@ -3,12 +3,13 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Browser tests.
  *
- * Screenshot baselines are platform-specific down to the distribution: fonts
- * and rasterisation differ between this workstation and the Rocky Linux 10
- * runner, so a baseline taken in one place fails in the other for reasons
- * that have nothing to do with the page. `SNAPSHOT_PLATFORM` names the
- * directory they live in; CI sets it to `rocky10` and commits those, and a
- * local run writes to `local/`, which is not committed (D71).
+ * Screenshot baselines are platform-specific down to the font stack: fonts
+ * and rasterisation differ between this workstation and the machine that took
+ * the baseline, so one taken in one place fails in the other for reasons that
+ * have nothing to do with the page. `SNAPSHOT_PLATFORM` names the directory
+ * they live in. CI sets it to `playwright-noble` and commits those, taken
+ * inside the pinned `mcr.microsoft.com/playwright` image, which anyone can
+ * run; a local run writes to `local/`, which is not committed (D78).
  */
 const platform = process.env.SNAPSHOT_PLATFORM ?? 'local';
 const port = Number(process.env.CHIP_WEB_PORT ?? 5199);

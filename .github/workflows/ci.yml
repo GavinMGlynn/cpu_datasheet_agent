@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
     inputs:
       update_screenshots:
-        description: 'Regenerate the Rocky Linux 10 screenshot baselines on this runner'
+        description: 'Regenerate the screenshot baselines in the pinned Playwright image'
         type: boolean
         default: false
 
-# There is one self-hosted runner, so a superseded run must not hold the queue.
+# A superseded run has nothing left to prove, and the minutes are not free.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -22,72 +22,41 @@ env:
   GIT_CONFIG_COUNT: 1
   GIT_CONFIG_KEY_0: init.defaultBranch
   GIT_CONFIG_VALUE_0: main
-  # Screenshot baselines belong to the platform that took them. This runner is
-  # the only one whose baselines are committed (D71).
-  SNAPSHOT_PLATFORM: rocky10
+  # Screenshot baselines belong to the platform that took them. That platform
+  # is the pinned Playwright container, which anyone can run (D78).
+  SNAPSHOT_PLATFORM: playwright-noble
   NODE_VERSION: '22'
 
 jobs:
-  # Everything is built for and on Rocky Linux 10. This job proves that is
-  # what we are standing on before anything else runs, and reports what the
-  # rest of the pipeline depends on. Tools are verified, never installed: a
-  # package manager running unattended on a private VM is not a build step.
+  # What the rest of the pipeline stands on, reported before anything depends
+  # on it. The runner is ephemeral and GitHub-hosted, so tools are installed
+  # rather than verified — nothing here outlives the job.
   environment:
-    name: Environment (Rocky Linux 10)
-    runs-on: [self-hosted, Linux, X64]
+    name: Environment
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
-      - name: Confirm the runner is Rocky Linux 10
+      - name: Install poppler
         run: |
           set -euo pipefail
-          . /etc/os-release
-          echo "$PRETTY_NAME"
-          if [ "${ID:-}" != "rocky" ]; then
-            echo "::error::this pipeline builds for Rocky Linux; runner reports ID=${ID:-unknown}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+
+      # The browser job runs in a container pinned by tag. A tag that has
+      # drifted from the installed Playwright means the browser under test is
+      # not the browser the baselines were taken with, which is the kind of
+      # failure that wastes an afternoon.
+      - name: Confirm the Playwright image matches the dependency
+        run: |
+          set -euo pipefail
+          wanted="$(node -p "require('./package.json').devDependencies['@playwright/test'].replace(/^[^0-9]*/, '')")"
+          pinned="$(grep -oP 'mcr\.microsoft\.com/playwright:v\K[0-9.]+' .github/workflows/ci.yml | head -1)"
+          echo "package.json: $wanted, workflow image: $pinned"
+          if [ "$wanted" != "$pinned" ]; then
+            echo "::error::the Playwright image is pinned to v$pinned but package.json asks for $wanted"
             exit 1
           fi
-          case "${VERSION_ID:-}" in
-            10|10.*) ;;
-            *)
-              echo "::error::this pipeline builds for Rocky Linux 10; runner reports ${VERSION_ID:-unknown}"
-              exit 1
-              ;;
-          esac
-
-      - name: Verify poppler
-        run: |
-          set -uo pipefail
-          missing=0
-          for tool in pdftotext pdftoppm pdfinfo; do
-            if command -v "$tool" >/dev/null 2>&1; then
-              "$tool" -v 2>&1 | head -1
-            else
-              echo "::error::$tool not found; install it with: sudo dnf install -y poppler-utils"
-              missing=1
-            fi
-          done
-          exit "$missing"
-
-      - name: Verify the shared libraries Chromium needs
-        run: |
-          set -uo pipefail
-          # Playwright's install-deps does not support RHEL-family distributions,
-          # so the libraries are a runner prerequisite and this reports the one
-          # dnf line that supplies whatever is missing.
-          libs="libnss3.so libnssutil3.so libatk-1.0.so.0 libatk-bridge-2.0.so.0 libcups.so.2 libdrm.so.2 libxkbcommon.so.0 libXcomposite.so.1 libXdamage.so.1 libXfixes.so.3 libXrandr.so.2 libgbm.so.1 libpango-1.0.so.0 libcairo.so.2 libasound.so.2"
-          missing=""
-          for lib in $libs; do
-            if ! /sbin/ldconfig -p | grep -q "$lib"; then
-              missing="$missing $lib"
-            fi
-          done
-          if [ -n "$missing" ]; then
-            echo "::error::missing shared libraries for Chromium:$missing"
-            echo "install with: sudo dnf install -y nss nspr atk at-spi2-atk cups-libs libdrm libxkbcommon libXcomposite libXdamage libXfixes libXrandr mesa-libgbm pango cairo alsa-lib"
-            exit 1
-          fi
-          echo "every library Chromium needs is present"
 
       - name: Record the environment
         run: |
@@ -98,6 +67,7 @@ jobs:
             echo
             echo "| What | Version |"
             echo "| --- | --- |"
+            echo "| Runner | ${RUNNER_NAME:-hosted} (GitHub-hosted) |"
             echo "| OS | $PRETTY_NAME |"
             echo "| Kernel | $(uname -r) |"
             echo "| Node | $(node --version 2>/dev/null || echo 'not yet installed') |"
@@ -108,7 +78,7 @@ jobs:
   check:
     name: Check (format, lint, types, tests, gate)
     needs: environment
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
@@ -116,6 +86,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
+
+      # The PDF toolkit shells out: its tests run the real binaries.
+      - name: Install poppler
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
 
       - run: npm ci
 
@@ -125,14 +102,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: coverage-rocky10
+          name: coverage
           path: coverage/
           retention-days: 14
 
   build:
-    name: Build for Rocky Linux 10
+    name: Build
     needs: check
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
@@ -150,28 +127,36 @@ jobs:
         run: |
           set -euo pipefail
           version="$(node -p "require('./package.json').version")"
-          name="chip-datasheet-agent-${version}-rocky10-node${NODE_VERSION}-${GITHUB_SHA::7}"
+          name="chip-datasheet-agent-${version}-linux-x64-node${NODE_VERSION}-${GITHUB_SHA::7}"
           staging="dist-package/$name"
           mkdir -p "$staging"
           cp -r dist "$staging/"
           cp -r prompts "$staging/"
           cp -r eval/golden "$staging/golden"
-          cp package.json package-lock.json README.md CLAUDE.md "$staging/"
+          cp package.json package-lock.json README.md CLAUDE.md LICENSE "$staging/"
           cp -r docs "$staging/"
           # The lock file travels; the dependencies do not. better-sqlite3 is a
           # native module, and a copy built here would only ever be right for a
           # machine identical to this one. The target runs `npm ci --omit=dev`.
           cat > "$staging/INSTALL.md" <<'NOTE'
-          # Installing on Rocky Linux 10
+          # Installing
 
-          1. `sudo dnf install -y poppler-utils` — the PDF toolkit shells out to
-             `pdftotext`, `pdftoppm` and `pdfinfo`.
+          Any Linux with Node 22. Developed on Rocky Linux 10, built and tested
+          on Ubuntu.
+
+          1. Install poppler — the PDF toolkit shells out to `pdftotext`,
+             `pdftoppm` and `pdfinfo`:
+             - Debian or Ubuntu: `sudo apt-get install -y poppler-utils`
+             - Rocky or Fedora: `sudo dnf install -y poppler-utils`
           2. Node 22.
           3. `npm ci --omit=dev` in this directory, which builds better-sqlite3
              against the Node on the target rather than the one that built this.
           4. Copy `.env.example` from the repository and fill in credentials.
           5. `node dist/web/server/serve.js` for the site, or see `docs/` for the
              command-line entry points.
+
+          Licensed under the GNU General Public License v3.0 or later; see
+          `LICENSE`.
           NOTE
           sed -i 's/^          //' "$staging/INSTALL.md"
           tar -czf "dist-package/$name.tar.gz" -C dist-package "$name"
@@ -191,9 +176,15 @@ jobs:
           retention-days: 30
 
   e2e:
-    name: Browser tests (Chromium on Rocky Linux 10)
+    name: Browser tests (Chromium in the pinned Playwright image)
     needs: build
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
+    # A screenshot baseline is a photograph of one machine's fonts and
+    # rasterisation. This image pins both, along with the browser, so the
+    # baselines in the repository can be reproduced anywhere — including on a
+    # contributor's laptop — with `docker run` and the same tag (D78).
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
       - uses: actions/checkout@v7
 
@@ -202,20 +193,15 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
+      # The image carries the browser and its libraries, not the PDF toolkit;
+      # the datasheet reader renders a page with pdftoppm while the tests watch.
+      - name: Install poppler
+        run: |
+          set -euo pipefail
+          apt-get update -qq
+          apt-get install -y -qq poppler-utils
+
       - run: npm ci
-
-      - name: Read the Playwright version
-        id: playwright
-        run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test'].replace(/^[^0-9]*/, '')")" >> "$GITHUB_OUTPUT"
-
-      - name: Cache the browser
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ steps.playwright.outputs.version }}-rocky10
-
-      - name: Install Chromium
-        run: npx playwright install chromium
 
       # The browser tests drive the built application, not the sources: the
       # server serves dist/ui, and a stale or missing build would test
@@ -229,8 +215,8 @@ jobs:
           CI: 'true'
         run: npm run test:e2e
 
-      # A deliberate regeneration: the baselines are only ever taken on this
-      # runner, so they are produced here and uploaded for a person to commit.
+      # A deliberate regeneration: the baselines are produced in the pinned
+      # image and uploaded for a person to commit.
       - name: Regenerate the screenshot baselines
         if: ${{ github.event.inputs.update_screenshots == 'true' }}
         env:
@@ -241,11 +227,11 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-rocky10
+          name: playwright
           path: |
             test/e2e/.report/
             test/e2e/.output/
-            test/e2e/__screenshots__/rocky10/
+            test/e2e/__screenshots__/playwright-noble/
           retention-days: 14
           if-no-files-found: ignore
 
@@ -253,7 +239,7 @@ jobs:
     name: Release
     needs: [check, build, e2e]
     if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -271,12 +257,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if ! command -v gh >/dev/null 2>&1; then
-            echo "::error::the GitHub CLI is not on this runner; install it with: sudo dnf install -y gh"
-            exit 1
-          fi
           tag="${GITHUB_REF_NAME}"
+          prerelease=""
+          case "$tag" in
+            *-*) prerelease="--prerelease" ;;
+          esac
           if ! gh release view "$tag" >/dev/null 2>&1; then
-            gh release create "$tag" --title "$tag" --generate-notes
+            gh release create "$tag" --title "$tag" --generate-notes $prerelease
           fi
           gh release upload "$tag" release/*.tar.gz --clobber
