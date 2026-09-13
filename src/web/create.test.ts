@@ -85,6 +85,20 @@ describe('createWeb', () => {
     }
   });
 
+  it('serves the tutorial as itself, to anyone, with no session', async () => {
+    const parts = await build();
+    const page = await call(parts, '/tutorial');
+    expect(page.statusCode).toBe(200);
+    expect(page.body).toContain('Building an agent');
+    // And the same page under its own directory, for anything it links to.
+    expect((await call(parts, '/tutorial/index.html')).statusCode).toBe(200);
+  });
+
+  it('says so when the tutorial is not where it should be', async () => {
+    const parts = await build({ tutorialDir: path.join(root, 'no-tutorial') });
+    expect((await call(parts, '/tutorial')).statusCode).toBe(404);
+  });
+
   it('says the front end is not built rather than 404ing the whole site', async () => {
     const parts = await build({ uiDir: path.join(root, 'nowhere') });
     const result = await call(parts, '/');

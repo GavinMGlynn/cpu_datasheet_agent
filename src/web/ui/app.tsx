@@ -56,6 +56,8 @@ export interface NavEntry {
   readonly path: string;
   readonly label: string;
   readonly group: string;
+  /** Served by the server rather than routed here: a full page load. */
+  readonly external?: boolean;
 }
 
 export const NAVIGATION: readonly NavEntry[] = Object.freeze([
@@ -77,6 +79,7 @@ export const NAVIGATION: readonly NavEntry[] = Object.freeze([
   { path: '/control', label: 'Run control', group: 'This machine' },
   { path: '/audit', label: 'Audit trail', group: 'This machine' },
   { path: '/health', label: 'Health', group: 'This machine' },
+  { path: '/tutorial', label: 'How this works', group: 'This machine', external: true },
 ]);
 
 function render(route: Route): ReactNode {
@@ -237,19 +240,27 @@ export function App(props: AppProps): ReactNode {
           {[...new Set(NAVIGATION.map((entry) => entry.group))].map((group) => (
             <nav key={group} aria-label={group}>
               <p className="group">{group}</p>
-              {NAVIGATION.filter((entry) => entry.group === group).map((entry) => (
-                <a
-                  key={entry.path}
-                  href={entry.path}
-                  aria-current={route.path === entry.path ? 'page' : undefined}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    navigate(withQuery({ ...route, path: entry.path }, {}));
-                  }}
-                >
-                  {entry.label}
-                </a>
-              ))}
+              {NAVIGATION.filter((entry) => entry.group === group).map((entry) =>
+                entry.external === true ? (
+                  // A page of documentation, served as itself: following it
+                  // leaves the application rather than routing inside it.
+                  <a key={entry.path} href={entry.path}>
+                    {entry.label}
+                  </a>
+                ) : (
+                  <a
+                    key={entry.path}
+                    href={entry.path}
+                    aria-current={route.path === entry.path ? 'page' : undefined}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      navigate(withQuery({ ...route, path: entry.path }, {}));
+                    }}
+                  >
+                    {entry.label}
+                  </a>
+                ),
+              )}
             </nav>
           ))}
           <div className="account">

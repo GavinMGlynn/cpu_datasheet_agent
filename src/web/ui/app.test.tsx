@@ -45,7 +45,8 @@ describe('routing', () => {
       '/audit': 'Audit trail',
       '/health': 'Health',
     };
-    for (const entry of NAVIGATION) {
+    // The external one is a page the server serves, not a route in here.
+    for (const entry of NAVIGATION.filter((one) => one.external !== true)) {
       const { unmount } = renderApp(entry.path);
       await waitFor(() => {
         expect(
@@ -87,6 +88,15 @@ describe('routing', () => {
       expect(globalThis.location.pathname).toBe('/ledger');
     });
     expect(screen.getByRole('heading', { name: 'Ledger' })).toBeInTheDocument();
+  });
+
+  it('leaves the application for a page the server serves', async () => {
+    renderApp('/');
+    const link = await screen.findByRole('link', { name: 'How this works' });
+    expect(link).toHaveAttribute('href', '/tutorial');
+    // No click handler: following it is a full page load, not a route change.
+    await userEvent.click(link);
+    expect(globalThis.location.pathname).toBe('/');
   });
 
   it('marks the page you are on', async () => {

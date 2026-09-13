@@ -9,6 +9,7 @@ import { createLogger, type Logger } from '../log/logger.js';
 import { createRedactor, secretsFromConfig } from '../log/redact.js';
 import { PdfToolkit, popplerPreflight, type PopplerTools } from '../pdf/index.js';
 import { registerApi, type ApiDeps } from './api/index.js';
+import { open } from './api/deps.js';
 import { createAuditor } from './audit.js';
 import { createLauncher } from './runs/launcher.js';
 import { createLaunchRegistry } from './runs/registry.js';
@@ -34,6 +35,15 @@ import { createStaticHandler } from './server/static.js';
 /** Where the built front end is looked for, relative to this file's package. */
 export const UI_DIR = fileURLToPath(new URL('../../dist/ui/', import.meta.url));
 
+/**
+ * The tutorial, served as itself.
+ *
+ * A page of documentation rather than data: it needs no session, and it is
+ * reachable before anyone has signed in. `docs/` travels in the release
+ * archive, so this address works in a packaged installation too.
+ */
+export const TUTORIAL_DIR = fileURLToPath(new URL('../../docs/tutorial/', import.meta.url));
+
 export interface WebOptions {
   /** Environment the configuration is read from. Defaults to the process's. */
   readonly env?: NodeJS.ProcessEnv;
@@ -43,6 +53,8 @@ export interface WebOptions {
   readonly databaseFile?: string;
   /** Where the built front end lives. */
   readonly uiDir?: string;
+  /** Where the tutorial lives. Defaults to `docs/tutorial` in this package. */
+  readonly tutorialDir?: string;
   /** Where evaluation results are read from. */
   readonly resultsDir?: string;
   /** Where the golden files live. */
@@ -195,6 +207,25 @@ export async function createWeb(options: WebOptions = {}): Promise<WebParts> {
       throw new WebError(404, 'WEB_NOT_FOUND', `nothing is served at ${context.url.pathname}`);
     },
   });
+
+  const tutorialDir = options.tutorialDir ?? TUTORIAL_DIR;
+  const hasTutorial = await present(tutorialDir);
+  const serveTutorial = createStaticHandler({ dir: tutorialDir });
+  const tutorial = open(async (context) => {
+    if (!hasTutorial) {
+      throw new WebError(
+        404,
+        'WEB_TUTORIAL_MISSING',
+        `no tutorial is installed at ${tutorialDir}`,
+        {
+          details: { tutorialDir },
+        },
+      );
+    }
+    await serveTutorial(context);
+  });
+  router.get('/tutorial', tutorial);
+  router.get('/tutorial/*path', tutorial);
 
   const uiDir = options.uiDir ?? UI_DIR;
   const built = await present(uiDir);
